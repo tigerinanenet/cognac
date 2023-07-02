@@ -17,7 +17,10 @@ export class Explore {
     targetElement: any = "normal";
     nextFightPrepped: any = false;
     baseTask = {
-        do: () => $location`Hobopolis Town Square`,
+        do: () => {
+            this.nextFightPrepped = false;
+            return $location`Hobopolis Town Square`
+        },
         post: () => this.parts[this.targetElement]++,
         choices: {
             200: 0,
@@ -38,7 +41,7 @@ export class Explore {
                 completed: () => this.nextFightPrepped,
                 do: () => {
                     this.targetElement = Object.keys(this.parts).find((elem: any) => this.parts[elem] < 1);
-                    this.nextFightPrepped = false;
+                    this.nextFightPrepped = true;
                 }
             },
             {
