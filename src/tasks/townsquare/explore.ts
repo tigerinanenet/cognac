@@ -1,6 +1,6 @@
 
 import { CombatStrategy, Task } from "grimoire-kolmafia"
-import { $effect, $location } from "libram"
+import { $effect, $item, $location } from "libram"
 
 import { attack, mortar } from "./combat"
 

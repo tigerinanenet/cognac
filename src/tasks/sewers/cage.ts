@@ -2,7 +2,7 @@ import { Task } from "grimoire-kolmafia"
 import { chatPrivate, wait } from "kolmafia";
 import { get } from "libram";
 
-import { CLAN } from "../../properties"
+import { CLAN } from "../../prefs/properties"
 
 const cagebait = "ASSBot";
 

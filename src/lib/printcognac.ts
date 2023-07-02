@@ -1,7 +1,7 @@
 import { print } from "kolmafia"
 import { get } from "libram"
 
-import { COGNACS } from "../properties";
+import { COGNACS } from "../prefs/properties";
 
 export function printCognac() {
     print("Cognac summary:");

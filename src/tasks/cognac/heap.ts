@@ -1,7 +1,7 @@
 
 import { CombatStrategy, Task } from "grimoire-kolmafia"
 import { myAdventures } from "kolmafia";
-import { Macro, get, $familiar, $item, $location, $skill} from "libram"
+import { Macro, get, $familiar, $effect, $item, $location, $skill} from "libram"
 
 const runaway = Macro
     .trySkill($skill`Bowl a Curveball`)
