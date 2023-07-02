@@ -47,7 +47,7 @@ export class Explore {
             {
                 ...this.baseTask,
                 name: "Hobo combat physical",
-                completed: () => this.targetElement === "normal",
+                completed: () => this.targetElement !== "normal",
                 combat: new CombatStrategy().macro(attack),
                 effects: [$effect`Carol of the Bulls`],
                 outfit: {
@@ -58,7 +58,7 @@ export class Explore {
             {
                 ...this.baseTask,
                 name: "Hobo combat elemental",
-                completed: () => this.targetElement !== "normal",
+                completed: () => this.targetElement === "normal",
                 effects: [elementMap[this.targetElement]],
                 combat: new CombatStrategy().macro(mortar)
             }
