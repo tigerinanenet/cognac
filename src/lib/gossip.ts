@@ -8,12 +8,10 @@ export class Gossip {
     stench: any = 0;
     mutex: any = "";
 
-    constructor() {
-        this.updateGossip();
-        this.init();
-    }
+    constructor() {}
 
     init() {
+        this.updateGossip();
         const nameMatch = (player: any) => player === `${myName()}`
         if (this.players.some(nameMatch)) {
             return;

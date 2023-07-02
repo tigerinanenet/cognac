@@ -20,10 +20,22 @@ const whiteboard = new Whiteboard(gossip);
 const pld = new PLD(gossip);
 const heap = new Heap(gossip);
 
+let initializedGossip = false;
+
+const gossipTask = {
+    name: "Init gossip",
+    completed: () => initializedGossip,
+    do: () => {
+        gossip.init();
+        initializedGossip = true;
+    }
+};
+
 export const Cognac: Quest<Task> = {
     name: "Cognac",
     completed: () => myAdventures() < 1,
     tasks: [
+        gossipTask,
         ...whiteboard.getTasks(),
         ...pld.getTasks(),
         ...heap.getTasks()
