@@ -23,7 +23,7 @@ export const TownSquare: Quest<Task> = {
     name: "Town Square",
     completed: () => {
         if (!skipTownSquare) {
-            skipTownSquare = !!visitUrl("clan_hobopolis.php?place=6&pwd", false).match(/The Heap/);
+            skipTownSquare = !!visitUrl("clan_hobopolis.php?place=8&pwd", false).match(/The Purple Light District/);
         }
         return skipTownSquare;
     },
