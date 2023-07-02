@@ -10,6 +10,7 @@ import * as Properties from "./properties";
 import { Sewers } from "./tasks/sewers/sewers";
 import { TownSquare } from "./tasks/townsquare/townsquare";
 import { Cognac } from "./tasks/cognac/cognac";
+import { Gossip } from "./tasks/cognac/gossip"
   
 const args = Args.create("Cognac", "Farming perscription strength alcohol since 2023.", {
   config: Args.flag({
@@ -47,6 +48,7 @@ export function main(command?: string): void {
     engine.run();
   } finally {
     engine.destruct();
+    new Gossip().destroy();
     Clan.join(startingClan);
     printCognac();
   }

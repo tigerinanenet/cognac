@@ -21,7 +21,7 @@ export class Gossip {
     }
 
     registered() {
-        return this.players.some((player: any) => player === `"${myName()}`)
+        return this.players.some((player: any) => player === `${myName()}`)
     }
 
     register() {
@@ -87,6 +87,13 @@ export class Gossip {
     
     readyToDive() {
         return this.stench >= BASE_STENCH_REQUIRED + this.players.length
+    }
+
+    destroy() {
+        this.claimMutex(0);
+        this.mutex = "";
+        this.players = this.players.filter((player: any) => player !== myName());
+        Whiteboard.write(this.asRawJSON());
     }
 }
 
