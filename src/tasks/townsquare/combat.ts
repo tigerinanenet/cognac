@@ -9,8 +9,8 @@ const delevel = Macro.trySkill($skill`Curse of weaksauce`)
 .tryItem($item`HOA citation pad`);
 
 export const mortar = delevel
-.skill($skill`Stuffed Mortar Shell`)
-.item($item`seal tooth`);
+.trySkill($skill`Stuffed Mortar Shell`)
+.tryItem($item`seal tooth`);
 
 export const attack = delevel
 .attack();

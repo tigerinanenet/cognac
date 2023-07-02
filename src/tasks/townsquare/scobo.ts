@@ -17,8 +17,8 @@ export class Scobo {
         }
     
         const matchRegistry = {
-            "hot": /Richard has[^\d]+(\d+)[<b>\\\/\s]+pairs of charred/,
-            "cold": /Richard has[^\d]+(\d+)[<b>\\\/\s]+pairs of frozen/,
+            "hot": /Richard has[^\d]+(\d+)[<b>\\\/\s]+pairs? of charred/,
+            "cold": /Richard has[^\d]+(\d+)[<b>\\\/\s]+pairs? of frozen/,
             "stench": /Richard has[^\d]+(\d+)[<b>\\\/\s]+pile/,
             "spooky": /Richard has[^\d]+(\d+)[<b>\\\/\s]+creepy/,
             "sleaze": /Richard has[^\d]+(\d+)[<b>\\\/\s]+hobo crotch/,
