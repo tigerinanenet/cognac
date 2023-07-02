@@ -26,11 +26,7 @@ export const ExploreTasks: Task[] = [
                 $item`hobo code binder`,
             ],
             modifier: "-combat",
-            familiar: [
-                $familiar`Frumious Bandersnatch`,
-                $familiar`Pair of Stomping Boots`,
-                $familiar`disgeist`,
-            ].find(have)
+            familiar: $familiar`disgeist`,
         },
         choices: {
             197: 1,

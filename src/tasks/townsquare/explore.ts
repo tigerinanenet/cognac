@@ -35,7 +35,7 @@ export class Explore {
         return [
             {
                 name: "Prep hobo fight",
-                completed: this.nextFightPrepped,
+                completed: () => this.nextFightPrepped,
                 do: () => {
                     this.targetElement = Object.keys(this.parts).find((elem: any) => this.parts[elem] < 1);
                     this.nextFightPrepped = false;
