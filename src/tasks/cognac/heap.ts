@@ -1,7 +1,7 @@
 
 import { CombatStrategy, Task } from "grimoire-kolmafia"
 import { myAdventures } from "kolmafia";
-import { Macro, get, $familiar, $effect, $item, $location, $skill} from "libram"
+import { Macro, get, have, $familiar, $effect, $item, $location, $skill} from "libram"
 
 const runaway = Macro
     .trySkill($skill`Bowl a Curveball`)
@@ -29,7 +29,7 @@ export class Heap {
                     equip: [
                         $item`june cleaver`,
                         $item`Greatest American Pants`
-                    ],
+                    ].filter(have) ?? [],
                     modifier: "-combat",
                     familiar: $familiar`disgeist`,
                 },
