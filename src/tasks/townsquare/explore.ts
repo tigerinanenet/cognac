@@ -44,7 +44,12 @@ export class Explore {
                 ...this.baseTask,
                 name: "Hobo combat physical",
                 completed: () => this.targetElement === "normal",
-                combat: new CombatStrategy().macro(attack)
+                combat: new CombatStrategy().macro(attack),
+                effects: [$effect`Carol of the Bulls`],
+                outfit: {
+                    equip: [$item`Fourth of May Cosplay Saber`]
+                }
+
             },
             {
                 ...this.baseTask,
