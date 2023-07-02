@@ -1,5 +1,5 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia"
-import { Macro, get, $effect, $familiar, $item, $location, $skill } from "libram"
+import { Macro, get, have, $effect, $familiar, $item, $location, $skill } from "libram"
 
 
 const runaway = Macro
@@ -28,7 +28,7 @@ export class PLD {
                     equip: [
                         $item`june cleaver`,
                         $item`Greatest American Pants`
-                    ],
+                    ].filter(have) ?? [],
                     modifier: "-combat",
                     familiar: $familiar`disgeist`,
                 },
