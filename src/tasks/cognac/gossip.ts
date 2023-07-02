@@ -39,15 +39,19 @@ export class Gossip {
         this.mutex = gossip.mutex || "";
     }
 
-    claimMutex(retries: number): boolean {
+    claimMutex(retries: number, callback?: any): void {
         sleep(100);
         this.updateGossip();
 
-        if (retries > 10) {
+        if (callback && callback()) {
+            return;
+        }
+
+        if (retries > 50) {
             throw `Could not claim whiteboard mutex`
         }
         if (this.mutex === myName()) {
-            return true;
+            return;
         }
 
         if (this.mutex === "") {
@@ -70,7 +74,7 @@ export class Gossip {
     }
 
     resetStench() {
-        this.claimMutex(0);
+        this.claimMutex(0, () => {return this.stench === 0});
         this.stench = 0;
         this.mutex = "";
         Whiteboard.write(this.asRawJSON());
