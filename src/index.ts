@@ -50,6 +50,7 @@ export function main(command?: string): void {
   const choiceAdventureScript = get(CHOICE_SCRIPT);
   try {
     Clan.join(get(Properties.CLAN));
+    set(CHOICE_SCRIPT, COGNAC_CHOICE_PATH);
     engine.run();
   } finally {
     engine.destruct();
