@@ -1,7 +1,8 @@
 
-import { $effect, $location } from "libram"
 import { CombatStrategy, Task } from "grimoire-kolmafia"
-import { mortar, attack } from "./combat"
+import { $effect, $location } from "libram"
+
+import { attack, mortar } from "./combat"
 
 const elementMap: any = {
     "hot": $effect`Spirit of Cayenne`,

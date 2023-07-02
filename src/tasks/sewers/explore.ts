@@ -1,6 +1,5 @@
 
-import { Macro, $effect, $familiar, $skill, $location, $item, have } from "libram"
-import { visitUrl } from "kolmafia";
+import { have, Macro, $effect, $familiar, $skill, $location, $item,  } from "libram"
 import { CombatStrategy, Task } from "grimoire-kolmafia"
 
 const tryFreeRunThenAttack = Macro

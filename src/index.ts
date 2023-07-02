@@ -1,16 +1,15 @@
-import { myAdventures, print, getClanId } from "kolmafia";
 import { Args, getTasks } from "grimoire-kolmafia";
+import { getClanId, myAdventures } from "kolmafia";
 import { Clan, get, set } from "libram";
 
 import { Engine } from "./engine";
-import { printCognac } from "./lib";
-import { showPreferences, checkGarbo } from "./prefs";
+import { Gossip } from "./lib/gossip"
+import { printCognac } from "./lib/printcognac";
+import { checkGarbo, showPreferences } from "./prefs";
 import * as Properties from "./properties";
-
+import { Cognac } from "./tasks/cognac/cognac";
 import { Sewers } from "./tasks/sewers/sewers";
 import { TownSquare } from "./tasks/townsquare/townsquare";
-import { Cognac } from "./tasks/cognac/cognac";
-import { Gossip } from "./tasks/cognac/gossip"
   
 const args = Args.create("Cognac", "Farming perscription strength alcohol since 2023.", {
   config: Args.flag({

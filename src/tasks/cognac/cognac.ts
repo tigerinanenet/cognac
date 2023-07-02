@@ -1,10 +1,9 @@
 
-import { $location } from "libram"
 import { myAdventures } from "kolmafia";
 import { Quest, Task } from "grimoire-kolmafia"
 
-import { Gossip } from "./gossip"
-import * as WhiteboardLib from "../../whiteboard";
+import { Gossip } from "../../lib/gossip"
+import * as WhiteboardLib from "../../lib/whiteboard";
 import { Whiteboard } from "./whiteboard";
 import { PLD } from "./pld";
 import { Heap } from "./heap";

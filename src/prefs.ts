@@ -1,12 +1,8 @@
 
-import {
-    abort,
-    print,
-    userConfirm,
-} from "kolmafia";
-import * as Properties  from "./properties";
-import { get } from "libram";
+import { abort, print, userConfirm } from "kolmafia";
 
+import { get } from "libram";
+import * as Properties  from "./properties";
 
 function showPreferences(): void {
     print("Preferences for cognac", "blue");

@@ -1,8 +1,7 @@
 
-import { Macro, get, $familiar, $skill, $location, $item } from "libram"
-import { myAdventures } from "kolmafia";
 import { CombatStrategy, Task } from "grimoire-kolmafia"
-//import { getEffects } from "./noncombat";
+import { myAdventures } from "kolmafia";
+import { Macro, get, $familiar, $item, $location, $skill} from "libram"
 
 const runaway = Macro
     .trySkill($skill`Bowl a Curveball`)
@@ -21,7 +20,10 @@ export class Heap {
                 name: "Dive",
                 completed: () => myAdventures() < 1,
                 do: () => $location`The Heap`,
-                //effects: getEffects(),
+                effects: [
+                    $effect`Sonata of sneakiness`,
+                    $effect`smooth movement`,
+                ],
                 combat: new CombatStrategy().macro(runaway),
                 outfit: {
                     equip: [

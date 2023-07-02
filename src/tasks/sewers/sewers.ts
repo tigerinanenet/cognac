@@ -1,5 +1,4 @@
 
-import { $location } from "libram"
 import { visitUrl } from "kolmafia";
 import { Quest, Task } from "grimoire-kolmafia"
 

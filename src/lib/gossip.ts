@@ -1,5 +1,6 @@
-import * as Whiteboard from "../../whiteboard";
-import { myName, print } from "kolmafia";
+import { myName } from "kolmafia";
+
+import * as Whiteboard from "./whiteboard";
 
 const BASE_STENCH_REQUIRED = 7;
 export class Gossip {

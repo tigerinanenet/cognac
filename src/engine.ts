@@ -1,11 +1,6 @@
-import { Engine as BaseEngine, Quest, Task  } from "grimoire-kolmafia";
+import { Engine as BaseEngine, Task  } from "grimoire-kolmafia";
 import { haveEffect, myAdventures } from "kolmafia";
-import {
-  $effect,
-  have,
-  PropertiesManager,
-  uneffect,
-} from "libram";
+import { have, PropertiesManager, uneffect, $effect } from "libram";
 
 export class Engine extends BaseEngine<never, Task> {
   constructor(tasks: Task[]) {

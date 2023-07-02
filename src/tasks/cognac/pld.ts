@@ -1,8 +1,6 @@
-
-import { Macro, $familiar, $skill, $location, $item, get } from "libram"
-import { canAdventure } from "kolmafia";
 import { CombatStrategy, Task } from "grimoire-kolmafia"
-//import { getEffects } from "./noncombat";
+import { Macro, get, $effect, $familiar, $item, $location, $skill } from "libram"
+
 
 const runaway = Macro
     .trySkill($skill`Bowl a Curveball`)
@@ -21,7 +19,10 @@ export class PLD {
                 name: "Increase stench",
                 completed: () => this.gossip.readyToDive(),
                 do: () => $location`The Purple Light District`,
-                //effects: getEffects(),
+                effects: [
+                    $effect`Sonata of sneakiness`,
+                    $effect`smooth movement`,
+                ],
                 combat: new CombatStrategy().macro(runaway),
                 outfit: {
                     equip: [

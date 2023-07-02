@@ -1,5 +1,5 @@
 
-import { visitUrl, print } from "kolmafia";
+import { visitUrl } from "kolmafia";
 
 let talkToRichard = true;
 

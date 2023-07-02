@@ -1,6 +1,7 @@
 
 import { visitUrl } from "kolmafia"
 import { Quest, Task } from "grimoire-kolmafia"
+
 import { Explore } from "./explore";
 import { Scobo } from "./scobo";
 
