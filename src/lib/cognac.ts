@@ -8,7 +8,9 @@ const session = Session.current();
 export function save(): void {
   const sessionDiff = session.diff(Session.current());
   const cognacs = sessionDiff.items.get($item`Ralph IX cognac`) ?? 0;
-  set(COGNACS, parseInt(get(COGNACS)) ?? 0 + cognacs);
+  const cognacPref = get(COGNACS);
+  const cognacCount = cognacPref === "" ? 0 : parseInt(cognacPref);
+  set(COGNACS, cognacCount + cognacs);
 }
 
 export function print(): void {

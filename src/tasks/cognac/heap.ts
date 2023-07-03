@@ -40,8 +40,9 @@ export class Heap {
         post: () => {
           if (get("lastEncounter") === "I Refuse!") {
             this.gossip.resetStench();
-            const dives = parseInt(get(DIVES)) ?? 0 + 1;
-            set(DIVES, dives);
+            const divesPref = get(DIVES);
+            const divesCount = divesPref === "" ? 0 : parseInt(divesPref);
+            set(DIVES, divesCount + 1);
           }
         },
       },
