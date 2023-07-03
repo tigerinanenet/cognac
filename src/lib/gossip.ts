@@ -1,13 +1,15 @@
-import { myName } from "kolmafia";
+import { myName, gametimeToInt } from "kolmafia";
 
 import * as Whiteboard from "./whiteboard";
 
-type GossipObject = { players: string[]; stench: number; mutex: string };
+type GossipObject = { players: string[]; stench: number; mutex: string; diveStart: number };
 
 const BASE_STENCH_REQUIRED = 7;
+const msBetweenRounds = 60 * 1000;
 export class Gossip {
   players: string[] = [];
   stench = 0;
+  diveStart = 0;
   mutex = "";
 
   init(): void {
@@ -35,21 +37,24 @@ export class Gossip {
     this.players = gossip.players || [];
     this.stench = gossip.stench || 0;
     this.mutex = gossip.mutex || "";
+    this.diveStart = gossip.diveStart || 0;
   }
 
-  claimMutex(retries: number, callback?: () => boolean): void {
+  // If callback evaluates to true, the reason we were fetching
+  // the mutex has already been fulfilled.
+  claimMutex(retries: number, callback?: () => boolean): boolean {
     sleep(100);
     this.updateGossip();
 
     if (callback && callback()) {
-      return;
+      return false;
     }
 
     if (retries > 50) {
       throw `Could not claim whiteboard mutex`;
     }
     if (this.mutex === myName()) {
-      return;
+      return true;
     }
 
     if (this.mutex === "") {
@@ -72,19 +77,31 @@ export class Gossip {
   }
 
   resetStench(): void {
-    this.claimMutex(0, () => {
-      return this.stench === 0;
-    });
+    const applyUpdate = this.claimMutex(0, () => gametimeToInt() < this.diveStart);
+    if (!applyUpdate) {
+      return;
+    }
     this.stench = 0;
     this.mutex = "";
+    this.diveStart = gametimeToInt() + msBetweenRounds;
     Whiteboard.write(this.asRawJSON());
     this.updateGossip();
+  }
+
+  getWaitTime(): number {
+    const msDelta = this.diveStart - gametimeToInt();
+    if (msDelta < 0) {
+      return 0;
+    }
+    // Overcompensate on delay.
+    return msDelta / 1000 + 1;
   }
 
   asRawJSON(): GossipObject {
     return {
       players: this.players,
       stench: this.stench,
+      diveStart: this.diveStart,
       mutex: this.mutex,
     };
   }

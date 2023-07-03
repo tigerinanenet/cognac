@@ -1,10 +1,10 @@
 import { Args, getTasks } from "grimoire-kolmafia";
-import { getClanId, myAdventures } from "kolmafia";
-import { Clan, get, set } from "libram";
+import { getClanId } from "kolmafia";
+import { Clan, get } from "libram";
 
 import { Engine } from "./lib/engine";
 import { Gossip } from "./lib/gossip";
-import { printCognac } from "./lib/printcognac";
+import * as CognacSession from "./lib/cognac";
 import { checkGarbo, showPreferences } from "./prefs/prefs";
 import * as Properties from "./prefs/properties";
 import { Cognac } from "./tasks/cognac/cognac";
@@ -30,9 +30,6 @@ export function main(command?: string): void {
   }
 
   checkGarbo();
-  if (myAdventures() > 0) {
-    set(Properties.COGNACS, 0);
-  }
 
   const cognacTasks = getTasks([Sewers, TownSquare, Cognac]);
   const engine = new Engine(cognacTasks);
@@ -47,6 +44,7 @@ export function main(command?: string): void {
     engine.destruct();
     new Gossip().destroy();
     Clan.join(startingClan);
-    printCognac();
+    CognacSession.save();
+    CognacSession.print();
   }
 }

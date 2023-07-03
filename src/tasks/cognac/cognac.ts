@@ -20,7 +20,7 @@ const heap = new Heap(gossip);
 
 let initializedGossip = false;
 
-const gossipTask = {
+const gossipTask: Task = {
   name: "Init gossip",
   completed: (): boolean => initializedGossip,
   do: (): void => {
