@@ -1,20 +1,15 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
-import { inebrietyLimit, myAdventures, myInebriety, wait } from "kolmafia";
+import { myAdventures, wait } from "kolmafia";
 import { $effect, $familiar, $item, $location, $skill, get, have, Macro, set } from "libram";
 
 import { getEquipment } from "../../lib/equipment";
 import { DIVES } from "../../prefs/properties";
 import { Gossip } from "../../lib/gossip";
+import { getCombat } from "../../lib/combat";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
   .runaway();
-
-const drunkRunaway = Macro.runaway();
-
-const drunk = (): boolean => {
-  return myInebriety() >= inebrietyLimit();
-};
 
 export class Heap {
   gossip: Gossip;
@@ -29,7 +24,7 @@ export class Heap {
         completed: () => myAdventures() < 1,
         do: () => $location`The Heap`,
         effects: [$effect`The Sonata of Sneakiness`, $effect`Smooth Movements`],
-        combat: new CombatStrategy().macro(drunk() ? drunkRunaway : runaway),
+        combat: new CombatStrategy().macro(getCombat(runaway)),
         outfit: {
           equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`].filter(have)),
           modifier: "-combat",
