@@ -1,4 +1,4 @@
-import { myName, gametimeToInt } from "kolmafia";
+import { gametimeToInt, myName } from "kolmafia";
 
 import * as Whiteboard from "./whiteboard";
 

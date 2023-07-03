@@ -1,3 +1,4 @@
+import { Task } from "grimoire-kolmafia";
 import { Gossip } from "../../lib/gossip";
 
 export class Whiteboard {
@@ -10,7 +11,7 @@ export class Whiteboard {
     this.gossip.updateGossip();
   }
 
-  getTasks() {
+  getTasks(): Task[] {
     return [
       {
         name: "Schedule gossip update",

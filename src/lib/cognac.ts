@@ -1,17 +1,17 @@
 import { print as kolPrint } from "kolmafia";
-import { $item, Session, get, set } from "libram";
+import { $item, get, Session, set } from "libram";
 
 import { COGNACS, DIVES } from "../prefs/properties";
 
 const session = Session.current();
 
-export function save() {
+export function save(): void {
   const sessionDiff = session.diff(Session.current());
   const cognacs = sessionDiff.items.get($item`Ralph IX cognac`) ?? 0;
   set(COGNACS, parseInt(get(COGNACS)) + cognacs);
 }
 
-export function print() {
+export function print(): void {
   kolPrint("Cognac summary:");
   kolPrint("");
   const cognacs = parseInt(get(COGNACS));

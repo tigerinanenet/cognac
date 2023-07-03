@@ -28,7 +28,7 @@ export class PLD {
         name: "Increase stench",
         completed: () => this.gossip.readyToDive(),
         do: () => $location`The Purple Light District`,
-        effects: [$effect`Sonata of sneakiness`, $effect`Smooth Movements`],
+        effects: [$effect`The Sonata of Sneakiness`, $effect`Smooth Movements`],
         combat: new CombatStrategy().macro(runaway),
         outfit: {
           equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`]),
