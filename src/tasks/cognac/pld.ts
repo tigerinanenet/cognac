@@ -3,6 +3,7 @@ import { print, wait } from "kolmafia";
 import { $effect, $familiar, $item, $location, $skill, get, Macro } from "libram";
 import { getEquipment } from "../../lib/equipment";
 import { Gossip } from "../../lib/gossip";
+import { getCombat } from "../../lib/combat";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
@@ -29,7 +30,7 @@ export class PLD {
         completed: () => this.gossip.readyToDive(),
         do: () => $location`The Purple Light District`,
         effects: [$effect`The Sonata of Sneakiness`, $effect`Smooth Movements`],
-        combat: new CombatStrategy().macro(runaway),
+        combat: new CombatStrategy().macro(getCombat(runaway)),
         outfit: {
           equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`]),
           modifier: "-combat",
