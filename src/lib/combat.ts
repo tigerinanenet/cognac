@@ -4,7 +4,7 @@ import { Macro } from "libram";
 const drunkRunaway = Macro.runaway();
 
 const drunk = (): boolean => {
-  return myInebriety() >= inebrietyLimit();
+  return myInebriety() > inebrietyLimit();
 };
 
 export function getCombat(macro: Macro): Macro {
