@@ -1,21 +1,21 @@
 import { Args, getTasks } from "grimoire-kolmafia";
-import { getClanId, myAdventures, print } from "kolmafia";
+import { getClanId, myAdventures } from "kolmafia";
 import { Clan, get, set } from "libram";
 
 import { Engine } from "./lib/engine";
-import { Gossip } from "./lib/gossip"
+import { Gossip } from "./lib/gossip";
 import { printCognac } from "./lib/printcognac";
 import { checkGarbo, showPreferences } from "./prefs/prefs";
 import * as Properties from "./prefs/properties";
 import { Cognac } from "./tasks/cognac/cognac";
 import { Sewers } from "./tasks/sewers/sewers";
 import { TownSquare } from "./tasks/townsquare/townsquare";
-  
+
 const args = Args.create("Cognac", "Farming perscription strength alcohol since 2023.", {
   config: Args.flag({
-      help: "Show script configuration, and exit.",
-      default: false
-  })
+    help: "Show script configuration, and exit.",
+    default: false,
+  }),
 });
 
 export function main(command?: string): void {
@@ -25,26 +25,22 @@ export function main(command?: string): void {
     return;
   }
   if (args.config) {
-      showPreferences();
-      return;
+    showPreferences();
+    return;
   }
 
   checkGarbo();
-  if(myAdventures() > 0) {
-      set(Properties.COGNACS, 0);
+  if (myAdventures() > 0) {
+    set(Properties.COGNACS, 0);
   }
 
-  const cognacTasks = getTasks([
-    Sewers,
-    TownSquare,
-    Cognac
-  ])
+  const cognacTasks = getTasks([Sewers, TownSquare, Cognac]);
   const engine = new Engine(cognacTasks);
-  engine
-  
+  engine;
+
   const startingClan = getClanId();
   try {
-    const clan = get(Properties.CLAN).replace(/'/g, "&apos;");    
+    const clan = get(Properties.CLAN).replace(/'/g, "&apos;");
     Clan.join(clan);
     engine.run();
   } finally {
