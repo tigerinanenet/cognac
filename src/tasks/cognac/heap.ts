@@ -42,7 +42,6 @@ export class Heap {
             this.gossip.resetStench();
             const dives = parseInt(get(DIVES)) ?? 0 + 1;
             set(DIVES, dives);
-            wait(60);
           }
         },
       },
