@@ -4,23 +4,22 @@ import * as Whiteboard from "./whiteboard";
 
 const BASE_STENCH_REQUIRED = 7;
 export class Gossip {
-    players: any = []
-    stench: any = 0;
-    mutex: any = "";
+    players: string[] = []
+    stench: number = 0;
+    mutex: string = "";
 
     constructor() {}
 
     init() {
         this.updateGossip();
-        const nameMatch = (player: any) => player === `${myName()}`
-        if (this.players.some(nameMatch)) {
+        if (this.registered()) {
             return;
         }
         this.register();
     }
 
     registered() {
-        return this.players.some((player: any) => player === `${myName()}`)
+        return this.players.some((player: string) => player === `${myName()}`)
     }
 
     register() {
@@ -79,7 +78,7 @@ export class Gossip {
         Whiteboard.write(this.asRawJSON());
         this.updateGossip();
     }
-    
+
     asRawJSON() {
         return {
             players: this.players,
@@ -95,7 +94,7 @@ export class Gossip {
     destroy() {
         this.claimMutex(0);
         this.mutex = "";
-        this.players = this.players.filter((player: any) => player !== myName());
+        this.players = this.players.filter((player: string) => player !== myName());
         Whiteboard.write(this.asRawJSON());
     }
 }

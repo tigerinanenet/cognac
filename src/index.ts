@@ -10,9 +10,6 @@ import * as Properties from "./prefs/properties";
 import { Cognac } from "./tasks/cognac/cognac";
 import { Sewers } from "./tasks/sewers/sewers";
 import { TownSquare } from "./tasks/townsquare/townsquare";
-
-const CHOICE_SCRIPT = "choiceAdventureScript";
-const COGNAC_CHOICE_PATH = "scripts/cognac/choice.ash"
   
 const args = Args.create("Cognac", "Farming perscription strength alcohol since 2023.", {
   config: Args.flag({
@@ -43,22 +40,17 @@ export function main(command?: string): void {
     Cognac
   ])
   const engine = new Engine(cognacTasks);
+  engine
   
   const startingClan = getClanId();
-  
-  // This is a workaround to ask kolmafia to wait 60 seconds when we encounter I Refuse!
-  const choiceAdventureScript = get(CHOICE_SCRIPT);
   try {
     const clan = get(Properties.CLAN).replace(/'/g, "&apos;");    
     Clan.join(clan);
-    print(`${getClanId()}`);
-    set(CHOICE_SCRIPT, COGNAC_CHOICE_PATH);
     engine.run();
   } finally {
     engine.destruct();
     new Gossip().destroy();
     Clan.join(startingClan);
-    set(CHOICE_SCRIPT, choiceAdventureScript);
     printCognac();
   }
 }
