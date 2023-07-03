@@ -21,5 +21,5 @@ export function print(): void {
   kolPrint("");
   const dives = parseInt(get(DIVES));
   const s = dives === 1 ? "" : "s";
-  kolPrint(`You dove for treasure ${dives} time${s} today!}`);
+  kolPrint(`You dove for treasure ${dives} time${s} today!`);
 }
