@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "editor.codeActionsOnSave": {
     "source.addMissingImports": true
   },
@@ -7,12 +6,3 @@
   "editor.formatOnSave": true,
   "editor.tabSize": 2
 }
-=======
-    "editor.codeActionsOnSave": {
-      "source.addMissingImports": true
-    },
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.tabSize": 4
-  }
->>>>>>> @{-1}
