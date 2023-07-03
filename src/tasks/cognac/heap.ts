@@ -18,9 +18,6 @@ export class Heap {
         return [
             {
                 name: "Dive",
-                prepare: () => {
-                    this.gossip.registerDive();
-                },
                 completed: () => myAdventures() < 1,
                 do: () => $location`The Heap`,
                 effects: [
