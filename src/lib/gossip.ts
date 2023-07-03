@@ -1,12 +1,15 @@
-import { myName } from "kolmafia";
+import { myName, gametimeToInt } from "kolmafia";
 
 import * as Whiteboard from "./whiteboard";
 
 const BASE_STENCH_REQUIRED = 7;
+const msBetweenRounds = 60 * 1000;
 export class Gossip {
     players: string[] = []
     stench: number = 0;
+    diveStart: number = 0;
     mutex: string = "";
+
 
     constructor() {}
 
@@ -37,19 +40,21 @@ export class Gossip {
         this.mutex = gossip.mutex || "";
     }
 
-    claimMutex(retries: number, callback?: any): void {
+    // If callback evaluates to true, the reason we were fetching
+    // the mutex has already been fulfilled.
+    claimMutex(retries: number, callback?: any): boolean {
         sleep(100);
         this.updateGossip();
 
         if (callback && callback()) {
-            return;
+            return false;
         }
 
         if (retries > 50) {
             throw `Could not claim whiteboard mutex`
         }
         if (this.mutex === myName()) {
-            return;
+            return true;
         }
 
         if (this.mutex === "") {
@@ -72,17 +77,31 @@ export class Gossip {
     }
 
     resetStench() {
-        this.claimMutex(0, () => {return this.stench === 0});
+        const applyUpdate = this.claimMutex(0, () => gametimeToInt() < this.diveStart);
+        if (!applyUpdate) {
+            return;
+        }
         this.stench = 0;
         this.mutex = "";
+        this.diveStart = gametimeToInt() + msBetweenRounds
         Whiteboard.write(this.asRawJSON());
         this.updateGossip();
+    }
+
+    getWaitTime() {
+        const msDelta = this.diveStart - gametimeToInt();
+        if (msDelta < 0) {
+            return 0;
+        }
+        // Overcompensate on delay.
+        return msDelta / 1000 + 1
     }
 
     asRawJSON() {
         return {
             players: this.players,
             stench: this.stench,
+            diveStart: this.diveStart,
             mutex: this.mutex
         }
     }

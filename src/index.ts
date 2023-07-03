@@ -4,7 +4,7 @@ import { Clan, get, set } from "libram";
 
 import { Engine } from "./lib/engine";
 import { Gossip } from "./lib/gossip"
-import { printCognac } from "./lib/printcognac";
+import { printCognac } from "./lib/cognac";
 import { checkGarbo, showPreferences } from "./prefs/prefs";
 import * as Properties from "./prefs/properties";
 import { Cognac } from "./tasks/cognac/cognac";

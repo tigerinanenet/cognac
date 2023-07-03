@@ -1,7 +1,10 @@
 
 import { CombatStrategy, Task } from "grimoire-kolmafia"
 import { myAdventures, wait } from "kolmafia";
-import { Macro, get, have, $familiar, $effect, $item, $location, $skill} from "libram"
+import { Macro, get, $familiar, $effect, $item, $location, $skill, set} from "libram"
+
+import { getEquipment } from "../../lib/equipment";
+import { DIVES } from "../../prefs/properties";
 
 const runaway = Macro
     .trySkill($skill`Bowl a Curveball`)
@@ -26,10 +29,10 @@ export class Heap {
                 ],
                 combat: new CombatStrategy().macro(runaway),
                 outfit: {
-                    equip: [
+                    equip: getEquipment([
                         $item`june cleaver`,
                         $item`Greatest American Pants`
-                    ].filter(have) ?? [],
+                    ]),
                     modifier: "-combat",
                     familiar: $familiar`disgeist`,
                 },
@@ -43,6 +46,8 @@ export class Heap {
                 post: () => {
                     if(get("lastEncounter") === "I Refuse!") {
                         this.gossip.resetStench();
+                        const dives = parseInt(get(DIVES)) + 1;
+                        set(DIVES, dives)
                         wait(60);
                     }
                 }

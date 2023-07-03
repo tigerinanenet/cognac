@@ -1,7 +1,8 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia"
-import { wait } from "kolmafia";
-import { Macro, get, have, $effect, $familiar, $item, $location, $skill } from "libram"
+import { print, wait } from "kolmafia";
+import { Macro, get, $effect, $familiar, $item, $location, $skill } from "libram"
 
+import { getEquipment } from "../../lib/equipment";
 
 const runaway = Macro
     .trySkill($skill`Bowl a Curveball`)
@@ -17,6 +18,14 @@ export class PLD {
     getTasks(): Task[] {
         return [
             {
+                name: "Delay until diving",
+                completed: () => this.gossip.getWaitTime() === 0,
+                do: () => {
+                    print("Waiting for next cognac round to begin")
+                    wait(this.gossip.getWaitTime());
+                }
+            },
+            {
                 name: "Increase stench",
                 completed: () => this.gossip.readyToDive(),
                 do: () => $location`The Purple Light District`,
@@ -26,10 +35,10 @@ export class PLD {
                 ],
                 combat: new CombatStrategy().macro(runaway),
                 outfit: {
-                    equip: [
+                    equip: getEquipment([
                         $item`june cleaver`,
                         $item`Greatest American Pants`
-                    ].filter(have) ?? [],
+                    ]),
                     modifier: "-combat",
                     familiar: $familiar`disgeist`,
                 },
