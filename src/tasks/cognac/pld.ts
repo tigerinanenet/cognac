@@ -1,4 +1,5 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia"
+import { wait } from "kolmafia";
 import { Macro, get, have, $effect, $familiar, $item, $location, $skill } from "libram"
 
 

@@ -1,5 +1,5 @@
 import { Args, getTasks } from "grimoire-kolmafia";
-import { getClanId, myAdventures } from "kolmafia";
+import { getClanId, myAdventures, print } from "kolmafia";
 import { Clan, get, set } from "libram";
 
 import { Engine } from "./lib/engine";
@@ -49,7 +49,9 @@ export function main(command?: string): void {
   // This is a workaround to ask kolmafia to wait 60 seconds when we encounter I Refuse!
   const choiceAdventureScript = get(CHOICE_SCRIPT);
   try {
-    Clan.join(get(Properties.CLAN));
+    const clan = get(Properties.CLAN).replace(/'/g, "&apos;");    
+    Clan.join(clan);
+    print(`${getClanId()}`);
     set(CHOICE_SCRIPT, COGNAC_CHOICE_PATH);
     engine.run();
   } finally {

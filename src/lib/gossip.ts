@@ -79,7 +79,7 @@ export class Gossip {
         Whiteboard.write(this.asRawJSON());
         this.updateGossip();
     }
-
+    
     asRawJSON() {
         return {
             players: this.players,

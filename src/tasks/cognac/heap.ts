@@ -1,6 +1,6 @@
 
 import { CombatStrategy, Task } from "grimoire-kolmafia"
-import { myAdventures } from "kolmafia";
+import { myAdventures, wait } from "kolmafia";
 import { Macro, get, have, $familiar, $effect, $item, $location, $skill} from "libram"
 
 const runaway = Macro
@@ -18,6 +18,9 @@ export class Heap {
         return [
             {
                 name: "Dive",
+                prepare: () => {
+                    this.gossip.registerDive();
+                },
                 completed: () => myAdventures() < 1,
                 do: () => $location`The Heap`,
                 effects: [
@@ -43,6 +46,7 @@ export class Heap {
                 post: () => {
                     if(get("lastEncounter") === "I Refuse!") {
                         this.gossip.resetStench();
+                        wait(60);
                     }
                 }
             }
