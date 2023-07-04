@@ -5,6 +5,20 @@ import { COGNACS, DIVES } from "../prefs/properties";
 
 const session = Session.current();
 
+function printCognac(): void {
+  const cognacs = parseInt(get(COGNACS));
+  cognacs > 0
+    ? kolPrint(`You found ${cognacs} bottles of cognac today!`, `green`)
+    : kolPrint(`Didn't find any bottles of cognac this time. :(`, `red`);
+}
+
+function printDives(): void {
+  const divesStr = get(DIVES);
+  const dives = divesStr === "" ? 0 : parseInt(divesStr);
+  const s = dives === 1 ? "" : "s";
+  kolPrint(`You dove for treasure ${dives} time${s} today!`);
+}
+
 export function save(): void {
   const sessionDiff = session.diff(Session.current());
   const cognacs = sessionDiff.items.get($item`Ralph IX cognac`) ?? 0;
@@ -16,12 +30,6 @@ export function save(): void {
 export function print(): void {
   kolPrint("Cognac summary:");
   kolPrint("");
-  const cognacs = parseInt(get(COGNACS));
-  cognacs > 0
-    ? kolPrint(`You found ${cognacs} bottles of cognac today!`, `green`)
-    : kolPrint(`Didn't find any bottles of cognac this time. :(`, `red`);
-  kolPrint("");
-  const dives = parseInt(get(DIVES));
-  const s = dives === 1 ? "" : "s";
-  kolPrint(`You dove for treasure ${dives} time${s} today!`);
+  printCognac();
+  printDives();
 }
