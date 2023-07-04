@@ -1,11 +1,14 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { myAdventures } from "kolmafia";
-import { $effect, $familiar, $item, $location, $skill, Macro, get, have, set } from "libram";
+import { $familiar, $item, $location, $skill, get, have, Macro, set } from "libram";
 
 import { getCombat } from "../../lib/combat";
 import { getEquipment } from "../../lib/equipment";
+
 import { Gossip } from "../../lib/gossip";
-import { DIVES } from "../../prefs/properties";
+import { getCombat } from "../../lib/combat";
+import { basicEffects } from "../../lib/effects";
+import { DIVES, HEAPS_QUEUED } from "../../prefs/properties";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
@@ -17,13 +20,28 @@ export class Heap {
     this.gossip = gossip;
   }
 
+  handleRefuse(): void {
+    if (get("lastEncounter") !== "I Refuse!") {
+      return;
+    }
+    this.gossip.resetStench();
+
+    const divesPref = get(DIVES);
+    const divesCount = divesPref === "" ? 0 : parseInt(divesPref);
+    set(DIVES, divesCount + 1);
+
+    const divesQueued = get(HEAPS_QUEUED);
+    const diveQueuedCount = divesQueued === "" ? 0 : parseInt(divesQueued);
+    set(HEAPS_QUEUED, diveQueuedCount + 1);
+  }
+
   getTasks(): Task[] {
     return [
       {
         name: "Dive",
         completed: () => myAdventures() < 1,
         do: () => $location`The Heap`,
-        effects: [$effect`The Sonata of Sneakiness`, $effect`Smooth Movements`],
+        effects: basicEffects(),
         combat: new CombatStrategy().macro(getCombat(runaway)),
         outfit: {
           equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`].filter(have)),
@@ -38,12 +56,7 @@ export class Heap {
           295: 2,
         },
         post: () => {
-          if (get("lastEncounter") === "I Refuse!") {
-            this.gossip.resetStench();
-            const divesPref = get(DIVES);
-            const divesCount = divesPref === "" ? 0 : parseInt(divesPref);
-            set(DIVES, divesCount + 1);
-          }
+          this.handleRefuse();
         },
       },
     ];
