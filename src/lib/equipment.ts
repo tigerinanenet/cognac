@@ -1,4 +1,4 @@
-import { inebrietyLimit, Item, myInebriety } from "kolmafia";
+import { Item, inebrietyLimit, myInebriety } from "kolmafia";
 import { $item, have } from "libram";
 
 function appendWineglass(equips: Item[]): void {

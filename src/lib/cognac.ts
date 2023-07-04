@@ -1,5 +1,5 @@
 import { print as kolPrint } from "kolmafia";
-import { $item, get, Session, set } from "libram";
+import { $item, Session, get, set } from "libram";
 
 import { COGNACS, DIVES } from "../prefs/properties";
 

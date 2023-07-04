@@ -2,7 +2,7 @@ import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { $effect, $effects, $item, $location } from "libram";
 
 import { attack, mortar } from "./combat";
-import { ScoboParts, ScoboPartType } from "./parts";
+import { ScoboPartType, ScoboParts } from "./parts";
 
 const elementMap = {
   hot: $effects`Spirit of Cayenne`,
