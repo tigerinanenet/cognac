@@ -4,6 +4,7 @@ import { $effect, $familiar, $item, $location, $skill, get, Macro } from "libram
 import { getEquipment } from "../../lib/equipment";
 import { Gossip } from "../../lib/gossip";
 import { getCombat } from "../../lib/combat";
+import { basicEffects } from "../../lib/effects";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
@@ -29,7 +30,7 @@ export class PLD {
         name: "Increase stench",
         completed: () => this.gossip.readyToDive(),
         do: () => $location`The Purple Light District`,
-        effects: [$effect`The Sonata of Sneakiness`, $effect`Smooth Movements`],
+        effects: basicEffects(),
         combat: new CombatStrategy().macro(getCombat(runaway)),
         outfit: {
           equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`]),

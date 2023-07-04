@@ -6,6 +6,7 @@ import { getEquipment } from "../../lib/equipment";
 import { DIVES } from "../../prefs/properties";
 import { Gossip } from "../../lib/gossip";
 import { getCombat } from "../../lib/combat";
+import { basicEffects } from "../../lib/effects";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
@@ -23,7 +24,7 @@ export class Heap {
         name: "Dive",
         completed: () => myAdventures() < 1,
         do: () => $location`The Heap`,
-        effects: [$effect`The Sonata of Sneakiness`, $effect`Smooth Movements`],
+        effects: basicEffects(),
         combat: new CombatStrategy().macro(getCombat(runaway)),
         outfit: {
           equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`].filter(have)),
