@@ -1,5 +1,6 @@
 import { visitUrl } from "kolmafia";
-import { ScoboParts, ScoboPartType } from "./parts";
+
+import { ScoboPartType, ScoboParts } from "./parts";
 
 let talkToRichard = true;
 

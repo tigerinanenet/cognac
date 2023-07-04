@@ -1,5 +1,5 @@
-import { $effect, $familiar, $item, $location, $skill, Macro } from "libram";
 import { CombatStrategy, Task } from "grimoire-kolmafia";
+import { $effect, $familiar, $item, $location, $skill, Macro } from "libram";
 
 const tryFreeRunThenAttack = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)

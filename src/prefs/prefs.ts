@@ -1,6 +1,6 @@
 import { abort, print, userConfirm } from "kolmafia";
-
 import { get } from "libram";
+
 import * as Properties from "./properties";
 
 function showPreferences(): void {
