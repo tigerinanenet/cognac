@@ -11,7 +11,7 @@ type GossipObject = {
 };
 
 const BASE_STENCH_REQUIRED = 7;
-const msBetweenRounds = 60 * 1000;
+const msBetweenRounds = 90 * 1000;
 export class Gossip {
   players: string[] = [];
   stench = 0;
