@@ -6,6 +6,7 @@ import * as WhiteboardLib from "../../lib/whiteboard";
 import { Whiteboard } from "./whiteboard";
 import { PLD } from "./pld";
 import { Heap } from "./heap";
+import { Round } from "./round";
 
 try {
   WhiteboardLib.read();
@@ -17,6 +18,7 @@ const gossip = new Gossip();
 const whiteboard = new Whiteboard(gossip);
 const pld = new PLD(gossip);
 const heap = new Heap(gossip);
+const round = new Round(gossip);
 
 let initializedGossip = false;
 
@@ -32,5 +34,11 @@ const gossipTask: Task = {
 export const Cognac: Quest<Task> = {
   name: "Cognac",
   completed: () => myAdventures() < 1,
-  tasks: [gossipTask, ...whiteboard.getTasks(), ...pld.getTasks(), ...heap.getTasks()],
+  tasks: [
+    gossipTask,
+    ...whiteboard.getTasks(),
+    ...round.getTasks(),
+    ...pld.getTasks(),
+    ...heap.getTasks(),
+  ],
 };

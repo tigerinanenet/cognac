@@ -14,3 +14,5 @@ export const TOWN_SQUARE = prefix("townSquare");
 
 export const COGNACS = privatize("bottlesFound");
 export const DIVES = privatize("dives");
+export const HEAPS_QUEUED = privatize("choice216");
+export const DO_FLOWER = privatize("doFlower");

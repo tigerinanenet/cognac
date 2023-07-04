@@ -3,7 +3,7 @@ import { myAdventures } from "kolmafia";
 import { $familiar, $item, $location, $skill, get, have, Macro, set } from "libram";
 
 import { getEquipment } from "../../lib/equipment";
-import { DIVES } from "../../prefs/properties";
+import { DIVES, HEAPS_QUEUED } from "../../prefs/properties";
 import { Gossip } from "../../lib/gossip";
 import { getCombat } from "../../lib/combat";
 import { basicEffects } from "../../lib/effects";
@@ -16,6 +16,21 @@ export class Heap {
   gossip: Gossip;
   constructor(gossip: Gossip) {
     this.gossip = gossip;
+  }
+
+  handleRefuse(): void {
+    if (get("lastEncounter") !== "I Refuse!") {
+      return;
+    }
+    this.gossip.resetStench();
+
+    const divesPref = get(DIVES);
+    const divesCount = divesPref === "" ? 0 : parseInt(divesPref);
+    set(DIVES, divesCount + 1);
+
+    const divesQueued = get(HEAPS_QUEUED);
+    const diveQueuedCount = divesQueued === "" ? 0 : parseInt(divesQueued);
+    set(HEAPS_QUEUED, diveQueuedCount + 1);
   }
 
   getTasks(): Task[] {
@@ -39,12 +54,7 @@ export class Heap {
           295: 2,
         },
         post: () => {
-          if (get("lastEncounter") === "I Refuse!") {
-            this.gossip.resetStench();
-            const divesPref = get(DIVES);
-            const divesCount = divesPref === "" ? 0 : parseInt(divesPref);
-            set(DIVES, divesCount + 1);
-          }
+          this.handleRefuse();
         },
       },
     ];

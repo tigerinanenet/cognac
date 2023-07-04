@@ -14,7 +14,7 @@ export class Whiteboard {
   getTasks(): Task[] {
     return [
       {
-        name: "Schedule gossip update",
+        name: "Gossip Update",
         completed: () => new Date().getTime() - this.lastCheck < this.checkInterval,
         do: () => {
           this.gossip.updateGossip();

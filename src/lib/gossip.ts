@@ -4,6 +4,7 @@ import * as Whiteboard from "./whiteboard";
 
 type GossipObject = {
   players: string[];
+  requestingFlower: string[];
   stench: number;
   mutex: string;
   diveStart: number;
@@ -11,9 +12,10 @@ type GossipObject = {
 };
 
 const BASE_STENCH_REQUIRED = 7;
-const msBetweenRounds = 90 * 1000;
+const MS_BETWEEN_ROUNDS = 75 * 1000;
 export class Gossip {
   players: string[] = [];
+  requestingFlower: string[] = [];
   stench = 0;
   diveStart = 0;
   gameday = 0;
@@ -34,13 +36,12 @@ export class Gossip {
   register(): void {
     this.claimMutex(0);
     this.players.push(`${myName()}`);
-    this.mutex = "";
     // It's a new day; next cognac round is now.
     if (this.gameday !== gamedayToInt()) {
       this.diveStart = gametimeToInt();
       this.gameday = gamedayToInt();
     }
-    Whiteboard.write(this.asRawJSON());
+    this.write();
     this.updateGossip();
   }
 
@@ -71,9 +72,8 @@ export class Gossip {
     }
 
     if (this.mutex === "") {
-      const toWhiteboard = this.asRawJSON();
-      toWhiteboard.mutex = myName();
-      Whiteboard.write(toWhiteboard);
+      this.mutex = myName();
+      Whiteboard.write(this.asRawJSON());
       sleep(50);
       this.claimMutex(retries + 1);
     }
@@ -84,8 +84,7 @@ export class Gossip {
   incrementStench(): void {
     this.claimMutex(0);
     this.stench++;
-    this.mutex = "";
-    Whiteboard.write(this.asRawJSON());
+    this.write();
     this.updateGossip();
   }
 
@@ -95,9 +94,23 @@ export class Gossip {
       return;
     }
     this.stench = 0;
+    this.diveStart = gametimeToInt() + MS_BETWEEN_ROUNDS;
+    this.requestingFlower = [];
+    this.write();
+    this.updateGossip();
+  }
+
+  write(): void {
     this.mutex = "";
-    this.diveStart = gametimeToInt() + msBetweenRounds;
     Whiteboard.write(this.asRawJSON());
+  }
+
+  requestFlower(): void {
+    this.claimMutex(0);
+    if (!this.requestingFlower.some((player: string) => player === `${myName()}`)) {
+      this.requestingFlower.push(myName());
+    }
+    this.write();
     this.updateGossip();
   }
 
@@ -117,11 +130,12 @@ export class Gossip {
       diveStart: this.diveStart,
       mutex: this.mutex,
       gameday: this.gameday,
+      requestingFlower: this.requestingFlower,
     };
   }
 
   readyToDive(): boolean {
-    return this.stench >= BASE_STENCH_REQUIRED + this.players.length;
+    return this.stench >= BASE_STENCH_REQUIRED + this.players.length + this.requestingFlower.length;
   }
 
   destroy(): void {
