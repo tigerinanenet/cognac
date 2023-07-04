@@ -36,7 +36,7 @@ export class Gossip {
     this.players.push(`${myName()}`);
     this.mutex = "";
     // It's a new day; next cognac round is now.
-    if (this.gameday != gamedayToInt()) {
+    if (this.gameday !== gamedayToInt()) {
       this.diveStart = gametimeToInt();
       this.gameday = gamedayToInt();
     }

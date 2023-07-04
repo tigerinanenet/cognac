@@ -1,4 +1,4 @@
-import { $familiar, $item, $location, $skill, have, Macro } from "libram";
+import { $familiar, $item, $location, $skill, Macro } from "libram";
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { basicEffects } from "../../lib/effects";
 

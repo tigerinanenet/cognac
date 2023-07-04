@@ -1,6 +1,6 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
-import { myAdventures, wait } from "kolmafia";
-import { $effect, $familiar, $item, $location, $skill, get, have, Macro, set } from "libram";
+import { myAdventures } from "kolmafia";
+import { $familiar, $item, $location, $skill, get, have, Macro, set } from "libram";
 
 import { getEquipment } from "../../lib/equipment";
 import { DIVES } from "../../prefs/properties";

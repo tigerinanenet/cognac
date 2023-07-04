@@ -1,6 +1,6 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
-import { $effect, $familiar, $item, $location, $skill, get, Macro } from "libram";
+import { $familiar, $item, $location, $skill, get, Macro } from "libram";
 import { getEquipment } from "../../lib/equipment";
 import { Gossip } from "../../lib/gossip";
 import { getCombat } from "../../lib/combat";
