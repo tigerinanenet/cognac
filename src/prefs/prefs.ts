@@ -32,4 +32,10 @@ function checkGarbo(): void {
   abort("Go bonk those embezzlers real good.");
 }
 
-export { checkGarbo, showPreferences };
+function checkClan(): void {
+  if (!get(Properties.CLAN)) {
+    throw `Please set cognac clan pref. See \`cognac config\``;
+  }
+}
+
+export { checkClan, checkGarbo, showPreferences };

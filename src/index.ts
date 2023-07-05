@@ -5,7 +5,7 @@ import { Clan, get } from "libram";
 import * as CognacSession from "./lib/cognac";
 import { Engine } from "./lib/engine";
 import { Gossip } from "./lib/gossip";
-import { checkGarbo, showPreferences } from "./prefs/prefs";
+import { checkClan, checkGarbo, showPreferences } from "./prefs/prefs";
 import * as Properties from "./prefs/properties";
 import { Cognac } from "./tasks/cognac/cognac";
 import { Prologue } from "./tasks/prologue/prologue";
@@ -31,10 +31,10 @@ export function main(command?: string): void {
   }
 
   checkGarbo();
+  checkClan();
 
   const cognacTasks = getTasks([Prologue, Sewers, TownSquare, Cognac]);
   const engine = new Engine(cognacTasks);
-  engine;
 
   const startingClan = getClanId();
   try {
