@@ -12,7 +12,7 @@ type GossipObject = {
 };
 
 const BASE_STENCH_REQUIRED = 7;
-const MS_BETWEEN_ROUNDS = 75 * 1000;
+const MS_BETWEEN_ROUNDS = 60 * 1000;
 export class Gossip {
   players: string[] = [];
   requestingCompost: string[] = [];
