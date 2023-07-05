@@ -7791,7 +7791,7 @@ function getUniques(location) {
   return null;
 }
 ;// CONCATENATED MODULE: ./src/tasks/global/global.ts
-var global_templateObject, global_templateObject2;
+var global_templateObject, global_templateObject2, global_templateObject3;
 function global_taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
@@ -7808,7 +7808,10 @@ var globalTasks = () => {
     name: "Deploy fall-e",
     completed: () => !available(),
     do: () => {
-      sendTo($location(global_templateObject2 || (global_templateObject2 = global_taggedTemplateLiteral(["The Haunted Conservatory"]))));
+      if (sendTo($location(global_templateObject2 || (global_templateObject2 = global_taggedTemplateLiteral(["The Haunted Conservatory"]))))) {
+        return;
+      }
+      sendTo($location(global_templateObject3 || (global_templateObject3 = global_taggedTemplateLiteral(["The Haunted Pantry"]))));
     }
   }];
 };
