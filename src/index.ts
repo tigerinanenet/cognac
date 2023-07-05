@@ -31,7 +31,7 @@ export function main(command?: string): void {
 
   checkGarbo();
 
-  const cognacTasks = getTasks([Sewers, TownSquare, Cognac]);
+  const cognacTasks = getTasks([Prologue, Sewers, TownSquare, Cognac]);
   const engine = new Engine(cognacTasks);
   engine;
 

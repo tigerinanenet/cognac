@@ -2,7 +2,7 @@ import { Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
 import { get, set } from "libram";
 import { Gossip } from "../../lib/gossip";
-import { DO_FLOWER, HEAPS_QUEUED } from "../../prefs/properties";
+import { DO_COMPOST, HEAPS_QUEUED } from "../../prefs/properties";
 
 export class Round {
   gossip: Gossip;
@@ -13,20 +13,20 @@ export class Round {
   getTasks(): Task[] {
     return [
       {
-        name: "Request flower",
+        name: "Request compost",
         completed: (): boolean => {
           if (this.gossip.getWaitTime() === 0) {
             return true;
           }
-          if (get(DO_FLOWER) !== "") {
+          if (get(DO_COMPOST) !== "") {
             return true;
           }
           const heapDives = get(HEAPS_QUEUED) === "" ? 0 : parseInt(get(HEAPS_QUEUED));
           return heapDives < 5;
         },
         do: () => {
-          this.gossip.requestFlower();
-          set(DO_FLOWER, "true");
+          this.gossip.requestCompost();
+          set(DO_COMPOST, "true");
         },
       },
       {

@@ -7,6 +7,7 @@ import { Heap } from "./heap";
 import { PLD } from "./pld";
 import { Whiteboard } from "./whiteboard";
 import { Round } from "./round";
+import { globalTasks } from "../global/global";
 
 try {
   WhiteboardLib.read();
@@ -35,6 +36,7 @@ export const Cognac: Quest<Task> = {
   name: "Cognac",
   completed: () => myAdventures() < 1,
   tasks: [
+    ...globalTasks(),
     gossipTask,
     ...whiteboard.getTasks(),
     ...round.getTasks(),

@@ -2,6 +2,7 @@ import { visitUrl } from "kolmafia";
 import { Quest, Task } from "grimoire-kolmafia";
 
 import { Explore } from "./explore";
+import { globalTasks } from "../global/global";
 import { Scobo } from "./scobo";
 
 const scoboParts = {
@@ -28,5 +29,5 @@ export const TownSquare: Quest<Task> = {
     }
     return skipTownSquare;
   },
-  tasks: [...scobo.getTasks(), ...explore.getTasks()],
+  tasks: [...globalTasks(), ...scobo.getTasks(), ...explore.getTasks()],
 };

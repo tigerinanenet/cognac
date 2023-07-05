@@ -4,7 +4,7 @@ import * as Whiteboard from "./whiteboard";
 
 type GossipObject = {
   players: string[];
-  requestingFlower: string[];
+  requestingCompost: string[];
   stench: number;
   mutex: string;
   diveStart: number;
@@ -15,7 +15,7 @@ const BASE_STENCH_REQUIRED = 7;
 const MS_BETWEEN_ROUNDS = 75 * 1000;
 export class Gossip {
   players: string[] = [];
-  requestingFlower: string[] = [];
+  requestingCompost: string[] = [];
   stench = 0;
   diveStart = 0;
   gameday = 0;
@@ -95,7 +95,7 @@ export class Gossip {
     }
     this.stench = 0;
     this.diveStart = gametimeToInt() + MS_BETWEEN_ROUNDS;
-    this.requestingFlower = [];
+    this.requestingCompost = [];
     this.write();
     this.updateGossip();
   }
@@ -105,10 +105,10 @@ export class Gossip {
     Whiteboard.write(this.asRawJSON());
   }
 
-  requestFlower(): void {
+  requestCompost(): void {
     this.claimMutex(0);
-    if (!this.requestingFlower.some((player: string) => player === `${myName()}`)) {
-      this.requestingFlower.push(myName());
+    if (!this.requestingCompost.some((player: string) => player === `${myName()}`)) {
+      this.requestingCompost.push(myName());
     }
     this.write();
     this.updateGossip();
@@ -130,12 +130,14 @@ export class Gossip {
       diveStart: this.diveStart,
       mutex: this.mutex,
       gameday: this.gameday,
-      requestingFlower: this.requestingFlower,
+      requestingCompost: this.requestingCompost,
     };
   }
 
   readyToDive(): boolean {
-    return this.stench >= BASE_STENCH_REQUIRED + this.players.length + this.requestingFlower.length;
+    return (
+      this.stench >= BASE_STENCH_REQUIRED + this.players.length + this.requestingCompost.length
+    );
   }
 
   destroy(): void {

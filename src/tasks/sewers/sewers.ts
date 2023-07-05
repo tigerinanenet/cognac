@@ -4,6 +4,7 @@ import { Quest, Task } from "grimoire-kolmafia";
 import { AcquireTasks } from "./acquire";
 import { CageTasks } from "./cage";
 import { ExploreTasks } from "./explore";
+import { globalTasks } from "../global/global";
 
 let complete = false;
 
@@ -15,5 +16,5 @@ export const Sewers: Quest<Task> = {
     }
     return complete;
   },
-  tasks: [...CageTasks, ...AcquireTasks, ...ExploreTasks],
+  tasks: [...globalTasks(), ...CageTasks, ...AcquireTasks, ...ExploreTasks],
 };
