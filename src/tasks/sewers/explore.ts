@@ -22,6 +22,7 @@ export const ExploreTasks: Task[] = [
       197: 1,
       198: 1,
       199: 1,
+      212: 1,
     },
   },
 ];
