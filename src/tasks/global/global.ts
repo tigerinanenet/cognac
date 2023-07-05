@@ -18,7 +18,10 @@ export const globalTasks = (): Task[] => {
       name: "Deploy fall-e",
       completed: () => !AutumnAton.available(),
       do: () => {
-        AutumnAton.sendTo($location`The Haunted Conservatory`);
+        if (AutumnAton.sendTo($location`The Haunted Conservatory`)) {
+          return;
+        }
+        AutumnAton.sendTo($location`The Haunted Pantry`);
       },
     },
   ];
