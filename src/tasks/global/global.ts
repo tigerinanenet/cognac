@@ -8,10 +8,10 @@ export const globalTasks = (): Task[] => {
     {
       name: "Fuel Asdon",
       completed: () => {
-        return !AsdonMartin.installed() || have($item`Asdon Martin keyfob`) || getFuel() >= 37;
+        return !AsdonMartin.installed() || have($item`Asdon Martin keyfob`) || getFuel() >= 50;
       },
       do: () => {
-        AsdonMartin.fillTo(37);
+        AsdonMartin.fillTo(50);
       },
     },
     {
