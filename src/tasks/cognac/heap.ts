@@ -1,13 +1,11 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { myAdventures } from "kolmafia";
-import { $familiar, $item, $location, $skill, get, have, Macro, set } from "libram";
+import { $familiar, $item, $location, $skill, Macro, get, have, set } from "libram";
 
-import { getCombat } from "../../lib/combat";
-import { getEquipment } from "../../lib/equipment";
-
-import { Gossip } from "../../lib/gossip";
 import { getCombat } from "../../lib/combat";
 import { basicEffects } from "../../lib/effects";
+import { getEquipment } from "../../lib/equipment";
+import { Gossip } from "../../lib/gossip";
 import { DIVES, HEAPS_QUEUED } from "../../prefs/properties";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)

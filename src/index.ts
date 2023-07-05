@@ -2,12 +2,13 @@ import { Args, getTasks } from "grimoire-kolmafia";
 import { getClanId } from "kolmafia";
 import { Clan, get } from "libram";
 
+import * as CognacSession from "./lib/cognac";
 import { Engine } from "./lib/engine";
 import { Gossip } from "./lib/gossip";
-import * as CognacSession from "./lib/cognac";
 import { checkGarbo, showPreferences } from "./prefs/prefs";
 import * as Properties from "./prefs/properties";
 import { Cognac } from "./tasks/cognac/cognac";
+import { Prologue } from "./tasks/prologue/prologue";
 import { Sewers } from "./tasks/sewers/sewers";
 import { TownSquare } from "./tasks/townsquare/townsquare";
 
