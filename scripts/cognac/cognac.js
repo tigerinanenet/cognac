@@ -7799,10 +7799,10 @@ var globalTasks = () => {
   return [{
     name: "Fuel Asdon",
     completed: () => {
-      return !installed() || have(template_string_$item(global_templateObject || (global_templateObject = global_taggedTemplateLiteral(["Asdon Martin keyfob"])))) || (0,external_kolmafia_namespaceObject.getFuel)() >= 37;
+      return !installed() || have(template_string_$item(global_templateObject || (global_templateObject = global_taggedTemplateLiteral(["Asdon Martin keyfob"])))) || (0,external_kolmafia_namespaceObject.getFuel)() >= 50;
     },
     do: () => {
-      fillTo(37);
+      fillTo(50);
     }
   }, {
     name: "Deploy fall-e",
