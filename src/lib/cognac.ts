@@ -20,7 +20,7 @@ function printDives(): void {
 }
 
 export function save(): void {
-  const sessionDiff = session.diff(Session.current());
+  const sessionDiff = Session.current().diff(session);
   const cognacs = sessionDiff.items.get($item`Ralph IX cognac`) ?? 0;
   const cognacPref = get(COGNACS);
   const cognacCount = cognacPref === "" ? 0 : parseInt(cognacPref);
