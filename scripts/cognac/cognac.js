@@ -6835,7 +6835,7 @@ function printDives() {
 }
 function save() {
   var _sessionDiff$items$ge;
-  var sessionDiff = session.diff(Session.current());
+  var sessionDiff = Session.current().diff(session);
   var cognacs = (_sessionDiff$items$ge = sessionDiff.items.get(template_string_$item(cognac_templateObject || (cognac_templateObject = cognac_taggedTemplateLiteral(["Ralph IX cognac"]))))) !== null && _sessionDiff$items$ge !== void 0 ? _sessionDiff$items$ge : 0;
   var cognacPref = property_get(COGNACS);
   var cognacCount = cognacPref === "" ? 0 : parseInt(cognacPref);
