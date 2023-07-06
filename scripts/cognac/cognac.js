@@ -841,7 +841,7 @@ function parseNumber(n) {
  * @param max Upper bound.
  * @returns Clamped value
  */
-function utils_clamp(n, min, max) {
+function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
 }
 /**
@@ -1845,7 +1845,7 @@ function getAverage(range) {
  * @param item Consumable item
  * @returns Average aventures from consumable
  */
-function lib_getAverageAdventures(item) {
+function getAverageAdventures(item) {
   return getAverage(item.adventures);
 }
 /**
@@ -7443,7 +7443,7 @@ function price(item, priceAge) {
   }
 }
 function inventoryItems() {
-  return Item.all().filter(isFuelItem).filter(item => haveItem(item) && [100, autosellPrice(item)].includes(price(item, PriceAge.RECENT)));
+  return external_kolmafia_namespaceObject.Item.all().filter(isFuelItem).filter(item => have(item) && [100, (0,external_kolmafia_namespaceObject.autosellPrice)(item)].includes(price(item, PriceAge.RECENT)));
 }
 /**
  * @param it The item in question
@@ -7452,7 +7452,7 @@ function inventoryItems() {
  */
 function calculateFuelUnitCost(it) {
   var priceAge = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : PriceAge.RECENT;
-  var units = lib_getAverageAdventures(it);
+  var units = getAverageAdventures(it);
   return price(it, priceAge) / units;
 }
 /**
@@ -7460,7 +7460,7 @@ function calculateFuelUnitCost(it) {
  * @returns Can `it` be used as Asdon fuel?
  */
 function isFuelItem(it) {
-  return !(0,external_kolmafia_namespaceObject.isNpcItem)(it) && it.fullness + it.inebriety > 0 && lib_getAverageAdventures(it) > 0 && it.tradeable && it.discardable && !fuelSkiplist.includes(it);
+  return !(0,external_kolmafia_namespaceObject.isNpcItem)(it) && it.fullness + it.inebriety > 0 && getAverageAdventures(it) > 0 && it.tradeable && it.discardable && !fuelSkiplist.includes(it);
 }
 /**
  * @returns The best fuel options available to us at this time
@@ -7483,7 +7483,7 @@ function getBestFuels() {
     (0,external_kolmafia_namespaceObject.mallPrices)("food");
     (0,external_kolmafia_namespaceObject.mallPrices)("booze");
   }
-  var key1 = item => -lib_getAverageAdventures(item);
+  var key1 = item => -getAverageAdventures(item);
   var key2 = item => calculateFuelUnitCost(item, PriceAge.RECENT);
   potentialFuel.sort((x, y) => key1(x) - key1(y));
   potentialFuel.sort((x, y) => key2(x) - key2(y));
@@ -7522,11 +7522,11 @@ function fillTo(targetUnits) {
       _ref2 = AsdonMartin_slicedToArray(_ref, 2),
       bestFuel = _ref2[0],
       secondBest = _ref2[1];
-    var count = Math.ceil(targetUnits / lib_getAverageAdventures(bestFuel));
+    var count = Math.ceil(targetUnits / getAverageAdventures(bestFuel));
     var ceiling = undefined;
     if (secondBest) {
-      var efficiencyOfSecondBest = (0,external_kolmafia_namespaceObject.mallPrice)(secondBest) / lib_getAverageAdventures(secondBest);
-      ceiling = Math.ceil(efficiencyOfSecondBest * lib_getAverageAdventures(bestFuel));
+      var efficiencyOfSecondBest = (0,external_kolmafia_namespaceObject.mallPrice)(secondBest) / getAverageAdventures(secondBest);
+      ceiling = Math.ceil(efficiencyOfSecondBest * getAverageAdventures(bestFuel));
     }
     if (!(0,external_kolmafia_namespaceObject.canInteract)()) (0,external_kolmafia_namespaceObject.retrieveItem)(count, bestFuel);else ceiling ? (0,external_kolmafia_namespaceObject.buy)(count, bestFuel, ceiling) : (0,external_kolmafia_namespaceObject.buy)(count, bestFuel);
     if (!insertFuel(bestFuel, Math.min((0,external_kolmafia_namespaceObject.itemAmount)(bestFuel), count))) {
@@ -7540,11 +7540,11 @@ function fillTo(targetUnits) {
  * @returns Whether we successfully filled our Asdon's tank
  */
 function fillWithBestInventoryItem(targetUnits) {
-  var options = inventoryItems().sort((a, b) => getAverageAdventures(b) / autosellPrice(b) - getAverageAdventures(a) / autosellPrice(a));
+  var options = inventoryItems().sort((a, b) => getAverageAdventures(b) / (0,external_kolmafia_namespaceObject.autosellPrice)(b) - getAverageAdventures(a) / (0,external_kolmafia_namespaceObject.autosellPrice)(a));
   if (options.length === 0) return false;
   var best = options[0];
-  if (autosellPrice(best) / getAverageAdventures(best) > 100) return false;
-  var amountToUse = clamp(Math.ceil(targetUnits / getAverageAdventures(best)), 0, itemAmount(best));
+  if ((0,external_kolmafia_namespaceObject.autosellPrice)(best) / getAverageAdventures(best) > 100) return false;
+  var amountToUse = clamp(Math.ceil(targetUnits / getAverageAdventures(best)), 0, (0,external_kolmafia_namespaceObject.itemAmount)(best));
   return insertFuel(best, amountToUse);
 }
 /**
@@ -7556,7 +7556,7 @@ function fillWithBestInventoryItem(targetUnits) {
 function fillWithInventoryTo(targetUnits) {
   if (!installed()) return false;
   var continueFuelingFromInventory = true;
-  while (getFuel() < targetUnits && continueFuelingFromInventory) {
+  while ((0,external_kolmafia_namespaceObject.getFuel)() < targetUnits && continueFuelingFromInventory) {
     continueFuelingFromInventory && (continueFuelingFromInventory = fillWithBestInventoryItem(targetUnits));
   }
   return fillTo(targetUnits);
@@ -7588,13 +7588,13 @@ function drive(style) {
   var preferInventory = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   if (!Object.values(Driving).includes(style)) return false;
   if (!installed()) return false;
-  if (haveEffect(style) >= turns) return true;
-  var fuelNeeded = 37 * Math.ceil((turns - haveEffect(style)) / 30);
+  if ((0,external_kolmafia_namespaceObject.haveEffect)(style) >= turns) return true;
+  var fuelNeeded = 37 * Math.ceil((turns - (0,external_kolmafia_namespaceObject.haveEffect)(style)) / 30);
   (preferInventory ? fillWithInventoryTo : fillTo)(fuelNeeded);
-  while (getFuel() >= 37 && haveEffect(style) < turns) {
-    cliExecute("asdonmartin drive ".concat(style.name.replace("Driving ", "")));
+  while ((0,external_kolmafia_namespaceObject.getFuel)() >= 37 && (0,external_kolmafia_namespaceObject.haveEffect)(style) < turns) {
+    (0,external_kolmafia_namespaceObject.cliExecute)("asdonmartin drive ".concat(style.name.replace("Driving ", "")));
   }
-  return haveEffect(style) >= turns;
+  return (0,external_kolmafia_namespaceObject.haveEffect)(style) >= turns;
 }
 ;// CONCATENATED MODULE: ./node_modules/libram/dist/resources/2022/AutumnAton.js
 var AutumnAton_templateObject, AutumnAton_templateObject2, AutumnAton_templateObject3, AutumnAton_templateObject4, AutumnAton_templateObject5, AutumnAton_templateObject6, AutumnAton_templateObject7, AutumnAton_templateObject8, AutumnAton_templateObject9;
@@ -7791,8 +7791,9 @@ function getUniques(location) {
   return null;
 }
 ;// CONCATENATED MODULE: ./src/tasks/global/global.ts
-var global_templateObject, global_templateObject2, global_templateObject3;
+var global_templateObject, global_templateObject2, global_templateObject3, global_templateObject4, global_templateObject5;
 function global_taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 
 
 var globalTasks = () => {
@@ -7805,13 +7806,21 @@ var globalTasks = () => {
       fillTo(50);
     }
   }, {
+    name: "Drive Stealthily ",
+    completed: () => {
+      return !installed() || have($effect(global_templateObject2 || (global_templateObject2 = global_taggedTemplateLiteral(["Driving Stealthily"]))));
+    },
+    do: () => {
+      drive($effect(global_templateObject3 || (global_templateObject3 = global_taggedTemplateLiteral(["Driving Stealthily"]))));
+    }
+  }, {
     name: "Deploy fall-e",
     completed: () => !available(),
     do: () => {
-      if (sendTo($location(global_templateObject2 || (global_templateObject2 = global_taggedTemplateLiteral(["The Haunted Conservatory"]))))) {
+      if (sendTo($location(global_templateObject4 || (global_templateObject4 = global_taggedTemplateLiteral(["The Haunted Conservatory"]))))) {
         return;
       }
-      sendTo($location(global_templateObject3 || (global_templateObject3 = global_taggedTemplateLiteral(["The Haunted Pantry"]))));
+      sendTo($location(global_templateObject5 || (global_templateObject5 = global_taggedTemplateLiteral(["The Haunted Pantry"]))));
     }
   }];
 };
@@ -7967,6 +7976,7 @@ var ExploreTasks = [{
     197: 1,
     198: 1,
     199: 1,
+    211: 1,
     212: 1
   }
 }];
