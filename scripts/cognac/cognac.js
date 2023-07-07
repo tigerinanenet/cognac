@@ -7028,11 +7028,16 @@ var Gossip = /*#__PURE__*/function () {
     key: "requestCompost",
     value: function requestCompost() {
       this.claimMutex(0);
-      if (!this.requestingCompost.some(player => player === "".concat((0,external_kolmafia_namespaceObject.myName)()))) {
+      if (!this.willCompost()) {
         this.requestingCompost.push((0,external_kolmafia_namespaceObject.myName)());
       }
       this.write();
       this.updateGossip();
+    }
+  }, {
+    key: "willCompost",
+    value: function willCompost() {
+      return this.requestingCompost.some(player => player === "".concat((0,external_kolmafia_namespaceObject.myName)()));
     }
   }, {
     key: "getWaitTime",
@@ -7207,7 +7212,7 @@ var Heap = /*#__PURE__*/function () {
         choices: {
           203: 2,
           214: 2,
-          216: () => property_get(REFUSES_UNTIL_COMPOST, 0) <= 0 ? 1 : 2,
+          216: () => property_get(REFUSES_UNTIL_COMPOST, 0) <= 0 && this.gossip.willCompost() ? 1 : 2,
           218: 1,
           295: 2
         },
