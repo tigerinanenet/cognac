@@ -8,12 +8,20 @@ export function write(content: Record<string, unknown>): string {
   );
 }
 
-export function read(): unknown {
+export function read(): Record<string, unknown> {
   const rawContent = visitUrl(`clan_basement.php?fromabove=1`, false);
   const contentMatch = rawContent.match(/textarea maxlength=5000 name=whiteboard[^>]+>([^<]+)</);
   if (!contentMatch) {
     return {};
   }
   const match = contentMatch[1].replace(/ ?&quot;/g, '"').replace(/\n/g, "");
-  return JSON.parse(match);
+  try {
+    return JSON.parse(match);
+  } catch {
+    if (match.trim() === "") {
+      return {};
+    } else {
+      throw "WARNING: Whiteboard contains non-JSON content. Remove it if you want to continue.";
+    }
+  }
 }
