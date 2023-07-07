@@ -46,7 +46,7 @@ export class Heap {
 
             set(REFUSES_UNTIL_COMPOST, get(REFUSES_UNTIL_COMPOST, 0) - 1);
           } else if (get("lastEncounter") === "The Compostal Service" && lastChoice() === 1) {
-            set(REFUSES_UNTIL_COMPOST, 0);
+            set(REFUSES_UNTIL_COMPOST, 5);
           }
         },
       },
