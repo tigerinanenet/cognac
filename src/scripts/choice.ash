@@ -6,9 +6,4 @@ void main(int choice, string page)
 
 		wait(60);
 	}
-	if (choice == 216 && get_property("_cognac_doCompost") != "") {
-		run_choice(1);
-		set_property("_cognac_doCompost", "");
-		set_property("_cognac_choice216", "");
-	} 
 }
