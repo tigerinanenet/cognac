@@ -107,11 +107,15 @@ export class Gossip {
 
   requestCompost(): void {
     this.claimMutex(0);
-    if (!this.requestingCompost.some((player: string) => player === `${myName()}`)) {
+    if (!this.willCompost()) {
       this.requestingCompost.push(myName());
     }
     this.write();
     this.updateGossip();
+  }
+
+  willCompost(): boolean {
+    return this.requestingCompost.some((player: string) => player === `${myName()}`);
   }
 
   getWaitTime(): number {

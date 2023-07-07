@@ -34,7 +34,7 @@ export class Heap {
         choices: {
           203: 2,
           214: 2,
-          216: () => (get(REFUSES_UNTIL_COMPOST, 0) <= 0 ? 1 : 2),
+          216: () => (get(REFUSES_UNTIL_COMPOST, 0) <= 0 && this.gossip.willCompost() ? 1 : 2),
           218: 1,
           295: 2,
         },
