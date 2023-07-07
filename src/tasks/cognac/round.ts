@@ -18,6 +18,9 @@ export class Round {
           if (this.gossip.getWaitTime() === 0) {
             return true;
           }
+          if (this.gossip.willCompost()) {
+            return true;
+          }
           return get(REFUSES_UNTIL_COMPOST, 0) > 0;
         },
         do: () => {
