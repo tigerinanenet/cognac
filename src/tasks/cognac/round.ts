@@ -1,8 +1,8 @@
 import { Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
-import { get, set } from "libram";
+import { get } from "libram";
 import { Gossip } from "../../lib/gossip";
-import { DO_COMPOST, HEAPS_QUEUED } from "../../prefs/properties";
+import { REFUSES_UNTIL_COMPOST } from "../../prefs/properties";
 
 export class Round {
   gossip: Gossip;
@@ -18,15 +18,10 @@ export class Round {
           if (this.gossip.getWaitTime() === 0) {
             return true;
           }
-          if (get(DO_COMPOST) !== "") {
-            return true;
-          }
-          const heapDives = get(HEAPS_QUEUED) === "" ? 0 : parseInt(get(HEAPS_QUEUED));
-          return heapDives < 5;
+          return get(REFUSES_UNTIL_COMPOST, 0) > 0;
         },
         do: () => {
           this.gossip.requestCompost();
-          set(DO_COMPOST, "true");
         },
       },
       {

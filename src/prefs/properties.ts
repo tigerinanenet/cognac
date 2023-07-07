@@ -12,8 +12,7 @@ export const CLAN = prefix("clan");
 export const ASDON = prefix("useAsdon");
 export const SKIP_GARBO = prefix("skipGarbo");
 export const TOWN_SQUARE = prefix("townSquare");
+export const REFUSES_UNTIL_COMPOST = prefix("choice216");
 
 export const COGNACS = privatize("bottlesFound");
 export const DIVES = privatize("dives");
-export const HEAPS_QUEUED = privatize("choice216");
-export const DO_COMPOST = privatize("doCompost");
