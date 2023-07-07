@@ -50,8 +50,7 @@ __webpack_require__.d(properties_namespaceObject, {
   CLAN: () => (CLAN),
   COGNACS: () => (COGNACS),
   DIVES: () => (DIVES),
-  DO_COMPOST: () => (DO_COMPOST),
-  HEAPS_QUEUED: () => (HEAPS_QUEUED),
+  REFUSES_UNTIL_COMPOST: () => (REFUSES_UNTIL_COMPOST),
   SKIP_GARBO: () => (SKIP_GARBO),
   TOWN_SQUARE: () => (TOWN_SQUARE)
 });
@@ -6812,10 +6811,9 @@ var CLAN = prefix("clan");
 var ASDON = prefix("useAsdon");
 var SKIP_GARBO = prefix("skipGarbo");
 var TOWN_SQUARE = prefix("townSquare");
+var REFUSES_UNTIL_COMPOST = prefix("choice216");
 var COGNACS = privatize("bottlesFound");
 var DIVES = privatize("dives");
-var HEAPS_QUEUED = privatize("choice216");
-var DO_COMPOST = privatize("doCompost");
 ;// CONCATENATED MODULE: ./src/lib/cognac.ts
 var cognac_templateObject;
 function cognac_taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -6906,7 +6904,15 @@ function read() {
     return {};
   }
   var match = contentMatch[1].replace(/ ?&quot;/g, '"').replace(/\n/g, "");
-  return JSON.parse(match);
+  try {
+    return JSON.parse(match);
+  } catch (_unused) {
+    if (match.trim() === "") {
+      return {};
+    } else {
+      throw "WARNING: Whiteboard contains non-JSON content. Remove it if you want to continue.";
+    }
+  }
 }
 ;// CONCATENATED MODULE: ./src/lib/gossip.ts
 function gossip_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7185,20 +7191,6 @@ var Heap = /*#__PURE__*/function () {
     this.gossip = gossip;
   }
   heap_createClass(Heap, [{
-    key: "handleRefuse",
-    value: function handleRefuse() {
-      if (property_get("lastEncounter") !== "I Refuse!") {
-        return;
-      }
-      this.gossip.resetStench();
-      var divesPref = property_get(DIVES);
-      var divesCount = divesPref === "" ? 0 : parseInt(divesPref);
-      _set(DIVES, divesCount + 1);
-      var divesQueued = property_get(HEAPS_QUEUED);
-      var diveQueuedCount = divesQueued === "" ? 0 : parseInt(divesQueued);
-      _set(HEAPS_QUEUED, diveQueuedCount + 1);
-    }
-  }, {
     key: "getTasks",
     value: function getTasks() {
       return [{
@@ -7215,12 +7207,18 @@ var Heap = /*#__PURE__*/function () {
         choices: {
           203: 2,
           214: 2,
-          216: 2,
+          216: () => property_get(REFUSES_UNTIL_COMPOST, 0) <= 0 ? 1 : 2,
           218: 1,
           295: 2
         },
         post: () => {
-          this.handleRefuse();
+          if (property_get("lastEncounter") === "I Refuse!") {
+            this.gossip.resetStench();
+            _set(DIVES, property_get(DIVES, 0) + 1);
+            _set(REFUSES_UNTIL_COMPOST, property_get(REFUSES_UNTIL_COMPOST, 0) - 1);
+          } else if (property_get("lastEncounter") === "The Compostal Service" && (0,external_kolmafia_namespaceObject.lastChoice)() === 1) {
+            _set(REFUSES_UNTIL_COMPOST, 5);
+          }
         }
       }];
     }
@@ -7343,15 +7341,10 @@ var Round = /*#__PURE__*/function () {
           if (this.gossip.getWaitTime() === 0) {
             return true;
           }
-          if (property_get(DO_COMPOST) !== "") {
-            return true;
-          }
-          var heapDives = property_get(HEAPS_QUEUED) === "" ? 0 : parseInt(property_get(HEAPS_QUEUED));
-          return heapDives < 5;
+          return property_get(REFUSES_UNTIL_COMPOST, 0) > 0;
         },
         do: () => {
           this.gossip.requestCompost();
-          _set(DO_COMPOST, "true");
         }
       }, {
         name: "Wait",
@@ -7838,12 +7831,6 @@ function cognac_arrayLikeToArray(arr, len) { if (len == null || len > arr.length
 
 
 
-
-try {
-  read();
-} catch (_unused) {
-  whiteboard_write({});
-}
 var gossip = new Gossip();
 var whiteboard = new Whiteboard(gossip);
 var pld = new PLD(gossip);
