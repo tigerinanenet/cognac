@@ -7221,7 +7221,7 @@ var Heap = /*#__PURE__*/function () {
             this.gossip.resetStench();
             _set(DIVES, property_get(DIVES, 0) + 1);
             _set(REFUSES_UNTIL_COMPOST, property_get(REFUSES_UNTIL_COMPOST, 0) - 1);
-          } else if (property_get("lastEncounter") === "The Compostal Service" && (0,external_kolmafia_namespaceObject.lastChoice)() === 1) {
+          } else if (property_get("lastEncounter") === "The Compostal Service" && this.gossip.willCompost()) {
             _set(REFUSES_UNTIL_COMPOST, 5);
           }
         }
