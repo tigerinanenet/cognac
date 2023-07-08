@@ -15,7 +15,7 @@ export function VoterTask(): Task {
       get("lastVoteMonsterTurn") >= totalTurnsPlayed(),
     effects: getEffects(),
     outfit: () => ({
-      equip: Object.values({ ...defaultEquipment(), acc3: $item`"I Voted!" sticker` }),
+      equip: Object.values({ ...defaultEquipment(), acc3: $item`"I Voted!" sticker` }).filter(have),
       modifier: "-combat",
     }),
     combat: kill(),

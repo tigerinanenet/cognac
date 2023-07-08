@@ -21,7 +21,7 @@ export const FuelAsdon: Task = {
   name: "Fuel Asdon",
   ready: () => getFuel() < 50,
   completed: () => {
-    return !AsdonMartin.installed() || have($item`Asdon Martin keyfob`) || getFuel() >= 50;
+    return !AsdonMartin.installed() || have($item`Asdon Martin keyfob`);
   },
   do: () => {
     AsdonMartin.fillTo(50);

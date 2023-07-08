@@ -28,7 +28,7 @@ export function MagnifyingGlass(): Task {
       equip: Object.values({
         ...defaultEquipment(),
         "off-hand": $item`cursed magnifying glass`,
-      }),
+      }).filter(have),
       modifier: "-combat",
     }),
     combat: kill(),

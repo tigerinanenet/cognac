@@ -15,7 +15,7 @@ export function SausageTask(): Task {
       equip: Object.values({
         ...defaultEquipment(),
         "off-hand": $item`Kramco Sausage-o-Matic™`,
-      }),
+      }).filter(have),
       modifier: "-combat",
     }),
     combat: kill(),
