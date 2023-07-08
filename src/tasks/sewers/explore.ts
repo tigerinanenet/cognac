@@ -14,7 +14,7 @@ export const ExploreTasks: Task[] = [
     effects: basicEffects(),
     combat: new CombatStrategy().macro(tryFreeRunThenAttack),
     outfit: {
-      equip: [$item`gatorskin umbrella`, $item`hobo code binder`],
+      equip: [$item`gatorskin umbrella`, $item`hobo code binder`, $item`Mafia Thumb Ring`],
       modifier: "-combat",
       familiar: $familiar`Disgeist`,
     },

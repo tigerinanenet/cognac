@@ -1,6 +1,6 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { myAdventures } from "kolmafia";
-import { $familiar, $item, $location, $skill, Macro, get, have, set } from "libram";
+import { $familiar, $item, $location, $skill, Macro, get, set } from "libram";
 
 import { getCombat } from "../../lib/combat";
 import { basicEffects } from "../../lib/effects";
@@ -27,7 +27,11 @@ export class Heap {
         effects: basicEffects(),
         combat: new CombatStrategy().macro(getCombat(runaway)),
         outfit: {
-          equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`].filter(have)),
+          equip: getEquipment([
+            $item`June cleaver`,
+            $item`Greatest American Pants`,
+            $item`Mafia Thumb Ring`,
+          ]),
           modifier: "-combat",
           familiar: $familiar`Disgeist`,
         },

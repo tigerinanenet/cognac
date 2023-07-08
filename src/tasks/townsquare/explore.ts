@@ -54,7 +54,7 @@ export class Explore {
         combat: new CombatStrategy().macro(attack),
         effects: [$effect`Carol of the Bulls`],
         outfit: {
-          equip: [$item`Fourth of May Cosplay Saber`],
+          equip: [$item`Fourth of May Cosplay Saber`, $item`Mafia Thumb Ring`],
         },
       },
       {
@@ -63,6 +63,9 @@ export class Explore {
         completed: () => this.targetElement === "normal",
         effects: () => elementMap[this.targetElement],
         combat: new CombatStrategy().macro(mortar),
+        outfit: {
+          equip: [$item`Mafia Thumb Ring`],
+        },
       },
     ];
   }

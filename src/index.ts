@@ -17,6 +17,10 @@ const args = Args.create("Cognac", "Farming perscription strength alcohol since 
     help: "Show script configuration, and exit.",
     default: false,
   }),
+  nocage: Args.flag({
+    help: "Do not fetch cagebait.",
+    default: false,
+  }),
 });
 
 export function main(command?: string): void {
@@ -33,7 +37,7 @@ export function main(command?: string): void {
   checkGarbo();
   checkClan();
 
-  const cognacTasks = getTasks([Prologue, Sewers, TownSquare, Cognac]);
+  const cognacTasks = getTasks([Prologue, Sewers(args.nocage), TownSquare, Cognac]);
   const engine = new Engine(cognacTasks);
 
   const startingClan = getClanId();

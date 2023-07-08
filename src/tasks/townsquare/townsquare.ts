@@ -1,9 +1,10 @@
-import { visitUrl } from "kolmafia";
 import { Quest, Task } from "grimoire-kolmafia";
+import { visitUrl } from "kolmafia";
 
-import { Explore } from "./explore";
 import { globalTasks } from "../global/global";
+import { Explore } from "./explore";
 import { Scobo } from "./scobo";
+import { Snapper } from "./snapper";
 
 const scoboParts = {
   hot: 0,
@@ -29,5 +30,5 @@ export const TownSquare: Quest<Task> = {
     }
     return skipTownSquare;
   },
-  tasks: [...globalTasks(), ...scobo.getTasks(), ...explore.getTasks()],
+  tasks: [...globalTasks(), Snapper, ...scobo.getTasks(), ...explore.getTasks()],
 };

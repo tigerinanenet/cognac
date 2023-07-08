@@ -34,7 +34,11 @@ export class PLD {
         effects: basicEffects(),
         combat: new CombatStrategy().macro(getCombat(runaway)),
         outfit: {
-          equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`]),
+          equip: getEquipment([
+            $item`June cleaver`,
+            $item`Greatest American Pants`,
+            $item`Mafia Thumb Ring`,
+          ]),
           modifier: "-combat",
           familiar: $familiar`Disgeist`,
         },
