@@ -7764,7 +7764,7 @@ var FuelAsdon = {
   name: "Fuel Asdon",
   ready: () => (0,external_kolmafia_namespaceObject.getFuel)() < 50,
   completed: () => {
-    return !installed() || have(template_string_$item(asdon_templateObject3 || (asdon_templateObject3 = tasks_asdon_taggedTemplateLiteral(["Asdon Martin keyfob"])))) || (0,external_kolmafia_namespaceObject.getFuel)() >= 50;
+    return !installed() || have(template_string_$item(asdon_templateObject3 || (asdon_templateObject3 = tasks_asdon_taggedTemplateLiteral(["Asdon Martin keyfob"]))));
   },
   do: () => {
     fillTo(50);
@@ -8999,7 +8999,7 @@ function DigitizedTask() {
     outfit: () => getDigitizeMonster() === $monster(digitized_templateObject3 || (digitized_templateObject3 = digitized_taggedTemplateLiteral(["Knob Goblin Embezzler"]))) ? {
       objective: "Meat Drop"
     } : {
-      equip: Object.values(defaultEquipment())
+      equip: Object.values(defaultEquipment()).filter(have)
     },
     combat: new CombatStrategy().autoattack(() => Macro.externalIf(shouldRedigitize(), Macro.skill(template_string_$skill(digitized_templateObject4 || (digitized_templateObject4 = digitized_taggedTemplateLiteral(["Digitize"]))))).step(killMacro())),
     prepare: () => {
@@ -9038,7 +9038,7 @@ function MagnifyingGlass() {
     outfit: () => ({
       equip: Object.values(magnifyingglass_objectSpread(magnifyingglass_objectSpread({}, defaultEquipment()), {}, {
         "off-hand": template_string_$item(magnifyingglass_templateObject2 || (magnifyingglass_templateObject2 = magnifyingglass_taggedTemplateLiteral(["cursed magnifying glass"])))
-      })),
+      })).filter(have),
       modifier: "-combat"
     }),
     combat: kill(),
@@ -9067,7 +9067,7 @@ function SausageTask() {
     outfit: () => ({
       equip: Object.values(sausage_objectSpread(sausage_objectSpread({}, defaultEquipment()), {}, {
         "off-hand": template_string_$item(sausage_templateObject2 || (sausage_templateObject2 = sausage_taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"])))
-      })),
+      })).filter(have),
       modifier: "-combat"
     }),
     combat: kill(),
@@ -9096,7 +9096,7 @@ function VoterTask() {
     outfit: () => ({
       equip: Object.values(voter_objectSpread(voter_objectSpread({}, defaultEquipment()), {}, {
         acc3: template_string_$item(voter_templateObject2 || (voter_templateObject2 = voter_taggedTemplateLiteral(["\"I Voted!\" sticker"])))
-      })),
+      })).filter(have),
       modifier: "-combat"
     }),
     combat: kill(),
