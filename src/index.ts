@@ -7,10 +7,10 @@ import { Engine } from "./lib/engine";
 import { Gossip } from "./lib/gossip";
 import { checkClan, checkGarbo, showPreferences } from "./prefs/prefs";
 import * as Properties from "./prefs/properties";
-import { Cognac } from "./tasks/cognac/cognac";
-import { Prologue } from "./tasks/prologue/prologue";
-import { Sewers } from "./tasks/sewers/sewers";
-import { TownSquare } from "./tasks/townsquare/townsquare";
+import { Cognac } from "./quests/cognac/cognac";
+import { Prologue } from "./quests/prologue/prologue";
+import { Sewers } from "./quests/sewers/sewers";
+import { TownSquare } from "./quests/townsquare/townsquare";
 
 const args = Args.create("Cognac", "Farming perscription strength alcohol since 2023.", {
   config: Args.flag({

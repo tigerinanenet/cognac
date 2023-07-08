@@ -7,8 +7,8 @@ const MAX_HEAP_ROUND_LENGTH = 27;
 const MAX_HEAP_LIVELOCKS = 3;
 
 export class Engine extends BaseEngine<never, Task> {
-  heapAdventures: number = 0;
-  brokeHeap: number = 0;
+  heapAdventures = 0;
+  brokeHeap = 0;
 
   constructor(tasks: Task[]) {
     super(tasks);

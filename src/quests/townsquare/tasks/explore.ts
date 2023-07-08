@@ -1,7 +1,7 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { $effect, $effects, $item, $location } from "libram";
 
-import { attack, mortar } from "./combat";
+import { attack, mortar } from "./combat/combat";
 import { ScoboPartType, ScoboParts } from "./parts";
 
 const elementMap = {
@@ -54,7 +54,7 @@ export class Explore {
         combat: new CombatStrategy().macro(attack),
         effects: [$effect`Carol of the Bulls`],
         outfit: {
-          equip: [$item`Fourth of May Cosplay Saber`, $item`Mafia Thumb Ring`],
+          equip: [$item`Fourth of May Cosplay Saber`, $item`mafia thumb ring`],
         },
       },
       {
@@ -64,7 +64,7 @@ export class Explore {
         effects: () => elementMap[this.targetElement],
         combat: new CombatStrategy().macro(mortar),
         outfit: {
-          equip: [$item`Mafia Thumb Ring`],
+          equip: [$item`mafia thumb ring`],
         },
       },
     ];

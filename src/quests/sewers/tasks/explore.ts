@@ -1,6 +1,6 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { $familiar, $item, $location, $skill, Macro } from "libram";
-import { basicEffects } from "../../lib/effects";
+import { basicEffects } from "../../../lib/effects";
 
 const tryFreeRunThenAttack = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
@@ -14,7 +14,7 @@ export const ExploreTasks: Task[] = [
     effects: basicEffects(),
     combat: new CombatStrategy().macro(tryFreeRunThenAttack),
     outfit: {
-      equip: [$item`gatorskin umbrella`, $item`hobo code binder`, $item`Mafia Thumb Ring`],
+      equip: [$item`gatorskin umbrella`, $item`hobo code binder`, $item`mafia thumb ring`],
       modifier: "-combat",
       familiar: $familiar`Disgeist`,
     },

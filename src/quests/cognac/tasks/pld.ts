@@ -2,10 +2,10 @@ import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
 import { $familiar, $item, $location, $skill, Macro, get } from "libram";
 
-import { getCombat } from "../../lib/combat";
-import { basicEffects } from "../../lib/effects";
-import { getEquipment } from "../../lib/equipment";
-import { Gossip } from "../../lib/gossip";
+import { getCombat } from "../../../lib/combat";
+import { basicEffects } from "../../../lib/effects";
+import { getEquipment } from "../../../lib/equipment";
+import { Gossip } from "../../../lib/gossip";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
@@ -37,7 +37,7 @@ export class PLD {
           equip: getEquipment([
             $item`June cleaver`,
             $item`Greatest American Pants`,
-            $item`Mafia Thumb Ring`,
+            $item`mafia thumb ring`,
           ]),
           modifier: "-combat",
           familiar: $familiar`Disgeist`,

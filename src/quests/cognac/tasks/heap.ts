@@ -2,11 +2,11 @@ import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { myAdventures } from "kolmafia";
 import { $familiar, $item, $location, $skill, Macro, get, set } from "libram";
 
-import { getCombat } from "../../lib/combat";
-import { basicEffects } from "../../lib/effects";
-import { getEquipment } from "../../lib/equipment";
-import { Gossip } from "../../lib/gossip";
-import { DIVES, REFUSES_UNTIL_COMPOST } from "../../prefs/properties";
+import { getCombat } from "../../../lib/combat";
+import { basicEffects } from "../../../lib/effects";
+import { getEquipment } from "../../../lib/equipment";
+import { Gossip } from "../../../lib/gossip";
+import { DIVES, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
@@ -30,7 +30,7 @@ export class Heap {
           equip: getEquipment([
             $item`June cleaver`,
             $item`Greatest American Pants`,
-            $item`Mafia Thumb Ring`,
+            $item`mafia thumb ring`,
           ]),
           modifier: "-combat",
           familiar: $familiar`Disgeist`,
