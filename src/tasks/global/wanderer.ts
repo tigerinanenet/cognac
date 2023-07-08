@@ -123,7 +123,7 @@ export function wandererTasks(): Task[] {
               equip: Object.values(wandererEquipment()),
             },
       combat: new CombatStrategy().autoattack(
-        Macro.externalIf(shouldRedigitize(), Macro.skill($skill`Digitize`)).step(killMacro())
+        () => Macro.externalIf(shouldRedigitize(), Macro.skill($skill`Digitize`)).step(killMacro())
       ),
       prepare: () => {
         if (shouldRedigitize()) SourceTerminal.educate($skill`Digitize`);
