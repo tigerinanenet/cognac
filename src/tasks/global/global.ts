@@ -1,8 +1,7 @@
 import { Task } from "grimoire-kolmafia";
 import { cliExecute, getFuel } from "kolmafia";
-import { $effect, get } from "libram";
+import { $effect, $item, $location, AsdonMartin, AutumnAton, get, have } from "libram";
 
-import { $item, $location, AsdonMartin, AutumnAton, have } from "libram";
 import { spookyravenTasks } from "./spookyraven";
 import { wandererTasks } from "./wanderer";
 
@@ -58,7 +57,7 @@ export function globalTasks(): Task[] {
         cliExecute(
           `latte refill ${preferred
             .filter((ingredient) => unlocked.includes(ingredient))
-            .join(" ")}`
+            .join(" ")}`,
         );
       },
     },

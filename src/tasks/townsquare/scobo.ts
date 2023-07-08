@@ -26,7 +26,7 @@ export class Scobo {
       normal: /Richard has[^\d]+(\d+)[<b>\\/\s]+hobo skin/,
     };
     Object.entries(matchRegistry).map(
-      ([key, value]) => (parts[key as ScoboPartType] = extractMatch(value))
+      ([key, value]) => (parts[key as ScoboPartType] = extractMatch(value)),
     );
   }
 
@@ -46,7 +46,7 @@ export class Scobo {
         do: () => {
           const html = visitUrl(
             "clan_hobopolis.php?place=3&action=talkrichard&whichtalk=3&pwd",
-            false
+            false,
           );
           this.processScoboParts(this.parts, html);
           talkToRichard = false;

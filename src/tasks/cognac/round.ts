@@ -1,6 +1,7 @@
 import { Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
 import { get } from "libram";
+
 import { Gossip } from "../../lib/gossip";
 import { REFUSES_UNTIL_COMPOST } from "../../prefs/properties";
 

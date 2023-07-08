@@ -42,7 +42,7 @@ export class Explore {
         completed: () => this.nextFightPrepped,
         do: () => {
           this.targetElement = Object.keys(this.parts).find(
-            (elem) => this.parts[elem as ScoboPartType] < 1
+            (elem) => this.parts[elem as ScoboPartType] < 1,
           ) as ScoboPartType;
           this.nextFightPrepped = true;
         },

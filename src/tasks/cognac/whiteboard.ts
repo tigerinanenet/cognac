@@ -1,4 +1,5 @@
 import { Task } from "grimoire-kolmafia";
+
 import { Gossip } from "../../lib/gossip";
 
 export class Whiteboard {

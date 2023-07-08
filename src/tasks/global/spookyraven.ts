@@ -13,6 +13,7 @@ import {
   have,
   questStep,
 } from "libram";
+
 import { getCombat } from "../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../lib/effects";
 import { getEquipment } from "../../lib/equipment";
@@ -72,11 +73,11 @@ export function spookyravenTasks(): Task[] {
         Macro.if_(
           "monstername writing desk",
           Macro.trySkill($skill`Transcendent Olfaction`, $skill`Gallapagosian Mating Call`).skill(
-            $skill`Spit jurassic acid`
-          )
+            $skill`Spit jurassic acid`,
+          ),
         )
           .trySkill($skill`Throw Latte on Opponent`)
-          .runaway()
+          .runaway(),
       ),
       do: () => {
         if (Cartography.have() && get("_monstersMapped") < 3) {

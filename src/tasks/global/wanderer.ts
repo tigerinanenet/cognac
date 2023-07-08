@@ -24,6 +24,7 @@ import {
   getKramcoWandererChance,
   have,
 } from "libram";
+
 import { basicEffects, resistanceEffects } from "../../lib/effects";
 
 export function killMacro(): Macro {
@@ -37,7 +38,7 @@ export function wandererKill(): CombatStrategy {
   return new CombatStrategy().autoattack(
     Macro.trySkill(...$skills`Micrometeorite, Curse of Weaksauce`)
       .attack()
-      .repeat()
+      .repeat(),
   );
 }
 
@@ -123,7 +124,7 @@ export function wandererTasks(): Task[] {
               equip: Object.values(wandererEquipment()),
             },
       combat: new CombatStrategy().autoattack(
-        Macro.externalIf(shouldRedigitize(), Macro.skill($skill`Digitize`)).step(killMacro())
+        Macro.externalIf(shouldRedigitize(), Macro.skill($skill`Digitize`)).step(killMacro()),
       ),
       prepare: () => {
         if (shouldRedigitize()) SourceTerminal.educate($skill`Digitize`);

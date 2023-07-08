@@ -1,10 +1,10 @@
-import { visitUrl } from "kolmafia";
 import { Quest, Task } from "grimoire-kolmafia";
+import { visitUrl } from "kolmafia";
 
+import { globalTasks } from "../global/global";
 import { AcquireTasks } from "./acquire";
 import { CageTasks } from "./cage";
 import { ExploreTasks } from "./explore";
-import { globalTasks } from "../global/global";
 
 let complete = false;
 
