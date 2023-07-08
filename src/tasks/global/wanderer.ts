@@ -6,6 +6,7 @@ import {
   SlotType,
   canAdventure,
   inebrietyLimit,
+  myAdventures,
   myInebriety,
   totalTurnsPlayed,
 } from "kolmafia";
@@ -15,6 +16,7 @@ import {
   $location,
   $monster,
   $skill,
+  $skills,
   Counter,
   Macro,
   SourceTerminal,
@@ -24,10 +26,16 @@ import {
 } from "libram";
 import { basicEffects, resistanceEffects } from "../../lib/effects";
 
+export function killMacro(): Macro {
+  return Macro.trySkill($skill`Micrometeorite`)
+    .trySkill($skill`Curse of Weaksauce`)
+    .attack()
+    .repeat();
+}
+
 export function wandererKill(): CombatStrategy {
   return new CombatStrategy().autoattack(
-    Macro.trySkill($skill`Micrometeorite`)
-      .trySkill($skill`Curse of Weaksauce`)
+    Macro.trySkill(...$skills`Micrometeorite, Curse of Weaksauce`)
       .attack()
       .repeat()
   );
@@ -64,6 +72,19 @@ export function wandererEquipment(): Partial<{ [_ in SlotType]: Item }> {
   };
 }
 
+function shouldRedigitize(): boolean {
+  const digitizesLeft = SourceTerminal.getDigitizeUsesRemaining();
+  const monsterCount = SourceTerminal.getDigitizeMonsterCount() + 1;
+  // triangular number * 10 - 3
+  const digitizeAdventuresUsed = monsterCount * (monsterCount + 1) * 5 - 3;
+  // Redigitize if fewer adventures than this digitize usage (account for thumb ring).
+  return (
+    SourceTerminal.have() &&
+    SourceTerminal.canDigitize() &&
+    myAdventures() / 0.96 < digitizesLeft * digitizeAdventuresUsed
+  );
+}
+
 export function wandererTasks(): Task[] {
   return [
     {
@@ -74,17 +95,17 @@ export function wandererTasks(): Task[] {
         totalTurnsPlayed() % 11 !== 1 ||
         get("lastVoteMonsterTurn") >= totalTurnsPlayed(),
       effects: wandererEffects,
-      outfit: {
+      outfit: () => ({
         equip: Object.values({ ...wandererEquipment(), acc3: $item`"I Voted!" sticker` }),
         modifier: "-combat",
-      },
+      }),
       combat: wandererKill(),
       do: wandererLocation,
     },
     {
       name: "Digitze",
       ready: () => SourceTerminal.have() && SourceTerminal.getDigitizeMonster() !== null,
-      completed: () => Counter.get("Digitize Wanderer") > 0,
+      completed: () => Counter.get("Digitize Monster") > 0,
       effects: () => {
         const monster = SourceTerminal.getDigitizeMonster();
         const result = wandererEffects();
@@ -93,10 +114,20 @@ export function wandererTasks(): Task[] {
         }
         return result;
       },
-      outfit: {
-        equip: Object.values(wandererEquipment()),
+      outfit: () =>
+        SourceTerminal.getDigitizeMonster() === $monster`Knob Goblin Embezzler`
+          ? {
+              objective: "Meat Drop",
+            }
+          : {
+              equip: Object.values(wandererEquipment()),
+            },
+      combat: new CombatStrategy().autoattack(
+        Macro.externalIf(shouldRedigitize(), Macro.skill($skill`Digitize`)).step(killMacro())
+      ),
+      prepare: () => {
+        if (shouldRedigitize()) SourceTerminal.educate($skill`Digitize`);
       },
-      combat: wandererKill(),
       do: wandererLocation,
     },
     {
@@ -104,13 +135,13 @@ export function wandererTasks(): Task[] {
       ready: () => have($item`Kramco Sausage-o-Matic™`) && myInebriety() <= inebrietyLimit(),
       completed: () => getKramcoWandererChance() < 1.0,
       effects: wandererEffects,
-      outfit: {
+      outfit: () => ({
         equip: Object.values({
           ...wandererEquipment(),
           "off-hand": $item`Kramco Sausage-o-Matic™`,
         }),
         modifier: "-combat",
-      },
+      }),
       combat: wandererKill(),
       do: wandererLocation,
     },
@@ -119,13 +150,13 @@ export function wandererTasks(): Task[] {
       ready: () => have($item`cursed magnifying glass`) && get("cursedMagnifyingGlassCount") === 13,
       completed: () => get("_voidFreeFights") >= 5,
       effects: wandererEffects,
-      outfit: {
+      outfit: () => ({
         equip: Object.values({
           ...wandererEquipment(),
           "off-hand": $item`cursed magnifying glass`,
         }),
         modifier: "-combat",
-      },
+      }),
       combat: wandererKill(),
       do: wandererLocation,
     },

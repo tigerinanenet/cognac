@@ -2,7 +2,7 @@ import { CombatStrategy, Guards, Task } from "grimoire-kolmafia";
 import { adv1, cliExecute, visitUrl } from "kolmafia";
 import {
   $effect,
-  $familiar,
+  $effects,
   $item,
   $location,
   $monster,
@@ -16,6 +16,7 @@ import {
 import { getCombat } from "../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../lib/effects";
 import { getEquipment } from "../../lib/equipment";
+import { noncombatFamiliar } from "../../lib/familiar";
 import { wandererEquipment } from "./wanderer";
 
 export function spookyravenTasks(): Task[] {
@@ -24,22 +25,22 @@ export function spookyravenTasks(): Task[] {
       name: "Haunted Billiards Room",
       ready: () => have($item`Spookyraven billiards room key`),
       completed: () => have($item`[7302]Spookyraven library key`),
-      effects: noncombatEffects,
-      outfit: {
+      effects: () => [...noncombatEffects(), ...$effects`Chalky Hand, Influence of Sphere`],
+      outfit: () => ({
         equip: getEquipment([
           $item`June cleaver`,
           $item`Greatest American Pants`,
           $item`mafia thumb ring`,
         ]),
         modifier: "-combat",
-        familiar: $familiar`Disgeist`,
-      },
+        familiar: noncombatFamiliar(),
+      }),
       choices: {
         900: 2, // Lights Out
         875: 1, // Hustle the ghost
         1436: 2, // Maps: go straight to hustle
       },
-      combat: new CombatStrategy().macro(getCombat(Macro.runaway())),
+      combat: new CombatStrategy().autoattack(getCombat(Macro.runaway())),
       do: $location`The Haunted Billiards Room`,
     },
     // Use Jurassic Parka to finish Spookyraven Library, slowly but surely
@@ -52,17 +53,14 @@ export function spookyravenTasks(): Task[] {
         get("writingDesksDefeated") < 5,
       completed: () => have($effect`Everything Looks Yellow`),
       effects: basicEffects,
-      outfit: {
+      outfit: () => ({
         equip: Object.values({
           ...wandererEquipment(),
           shirt: $item`Jurassic Parka`,
-          "off-hand":
-            !get("_latteBanishUsed") || get("_latteRefillsUsed") < 3
-              ? $item`latte lovers member's mug`
-              : $item`cursed magnifying glass`,
+          "off-hand": $item`latte lovers member's mug`,
           pants: $item`Greatest American Pants`,
         }),
-      },
+      }),
       choices: {
         894: 1, // Lights Out
         888: 4, // Take a Look (Rise)
@@ -81,10 +79,11 @@ export function spookyravenTasks(): Task[] {
           ) {
             ingredients = unlocked.slice(0, 3);
           }
+          if (unlocked.includes("ink")) ingredients[2] = "ink";
           cliExecute(`latte refill ${ingredients.join(" ")}`);
         }
       },
-      combat: new CombatStrategy().macro(
+      combat: new CombatStrategy().autoattack(
         Macro.if_(
           "monstername writing desk",
           Macro.trySkill($skill`Transcendent Olfaction`, $skill`Gallapagosian Mating Call`).skill(
