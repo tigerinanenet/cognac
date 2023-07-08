@@ -1,10 +1,11 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
-import { $familiar, $item, $location, $skill, Macro, get } from "libram";
+import { $item, $location, $skill, Macro, get } from "libram";
 
 import { getCombat } from "../../lib/combat";
-import { basicEffects } from "../../lib/effects";
+import { basicEffects, noncombatEffects } from "../../lib/effects";
 import { getEquipment } from "../../lib/equipment";
+import { noncombatFamiliar } from "../../lib/familiar";
 import { Gossip } from "../../lib/gossip";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
@@ -31,13 +32,14 @@ export class PLD {
         name: "Increase stench",
         completed: () => this.gossip.readyToDive(),
         do: () => $location`The Purple Light District`,
-        effects: basicEffects(),
-        combat: new CombatStrategy().macro(getCombat(runaway)),
-        outfit: {
+        effects: [...basicEffects(), ...noncombatEffects()],
+        combat: new CombatStrategy().autoattack(getCombat(runaway)),
+        outfit: () => ({
           equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`]),
           modifier: "-combat",
-          familiar: $familiar`Disgeist`,
-        },
+          bonuses: new Map([[$item`mafia thumb ring`, 200]]),
+          familiar: noncombatFamiliar(),
+        }),
         choices: {
           205: 2,
           219: 2,

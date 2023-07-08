@@ -51,18 +51,18 @@ export class Explore {
         ...this.baseTask,
         name: "Hobo combat physical",
         completed: () => this.targetElement !== "normal",
-        combat: new CombatStrategy().macro(attack),
+        combat: new CombatStrategy().autoattack(attack),
         effects: [$effect`Carol of the Bulls`],
-        outfit: {
+        outfit: () => ({
           equip: [$item`Fourth of May Cosplay Saber`],
-        },
+        }),
       },
       {
         ...this.baseTask,
         name: "Hobo combat elemental",
         completed: () => this.targetElement === "normal",
         effects: () => elementMap[this.targetElement],
-        combat: new CombatStrategy().macro(mortar),
+        combat: new CombatStrategy().autoattack(mortar),
       },
     ];
   }
