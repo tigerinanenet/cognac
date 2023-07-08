@@ -3,7 +3,7 @@ import { myAdventures } from "kolmafia";
 import { $familiar, $item, $location, $skill, Macro, get, have, set } from "libram";
 
 import { getCombat } from "../../lib/combat";
-import { basicEffects } from "../../lib/effects";
+import { basicEffects, noncombatEffects } from "../../lib/effects";
 import { getEquipment } from "../../lib/equipment";
 import { Gossip } from "../../lib/gossip";
 import { DIVES, REFUSES_UNTIL_COMPOST } from "../../prefs/properties";
@@ -24,7 +24,7 @@ export class Heap {
         name: "Dive",
         completed: () => myAdventures() < 1,
         do: () => $location`The Heap`,
-        effects: basicEffects(),
+        effects: [...basicEffects(), ...noncombatEffects()],
         combat: new CombatStrategy().macro(getCombat(runaway)),
         outfit: {
           equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`].filter(have)),

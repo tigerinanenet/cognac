@@ -3,7 +3,7 @@ import { print, wait } from "kolmafia";
 import { $familiar, $item, $location, $skill, Macro, get } from "libram";
 
 import { getCombat } from "../../lib/combat";
-import { basicEffects } from "../../lib/effects";
+import { basicEffects, noncombatEffects } from "../../lib/effects";
 import { getEquipment } from "../../lib/equipment";
 import { Gossip } from "../../lib/gossip";
 
@@ -31,7 +31,7 @@ export class PLD {
         name: "Increase stench",
         completed: () => this.gossip.readyToDive(),
         do: () => $location`The Purple Light District`,
-        effects: basicEffects(),
+        effects: [...basicEffects(), ...noncombatEffects()],
         combat: new CombatStrategy().macro(getCombat(runaway)),
         outfit: {
           equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`]),

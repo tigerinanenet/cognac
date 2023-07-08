@@ -3,9 +3,20 @@ import { getFuel } from "kolmafia";
 import { $effect } from "libram";
 
 import { $item, $location, AsdonMartin, AutumnAton, have } from "libram";
+import { spookyravenTasks } from "./spookyraven";
+import { wandererTasks } from "./wanderer";
 
-export const globalTasks = (): Task[] => {
+export function globalTasks(): Task[] {
   return [
+    {
+      name: "Drive Stealthily",
+      completed: () => {
+        return !AsdonMartin.installed() || have($effect`Driving Stealthily`);
+      },
+      do: () => {
+        AsdonMartin.drive($effect`Driving Stealthily`);
+      },
+    },
     {
       name: "Fuel Asdon",
       completed: () => {
@@ -13,15 +24,6 @@ export const globalTasks = (): Task[] => {
       },
       do: () => {
         AsdonMartin.fillTo(50);
-      },
-    },
-    {
-      name: "Drive Stealthily ",
-      completed: () => {
-        return !AsdonMartin.installed() || have($effect`Driving Stealthily`);
-      },
-      do: () => {
-        AsdonMartin.drive($effect`Driving Stealthily`);
       },
     },
     {
@@ -34,5 +36,7 @@ export const globalTasks = (): Task[] => {
         AutumnAton.sendTo($location`The Haunted Pantry`);
       },
     },
+    ...wandererTasks(),
+    ...spookyravenTasks(),
   ];
-};
+}
