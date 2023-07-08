@@ -67,22 +67,7 @@ export function spookyravenTasks(): Task[] {
         889: 5, // Take a Look (Fall)
         163: 4, // Melvil Dewey
       },
-      prepare: () => {
-        cliExecute("parka acid");
-
-        if (get("_latteBanishUsed") && get("_latteRefillsUsed") < 3) {
-          const unlocked = get("latteUnlocks").split(",");
-          let ingredients = get("latteIngredients").split(",");
-          if (
-            ingredients.length === 0 ||
-            ingredients.some((ingredient) => !unlocked.includes(ingredient))
-          ) {
-            ingredients = unlocked.slice(0, 3);
-          }
-          if (unlocked.includes("ink")) ingredients[2] = "ink";
-          cliExecute(`latte refill ${ingredients.join(" ")}`);
-        }
-      },
+      prepare: () => cliExecute("parka acid"),
       combat: new CombatStrategy().autoattack(
         Macro.if_(
           "monstername writing desk",
