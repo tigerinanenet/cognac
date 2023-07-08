@@ -1,7 +1,7 @@
 import { Quest, Task } from "grimoire-kolmafia";
 import { visitUrl } from "kolmafia";
 
-import { globalTasks } from "../global/tasks/global";
+import { globalTasks } from "../shared/asdon";
 import { Explore } from "./tasks/explore";
 import { Scobo } from "./tasks/scobo";
 import { Snapper } from "./tasks/snapper";

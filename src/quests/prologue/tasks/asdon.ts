@@ -1,5 +1,5 @@
 import { Task } from "grimoire-kolmafia";
-import { use } from "kolmafia";
+import { getFuel, use } from "kolmafia";
 import { $item, AsdonMartin, get, have } from "libram";
 import { ASDON } from "../../../prefs/properties";
 
@@ -14,6 +14,17 @@ export const InstallAsdon: Task = {
       return;
     }
     use($item`Asdon Martin keyfob`);
+  },
+};
+
+export const FuelAsdon: Task = {
+  name: "Fuel Asdon",
+  ready: () => getFuel() < 50,
+  completed: () => {
+    return !AsdonMartin.installed() || have($item`Asdon Martin keyfob`) || getFuel() >= 50;
+  },
+  do: () => {
+    AsdonMartin.fillTo(50);
   },
 };
 
