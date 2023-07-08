@@ -13,10 +13,10 @@ import {
   have,
   questStep,
 } from "libram";
-import { getCombat } from "../../lib/combat";
-import { basicEffects, noncombatEffects } from "../../lib/effects";
-import { getEquipment } from "../../lib/equipment";
-import { noncombatFamiliar } from "../../lib/familiar";
+import { getCombat } from "../../../lib/combat";
+import { basicEffects, noncombatEffects } from "../../../lib/effects";
+import { getEquipment } from "../../../lib/equipment";
+import { noncombatFamiliar } from "../../../lib/familiar";
 import { wandererEquipment } from "./wanderer";
 
 export function spookyravenTasks(): Task[] {

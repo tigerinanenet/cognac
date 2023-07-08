@@ -3,7 +3,8 @@ import { haveEffect, myLocation, print } from "kolmafia";
 import { $effect, $location, get, uneffect } from "libram";
 import { Gossip } from "./gossip";
 
-const MAX_HEAP_ROUND_LENGTH = 27;
+// 2.5 combat/NC, 6 NCs/heap. 5 sigma.
+const MAX_HEAP_ROUND_LENGTH = 75;
 const MAX_HEAP_LIVELOCKS = 3;
 
 export class Engine extends BaseEngine<never, Task> {
@@ -23,7 +24,7 @@ export class Engine extends BaseEngine<never, Task> {
     }
     this.heapAdventures++;
     if (this.heapAdventures >= MAX_HEAP_ROUND_LENGTH) {
-      print(`Exceed max round length in heap. Resetting. . .`, `yellow`);
+      print(`Exceed max round length in heap. Resetting. . .`, `purple`);
       new Gossip().resetStench();
       this.brokeHeap++;
     }
