@@ -13,12 +13,12 @@ import {
   questStep,
 } from "libram";
 import { basicEffects } from "../../../lib/effects";
-import { wandererEquipment } from "../../wander/wander";
+import { defaultEquipment } from "../../wander/shared/combat";
 
 const outfit = () => {
   {
     let equip = Object.values({
-      ...wandererEquipment(),
+      ...defaultEquipment(),
       shirt: $item`Jurassic Parka`,
       offhand: $item`latte lovers member's mug`,
       pants: $item`Greatest American Pants`,

@@ -1,7 +1,7 @@
 import { Quest, Task } from "grimoire-kolmafia";
 import { visitUrl } from "kolmafia";
 
-import { globalTasks } from "../shared/asdon";
+import { DriveStealthily } from "../shared/asdon";
 import { AcquireTasks } from "./tasks/acquire";
 import { CageTasks } from "./tasks/cage";
 import { ExploreTasks } from "./tasks/explore";
@@ -17,6 +17,6 @@ export function Sewers(nocage: boolean): Quest<Task> {
       }
       return complete;
     },
-    tasks: [...globalTasks(), ...(nocage ? [] : CageTasks), ...AcquireTasks, ...ExploreTasks],
+    tasks: [DriveStealthily, ...(nocage ? [] : CageTasks), ...AcquireTasks, ...ExploreTasks],
   };
 }

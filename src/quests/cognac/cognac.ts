@@ -2,7 +2,7 @@ import { Quest, Task } from "grimoire-kolmafia";
 import { myAdventures } from "kolmafia";
 
 import { Gossip } from "../../lib/gossip";
-import { globalTasks } from "../shared/asdon";
+import { DriveStealthily } from "../shared/asdon";
 import { Heap } from "./tasks/heap";
 import { PLD } from "./tasks/pld";
 import { Round } from "./tasks/round";
@@ -29,7 +29,7 @@ export const Cognac: Quest<Task> = {
   name: "Cognac",
   completed: () => myAdventures() < 1,
   tasks: [
-    ...globalTasks(),
+    DriveStealthily,
     gossipTask,
     ...whiteboard.getTasks(),
     ...round.getTasks(),
