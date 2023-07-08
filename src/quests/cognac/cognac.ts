@@ -2,11 +2,11 @@ import { Quest, Task } from "grimoire-kolmafia";
 import { myAdventures } from "kolmafia";
 
 import { Gossip } from "../../lib/gossip";
-import { Heap } from "./heap";
-import { PLD } from "./pld";
-import { Whiteboard } from "./whiteboard";
-import { Round } from "./round";
-import { globalTasks } from "../global/global";
+import { globalTasks } from "../global/tasks/global";
+import { Heap } from "./tasks/heap";
+import { PLD } from "./tasks/pld";
+import { Round } from "./tasks/round";
+import { Whiteboard } from "./tasks/whiteboard";
 
 const gossip = new Gossip();
 const whiteboard = new Whiteboard(gossip);
