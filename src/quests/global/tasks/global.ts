@@ -3,8 +3,8 @@ import { cliExecute, getFuel } from "kolmafia";
 import { $effect, get } from "libram";
 
 import { $item, $location, AsdonMartin, AutumnAton, have } from "libram";
-import { spookyravenTasks } from "./spookyraven";
-import { wandererTasks } from "./wanderer";
+import { spookyravenTasks } from "../../spookyraven/spookyraven";
+import { wandererTasks } from "../../wander/wander";
 
 export function globalTasks(): Task[] {
   return [
