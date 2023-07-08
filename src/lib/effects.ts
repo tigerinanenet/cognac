@@ -1,22 +1,18 @@
-import { Effect } from "kolmafia";
-import { $effect, $skill, have } from "libram";
+import { Effect, toSkill } from "kolmafia";
+import { $effects, have } from "libram";
+
+function filterHave(effects: Effect[]) {
+  return effects.filter((effect) => have(toSkill(effect)));
+}
 
 export function basicEffects(): Effect[] {
-  const effects = [];
-  if (have($skill`The Sonata of Sneakiness`)) {
-    effects.push($effect`The Sonata of Sneakiness`);
-  }
-  if (have($skill`Smooth Movement`)) {
-    effects.push($effect`Smooth Movements`);
-  }
-  if (have($skill`Leash of Linguini`)) {
-    effects.push($effect`Leash of Linguini`);
-  }
-  if (have($skill`Empathy of the Newt`)) {
-    effects.push($effect`Empathy`);
-  }
-  if (have($skill`Blood Bond`)) {
-    effects.push($effect`Blood Bond`);
-  }
-  return effects;
+  return filterHave($effects`Leash of Linguini, Empathy, Blood Bond`);
+}
+
+export function noncombatEffects(): Effect[] {
+  return filterHave($effects`The Sonata of Sneakiness, Smooth Movements`);
+}
+
+export function resistanceEffects(): Effect[] {
+  return filterHave($effects`Elemental Saucesphere, Astral Shell`);
 }
