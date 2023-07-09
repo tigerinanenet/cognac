@@ -4,7 +4,7 @@ export function write(content: Record<string, unknown>): string {
   return visitUrl(
     `clan_basement.php?action=whitewrite&whiteboard=${JSON.stringify(content)}&pwd`,
     true,
-    false
+    false,
   );
 }
 

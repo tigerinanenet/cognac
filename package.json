@@ -7,34 +7,32 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "yarn run build:types && yarn run build:js",
     "build:types": "tsc",
-    "build:js": "webpack",
+    "build:js": "node build.mjs",
     "lint": "eslint src && prettier --check .",
     "prettier": "prettier --write .",
-    "watch": "webpack --watch --progress"
+    "watch": "node build.mjs --watch"
   },
   "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/core": "^7.15.0",
-    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/cli": "^7.22.6",
+    "@babel/core": "^7.22.8",
     "@babel/plugin-proposal-object-rest-spread": "^7.14.7",
-    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-env": "^7.22.7",
     "@babel/preset-typescript": "^7.15.0",
-    "@types/node-fetch": "^2.6.4",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
-    "babel-loader": "^9.1.2",
+    "esbuild": "^0.18.11",
+    "esbuild-plugin-babel": "^0.2.3",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-libram": "^0.2.32",
-    "prettier": "^2.3.2",
-    "typescript": "^5.1.6",
-    "webpack": "^5.61.0",
-    "webpack-cli": "^5.1.4"
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
-    "core-js": "^3.16.4",
+    "core-js": "^3.31.1",
     "grimoire-kolmafia": "^0.3.18",
-    "kolmafia": ">=1.2.0",
+    "kolmafia": ">=5.27455.0",
     "libram": ">=0.8.3"
   },
   "repository": {

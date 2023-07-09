@@ -1,4 +1,5 @@
 import { Quest, Task } from "grimoire-kolmafia";
+
 import { FuelAsdon, InstallAsdon } from "./tasks/asdon";
 import { DeployFalle } from "./tasks/autumnaton";
 import { RefillLatte } from "./tasks/latte";

@@ -25,7 +25,7 @@ export const TownSquare: Quest<Task> = {
   completed: () => {
     if (!skipTownSquare) {
       skipTownSquare = !!visitUrl("clan_hobopolis.php?place=8&pwd", false).match(
-        /The Purple Light District/
+        /The Purple Light District/,
       );
     }
     return skipTownSquare;

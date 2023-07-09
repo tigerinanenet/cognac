@@ -1,5 +1,6 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { $effects, $item, $location, Macro, have } from "libram";
+
 import { getCombat } from "../../../lib/combat";
 import { noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";

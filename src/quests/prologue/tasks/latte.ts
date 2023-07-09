@@ -22,7 +22,7 @@ export const RefillLatte: Task = {
     const preferred = ["ink", "rawhide", "cajun", "carrot", "cinnamon", "pumpkin", "vanilla"];
     const unlocked = get("latteUnlocks").split(",");
     cliExecute(
-      `latte refill ${preferred.filter((ingredient) => unlocked.includes(ingredient)).join(" ")}`
+      `latte refill ${preferred.filter((ingredient) => unlocked.includes(ingredient)).join(" ")}`,
     );
   },
 };

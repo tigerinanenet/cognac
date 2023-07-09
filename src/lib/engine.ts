@@ -1,6 +1,7 @@
 import { Engine as BaseEngine, Task } from "grimoire-kolmafia";
 import { haveEffect, myLocation, print } from "kolmafia";
 import { $effect, $location, get, uneffect } from "libram";
+
 import { Gossip } from "./gossip";
 
 // 2.5 combat/NC, 6 NCs/heap. 5 sigma.

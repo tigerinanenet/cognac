@@ -1,6 +1,7 @@
 import { Guards, Task } from "grimoire-kolmafia";
 import { visitUrl } from "kolmafia";
 import { $item, get, have } from "libram";
+
 import { basicEffects } from "../../../lib/effects";
 
 export function EpilogueTask(): Task {
