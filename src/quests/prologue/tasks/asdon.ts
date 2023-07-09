@@ -5,7 +5,7 @@ import { ASDON } from "../../../prefs/properties";
 
 export const InstallAsdon: Task = {
   name: "Install Asdon",
-  completed: () => AsdonInstalled(),
+  completed: () => get("_workshedItemUsed") || AsdonInstalled(),
   do: () => {
     if (AsdonMartin.installed() || !have($item`Asdon Martin keyfob`)) {
       return;
