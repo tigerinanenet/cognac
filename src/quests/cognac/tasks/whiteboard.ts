@@ -15,6 +15,13 @@ export class Whiteboard {
   getTasks(): Task[] {
     return [
       {
+        name: "Register",
+        completed: () => this.gossip.registered(),
+        do: () => {
+          this.gossip.register();
+        },
+      },
+      {
         name: "Gossip Update",
         completed: () => new Date().getTime() - this.lastCheck < this.checkInterval,
         do: () => {

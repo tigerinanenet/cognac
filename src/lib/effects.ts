@@ -6,7 +6,7 @@ function filterHave(effects: Effect[]) {
 }
 
 export function basicEffects(): Effect[] {
-  return filterHave($effects`Leash of Linguini, Empathy, Blood Bond`);
+  return filterHave($effects`Leash of Linguini, Empathy, Blood Bond, Springy Fusilli`);
 }
 
 export function noncombatEffects(): Effect[] {

@@ -23,35 +23,17 @@ export class Gossip {
 
   init(): void {
     this.updateGossip();
-    if (this.registered()) {
-      return;
-    }
-    this.register();
+    this.startDay();
   }
 
-  registered(): boolean {
-    return this.players.some((player: string) => player === `${myName()}`);
-  }
-
-  register(): void {
+  startDay(): void {
     this.claimMutex(0);
-    this.players.push(`${myName()}`);
     // It's a new day; next cognac round is now.
     if (this.gameday !== gamedayToInt()) {
       this.diveStart = gametimeToInt();
       this.gameday = gamedayToInt();
     }
     this.write();
-    this.updateGossip();
-  }
-
-  updateGossip(): void {
-    const gossip = Whiteboard.read() as GossipObject;
-    this.players = gossip.players || [];
-    this.stench = gossip.stench || 0;
-    this.mutex = gossip.mutex || "";
-    this.diveStart = gossip.diveStart || 0;
-    this.gameday = gossip.gameday || 0;
   }
 
   // If callback evaluates to true, the reason we were fetching
@@ -81,6 +63,47 @@ export class Gossip {
     return this.claimMutex(retries + 1);
   }
 
+  asRawJSON(): GossipObject {
+    return {
+      players: this.players,
+      stench: this.stench,
+      diveStart: this.diveStart,
+      mutex: this.mutex,
+      gameday: this.gameday,
+      requestingCompost: this.requestingCompost,
+    };
+  }
+
+  updateGossip(): void {
+    const gossip = Whiteboard.read() as GossipObject;
+    this.players = gossip.players || [];
+    this.stench = gossip.stench || 0;
+    this.mutex = gossip.mutex || "";
+    this.diveStart = gossip.diveStart || 0;
+    this.gameday = gossip.gameday || 0;
+  }
+
+  write(): void {
+    this.mutex = "";
+    Whiteboard.write(this.asRawJSON());
+  }
+
+  registered(): boolean {
+    return this.players.some((player: string) => player === `${myName()}`);
+  }
+
+  register(): void {
+    this.claimMutex(0);
+    this.players.push(`${myName()}`);
+    // It's a new day; next cognac round is now.
+    if (this.gameday !== gamedayToInt()) {
+      this.diveStart = gametimeToInt();
+      this.gameday = gamedayToInt();
+    }
+    this.write();
+    this.updateGossip();
+  }
+
   incrementStench(): void {
     this.claimMutex(0);
     this.stench++;
@@ -96,13 +119,9 @@ export class Gossip {
     this.stench = 0;
     this.diveStart = gametimeToInt() + MS_BETWEEN_ROUNDS;
     this.requestingCompost = [];
+    this.players = [];
     this.write();
     this.updateGossip();
-  }
-
-  write(): void {
-    this.mutex = "";
-    Whiteboard.write(this.asRawJSON());
   }
 
   requestCompost(): void {
@@ -125,17 +144,6 @@ export class Gossip {
     }
     // Overcompensate on delay.
     return msDelta / 1000 + 1;
-  }
-
-  asRawJSON(): GossipObject {
-    return {
-      players: this.players,
-      stench: this.stench,
-      diveStart: this.diveStart,
-      mutex: this.mutex,
-      gameday: this.gameday,
-      requestingCompost: this.requestingCompost,
-    };
   }
 
   readyToDive(): boolean {

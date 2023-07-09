@@ -1,6 +1,6 @@
 import { Task } from "grimoire-kolmafia";
 import { $item, get, have } from "libram";
-
+import { getEquipment } from "../../../lib/equipment";
 import { defaultEquipment, kill } from "../shared/combat";
 import { getEffects } from "../shared/effects";
 import { getLocation } from "../shared/location";
@@ -12,10 +12,12 @@ export function MagnifyingGlass(): Task {
     completed: () => get("_voidFreeFights") >= 5,
     effects: getEffects,
     outfit: () => ({
-      equip: Object.values({
-        ...defaultEquipment(),
-        "off-hand": $item`cursed magnifying glass`,
-      }).filter(have),
+      equip: getEquipment(
+        Object.values({
+          ...defaultEquipment(),
+          "off-hand": $item`cursed magnifying glass`,
+        })
+      ),
       modifier: "-combat",
     }),
     combat: kill(),

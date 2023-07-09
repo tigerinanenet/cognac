@@ -7,6 +7,7 @@ import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
+import { capNonCombat } from "../../../lib/preparenoncom";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
@@ -34,6 +35,9 @@ export class PLD {
         do: () => $location`The Purple Light District`,
         effects: [...basicEffects(), ...noncombatEffects()],
         combat: new CombatStrategy().autoattack(getCombat(runaway)),
+        prepare: () => {
+          capNonCombat();
+        },
         outfit: () => ({
           equip: getEquipment([
             $item`June cleaver`,

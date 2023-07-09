@@ -14,6 +14,7 @@ import {
 } from "libram";
 
 import { basicEffects } from "../../../lib/effects";
+import { getEquipment } from "../../../lib/equipment";
 import { defaultEquipment } from "../../wander/shared/combat";
 
 const outfit = () => {
@@ -24,7 +25,7 @@ const outfit = () => {
       offhand: $item`latte lovers member's mug`,
       pants: $item`Greatest American Pants`,
     });
-    equip = equip.filter((it) => have(it));
+    equip = getEquipment(equip);
     return {
       equip,
     };

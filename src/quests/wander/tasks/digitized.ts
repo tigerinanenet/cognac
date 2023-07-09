@@ -1,7 +1,7 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { Effect, myAdventures } from "kolmafia";
-import { $effects, $monster, $skill, Counter, Macro, SourceTerminal, have } from "libram";
-
+import { $effects, $monster, $skill, Counter, Macro, SourceTerminal } from "libram";
+import { getEquipment } from "../../../lib/equipment";
 import { defaultEquipment, killMacro } from "../shared/combat";
 import { getEffects } from "../shared/effects";
 import { getLocation } from "../shared/location";
@@ -40,7 +40,7 @@ export function DigitizedTask(): Task {
             objective: "Meat Drop",
           }
         : {
-            equip: Object.values(defaultEquipment()).filter((it) => have(it)),
+            equip: getEquipment(Object.values(defaultEquipment())),
           },
     combat: new CombatStrategy().autoattack(() =>
       Macro.externalIf(shouldRedigitize(), Macro.skill($skill`Digitize`)).step(killMacro()),

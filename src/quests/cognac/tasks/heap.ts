@@ -7,6 +7,7 @@ import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
+import { capNonCombat } from "../../../lib/preparenoncom";
 import { DIVES, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
@@ -27,6 +28,9 @@ export class Heap {
         do: () => $location`The Heap`,
         effects: [...basicEffects(), ...noncombatEffects()],
         combat: new CombatStrategy().autoattack(getCombat(runaway)),
+        prepare: () => {
+          capNonCombat();
+        },
         outfit: () => ({
           equip: getEquipment([
             $item`June cleaver`,

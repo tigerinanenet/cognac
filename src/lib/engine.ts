@@ -39,7 +39,7 @@ export class Engine extends BaseEngine<never, Task> {
     uneffect($effect`Beaten Up`);
     this.tryHeapBreak();
     if (this.brokeHeap >= MAX_HEAP_LIVELOCKS) {
-      throw `Bug detected in application; heap appears to have entered a loop ${this.heapAdventures} times`;
+      throw `Bug detected in application; heap appears to have entered a loop ${this.brokeHeap} times`;
     }
   }
 

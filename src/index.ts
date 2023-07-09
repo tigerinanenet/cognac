@@ -1,5 +1,5 @@
 import { Args, getTasks } from "grimoire-kolmafia";
-import { getClanId } from "kolmafia";
+import { cliExecute, getClanId, myMeat } from "kolmafia";
 import { Clan, get } from "libram";
 
 import * as CognacSession from "./lib/cognac";
@@ -50,14 +50,21 @@ export function main(command?: string): void {
   const engine = new Engine(cognacTasks);
 
   const startingClan = getClanId();
+  const meatToCloset = myMeat() > 1000000 ? myMeat() - 1000000 : 0;
   try {
     const clan = get(Properties.CLAN).replace(/'/g, "&apos;");
     Clan.join(clan);
+    if (meatToCloset > 0) {
+      cliExecute(`closet put ${meatToCloset} meat`);
+    }
     engine.run();
   } finally {
     engine.destruct();
     new Gossip().destroy();
     Clan.join(startingClan);
+    if (meatToCloset > 0) {
+      cliExecute(`closet take ${meatToCloset} meat`);
+    }
     CognacSession.save();
     CognacSession.print();
   }
