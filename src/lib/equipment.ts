@@ -9,7 +9,7 @@ function appendWineglass(equips: Item[]): void {
 }
 
 export function getEquipment(equips: Item[]): Item[] {
-  const equipment = equips.filter(it => have(it));
+  const equipment = equips.filter((it) => have(it));
   if (myInebriety() > inebrietyLimit()) {
     appendWineglass(equipment);
   }

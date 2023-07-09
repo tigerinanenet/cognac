@@ -12,6 +12,7 @@ import {
   have,
   questStep,
 } from "libram";
+
 import { basicEffects } from "../../../lib/effects";
 import { defaultEquipment } from "../../wander/shared/combat";
 
@@ -23,7 +24,7 @@ const outfit = () => {
       offhand: $item`latte lovers member's mug`,
       pants: $item`Greatest American Pants`,
     });
-    equip = equip.filter(it => have(it));
+    equip = equip.filter((it) => have(it));
     return {
       equip,
     };
@@ -35,11 +36,11 @@ export function LibraryTask(): Task {
     Macro.if_(
       "monstername writing desk",
       Macro.trySkill($skill`Transcendent Olfaction`, $skill`Gallapagosian Mating Call`).skill(
-        $skill`Spit jurassic acid`
-      )
+        $skill`Spit jurassic acid`,
+      ),
     )
       .trySkill($skill`Throw Latte on Opponent`)
-      .runaway()
+      .runaway(),
   );
 
   return {

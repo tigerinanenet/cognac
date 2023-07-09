@@ -13,7 +13,7 @@ export function kill(): CombatStrategy {
   return new CombatStrategy().autoattack(
     Macro.trySkill(...$skills`Micrometeorite, Curse of Weaksauce`)
       .attack()
-      .repeat()
+      .repeat(),
   );
 }
 
