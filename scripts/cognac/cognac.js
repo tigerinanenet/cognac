@@ -7029,7 +7029,7 @@ var BASE_STENCH_REQUIRED = 7, MS_BETWEEN_ROUNDS = 60 * 1e3, Gossip = /* @__PURE_
     key: "updateGossip",
     value: function() {
       var gossip2 = read();
-      this.players = gossip2.players || [], this.stench = gossip2.stench || 0, this.mutex = gossip2.mutex || "", this.diveStart = gossip2.diveStart || 0, this.gameday = gossip2.gameday || 0;
+      this.players = gossip2.players || [], this.requestingCompost = gossip2.requestingCompost, this.stench = gossip2.stench || 0, this.mutex = gossip2.mutex || "", this.diveStart = gossip2.diveStart || 0, this.gameday = gossip2.gameday || 0;
     }
   }, {
     key: "write",
