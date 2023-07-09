@@ -53,10 +53,10 @@ export function main(command?: string): void {
   const meatToCloset = myMeat() > 1000000 ? myMeat() - 1000000 : 0;
   try {
     const clan = get(Properties.CLAN).replace(/'/g, "&apos;");
-    Clan.join(clan);
     if (meatToCloset > 0) {
       cliExecute(`closet put ${meatToCloset} meat`);
     }
+    Clan.join(clan);
     engine.run();
   } finally {
     engine.destruct();

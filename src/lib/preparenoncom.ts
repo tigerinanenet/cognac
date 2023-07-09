@@ -92,6 +92,7 @@ export function capNonCombat(): void {
     if (!use(item, 1)) {
       throw `Failed to use item`;
     }
+    itemBought = true;
     info.price = mallPrice(item);
   }
 
