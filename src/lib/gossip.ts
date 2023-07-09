@@ -77,6 +77,7 @@ export class Gossip {
   updateGossip(): void {
     const gossip = Whiteboard.read() as GossipObject;
     this.players = gossip.players || [];
+    this.requestingCompost = gossip.requestingCompost;
     this.stench = gossip.stench || 0;
     this.mutex = gossip.mutex || "";
     this.diveStart = gossip.diveStart || 0;
