@@ -11,8 +11,7 @@ const privatize = (prop: string): string => {
 export const CLAN = prefix("clan");
 export const ASDON = prefix("useAsdon");
 export const SKIP_GARBO = prefix("skipGarbo");
-export const TOWN_SQUARE = prefix("townSquare");
-export const REFUSES_UNTIL_COMPOST = prefix("choice216");
 
+export const REFUSES_UNTIL_COMPOST = privatize("choice216");
 export const COGNACS = privatize("bottlesFound");
 export const DIVES = privatize("dives");

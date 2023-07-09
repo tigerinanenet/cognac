@@ -7,14 +7,20 @@ import { Engine } from "./lib/engine";
 import { Gossip } from "./lib/gossip";
 import { checkClan, checkGarbo, showPreferences } from "./prefs/prefs";
 import * as Properties from "./prefs/properties";
-import { Cognac } from "./tasks/cognac/cognac";
-import { Prologue } from "./tasks/prologue/prologue";
-import { Sewers } from "./tasks/sewers/sewers";
-import { TownSquare } from "./tasks/townsquare/townsquare";
+import { Cognac } from "./quests/cognac/cognac";
+import { Prologue } from "./quests/prologue/prologue";
+import { Sewers } from "./quests/sewers/sewers";
+import { Spookyraven } from "./quests/spookyraven/spookyraven";
+import { TownSquare } from "./quests/townsquare/townsquare";
+import { Wander } from "./quests/wander/wander";
 
 const args = Args.create("Cognac", "Farming perscription strength alcohol since 2023.", {
   config: Args.flag({
     help: "Show script configuration, and exit.",
+    default: false,
+  }),
+  nocage: Args.flag({
+    help: "Do not fetch cagebait.",
     default: false,
   }),
 });
@@ -33,7 +39,14 @@ export function main(command?: string): void {
   checkGarbo();
   checkClan();
 
-  const cognacTasks = getTasks([Prologue, Sewers, TownSquare, Cognac]);
+  const cognacTasks = getTasks([
+    Prologue,
+    Wander,
+    Spookyraven,
+    Sewers(args.nocage),
+    TownSquare,
+    Cognac,
+  ]);
   const engine = new Engine(cognacTasks);
 
   const startingClan = getClanId();

@@ -1,10 +1,33 @@
 import { Engine as BaseEngine, Task } from "grimoire-kolmafia";
-import { haveEffect } from "kolmafia";
-import { $effect, get, uneffect } from "libram";
+import { haveEffect, myLocation, print } from "kolmafia";
+import { $effect, $location, get, uneffect } from "libram";
+import { Gossip } from "./gossip";
+
+// 2.5 combat/NC, 6 NCs/heap. 5 sigma.
+const MAX_HEAP_ROUND_LENGTH = 75;
+const MAX_HEAP_LIVELOCKS = 3;
 
 export class Engine extends BaseEngine<never, Task> {
+  heapAdventures = 0;
+  brokeHeap = 0;
+
   constructor(tasks: Task[]) {
     super(tasks);
+  }
+
+  tryHeapBreak() {
+    if (get("lastEncounter") === "I Refuse!") {
+      this.heapAdventures = 0;
+    }
+    if (myLocation() !== $location`The Heap`) {
+      return;
+    }
+    this.heapAdventures++;
+    if (this.heapAdventures >= MAX_HEAP_ROUND_LENGTH) {
+      print(`Exceed max round length in heap. Resetting. . .`, `purple`);
+      new Gossip().resetStench();
+      this.brokeHeap++;
+    }
   }
 
   execute(task: Task): void {
@@ -13,6 +36,10 @@ export class Engine extends BaseEngine<never, Task> {
       throw `Combat lost`;
     }
     uneffect($effect`Beaten Up`);
+    this.tryHeapBreak();
+    if (this.brokeHeap >= MAX_HEAP_LIVELOCKS) {
+      throw `Bug detected in application; heap appears to have entered a loop ${this.heapAdventures} times`;
+    }
   }
 
   static defaultSettings = {

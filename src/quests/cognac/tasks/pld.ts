@@ -2,11 +2,11 @@ import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
 import { $item, $location, $skill, Macro, get } from "libram";
 
-import { getCombat } from "../../lib/combat";
-import { basicEffects, noncombatEffects } from "../../lib/effects";
-import { getEquipment } from "../../lib/equipment";
-import { noncombatFamiliar } from "../../lib/familiar";
-import { Gossip } from "../../lib/gossip";
+import { getCombat } from "../../../lib/combat";
+import { basicEffects, noncombatEffects } from "../../../lib/effects";
+import { getEquipment } from "../../../lib/equipment";
+import { noncombatFamiliar } from "../../../lib/familiar";
+import { Gossip } from "../../../lib/gossip";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
@@ -35,9 +35,12 @@ export class PLD {
         effects: [...basicEffects(), ...noncombatEffects()],
         combat: new CombatStrategy().autoattack(getCombat(runaway)),
         outfit: () => ({
-          equip: getEquipment([$item`June cleaver`, $item`Greatest American Pants`]),
+          equip: getEquipment([
+            $item`June cleaver`,
+            $item`Greatest American Pants`,
+            $item`mafia thumb ring`,
+          ]),
           modifier: "-combat",
-          bonuses: new Map([[$item`mafia thumb ring`, 200]]),
           familiar: noncombatFamiliar(),
         }),
         choices: {

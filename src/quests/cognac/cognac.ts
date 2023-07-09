@@ -2,11 +2,11 @@ import { Quest, Task } from "grimoire-kolmafia";
 import { myAdventures } from "kolmafia";
 
 import { Gossip } from "../../lib/gossip";
-import { globalTasks } from "../global/global";
-import { Heap } from "./heap";
-import { PLD } from "./pld";
-import { Round } from "./round";
-import { Whiteboard } from "./whiteboard";
+import { DriveStealthily } from "../shared/asdon";
+import { Heap } from "./tasks/heap";
+import { PLD } from "./tasks/pld";
+import { Round } from "./tasks/round";
+import { Whiteboard } from "./tasks/whiteboard";
 
 const gossip = new Gossip();
 const whiteboard = new Whiteboard(gossip);
@@ -29,7 +29,7 @@ export const Cognac: Quest<Task> = {
   name: "Cognac",
   completed: () => myAdventures() < 1,
   tasks: [
-    ...globalTasks(),
+    DriveStealthily,
     gossipTask,
     ...whiteboard.getTasks(),
     ...round.getTasks(),

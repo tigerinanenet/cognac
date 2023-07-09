@@ -1,9 +1,10 @@
 import { Quest, Task } from "grimoire-kolmafia";
 import { visitUrl } from "kolmafia";
 
-import { globalTasks } from "../global/global";
-import { Explore } from "./explore";
-import { Scobo } from "./scobo";
+import { DriveStealthily } from "../shared/asdon";
+import { Explore } from "./tasks/explore";
+import { Scobo } from "./tasks/scobo";
+import { Snapper } from "./tasks/snapper";
 
 const scoboParts = {
   hot: 0,
@@ -29,5 +30,5 @@ export const TownSquare: Quest<Task> = {
     }
     return skipTownSquare;
   },
-  tasks: [...globalTasks(), ...scobo.getTasks(), ...explore.getTasks()],
+  tasks: [DriveStealthily, Snapper, ...scobo.getTasks(), ...explore.getTasks()],
 };
