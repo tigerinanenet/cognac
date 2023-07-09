@@ -23,7 +23,7 @@ const outfit = () => {
       offhand: $item`latte lovers member's mug`,
       pants: $item`Greatest American Pants`,
     });
-    equip = equip.filter(have);
+    equip = equip.filter(it => have(it));
     return {
       equip,
     };
@@ -51,7 +51,7 @@ export function LibraryTask(): Task {
       get("writingDesksDefeated") < 5,
     completed: () => have($effect`Everything Looks Yellow`),
     effects: basicEffects,
-    outfit: outfit,
+    outfit,
     choices: {
       894: 1, // Lights Out
       888: 4, // Take a Look (Rise)

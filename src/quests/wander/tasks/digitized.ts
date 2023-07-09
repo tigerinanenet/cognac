@@ -39,7 +39,7 @@ export function DigitizedTask(): Task {
             objective: "Meat Drop",
           }
         : {
-            equip: Object.values(defaultEquipment()).filter(have),
+            equip: Object.values(defaultEquipment()).filter(it => have(it)),
           },
     combat: new CombatStrategy().autoattack(() =>
       Macro.externalIf(shouldRedigitize(), Macro.skill($skill`Digitize`)).step(killMacro())

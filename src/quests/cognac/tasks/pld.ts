@@ -41,7 +41,6 @@ export class PLD {
             $item`mafia thumb ring`,
           ]),
           modifier: "-combat",
-          bonuses: new Map([[$item`mafia thumb ring`, 200]]),
           familiar: noncombatFamiliar(),
         }),
         choices: {
