@@ -18,6 +18,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.14.7",
     "@babel/preset-env": "^7.22.7",
     "@babel/preset-typescript": "^7.15.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
     "esbuild": "^0.18.11",
@@ -29,7 +30,6 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "core-js": "^3.31.1",
     "grimoire-kolmafia": "^0.3.18",
     "kolmafia": ">=5.27455.0",
