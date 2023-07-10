@@ -1,8 +1,8 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
-import { $item, $location, $skill, Macro, get } from "libram";
+import { $item, $location, $skill, get } from "libram";
 
-import { getCombat } from "../../../lib/combat";
+import { Macro, runawayIfDrunk } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
@@ -34,7 +34,7 @@ export class PLD {
         completed: () => this.gossip.readyToDive(),
         do: () => $location`The Purple Light District`,
         effects: [...basicEffects(), ...noncombatEffects()],
-        combat: new CombatStrategy().autoattack(getCombat(runaway)),
+        combat: new CombatStrategy().autoattack(runawayIfDrunk(runaway)),
         prepare: () => {
           capNonCombat();
         },

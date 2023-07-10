@@ -1,6 +1,7 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { Effect, myAdventures } from "kolmafia";
 import { $effects, $monster, $skill, Counter, Macro, SourceTerminal } from "libram";
+
 import { getEquipment } from "../../../lib/equipment";
 import { defaultEquipment, killMacro } from "../shared/combat";
 import { getEffects } from "../shared/effects";
