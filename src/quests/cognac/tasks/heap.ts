@@ -8,11 +8,23 @@ import { getEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
-import { DIVES, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
+import { DIVES, HEAP_ATTEMPTS, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
 
 const runaway = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
   .runaway();
+
+const heapEpilogue = (gossip: Gossip) => {
+  if (get("lastEncounter") === "I Refuse!") {
+    gossip.resetStench();
+
+    set(DIVES, get(DIVES, 0) + 1);
+    set(HEAP_ATTEMPTS, 0);
+    set(REFUSES_UNTIL_COMPOST, get(REFUSES_UNTIL_COMPOST, 0) - 1);
+  } else if (get("lastEncounter") === "The Compostal Service" && gossip.willCompost()) {
+    set(REFUSES_UNTIL_COMPOST, 5);
+  }
+};
 
 export class Heap {
   gossip: Gossip;
@@ -47,19 +59,9 @@ export class Heap {
           218: 1,
           295: 2,
         },
-        post: () => {
-          if (get("lastEncounter") === "I Refuse!") {
-            this.gossip.resetStench();
-
-            set(DIVES, get(DIVES, 0) + 1);
-
-            set(REFUSES_UNTIL_COMPOST, get(REFUSES_UNTIL_COMPOST, 0) - 1);
-          } else if (
-            get("lastEncounter") === "The Compostal Service" &&
-            this.gossip.willCompost()
-          ) {
-            set(REFUSES_UNTIL_COMPOST, 5);
-          }
+        post: () => heapEpilogue(this.gossip),
+        limit: {
+          guard: () => () => get(HEAP_ATTEMPTS, 0) < 75,
         },
       },
     ];
