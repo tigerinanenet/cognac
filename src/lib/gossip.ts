@@ -1,4 +1,4 @@
-import { gamedayToInt, gametimeToInt, myName } from "kolmafia";
+import { gamedayToInt, gametimeToInt, myName, print } from "kolmafia";
 
 import * as Whiteboard from "./whiteboard";
 
@@ -77,11 +77,12 @@ export class Gossip {
   updateGossip(): void {
     const gossip = Whiteboard.read() as GossipObject;
     this.players = gossip.players || [];
-    this.requestingCompost = gossip.requestingCompost;
+    this.requestingCompost = gossip.requestingCompost || [];
     this.stench = gossip.stench || 0;
     this.mutex = gossip.mutex || "";
     this.diveStart = gossip.diveStart || 0;
     this.gameday = gossip.gameday || 0;
+    print(JSON.stringify(this.asRawJSON()));
   }
 
   write(): void {
