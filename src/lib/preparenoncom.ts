@@ -16,8 +16,7 @@ type Info = { item: Item; modifier: number; duration: number; price: number };
 const EFFECTIVE_NC_VALUE = 100;
 
 const itemInfo: Info[] = [];
-let i = 0;
-for (let item of $items``) {
+for (const item of $items``) {
   const effect = effectModifier(item, "Effect");
   const modifier = -1 * getModifier("Combat Rate", effect);
   if (modifier <= 0) {
@@ -80,7 +79,7 @@ export function capNonCombat(): void {
     const bought = buy(
       item,
       1,
-      Math.min((EFFECTIVE_NC_VALUE * info.duration * info.modifier) / 5, 10000)
+      Math.min((EFFECTIVE_NC_VALUE * info.duration * info.modifier) / 5, 10000),
     );
     if (bought > 1) {
       throw `Bought too many items.`;

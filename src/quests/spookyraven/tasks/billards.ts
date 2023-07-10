@@ -1,7 +1,7 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
-import { $effects, $item, $location, Macro, have } from "libram";
+import { $effects, $item, $location, have } from "libram";
 
-import { getCombat } from "../../../lib/combat";
+import { Macro, runawayIfDrunk } from "../../../lib/combat";
 import { noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
@@ -26,7 +26,7 @@ export function BilliarTask(): Task {
       875: 1, // Hustle the ghost
       1436: 2, // Maps: go straight to hustle
     },
-    combat: new CombatStrategy().autoattack(getCombat(Macro.runaway())),
+    combat: new CombatStrategy().autoattack(runawayIfDrunk(Macro.runaway())),
     do: $location`The Haunted Billiards Room`,
   };
 }

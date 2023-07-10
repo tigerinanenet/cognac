@@ -1,7 +1,7 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { $effect, $effects, $item, $location } from "libram";
 
-import { attack, mortar } from "./combat/combat";
+import { Macro } from "../../../lib/combat";
 import { ScoboPartType, ScoboParts } from "./parts";
 
 const elementMap = {
@@ -51,7 +51,7 @@ export class Explore {
         ...this.baseTask,
         name: "Hobo combat physical",
         completed: () => this.targetElement !== "normal",
-        combat: new CombatStrategy().autoattack(attack),
+        combat: new CombatStrategy().autoattack(Macro.attackKill()),
         effects: [$effect`Carol of the Bulls`],
         outfit: {
           equip: [$item`Fourth of May Cosplay Saber`, $item`mafia thumb ring`],
@@ -62,7 +62,7 @@ export class Explore {
         name: "Hobo combat elemental",
         completed: () => this.targetElement === "normal",
         effects: () => elementMap[this.targetElement],
-        combat: new CombatStrategy().autoattack(mortar),
+        combat: new CombatStrategy().autoattack(Macro.mortarShell()),
         outfit: {
           equip: [$item`mafia thumb ring`],
         },

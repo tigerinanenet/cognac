@@ -1,6 +1,7 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
-import { $item, $location, $skill, Macro } from "libram";
+import { $item, $location, $skill } from "libram";
 
+import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
@@ -8,7 +9,8 @@ import { capNonCombat } from "../../../lib/preparenoncom";
 
 const tryFreeRunThenAttack = Macro.trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
-  .attack();
+  .attack()
+  .repeat();
 
 export const ExploreTasks: Task[] = [
   {

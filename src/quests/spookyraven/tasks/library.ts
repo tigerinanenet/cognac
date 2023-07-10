@@ -7,12 +7,12 @@ import {
   $monster,
   $skill,
   Cartography,
-  Macro,
   get,
   have,
   questStep,
 } from "libram";
 
+import { Macro } from "../../../lib/combat";
 import { basicEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
 import { defaultEquipment } from "../../wander/shared/combat";
