@@ -1,6 +1,7 @@
 import { Task } from "grimoire-kolmafia";
 import { inebrietyLimit, myInebriety } from "kolmafia";
 import { $item, getKramcoWandererChance, have } from "libram";
+
 import { getEquipment } from "../../../lib/equipment";
 import { defaultEquipment, kill } from "../shared/combat";
 import { getEffects } from "../shared/effects";
@@ -17,7 +18,7 @@ export function SausageTask(): Task {
         Object.values({
           ...defaultEquipment(),
           "off-hand": $item`Kramco Sausage-o-Matic™`,
-        })
+        }),
       ),
       modifier: "-combat",
     }),

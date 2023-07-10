@@ -1,6 +1,7 @@
 import { Task } from "grimoire-kolmafia";
 import { totalTurnsPlayed } from "kolmafia";
 import { $item, get, have } from "libram";
+
 import { getEquipment } from "../../../lib/equipment";
 import { defaultEquipment, kill } from "../shared/combat";
 import { getEffects } from "../shared/effects";
@@ -17,7 +18,7 @@ export function VoterTask(): Task {
     effects: getEffects(),
     outfit: () => ({
       equip: getEquipment(
-        Object.values({ ...defaultEquipment(), acc3: $item`"I Voted!" sticker` })
+        Object.values({ ...defaultEquipment(), acc3: $item`"I Voted!" sticker` }),
       ),
       modifier: "-combat",
     }),
