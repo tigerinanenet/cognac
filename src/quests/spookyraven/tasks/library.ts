@@ -1,5 +1,5 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
-import { adv1, cliExecute } from "kolmafia";
+import { adv1, cliExecute, visitUrl } from "kolmafia";
 import {
   $effect,
   $item,
@@ -68,6 +68,8 @@ export function LibraryTask(): Task {
       } else {
         adv1($location`The Haunted Library`, -1, "");
       }
+      // Refresh latte ingredients.
+      visitUrl("main.php?latte=1");
     },
     limit: { soft: 15 },
   };
