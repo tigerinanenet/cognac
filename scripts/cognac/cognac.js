@@ -1942,10 +1942,10 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
   }
   return _createClass5(InvalidMacroError2);
 }(/* @__PURE__ */ _wrapNativeSuper2(Error)), Macro = /* @__PURE__ */ function() {
-  function Macro2() {
-    _classCallCheck5(this, Macro2), _defineProperty4(this, "components", []), _defineProperty4(this, "name", MACRO_NAME);
+  function Macro3() {
+    _classCallCheck5(this, Macro3), _defineProperty4(this, "components", []), _defineProperty4(this, "name", MACRO_NAME);
   }
-  return _createClass5(Macro2, [{
+  return _createClass5(Macro3, [{
     key: "toString",
     value: (
       /**
@@ -1981,7 +1981,7 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
        * Save a macro to a Mafia property for use in a consult script.
        */
       function() {
-        _set(Macro2.SAVED_MACRO_PROPERTY, this.toString());
+        _set(Macro3.SAVED_MACRO_PROPERTY, this.toString());
       }
     )
     /**
@@ -2002,7 +2002,7 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
         for (var _ref, _this$components, _len = arguments.length, nextSteps = new Array(_len), _key = 0; _key < _len; _key++)
           nextSteps[_key] = arguments[_key];
         var nextStepsStrings = (_ref = []).concat.apply(_ref, _toConsumableArray2(nextSteps.map(function(x) {
-          return x instanceof Macro2 ? x.components : [x];
+          return x instanceof Macro3 ? x.components : [x];
         })));
         return (_this$components = this.components).push.apply(_this$components, _toConsumableArray2(nextStepsStrings.filter(function(s) {
           return s.length > 0;
@@ -2034,8 +2034,8 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
   }, {
     key: "setAutoAttack",
     value: function() {
-      var id = Macro2.cachedMacroIds.get(this.name);
-      id === void 0 && (id = getMacroId(this.name), Macro2.cachedMacroIds.set(this.name, id)), !((0, import_kolmafia6.getAutoAttack)() === 99e6 + id && this.toString() === Macro2.cachedAutoAttacks.get(this.name)) && ((0, import_kolmafia6.visitUrl)("account_combatmacros.php?macroid=".concat(id, "&name=").concat((0, import_kolmafia6.urlEncode)(this.name), "&macrotext=").concat((0, import_kolmafia6.urlEncode)(this.toString()), "&action=save"), !0, !0), (0, import_kolmafia6.visitUrl)("account.php?am=1&action=autoattack&value=".concat(99e6 + id, "&ajax=1")), Macro2.cachedAutoAttacks.set(this.name, this.toString()));
+      var id = Macro3.cachedMacroIds.get(this.name);
+      id === void 0 && (id = getMacroId(this.name), Macro3.cachedMacroIds.set(this.name, id)), !((0, import_kolmafia6.getAutoAttack)() === 99e6 + id && this.toString() === Macro3.cachedAutoAttacks.get(this.name)) && ((0, import_kolmafia6.visitUrl)("account_combatmacros.php?macroid=".concat(id, "&name=").concat((0, import_kolmafia6.urlEncode)(this.name), "&macrotext=").concat((0, import_kolmafia6.urlEncode)(this.toString()), "&action=save"), !0, !0), (0, import_kolmafia6.visitUrl)("account.php?am=1&action=autoattack&value=".concat(99e6 + id, "&ajax=1")), Macro3.cachedAutoAttacks.set(this.name, this.toString()));
     }
     /**
      * Renames the macro, then sets it as an autoattack.
@@ -2114,7 +2114,7 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
        * @returns {Macro} This object itself.
        */
       function(condition, ifTrue) {
-        return this.step("if ".concat(Macro2.makeBALLSPredicate(condition))).step(ifTrue).step("endif");
+        return this.step("if ".concat(Macro3.makeBALLSPredicate(condition))).step(ifTrue).step("endif");
       }
     )
     /**
@@ -2135,7 +2135,7 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
        * @returns {Macro} This object itself.
        */
       function(condition, ifTrue) {
-        return this.step("if !(".concat(Macro2.makeBALLSPredicate(condition), ")")).step(ifTrue).step("endif");
+        return this.step("if !(".concat(Macro3.makeBALLSPredicate(condition), ")")).step(ifTrue).step("endif");
       }
     )
     /**
@@ -2235,7 +2235,7 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
         for (var _len3 = arguments.length, skills = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++)
           skills[_key3] = arguments[_key3];
         return this.step.apply(this, _toConsumableArray2(skills.map(function(skill) {
-          return Macro2.if_("hasskill ".concat(skillBallsMacroName(skill)), Macro2.skill(skill));
+          return Macro3.if_("hasskill ".concat(skillBallsMacroName(skill)), Macro3.skill(skill));
         })));
       }
     )
@@ -2258,7 +2258,7 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
         for (var _len4 = arguments.length, skills = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++)
           skills[_key4] = arguments[_key4];
         return this.step.apply(this, _toConsumableArray2(skills.map(function(skill) {
-          return Macro2.if_("hasskill ".concat(skillBallsMacroName(skill)), Macro2.skill(skill).repeat());
+          return Macro3.if_("hasskill ".concat(skillBallsMacroName(skill)), Macro3.skill(skill).repeat());
         })));
       }
     )
@@ -2304,7 +2304,7 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
         for (var _len6 = arguments.length, items = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++)
           items[_key6] = arguments[_key6];
         return this.step.apply(this, _toConsumableArray2(items.map(function(item3) {
-          return Macro2.if_(itemOrItemsBallsMacroPredicate(item3), "use ".concat(itemOrItemsBallsMacroName(item3)));
+          return Macro3.if_(itemOrItemsBallsMacroPredicate(item3), "use ".concat(itemOrItemsBallsMacroName(item3)));
         })));
       }
     )
@@ -2384,7 +2384,7 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
     key: "load",
     value: function() {
       var _this;
-      return (_this = new this()).step.apply(_this, _toConsumableArray2(get(Macro2.SAVED_MACRO_PROPERTY).split(";")));
+      return (_this = new this()).step.apply(_this, _toConsumableArray2(get(Macro3.SAVED_MACRO_PROPERTY).split(";")));
     }
     /**
      * Clear the saved macro in the Mafia property.
@@ -2392,7 +2392,7 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
   }, {
     key: "clearSaved",
     value: function() {
-      (0, import_kolmafia6.removeProperty)(Macro2.SAVED_MACRO_PROPERTY);
+      (0, import_kolmafia6.removeProperty)(Macro3.SAVED_MACRO_PROPERTY);
     }
   }, {
     key: "step",
@@ -2403,11 +2403,11 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
   }, {
     key: "clearAutoAttackMacros",
     value: function() {
-      var _iterator2 = _createForOfIteratorHelper3(Macro2.cachedAutoAttacks.keys()), _step2;
+      var _iterator2 = _createForOfIteratorHelper3(Macro3.cachedAutoAttacks.keys()), _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
-          var _Macro$cachedMacroIds, name = _step2.value, id = (_Macro$cachedMacroIds = Macro2.cachedMacroIds.get(name)) !== null && _Macro$cachedMacroIds !== void 0 ? _Macro$cachedMacroIds : getMacroId(name);
-          (0, import_kolmafia6.visitUrl)("account_combatmacros.php?macroid=".concat(id, "&action=edit&what=Delete&confirm=1")), Macro2.cachedAutoAttacks.delete(name), Macro2.cachedMacroIds.delete(name);
+          var _Macro$cachedMacroIds, name = _step2.value, id = (_Macro$cachedMacroIds = Macro3.cachedMacroIds.get(name)) !== null && _Macro$cachedMacroIds !== void 0 ? _Macro$cachedMacroIds : getMacroId(name);
+          (0, import_kolmafia6.visitUrl)("account_combatmacros.php?macroid=".concat(id, "&action=edit&what=Delete&confirm=1")), Macro3.cachedAutoAttacks.delete(name), Macro3.cachedMacroIds.delete(name);
         }
       } catch (err) {
         _iterator2.e(err);
@@ -2526,7 +2526,7 @@ var InvalidMacroError = /* @__PURE__ */ function(_Error) {
     value: function(macro) {
       return new this().ifNotHolidayWanderer(macro);
     }
-  }]), Macro2;
+  }]), Macro3;
 }();
 _defineProperty4(Macro, "SAVED_MACRO_PROPERTY", "libram_savedMacro");
 _defineProperty4(Macro, "cachedMacroIds", /* @__PURE__ */ new Map());
@@ -6895,6 +6895,9 @@ __export(properties_exports, {
   DIVES: function() {
     return DIVES;
   },
+  HEAP_ATTEMPTS: function() {
+    return HEAP_ATTEMPTS;
+  },
   REFUSES_UNTIL_COMPOST: function() {
     return REFUSES_UNTIL_COMPOST;
   },
@@ -6906,7 +6909,7 @@ var SCRIPT_PREFIX = "cognac", prefix = function(prop) {
   return "".concat(SCRIPT_PREFIX, "_").concat(prop);
 }, privatize = function(prop) {
   return "_".concat(prefix(prop));
-}, CLAN = prefix("clan"), ASDON = prefix("useAsdon"), SKIP_GARBO = prefix("skipGarbo"), REFUSES_UNTIL_COMPOST = privatize("choice216"), COGNACS = privatize("bottlesFound"), DIVES = privatize("dives");
+}, CLAN = prefix("clan"), ASDON = prefix("useAsdon"), SKIP_GARBO = prefix("skipGarbo"), REFUSES_UNTIL_COMPOST = privatize("choice216"), COGNACS = privatize("bottlesFound"), DIVES = privatize("dives"), HEAP_ATTEMPTS = privatize("heapAttempts");
 
 // src/lib/cognac.ts
 var _templateObject68;
@@ -7029,7 +7032,7 @@ var BASE_STENCH_REQUIRED = 7, MS_BETWEEN_ROUNDS = 60 * 1e3, Gossip = /* @__PURE_
     key: "updateGossip",
     value: function() {
       var gossip2 = read();
-      this.players = gossip2.players || [], this.requestingCompost = gossip2.requestingCompost, this.stench = gossip2.stench || 0, this.mutex = gossip2.mutex || "", this.diveStart = gossip2.diveStart || 0, this.gameday = gossip2.gameday || 0;
+      this.players = gossip2.players || [], this.requestingCompost = gossip2.requestingCompost || [], this.stench = gossip2.stench || 0, this.mutex = gossip2.mutex || "", this.diveStart = gossip2.diveStart || 0, this.gameday = gossip2.gameday || 0;
     }
   }, {
     key: "write",
@@ -7290,17 +7293,158 @@ var import_kolmafia29 = require("kolmafia");
 
 // src/lib/combat.ts
 var import_kolmafia25 = require("kolmafia");
-var drunkRunaway = Macro.runaway(), drunk = function() {
+var _templateObject71, _templateObject226, _templateObject319, _templateObject416, _templateObject510, _templateObject610, _templateObject77;
+function _taggedTemplateLiteral13(strings, raw) {
+  return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
+}
+function _classCallCheck16(instance, Constructor) {
+  if (!(instance instanceof Constructor))
+    throw new TypeError("Cannot call a class as a function");
+}
+function _defineProperties16(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey17(descriptor.key), descriptor);
+  }
+}
+function _createClass16(Constructor, protoProps, staticProps) {
+  return protoProps && _defineProperties16(Constructor.prototype, protoProps), staticProps && _defineProperties16(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
+}
+function _toPropertyKey17(arg) {
+  var key = _toPrimitive17(arg, "string");
+  return typeof key == "symbol" ? key : String(key);
+}
+function _toPrimitive17(input, hint) {
+  if (typeof input != "object" || input === null)
+    return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== void 0) {
+    var res = prim.call(input, hint || "default");
+    if (typeof res != "object")
+      return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+function _inherits6(subClass, superClass) {
+  if (typeof superClass != "function" && superClass !== null)
+    throw new TypeError("Super expression must either be null or a function");
+  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: !0, configurable: !0 } }), Object.defineProperty(subClass, "prototype", { writable: !1 }), superClass && _setPrototypeOf6(subClass, superClass);
+}
+function _setPrototypeOf6(o, p) {
+  return _setPrototypeOf6 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function(o2, p2) {
+    return o2.__proto__ = p2, o2;
+  }, _setPrototypeOf6(o, p);
+}
+function _createSuper5(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct5();
+  return function() {
+    var Super = _getPrototypeOf5(Derived), result;
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf5(this).constructor;
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else
+      result = Super.apply(this, arguments);
+    return _possibleConstructorReturn5(this, result);
+  };
+}
+function _possibleConstructorReturn5(self, call) {
+  if (call && (typeof call == "object" || typeof call == "function"))
+    return call;
+  if (call !== void 0)
+    throw new TypeError("Derived constructors may only return object or undefined");
+  return _assertThisInitialized5(self);
+}
+function _assertThisInitialized5(self) {
+  if (self === void 0)
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  return self;
+}
+function _isNativeReflectConstruct5() {
+  if (typeof Reflect > "u" || !Reflect.construct || Reflect.construct.sham)
+    return !1;
+  if (typeof Proxy == "function")
+    return !0;
+  try {
+    return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+    })), !0;
+  } catch (e) {
+    return !1;
+  }
+}
+function _getPrototypeOf5(o) {
+  return _getPrototypeOf5 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function(o2) {
+    return o2.__proto__ || Object.getPrototypeOf(o2);
+  }, _getPrototypeOf5(o);
+}
+var drunk = function() {
   return (0, import_kolmafia25.myInebriety)() > (0, import_kolmafia25.inebrietyLimit)();
-};
-function getCombat(macro) {
-  return drunk() ? drunkRunaway : macro;
+}, Macro2 = /* @__PURE__ */ function(_LibramMacro) {
+  _inherits6(Macro3, _LibramMacro);
+  var _super = _createSuper5(Macro3);
+  function Macro3() {
+    return _classCallCheck16(this, Macro3), _super.apply(this, arguments);
+  }
+  return _createClass16(Macro3, [{
+    key: "pickpocket",
+    value: function() {
+      return this.step("pickpocket");
+    }
+  }, {
+    key: "tryItemsTogether",
+    value: function(itemOrItems) {
+      return have($skill(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral13(["Ambidextrous Funkslinging"])))) ? this.tryItem(itemOrItems) : Array.isArray(itemOrItems) ? this.tryItem(itemOrItems[0]).tryItem(itemOrItems[1]) : this.tryItem(itemOrItems);
+    }
+  }, {
+    key: "stasis",
+    value: function() {
+      return this.trySkill($skill(_templateObject226 || (_templateObject226 = _taggedTemplateLiteral13(["Curse of Weaksauce"])))).trySkill($skill(_templateObject319 || (_templateObject319 = _taggedTemplateLiteral13(["Micrometeorite"])))).tryItemsTogether([$item(_templateObject416 || (_templateObject416 = _taggedTemplateLiteral13(["Time-Spinner"]))), $item(_templateObject510 || (_templateObject510 = _taggedTemplateLiteral13(["HOA citation pad"])))]);
+    }
+  }, {
+    key: "attackKill",
+    value: function() {
+      return this.stasis().attack().repeat();
+    }
+  }, {
+    key: "mortarShell",
+    value: function() {
+      return this.stasis().trySkill($skill(_templateObject610 || (_templateObject610 = _taggedTemplateLiteral13(["Stuffed Mortar Shell"])))).tryItem($item(_templateObject77 || (_templateObject77 = _taggedTemplateLiteral13(["seal tooth"]))));
+    }
+  }], [{
+    key: "pickpocket",
+    value: function() {
+      return new Macro3().pickpocket();
+    }
+  }, {
+    key: "tryItemsTogether",
+    value: function(itemOrItems) {
+      return new Macro3().tryItemsTogether(itemOrItems);
+    }
+  }, {
+    key: "stasis",
+    value: function() {
+      return new Macro3().stasis();
+    }
+  }, {
+    key: "attackKill",
+    value: function() {
+      return new Macro3().attackKill();
+    }
+  }, {
+    key: "mortarShell",
+    value: function() {
+      return new Macro3().mortarShell();
+    }
+  }]), Macro3;
+}(Macro);
+function runawayIfDrunk(macro) {
+  return drunk() ? Macro2.runaway() : macro;
 }
 
 // src/lib/effects.ts
 var import_kolmafia26 = require("kolmafia");
-var _templateObject71, _templateObject226, _templateObject319;
-function _taggedTemplateLiteral13(strings, raw) {
+var _templateObject78, _templateObject227, _templateObject320;
+function _taggedTemplateLiteral14(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 function filterHave(effects) {
@@ -7309,25 +7453,25 @@ function filterHave(effects) {
   });
 }
 function basicEffects() {
-  return filterHave($effects(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral13(["Leash of Linguini, Empathy, Blood Bond, Springy Fusilli"]))));
+  return filterHave($effects(_templateObject78 || (_templateObject78 = _taggedTemplateLiteral14(["Leash of Linguini, Empathy, Blood Bond, Springy Fusilli"]))));
 }
 function noncombatEffects() {
-  return filterHave($effects(_templateObject226 || (_templateObject226 = _taggedTemplateLiteral13(["The Sonata of Sneakiness, Smooth Movements"]))));
+  return filterHave($effects(_templateObject227 || (_templateObject227 = _taggedTemplateLiteral14(["The Sonata of Sneakiness, Smooth Movements"]))));
 }
 function resistanceEffects() {
-  return filterHave($effects(_templateObject319 || (_templateObject319 = _taggedTemplateLiteral13(["Elemental Saucesphere, Astral Shell"]))));
+  return filterHave($effects(_templateObject320 || (_templateObject320 = _taggedTemplateLiteral14(["Elemental Saucesphere, Astral Shell"]))));
 }
 
 // src/lib/equipment.ts
 var import_kolmafia27 = require("kolmafia");
-var _templateObject77, _templateObject227;
-function _taggedTemplateLiteral14(strings, raw) {
+var _templateObject79, _templateObject228;
+function _taggedTemplateLiteral15(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 function appendWineglass(equips) {
-  if (!have($item(_templateObject77 || (_templateObject77 = _taggedTemplateLiteral14(["Drunkula's wineglass"])))))
+  if (!have($item(_templateObject79 || (_templateObject79 = _taggedTemplateLiteral15(["Drunkula's wineglass"])))))
     throw "You are overdrunk, but don't have a wineglass!";
-  equips.push($item(_templateObject227 || (_templateObject227 = _taggedTemplateLiteral14(["Drunkula's wineglass"]))));
+  equips.push($item(_templateObject228 || (_templateObject228 = _taggedTemplateLiteral15(["Drunkula's wineglass"]))));
 }
 function getEquipment(equips) {
   var equipment = equips.filter(function(it) {
@@ -7337,18 +7481,18 @@ function getEquipment(equips) {
 }
 
 // src/lib/familiar.ts
-var _templateObject78, _templateObject228, _templateObject320, _templateObject416, _templateObject510, _templateObject610, _templateObject79, _templateObject87, _templateObject98, _templateObject107;
-function _taggedTemplateLiteral15(strings, raw) {
+var _templateObject80, _templateObject229, _templateObject321, _templateObject417, _templateObject511, _templateObject611, _templateObject710, _templateObject87, _templateObject98, _templateObject107;
+function _taggedTemplateLiteral16(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 function noncombatFamiliar() {
-  return have($familiar(_templateObject78 || (_templateObject78 = _taggedTemplateLiteral15(["Left-Hand Man"])))) && (have($item(_templateObject228 || (_templateObject228 = _taggedTemplateLiteral15(["rusted-out shootin' iron"])))) || have($item(_templateObject320 || (_templateObject320 = _taggedTemplateLiteral15(["iFlail"]))))) && have($item(_templateObject416 || (_templateObject416 = _taggedTemplateLiteral15(["unbreakable umbrella"])))) ? $familiar(_templateObject510 || (_templateObject510 = _taggedTemplateLiteral15(["Left-Hand Man"]))) : have($familiar(_templateObject610 || (_templateObject610 = _taggedTemplateLiteral15(["Disembodied Hand"])))) && (have($item(_templateObject79 || (_templateObject79 = _taggedTemplateLiteral15(["fish hatchet"])))) || have($item(_templateObject87 || (_templateObject87 = _taggedTemplateLiteral15(["bass clarinet"]))))) ? $familiar(_templateObject98 || (_templateObject98 = _taggedTemplateLiteral15(["Disembodied Hand"]))) : $familiar(_templateObject107 || (_templateObject107 = _taggedTemplateLiteral15(["Disgeist"])));
+  return have($familiar(_templateObject80 || (_templateObject80 = _taggedTemplateLiteral16(["Left-Hand Man"])))) && (have($item(_templateObject229 || (_templateObject229 = _taggedTemplateLiteral16(["rusted-out shootin' iron"])))) || have($item(_templateObject321 || (_templateObject321 = _taggedTemplateLiteral16(["iFlail"]))))) && have($item(_templateObject417 || (_templateObject417 = _taggedTemplateLiteral16(["unbreakable umbrella"])))) ? $familiar(_templateObject511 || (_templateObject511 = _taggedTemplateLiteral16(["Left-Hand Man"]))) : have($familiar(_templateObject611 || (_templateObject611 = _taggedTemplateLiteral16(["Disembodied Hand"])))) && (have($item(_templateObject710 || (_templateObject710 = _taggedTemplateLiteral16(["fish hatchet"])))) || have($item(_templateObject87 || (_templateObject87 = _taggedTemplateLiteral16(["bass clarinet"]))))) ? $familiar(_templateObject98 || (_templateObject98 = _taggedTemplateLiteral16(["Disembodied Hand"]))) : $familiar(_templateObject107 || (_templateObject107 = _taggedTemplateLiteral16(["Disgeist"])));
 }
 
 // src/lib/preparenoncom.ts
 var import_kolmafia28 = require("kolmafia");
-var _templateObject80;
-function _taggedTemplateLiteral16(strings, raw) {
+var _templateObject81;
+function _taggedTemplateLiteral17(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 function _createForOfIteratorHelper12(o, allowArrayLike) {
@@ -7400,8 +7544,7 @@ function _arrayLikeToArray16(arr, len) {
     arr2[i] = arr[i];
   return arr2;
 }
-var EFFECTIVE_NC_VALUE = 100, itemInfo = [];
-var _iterator = _createForOfIteratorHelper12($items(_templateObject80 || (_templateObject80 = _taggedTemplateLiteral16([""])))), _step;
+var EFFECTIVE_NC_VALUE = 100, itemInfo = [], _iterator = _createForOfIteratorHelper12($items(_templateObject81 || (_templateObject81 = _taggedTemplateLiteral17([""])))), _step;
 try {
   for (_iterator.s(); !(_step = _iterator.n()).done; )
     item3 = _step.value, effect = (0, import_kolmafia28.effectModifier)(item3, "Effect"), modifier = -1 * get2("Combat Rate", effect), !(modifier <= 0) && (duration = (0, import_kolmafia28.numericModifier)(item3, "Effect Duration"), duration !== 0 && item3.tradeable && (price2 = (0, import_kolmafia28.mallPrice)(item3), !(price2 / duration > EFFECTIVE_NC_VALUE) && itemInfo.push({
@@ -7424,8 +7567,8 @@ function value(info) {
   return info.duration * info.modifier / info.price;
 }
 function capNonCombat() {
-  for (var itemBought = !1, _i = 0; _i < itemInfo.length; _i++) {
-    var info = itemInfo[_i], item3 = info.item;
+  for (var itemBought = !1, i = 0; i < itemInfo.length; i++) {
+    var info = itemInfo[i], item3 = info.item;
     if ((0, import_kolmafia28.combatRateModifier)() <= -35)
       break;
     if (!(0, import_kolmafia28.haveEffect)(get2("Effect", item3))) {
@@ -7443,7 +7586,7 @@ function capNonCombat() {
 }
 
 // src/quests/cognac/tasks/heap.ts
-var _templateObject81, _templateObject229, _templateObject321, _templateObject417, _templateObject511, _templateObject611;
+var _templateObject88, _templateObject230, _templateObject325, _templateObject418, _templateObject513, _templateObject612;
 function _toConsumableArray10(arr) {
   return _arrayWithoutHoles10(arr) || _iterableToArray10(arr) || _unsupportedIterableToArray17(arr) || _nonIterableSpread10();
 }
@@ -7475,27 +7618,27 @@ function _arrayLikeToArray17(arr, len) {
     arr2[i] = arr[i];
   return arr2;
 }
-function _classCallCheck16(instance, Constructor) {
+function _classCallCheck17(instance, Constructor) {
   if (!(instance instanceof Constructor))
     throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties16(target, props) {
+function _defineProperties17(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey17(descriptor.key), descriptor);
+    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey18(descriptor.key), descriptor);
   }
 }
-function _createClass16(Constructor, protoProps, staticProps) {
-  return protoProps && _defineProperties16(Constructor.prototype, protoProps), staticProps && _defineProperties16(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
+function _createClass17(Constructor, protoProps, staticProps) {
+  return protoProps && _defineProperties17(Constructor.prototype, protoProps), staticProps && _defineProperties17(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
 }
 function _defineProperty13(obj, key, value2) {
-  return key = _toPropertyKey17(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
+  return key = _toPropertyKey18(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
 }
-function _toPropertyKey17(arg) {
-  var key = _toPrimitive17(arg, "string");
+function _toPropertyKey18(arg) {
+  var key = _toPrimitive18(arg, "string");
   return typeof key == "symbol" ? key : String(key);
 }
-function _toPrimitive17(input, hint) {
+function _toPrimitive18(input, hint) {
   if (typeof input != "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
@@ -7507,14 +7650,16 @@ function _toPrimitive17(input, hint) {
   }
   return (hint === "string" ? String : Number)(input);
 }
-function _taggedTemplateLiteral17(strings, raw) {
+function _taggedTemplateLiteral18(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
-var runaway = Macro.trySkill($skill(_templateObject81 || (_templateObject81 = _taggedTemplateLiteral17(["Bowl a Curveball"])))).trySkill($skill(_templateObject229 || (_templateObject229 = _taggedTemplateLiteral17(["Asdon Martin: Spring-Loaded Front Bumper"])))).runaway(), Heap = /* @__PURE__ */ function() {
+var runaway = Macro2.trySkill($skill(_templateObject88 || (_templateObject88 = _taggedTemplateLiteral18(["Bowl a Curveball"])))).trySkill($skill(_templateObject230 || (_templateObject230 = _taggedTemplateLiteral18(["Asdon Martin: Spring-Loaded Front Bumper"])))).runaway(), heapEpilogue = function(gossip2) {
+  get("lastEncounter") === "I Refuse!" ? (gossip2.resetStench(), _set(DIVES, get(DIVES, 0) + 1), _set(HEAP_ATTEMPTS, 0), _set(REFUSES_UNTIL_COMPOST, get(REFUSES_UNTIL_COMPOST, 0) - 1)) : get("lastEncounter") === "The Compostal Service" && gossip2.willCompost() && _set(REFUSES_UNTIL_COMPOST, 5);
+}, Heap = /* @__PURE__ */ function() {
   function Heap2(gossip2) {
-    _classCallCheck16(this, Heap2), _defineProperty13(this, "gossip", void 0), this.gossip = gossip2;
+    _classCallCheck17(this, Heap2), _defineProperty13(this, "gossip", void 0), this.gossip = gossip2;
   }
-  return _createClass16(Heap2, [{
+  return _createClass17(Heap2, [{
     key: "getTasks",
     value: function() {
       var _this = this;
@@ -7524,16 +7669,16 @@ var runaway = Macro.trySkill($skill(_templateObject81 || (_templateObject81 = _t
           return (0, import_kolmafia29.myAdventures)() < 1;
         },
         do: function() {
-          return $location(_templateObject321 || (_templateObject321 = _taggedTemplateLiteral17(["The Heap"])));
+          return $location(_templateObject325 || (_templateObject325 = _taggedTemplateLiteral18(["The Heap"])));
         },
         effects: [].concat(_toConsumableArray10(basicEffects()), _toConsumableArray10(noncombatEffects())),
-        combat: new CombatStrategy().autoattack(getCombat(runaway)),
+        combat: new CombatStrategy().autoattack(runawayIfDrunk(runaway)),
         prepare: function() {
           capNonCombat();
         },
         outfit: function() {
           return {
-            equip: getEquipment([$item(_templateObject417 || (_templateObject417 = _taggedTemplateLiteral17(["June cleaver"]))), $item(_templateObject511 || (_templateObject511 = _taggedTemplateLiteral17(["Greatest American Pants"]))), $item(_templateObject611 || (_templateObject611 = _taggedTemplateLiteral17(["mafia thumb ring"])))]),
+            equip: getEquipment([$item(_templateObject418 || (_templateObject418 = _taggedTemplateLiteral18(["June cleaver"]))), $item(_templateObject513 || (_templateObject513 = _taggedTemplateLiteral18(["Greatest American Pants"]))), $item(_templateObject612 || (_templateObject612 = _taggedTemplateLiteral18(["mafia thumb ring"])))]),
             modifier: "-combat",
             familiar: noncombatFamiliar()
           };
@@ -7548,7 +7693,14 @@ var runaway = Macro.trySkill($skill(_templateObject81 || (_templateObject81 = _t
           295: 2
         },
         post: function() {
-          get("lastEncounter") === "I Refuse!" ? (_this.gossip.resetStench(), _set(DIVES, get(DIVES, 0) + 1), _set(REFUSES_UNTIL_COMPOST, get(REFUSES_UNTIL_COMPOST, 0) - 1)) : get("lastEncounter") === "The Compostal Service" && _this.gossip.willCompost() && _set(REFUSES_UNTIL_COMPOST, 5);
+          return heapEpilogue(_this.gossip);
+        },
+        limit: {
+          guard: function() {
+            return function() {
+              return get(HEAP_ATTEMPTS, 0) < 75;
+            };
+          }
         }
       }];
     }
@@ -7557,7 +7709,7 @@ var runaway = Macro.trySkill($skill(_templateObject81 || (_templateObject81 = _t
 
 // src/quests/cognac/tasks/pld.ts
 var import_kolmafia30 = require("kolmafia");
-var _templateObject88, _templateObject230, _templateObject325, _templateObject418, _templateObject513, _templateObject612;
+var _templateObject89, _templateObject231, _templateObject326, _templateObject419, _templateObject514, _templateObject613;
 function _toConsumableArray11(arr) {
   return _arrayWithoutHoles11(arr) || _iterableToArray11(arr) || _unsupportedIterableToArray18(arr) || _nonIterableSpread11();
 }
@@ -7589,27 +7741,27 @@ function _arrayLikeToArray18(arr, len) {
     arr2[i] = arr[i];
   return arr2;
 }
-function _classCallCheck17(instance, Constructor) {
+function _classCallCheck18(instance, Constructor) {
   if (!(instance instanceof Constructor))
     throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties17(target, props) {
+function _defineProperties18(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey18(descriptor.key), descriptor);
+    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey19(descriptor.key), descriptor);
   }
 }
-function _createClass17(Constructor, protoProps, staticProps) {
-  return protoProps && _defineProperties17(Constructor.prototype, protoProps), staticProps && _defineProperties17(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
+function _createClass18(Constructor, protoProps, staticProps) {
+  return protoProps && _defineProperties18(Constructor.prototype, protoProps), staticProps && _defineProperties18(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
 }
 function _defineProperty14(obj, key, value2) {
-  return key = _toPropertyKey18(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
+  return key = _toPropertyKey19(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
 }
-function _toPropertyKey18(arg) {
-  var key = _toPrimitive18(arg, "string");
+function _toPropertyKey19(arg) {
+  var key = _toPrimitive19(arg, "string");
   return typeof key == "symbol" ? key : String(key);
 }
-function _toPrimitive18(input, hint) {
+function _toPrimitive19(input, hint) {
   if (typeof input != "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
@@ -7621,14 +7773,14 @@ function _toPrimitive18(input, hint) {
   }
   return (hint === "string" ? String : Number)(input);
 }
-function _taggedTemplateLiteral18(strings, raw) {
+function _taggedTemplateLiteral19(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
-var runaway2 = Macro.trySkill($skill(_templateObject88 || (_templateObject88 = _taggedTemplateLiteral18(["Bowl a Curveball"])))).trySkill($skill(_templateObject230 || (_templateObject230 = _taggedTemplateLiteral18(["Asdon Martin: Spring-Loaded Front Bumper"])))).runaway(), PLD = /* @__PURE__ */ function() {
+var runaway2 = Macro2.trySkill($skill(_templateObject89 || (_templateObject89 = _taggedTemplateLiteral19(["Bowl a Curveball"])))).trySkill($skill(_templateObject231 || (_templateObject231 = _taggedTemplateLiteral19(["Asdon Martin: Spring-Loaded Front Bumper"])))).runaway(), PLD = /* @__PURE__ */ function() {
   function PLD2(gossip2) {
-    _classCallCheck17(this, PLD2), _defineProperty14(this, "gossip", void 0), this.gossip = gossip2;
+    _classCallCheck18(this, PLD2), _defineProperty14(this, "gossip", void 0), this.gossip = gossip2;
   }
-  return _createClass17(PLD2, [{
+  return _createClass18(PLD2, [{
     key: "getTasks",
     value: function() {
       var _this = this;
@@ -7646,16 +7798,16 @@ var runaway2 = Macro.trySkill($skill(_templateObject88 || (_templateObject88 = _
           return _this.gossip.readyToDive();
         },
         do: function() {
-          return $location(_templateObject325 || (_templateObject325 = _taggedTemplateLiteral18(["The Purple Light District"])));
+          return $location(_templateObject326 || (_templateObject326 = _taggedTemplateLiteral19(["The Purple Light District"])));
         },
         effects: [].concat(_toConsumableArray11(basicEffects()), _toConsumableArray11(noncombatEffects())),
-        combat: new CombatStrategy().autoattack(getCombat(runaway2)),
+        combat: new CombatStrategy().autoattack(runawayIfDrunk(runaway2)),
         prepare: function() {
           capNonCombat();
         },
         outfit: function() {
           return {
-            equip: getEquipment([$item(_templateObject418 || (_templateObject418 = _taggedTemplateLiteral18(["June cleaver"]))), $item(_templateObject513 || (_templateObject513 = _taggedTemplateLiteral18(["Greatest American Pants"]))), $item(_templateObject612 || (_templateObject612 = _taggedTemplateLiteral18(["mafia thumb ring"])))]),
+            equip: getEquipment([$item(_templateObject419 || (_templateObject419 = _taggedTemplateLiteral19(["June cleaver"]))), $item(_templateObject514 || (_templateObject514 = _taggedTemplateLiteral19(["Greatest American Pants"]))), $item(_templateObject613 || (_templateObject613 = _taggedTemplateLiteral19(["mafia thumb ring"])))]),
             modifier: "-combat",
             familiar: noncombatFamiliar()
           };
@@ -7677,27 +7829,27 @@ var runaway2 = Macro.trySkill($skill(_templateObject88 || (_templateObject88 = _
 
 // src/quests/cognac/tasks/round.ts
 var import_kolmafia31 = require("kolmafia");
-function _classCallCheck18(instance, Constructor) {
+function _classCallCheck19(instance, Constructor) {
   if (!(instance instanceof Constructor))
     throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties18(target, props) {
+function _defineProperties19(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey19(descriptor.key), descriptor);
+    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey20(descriptor.key), descriptor);
   }
 }
-function _createClass18(Constructor, protoProps, staticProps) {
-  return protoProps && _defineProperties18(Constructor.prototype, protoProps), staticProps && _defineProperties18(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
+function _createClass19(Constructor, protoProps, staticProps) {
+  return protoProps && _defineProperties19(Constructor.prototype, protoProps), staticProps && _defineProperties19(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
 }
 function _defineProperty15(obj, key, value2) {
-  return key = _toPropertyKey19(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
+  return key = _toPropertyKey20(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
 }
-function _toPropertyKey19(arg) {
-  var key = _toPrimitive19(arg, "string");
+function _toPropertyKey20(arg) {
+  var key = _toPrimitive20(arg, "string");
   return typeof key == "symbol" ? key : String(key);
 }
-function _toPrimitive19(input, hint) {
+function _toPrimitive20(input, hint) {
   if (typeof input != "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
@@ -7711,9 +7863,9 @@ function _toPrimitive19(input, hint) {
 }
 var Round = /* @__PURE__ */ function() {
   function Round2(gossip2) {
-    _classCallCheck18(this, Round2), _defineProperty15(this, "gossip", void 0), this.gossip = gossip2;
+    _classCallCheck19(this, Round2), _defineProperty15(this, "gossip", void 0), this.gossip = gossip2;
   }
-  return _createClass18(Round2, [{
+  return _createClass19(Round2, [{
     key: "getTasks",
     value: function() {
       var _this = this;
@@ -7739,27 +7891,27 @@ var Round = /* @__PURE__ */ function() {
 }();
 
 // src/quests/cognac/tasks/whiteboard.ts
-function _classCallCheck19(instance, Constructor) {
+function _classCallCheck20(instance, Constructor) {
   if (!(instance instanceof Constructor))
     throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties19(target, props) {
+function _defineProperties20(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey20(descriptor.key), descriptor);
+    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey21(descriptor.key), descriptor);
   }
 }
-function _createClass19(Constructor, protoProps, staticProps) {
-  return protoProps && _defineProperties19(Constructor.prototype, protoProps), staticProps && _defineProperties19(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
+function _createClass20(Constructor, protoProps, staticProps) {
+  return protoProps && _defineProperties20(Constructor.prototype, protoProps), staticProps && _defineProperties20(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
 }
 function _defineProperty16(obj, key, value2) {
-  return key = _toPropertyKey20(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
+  return key = _toPropertyKey21(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
 }
-function _toPropertyKey20(arg) {
-  var key = _toPrimitive20(arg, "string");
+function _toPropertyKey21(arg) {
+  var key = _toPrimitive21(arg, "string");
   return typeof key == "symbol" ? key : String(key);
 }
-function _toPrimitive20(input, hint) {
+function _toPrimitive21(input, hint) {
   if (typeof input != "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
@@ -7773,9 +7925,9 @@ function _toPrimitive20(input, hint) {
 }
 var Whiteboard = /* @__PURE__ */ function() {
   function Whiteboard2(gossip2) {
-    _classCallCheck19(this, Whiteboard2), _defineProperty16(this, "gossip", void 0), _defineProperty16(this, "lastCheck", (/* @__PURE__ */ new Date()).getTime()), _defineProperty16(this, "checkInterval", 5 * 1e3), this.gossip = gossip2, this.gossip.updateGossip();
+    _classCallCheck20(this, Whiteboard2), _defineProperty16(this, "gossip", void 0), _defineProperty16(this, "lastCheck", (/* @__PURE__ */ new Date()).getTime()), _defineProperty16(this, "checkInterval", 5 * 1e3), this.gossip = gossip2, this.gossip.updateGossip();
   }
-  return _createClass19(Whiteboard2, [{
+  return _createClass20(Whiteboard2, [{
     key: "getTasks",
     value: function() {
       var _this = this;
@@ -7850,8 +8002,8 @@ var gossip = new Gossip(), whiteboard = new Whiteboard(gossip), pld = new PLD(go
 
 // src/quests/prologue/tasks/asdon.ts
 var import_kolmafia33 = require("kolmafia");
-var _templateObject89, _templateObject231, _templateObject326, _templateObject419;
-function _taggedTemplateLiteral19(strings, raw) {
+var _templateObject90, _templateObject236, _templateObject327, _templateObject420;
+function _taggedTemplateLiteral20(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 var InstallAsdon = {
@@ -7860,7 +8012,7 @@ var InstallAsdon = {
     return get("_workshedItemUsed") || AsdonInstalled();
   },
   do: function() {
-    AsdonMartin_exports.installed() || !have($item(_templateObject89 || (_templateObject89 = _taggedTemplateLiteral19(["Asdon Martin keyfob"])))) || get(ASDON) && (0, import_kolmafia33.use)($item(_templateObject231 || (_templateObject231 = _taggedTemplateLiteral19(["Asdon Martin keyfob"]))));
+    AsdonMartin_exports.installed() || !have($item(_templateObject90 || (_templateObject90 = _taggedTemplateLiteral20(["Asdon Martin keyfob"])))) || get(ASDON) && (0, import_kolmafia33.use)($item(_templateObject236 || (_templateObject236 = _taggedTemplateLiteral20(["Asdon Martin keyfob"]))));
   }
 }, FuelAsdon = {
   name: "Fuel Asdon",
@@ -7868,19 +8020,19 @@ var InstallAsdon = {
     return (0, import_kolmafia33.getFuel)() < 50;
   },
   completed: function() {
-    return !AsdonMartin_exports.installed() || have($item(_templateObject326 || (_templateObject326 = _taggedTemplateLiteral19(["Asdon Martin keyfob"]))));
+    return !AsdonMartin_exports.installed() || have($item(_templateObject327 || (_templateObject327 = _taggedTemplateLiteral20(["Asdon Martin keyfob"]))));
   },
   do: function() {
     AsdonMartin_exports.fillTo(50);
   }
 };
 function AsdonInstalled() {
-  return !get(ASDON) || AsdonMartin_exports.installed() ? !0 : !have($item(_templateObject419 || (_templateObject419 = _taggedTemplateLiteral19(["Asdon Martin keyfob"]))));
+  return !get(ASDON) || AsdonMartin_exports.installed() ? !0 : !have($item(_templateObject420 || (_templateObject420 = _taggedTemplateLiteral20(["Asdon Martin keyfob"]))));
 }
 
 // src/quests/prologue/tasks/autumnaton.ts
-var _templateObject90, _templateObject236;
-function _taggedTemplateLiteral20(strings, raw) {
+var _templateObject91, _templateObject237;
+function _taggedTemplateLiteral21(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 var DeployFalle = {
@@ -7889,20 +8041,20 @@ var DeployFalle = {
     return !AutumnAton_exports.available();
   },
   do: function() {
-    AutumnAton_exports.sendTo($location(_templateObject90 || (_templateObject90 = _taggedTemplateLiteral20(["The Haunted Conservatory"])))) || AutumnAton_exports.sendTo($location(_templateObject236 || (_templateObject236 = _taggedTemplateLiteral20(["The Haunted Pantry"]))));
+    AutumnAton_exports.sendTo($location(_templateObject91 || (_templateObject91 = _taggedTemplateLiteral21(["The Haunted Conservatory"])))) || AutumnAton_exports.sendTo($location(_templateObject237 || (_templateObject237 = _taggedTemplateLiteral21(["The Haunted Pantry"]))));
   }
 };
 
 // src/quests/prologue/tasks/latte.ts
 var import_kolmafia34 = require("kolmafia");
-var _templateObject91;
-function _taggedTemplateLiteral21(strings, raw) {
+var _templateObject99;
+function _taggedTemplateLiteral22(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 var RefillLatte = {
   name: "Refill Latte",
   ready: function() {
-    return have($item(_templateObject91 || (_templateObject91 = _taggedTemplateLiteral21(["latte lovers member's mug"]))));
+    return have($item(_templateObject99 || (_templateObject99 = _taggedTemplateLiteral22(["latte lovers member's mug"]))));
   },
   completed: function() {
     return get("latteIngredients").toLowerCase().includes("ink") || get("_latteRefillsUsed") >= 3 ? !0 : get("latteUnlocks").split(",").includes("ink") ? !1 : !get("_latteBanishUsed") || get("_latteRefillsUsed") >= 2;
@@ -7926,41 +8078,41 @@ var import_kolmafia37 = require("kolmafia");
 
 // src/quests/sewers/tasks/acquire.ts
 var import_kolmafia35 = require("kolmafia");
-var _templateObject99, _templateObject237, _templateObject327, _templateObject420, _templateObject514, _templateObject613, _templateObject710, _templateObject810, _templateObject910, _templateObject108, _templateObject117, _templateObject127;
-function _taggedTemplateLiteral22(strings, raw) {
+var _templateObject100, _templateObject238, _templateObject328, _templateObject421, _templateObject515, _templateObject614, _templateObject711, _templateObject810, _templateObject910, _templateObject108, _templateObject117, _templateObject127;
+function _taggedTemplateLiteral23(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 var skipDumplings = !1, skipOozo = !1, skipOiliness = !1, skipGatorskin = !1, AcquireTasks = [{
   name: "Mmm, dumpling",
   completed: function() {
-    return have($item(_templateObject99 || (_templateObject99 = _taggedTemplateLiteral22(["unfortunate dumplings"])))) || skipDumplings;
+    return have($item(_templateObject100 || (_templateObject100 = _taggedTemplateLiteral23(["unfortunate dumplings"])))) || skipDumplings;
   },
   do: function() {
-    (0, import_kolmafia35.buy)($item(_templateObject237 || (_templateObject237 = _taggedTemplateLiteral22(["unfortunate dumplings"]))), 1, 2e4), skipDumplings = !have($item(_templateObject327 || (_templateObject327 = _taggedTemplateLiteral22(["unfortunate dumplings"]))));
+    (0, import_kolmafia35.buy)($item(_templateObject238 || (_templateObject238 = _taggedTemplateLiteral23(["unfortunate dumplings"]))), 1, 2e4), skipDumplings = !have($item(_templateObject328 || (_templateObject328 = _taggedTemplateLiteral23(["unfortunate dumplings"]))));
   }
 }, {
   name: "Mmm, oozo",
   completed: function() {
-    return have($item(_templateObject420 || (_templateObject420 = _taggedTemplateLiteral22(["bottle of Ooze-O"])))) || skipOozo;
+    return have($item(_templateObject421 || (_templateObject421 = _taggedTemplateLiteral23(["bottle of Ooze-O"])))) || skipOozo;
   },
   do: function() {
-    (0, import_kolmafia35.buy)($item(_templateObject514 || (_templateObject514 = _taggedTemplateLiteral22(["bottle of Ooze-O"]))), 1, 2e4), skipOozo = !have($item(_templateObject613 || (_templateObject613 = _taggedTemplateLiteral22(["bottle of Ooze-O"]))));
+    (0, import_kolmafia35.buy)($item(_templateObject515 || (_templateObject515 = _taggedTemplateLiteral23(["bottle of Ooze-O"]))), 1, 2e4), skipOozo = !have($item(_templateObject614 || (_templateObject614 = _taggedTemplateLiteral23(["bottle of Ooze-O"]))));
   }
 }, {
   name: "Get oil of oiliness",
   completed: function() {
-    return have($item(_templateObject710 || (_templateObject710 = _taggedTemplateLiteral22(["oil of oiliness"])))) || skipOiliness;
+    return have($item(_templateObject711 || (_templateObject711 = _taggedTemplateLiteral23(["oil of oiliness"])))) || skipOiliness;
   },
   do: function() {
-    (0, import_kolmafia35.buy)($item(_templateObject810 || (_templateObject810 = _taggedTemplateLiteral22(["oil of oiliness"]))), 1, 1e4), skipOiliness = !have($item(_templateObject910 || (_templateObject910 = _taggedTemplateLiteral22(["oil of oiliness"]))));
+    (0, import_kolmafia35.buy)($item(_templateObject810 || (_templateObject810 = _taggedTemplateLiteral23(["oil of oiliness"]))), 1, 1e4), skipOiliness = !have($item(_templateObject910 || (_templateObject910 = _taggedTemplateLiteral23(["oil of oiliness"]))));
   }
 }, {
   name: "Get gatorkskin umbrella",
   completed: function() {
-    return have($item(_templateObject108 || (_templateObject108 = _taggedTemplateLiteral22(["gatorskin umbrella"])))) || skipGatorskin;
+    return have($item(_templateObject108 || (_templateObject108 = _taggedTemplateLiteral23(["gatorskin umbrella"])))) || skipGatorskin;
   },
   do: function() {
-    (0, import_kolmafia35.buy)($item(_templateObject117 || (_templateObject117 = _taggedTemplateLiteral22(["gatorskin umbrella"]))), 1, 1e4), skipGatorskin = !have($item(_templateObject127 || (_templateObject127 = _taggedTemplateLiteral22(["gatorskin umbrella"]))));
+    (0, import_kolmafia35.buy)($item(_templateObject117 || (_templateObject117 = _taggedTemplateLiteral23(["gatorskin umbrella"]))), 1, 1e4), skipGatorskin = !have($item(_templateObject127 || (_templateObject127 = _taggedTemplateLiteral23(["gatorskin umbrella"]))));
   }
 }];
 
@@ -7979,7 +8131,7 @@ var cagebait = "ASSBot", caged = !1, cage = function() {
 }];
 
 // src/quests/sewers/tasks/explore.ts
-var _templateObject100, _templateObject238, _templateObject328, _templateObject421, _templateObject515, _templateObject614, _templateObject711;
+var _templateObject101, _templateObject239, _templateObject329, _templateObject423, _templateObject516, _templateObject615, _templateObject712;
 function _toConsumableArray13(arr) {
   return _arrayWithoutHoles13(arr) || _iterableToArray13(arr) || _unsupportedIterableToArray20(arr) || _nonIterableSpread13();
 }
@@ -8011,10 +8163,10 @@ function _arrayLikeToArray20(arr, len) {
     arr2[i] = arr[i];
   return arr2;
 }
-function _taggedTemplateLiteral23(strings, raw) {
+function _taggedTemplateLiteral24(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
-var tryFreeRunThenAttack = Macro.trySkill($skill(_templateObject100 || (_templateObject100 = _taggedTemplateLiteral23(["Bowl a Curveball"])))).trySkill($skill(_templateObject238 || (_templateObject238 = _taggedTemplateLiteral23(["Asdon Martin: Spring-Loaded Front Bumper"])))).attack(), ExploreTasks = [{
+var tryFreeRunThenAttack = Macro2.trySkill($skill(_templateObject101 || (_templateObject101 = _taggedTemplateLiteral24(["Bowl a Curveball"])))).trySkill($skill(_templateObject239 || (_templateObject239 = _taggedTemplateLiteral24(["Asdon Martin: Spring-Loaded Front Bumper"])))).attack().repeat(), ExploreTasks = [{
   name: "Explore sewer",
   completed: function() {
     return !1;
@@ -8023,15 +8175,15 @@ var tryFreeRunThenAttack = Macro.trySkill($skill(_templateObject100 || (_templat
     capNonCombat();
   },
   do: function() {
-    return $location(_templateObject328 || (_templateObject328 = _taggedTemplateLiteral23(["A Maze of Sewer Tunnels"])));
+    return $location(_templateObject329 || (_templateObject329 = _taggedTemplateLiteral24(["A Maze of Sewer Tunnels"])));
   },
   effects: [].concat(_toConsumableArray13(basicEffects()), _toConsumableArray13(noncombatEffects())),
   combat: new CombatStrategy().autoattack(tryFreeRunThenAttack),
   outfit: function() {
     return {
-      equip: getEquipment([$item(_templateObject421 || (_templateObject421 = _taggedTemplateLiteral23(["gatorskin umbrella"]))), $item(_templateObject515 || (_templateObject515 = _taggedTemplateLiteral23(["hobo code binder"]))), $item(_templateObject614 || (_templateObject614 = _taggedTemplateLiteral23(["mafia thumb ring"])))]),
+      equip: getEquipment([$item(_templateObject423 || (_templateObject423 = _taggedTemplateLiteral24(["gatorskin umbrella"]))), $item(_templateObject516 || (_templateObject516 = _taggedTemplateLiteral24(["hobo code binder"]))), $item(_templateObject615 || (_templateObject615 = _taggedTemplateLiteral24(["mafia thumb ring"])))]),
       modifier: "-combat",
-      bonuses: /* @__PURE__ */ new Map([[$item(_templateObject711 || (_templateObject711 = _taggedTemplateLiteral23(["mafia thumb ring"]))), 200]]),
+      bonuses: /* @__PURE__ */ new Map([[$item(_templateObject712 || (_templateObject712 = _taggedTemplateLiteral24(["mafia thumb ring"]))), 200]]),
       familiar: noncombatFamiliar()
     };
   },
@@ -8091,7 +8243,7 @@ function Sewers(nocage) {
 var import_kolmafia40 = require("kolmafia");
 
 // src/quests/spookyraven/tasks/billards.ts
-var _templateObject101, _templateObject239, _templateObject329, _templateObject423, _templateObject516, _templateObject615, _templateObject712;
+var _templateObject109, _templateObject240, _templateObject330, _templateObject424, _templateObject517, _templateObject616, _templateObject713;
 function _toConsumableArray15(arr) {
   return _arrayWithoutHoles15(arr) || _iterableToArray15(arr) || _unsupportedIterableToArray22(arr) || _nonIterableSpread15();
 }
@@ -8123,24 +8275,24 @@ function _arrayLikeToArray22(arr, len) {
     arr2[i] = arr[i];
   return arr2;
 }
-function _taggedTemplateLiteral24(strings, raw) {
+function _taggedTemplateLiteral25(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 function BilliarTask() {
   return {
     name: "Haunted Billiards Room",
     ready: function() {
-      return have($item(_templateObject101 || (_templateObject101 = _taggedTemplateLiteral24(["Spookyraven billiards room key"]))));
+      return have($item(_templateObject109 || (_templateObject109 = _taggedTemplateLiteral25(["Spookyraven billiards room key"]))));
     },
     completed: function() {
-      return have($item(_templateObject239 || (_templateObject239 = _taggedTemplateLiteral24(["[7302]Spookyraven library key"]))));
+      return have($item(_templateObject240 || (_templateObject240 = _taggedTemplateLiteral25(["[7302]Spookyraven library key"]))));
     },
     effects: function() {
-      return [].concat(_toConsumableArray15(noncombatEffects()), _toConsumableArray15($effects(_templateObject329 || (_templateObject329 = _taggedTemplateLiteral24(["Chalky Hand, Influence of Sphere"])))));
+      return [].concat(_toConsumableArray15(noncombatEffects()), _toConsumableArray15($effects(_templateObject330 || (_templateObject330 = _taggedTemplateLiteral25(["Chalky Hand, Influence of Sphere"])))));
     },
     outfit: function() {
       return {
-        equip: getEquipment([$item(_templateObject423 || (_templateObject423 = _taggedTemplateLiteral24(["June cleaver"]))), $item(_templateObject516 || (_templateObject516 = _taggedTemplateLiteral24(["Greatest American Pants"]))), $item(_templateObject615 || (_templateObject615 = _taggedTemplateLiteral24(["mafia thumb ring"])))]),
+        equip: getEquipment([$item(_templateObject424 || (_templateObject424 = _taggedTemplateLiteral25(["June cleaver"]))), $item(_templateObject517 || (_templateObject517 = _taggedTemplateLiteral25(["Greatest American Pants"]))), $item(_templateObject616 || (_templateObject616 = _taggedTemplateLiteral25(["mafia thumb ring"])))]),
         modifier: "-combat",
         familiar: noncombatFamiliar()
       };
@@ -8153,22 +8305,22 @@ function BilliarTask() {
       1436: 2
       // Maps: go straight to hustle
     },
-    combat: new CombatStrategy().autoattack(getCombat(Macro.runaway())),
-    do: $location(_templateObject712 || (_templateObject712 = _taggedTemplateLiteral24(["The Haunted Billiards Room"])))
+    combat: new CombatStrategy().autoattack(runawayIfDrunk(Macro2.runaway())),
+    do: $location(_templateObject713 || (_templateObject713 = _taggedTemplateLiteral25(["The Haunted Billiards Room"])))
   };
 }
 
 // src/quests/spookyraven/tasks/epilogue.ts
 var import_kolmafia38 = require("kolmafia");
-var _templateObject109;
-function _taggedTemplateLiteral25(strings, raw) {
+var _templateObject110;
+function _taggedTemplateLiteral26(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 function EpilogueTask() {
   return {
     name: "Give Lady Spookyraven Her Necklace",
     ready: function() {
-      return have($item(_templateObject109 || (_templateObject109 = _taggedTemplateLiteral25(["Lady Spookyraven's necklace"]))));
+      return have($item(_templateObject110 || (_templateObject110 = _taggedTemplateLiteral26(["Lady Spookyraven's necklace"]))));
     },
     completed: function() {
       return get("questM20Necklace") === "finished";
@@ -8187,7 +8339,7 @@ function EpilogueTask() {
 var import_kolmafia39 = require("kolmafia");
 
 // src/quests/wander/shared/combat.ts
-var _templateObject110, _templateObject240, _templateObject330, _templateObject424, _templateObject517, _templateObject616, _templateObject713, _templateObject811, _templateObject911, _templateObject1010, _templateObject118;
+var _templateObject111, _templateObject241, _templateObject331, _templateObject425, _templateObject518, _templateObject617, _templateObject714, _templateObject811, _templateObject911, _templateObject1010, _templateObject118;
 function _toConsumableArray16(arr) {
   return _arrayWithoutHoles16(arr) || _iterableToArray16(arr) || _unsupportedIterableToArray23(arr) || _nonIterableSpread16();
 }
@@ -8219,30 +8371,30 @@ function _arrayLikeToArray23(arr, len) {
     arr2[i] = arr[i];
   return arr2;
 }
-function _taggedTemplateLiteral26(strings, raw) {
+function _taggedTemplateLiteral27(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 function killMacro() {
-  return Macro.trySkill($skill(_templateObject110 || (_templateObject110 = _taggedTemplateLiteral26(["Micrometeorite"])))).trySkill($skill(_templateObject240 || (_templateObject240 = _taggedTemplateLiteral26(["Curse of Weaksauce"])))).attack().repeat();
+  return Macro.trySkill($skill(_templateObject111 || (_templateObject111 = _taggedTemplateLiteral27(["Micrometeorite"])))).trySkill($skill(_templateObject241 || (_templateObject241 = _taggedTemplateLiteral27(["Curse of Weaksauce"])))).attack().repeat();
 }
 function kill() {
-  return new CombatStrategy().autoattack(Macro.trySkill.apply(Macro, _toConsumableArray16($skills(_templateObject330 || (_templateObject330 = _taggedTemplateLiteral26(["Micrometeorite, Curse of Weaksauce"]))))).attack().repeat());
+  return new CombatStrategy().autoattack(Macro.trySkill.apply(Macro, _toConsumableArray16($skills(_templateObject331 || (_templateObject331 = _taggedTemplateLiteral27(["Micrometeorite, Curse of Weaksauce"]))))).attack().repeat());
 }
 function defaultEquipment() {
   var sweatNeeded = Math.max(0, 75 - get("_sweatOutSomeBoozeUsed") - get("sweat"));
   return {
-    weapon: $item(_templateObject424 || (_templateObject424 = _taggedTemplateLiteral26(["June cleaver"]))),
-    "off-hand": $item(_templateObject517 || (_templateObject517 = _taggedTemplateLiteral26(["cursed magnifying glass"]))),
-    pants: sweatNeeded > 0 && have($item(_templateObject616 || (_templateObject616 = _taggedTemplateLiteral26(["designer sweatpants"])))) ? $item(_templateObject713 || (_templateObject713 = _taggedTemplateLiteral26(["designer sweatpants"]))) : $item(_templateObject811 || (_templateObject811 = _taggedTemplateLiteral26(["Pantsgiving"]))),
-    acc1: $item(_templateObject911 || (_templateObject911 = _taggedTemplateLiteral26(["lucky gold ring"]))),
-    acc2: $item(_templateObject1010 || (_templateObject1010 = _taggedTemplateLiteral26(["Mr. Cheeng's spectacles"]))),
-    acc3: $item(_templateObject118 || (_templateObject118 = _taggedTemplateLiteral26(["Mr. Screege's spectacles"])))
+    weapon: $item(_templateObject425 || (_templateObject425 = _taggedTemplateLiteral27(["June cleaver"]))),
+    "off-hand": $item(_templateObject518 || (_templateObject518 = _taggedTemplateLiteral27(["cursed magnifying glass"]))),
+    pants: sweatNeeded > 0 && have($item(_templateObject617 || (_templateObject617 = _taggedTemplateLiteral27(["designer sweatpants"])))) ? $item(_templateObject714 || (_templateObject714 = _taggedTemplateLiteral27(["designer sweatpants"]))) : $item(_templateObject811 || (_templateObject811 = _taggedTemplateLiteral27(["Pantsgiving"]))),
+    acc1: $item(_templateObject911 || (_templateObject911 = _taggedTemplateLiteral27(["lucky gold ring"]))),
+    acc2: $item(_templateObject1010 || (_templateObject1010 = _taggedTemplateLiteral27(["Mr. Cheeng's spectacles"]))),
+    acc3: $item(_templateObject118 || (_templateObject118 = _taggedTemplateLiteral27(["Mr. Screege's spectacles"])))
   };
 }
 
 // src/quests/spookyraven/tasks/library.ts
-var _templateObject111, _templateObject241, _templateObject331, _templateObject425, _templateObject518, _templateObject617, _templateObject714, _templateObject812, _templateObject912, _templateObject1011, _templateObject119, _templateObject128, _templateObject137;
-function _taggedTemplateLiteral27(strings, raw) {
+var _templateObject119, _templateObject246, _templateObject335, _templateObject426, _templateObject519, _templateObject618, _templateObject715, _templateObject812, _templateObject912, _templateObject1011, _templateObject1110, _templateObject128, _templateObject137;
+function _taggedTemplateLiteral28(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 function ownKeys7(object, enumerableOnly) {
@@ -8267,13 +8419,13 @@ function _objectSpread7(target) {
   return target;
 }
 function _defineProperty17(obj, key, value2) {
-  return key = _toPropertyKey21(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
+  return key = _toPropertyKey22(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
 }
-function _toPropertyKey21(arg) {
-  var key = _toPrimitive21(arg, "string");
+function _toPropertyKey22(arg) {
+  var key = _toPrimitive22(arg, "string");
   return typeof key == "symbol" ? key : String(key);
 }
-function _toPrimitive21(input, hint) {
+function _toPrimitive22(input, hint) {
   if (typeof input != "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
@@ -8288,9 +8440,9 @@ function _toPrimitive21(input, hint) {
 var outfit2 = function() {
   {
     var equip4 = Object.values(_objectSpread7(_objectSpread7({}, defaultEquipment()), {}, {
-      shirt: $item(_templateObject111 || (_templateObject111 = _taggedTemplateLiteral27(["Jurassic Parka"]))),
-      offhand: $item(_templateObject241 || (_templateObject241 = _taggedTemplateLiteral27(["latte lovers member's mug"]))),
-      pants: $item(_templateObject331 || (_templateObject331 = _taggedTemplateLiteral27(["Greatest American Pants"])))
+      shirt: $item(_templateObject119 || (_templateObject119 = _taggedTemplateLiteral28(["Jurassic Parka"]))),
+      offhand: $item(_templateObject246 || (_templateObject246 = _taggedTemplateLiteral28(["latte lovers member's mug"]))),
+      pants: $item(_templateObject335 || (_templateObject335 = _taggedTemplateLiteral28(["Greatest American Pants"])))
     }));
     return equip4 = getEquipment(equip4), {
       equip: equip4
@@ -8298,14 +8450,14 @@ var outfit2 = function() {
   }
 };
 function LibraryTask() {
-  var combatStrat = new CombatStrategy().autoattack(Macro.if_("monstername writing desk", Macro.trySkill($skill(_templateObject425 || (_templateObject425 = _taggedTemplateLiteral27(["Transcendent Olfaction"]))), $skill(_templateObject518 || (_templateObject518 = _taggedTemplateLiteral27(["Gallapagosian Mating Call"])))).skill($skill(_templateObject617 || (_templateObject617 = _taggedTemplateLiteral27(["Spit jurassic acid"]))))).trySkill($skill(_templateObject714 || (_templateObject714 = _taggedTemplateLiteral27(["Throw Latte on Opponent"])))).runaway());
+  var combatStrat = new CombatStrategy().autoattack(Macro2.if_("monstername writing desk", Macro2.trySkill($skill(_templateObject426 || (_templateObject426 = _taggedTemplateLiteral28(["Transcendent Olfaction"]))), $skill(_templateObject519 || (_templateObject519 = _taggedTemplateLiteral28(["Gallapagosian Mating Call"])))).skill($skill(_templateObject618 || (_templateObject618 = _taggedTemplateLiteral28(["Spit jurassic acid"]))))).trySkill($skill(_templateObject715 || (_templateObject715 = _taggedTemplateLiteral28(["Throw Latte on Opponent"])))).runaway());
   return {
     name: "Spit Acid in Library",
     ready: function() {
-      return have($item(_templateObject812 || (_templateObject812 = _taggedTemplateLiteral27(["Jurassic Parka"])))) && have($item(_templateObject912 || (_templateObject912 = _taggedTemplateLiteral27(["[7302]Spookyraven library key"])))) && questStep("questM20Necklace") < 4 && get("writingDesksDefeated") < 5;
+      return have($item(_templateObject812 || (_templateObject812 = _taggedTemplateLiteral28(["Jurassic Parka"])))) && have($item(_templateObject912 || (_templateObject912 = _taggedTemplateLiteral28(["[7302]Spookyraven library key"])))) && questStep("questM20Necklace") < 4 && get("writingDesksDefeated") < 5;
     },
     completed: function() {
-      return have($effect(_templateObject1011 || (_templateObject1011 = _taggedTemplateLiteral27(["Everything Looks Yellow"]))));
+      return have($effect(_templateObject1011 || (_templateObject1011 = _taggedTemplateLiteral28(["Everything Looks Yellow"]))));
     },
     effects: basicEffects,
     outfit: outfit2,
@@ -8324,7 +8476,7 @@ function LibraryTask() {
     },
     combat: combatStrat,
     do: function() {
-      Cartography_exports.have() && get("_monstersMapped") < 3 ? Cartography_exports.mapMonster($location(_templateObject119 || (_templateObject119 = _taggedTemplateLiteral27(["The Haunted Library"]))), $monster(_templateObject128 || (_templateObject128 = _taggedTemplateLiteral27(["writing desk"])))) : (0, import_kolmafia39.adv1)($location(_templateObject137 || (_templateObject137 = _taggedTemplateLiteral27(["The Haunted Library"]))), -1, "");
+      Cartography_exports.have() && get("_monstersMapped") < 3 ? Cartography_exports.mapMonster($location(_templateObject1110 || (_templateObject1110 = _taggedTemplateLiteral28(["The Haunted Library"]))), $monster(_templateObject128 || (_templateObject128 = _taggedTemplateLiteral28(["writing desk"])))) : (0, import_kolmafia39.adv1)($location(_templateObject137 || (_templateObject137 = _taggedTemplateLiteral28(["The Haunted Library"]))), -1, "");
     },
     limit: {
       soft: 8
@@ -8344,15 +8496,8 @@ var Spookyraven = {
 // src/quests/townsquare/townsquare.ts
 var import_kolmafia43 = require("kolmafia");
 
-// src/quests/townsquare/tasks/combat/combat.ts
-var _templateObject120, _templateObject246, _templateObject335, _templateObject426, _templateObject519, _templateObject618, _templateObject715, _templateObject813, _templateObject913, _templateObject1012, _templateObject1110, _templateObject129, _templateObject138, _templateObject146;
-function _taggedTemplateLiteral28(strings, raw) {
-  return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
-}
-var mortar = Macro.trySkill($skill(_templateObject120 || (_templateObject120 = _taggedTemplateLiteral28(["Curse of Weaksauce"])))).trySkill($skill(_templateObject246 || (_templateObject246 = _taggedTemplateLiteral28(["Micrometeorite"])))).tryItem($item(_templateObject335 || (_templateObject335 = _taggedTemplateLiteral28(["Rain-Doh indigo cup"])))).trySkill($skill(_templateObject426 || (_templateObject426 = _taggedTemplateLiteral28(["Summon Love Mosquito"])))).tryItem($item(_templateObject519 || (_templateObject519 = _taggedTemplateLiteral28(["Time-Spinner"])))).tryItem($item(_templateObject618 || (_templateObject618 = _taggedTemplateLiteral28(["HOA citation pad"])))).trySkill($skill(_templateObject715 || (_templateObject715 = _taggedTemplateLiteral28(["Stuffed Mortar Shell"])))).tryItem($item(_templateObject813 || (_templateObject813 = _taggedTemplateLiteral28(["seal tooth"])))), attack = Macro.trySkill($skill(_templateObject913 || (_templateObject913 = _taggedTemplateLiteral28(["Curse of Weaksauce"])))).trySkill($skill(_templateObject1012 || (_templateObject1012 = _taggedTemplateLiteral28(["Micrometeorite"])))).tryItem($item(_templateObject1110 || (_templateObject1110 = _taggedTemplateLiteral28(["Rain-Doh indigo cup"])))).trySkill($skill(_templateObject129 || (_templateObject129 = _taggedTemplateLiteral28(["Summon Love Mosquito"])))).tryItem($item(_templateObject138 || (_templateObject138 = _taggedTemplateLiteral28(["Time-Spinner"])))).tryItem($item(_templateObject146 || (_templateObject146 = _taggedTemplateLiteral28(["HOA citation pad"])))).attack();
-
 // src/quests/townsquare/tasks/explore.ts
-var _templateObject121, _templateObject247, _templateObject336, _templateObject427, _templateObject520, _templateObject619, _templateObject716, _templateObject814, _templateObject914, _templateObject1013;
+var _templateObject120, _templateObject247, _templateObject336, _templateObject427, _templateObject520, _templateObject619, _templateObject716, _templateObject813, _templateObject913, _templateObject1012;
 function ownKeys8(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
@@ -8374,27 +8519,27 @@ function _objectSpread8(target) {
   }
   return target;
 }
-function _classCallCheck20(instance, Constructor) {
+function _classCallCheck21(instance, Constructor) {
   if (!(instance instanceof Constructor))
     throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties20(target, props) {
+function _defineProperties21(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey22(descriptor.key), descriptor);
+    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey23(descriptor.key), descriptor);
   }
 }
-function _createClass20(Constructor, protoProps, staticProps) {
-  return protoProps && _defineProperties20(Constructor.prototype, protoProps), staticProps && _defineProperties20(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
+function _createClass21(Constructor, protoProps, staticProps) {
+  return protoProps && _defineProperties21(Constructor.prototype, protoProps), staticProps && _defineProperties21(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
 }
 function _defineProperty18(obj, key, value2) {
-  return key = _toPropertyKey22(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
+  return key = _toPropertyKey23(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
 }
-function _toPropertyKey22(arg) {
-  var key = _toPrimitive22(arg, "string");
+function _toPropertyKey23(arg) {
+  var key = _toPrimitive23(arg, "string");
   return typeof key == "symbol" ? key : String(key);
 }
-function _toPrimitive22(input, hint) {
+function _toPrimitive23(input, hint) {
   if (typeof input != "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
@@ -8410,7 +8555,7 @@ function _taggedTemplateLiteral29(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 var elementMap = {
-  hot: $effects(_templateObject121 || (_templateObject121 = _taggedTemplateLiteral29(["Spirit of Cayenne"]))),
+  hot: $effects(_templateObject120 || (_templateObject120 = _taggedTemplateLiteral29(["Spirit of Cayenne"]))),
   cold: $effects(_templateObject247 || (_templateObject247 = _taggedTemplateLiteral29(["Spirit of Peppermint"]))),
   stench: $effects(_templateObject336 || (_templateObject336 = _taggedTemplateLiteral29(["Spirit of Garlic"]))),
   spooky: $effects(_templateObject427 || (_templateObject427 = _taggedTemplateLiteral29(["Spirit of Wormwood"]))),
@@ -8419,7 +8564,7 @@ var elementMap = {
 }, Explore = /* @__PURE__ */ function() {
   function Explore2(parts) {
     var _this = this;
-    _classCallCheck20(this, Explore2), _defineProperty18(this, "parts", void 0), _defineProperty18(this, "targetElement", "normal"), _defineProperty18(this, "nextFightPrepped", !1), _defineProperty18(this, "baseTask", {
+    _classCallCheck21(this, Explore2), _defineProperty18(this, "parts", void 0), _defineProperty18(this, "targetElement", "normal"), _defineProperty18(this, "nextFightPrepped", !1), _defineProperty18(this, "baseTask", {
       do: function() {
         return _this.nextFightPrepped = !1, $location(_templateObject619 || (_templateObject619 = _taggedTemplateLiteral29(["Hobopolis Town Square"])));
       },
@@ -8434,7 +8579,7 @@ var elementMap = {
       }
     }), this.parts = parts;
   }
-  return _createClass20(Explore2, [{
+  return _createClass21(Explore2, [{
     key: "getTasks",
     value: function() {
       var _this = this;
@@ -8453,10 +8598,10 @@ var elementMap = {
         completed: function() {
           return _this.targetElement !== "normal";
         },
-        combat: new CombatStrategy().autoattack(attack),
+        combat: new CombatStrategy().autoattack(Macro2.attackKill()),
         effects: [$effect(_templateObject716 || (_templateObject716 = _taggedTemplateLiteral29(["Carol of the Bulls"])))],
         outfit: {
-          equip: [$item(_templateObject814 || (_templateObject814 = _taggedTemplateLiteral29(["Fourth of May Cosplay Saber"]))), $item(_templateObject914 || (_templateObject914 = _taggedTemplateLiteral29(["mafia thumb ring"])))]
+          equip: [$item(_templateObject813 || (_templateObject813 = _taggedTemplateLiteral29(["Fourth of May Cosplay Saber"]))), $item(_templateObject913 || (_templateObject913 = _taggedTemplateLiteral29(["mafia thumb ring"])))]
         }
       }), _objectSpread8(_objectSpread8({}, this.baseTask), {}, {
         name: "Hobo combat elemental",
@@ -8466,9 +8611,9 @@ var elementMap = {
         effects: function() {
           return elementMap[_this.targetElement];
         },
-        combat: new CombatStrategy().autoattack(mortar),
+        combat: new CombatStrategy().autoattack(Macro2.mortarShell()),
         outfit: {
-          equip: [$item(_templateObject1013 || (_templateObject1013 = _taggedTemplateLiteral29(["mafia thumb ring"])))]
+          equip: [$item(_templateObject1012 || (_templateObject1012 = _taggedTemplateLiteral29(["mafia thumb ring"])))]
         }
       })];
     }
@@ -8530,27 +8675,27 @@ function _arrayWithHoles11(arr) {
   if (Array.isArray(arr))
     return arr;
 }
-function _classCallCheck21(instance, Constructor) {
+function _classCallCheck22(instance, Constructor) {
   if (!(instance instanceof Constructor))
     throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties21(target, props) {
+function _defineProperties22(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey23(descriptor.key), descriptor);
+    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, _toPropertyKey24(descriptor.key), descriptor);
   }
 }
-function _createClass21(Constructor, protoProps, staticProps) {
-  return protoProps && _defineProperties21(Constructor.prototype, protoProps), staticProps && _defineProperties21(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
+function _createClass22(Constructor, protoProps, staticProps) {
+  return protoProps && _defineProperties22(Constructor.prototype, protoProps), staticProps && _defineProperties22(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
 }
 function _defineProperty19(obj, key, value2) {
-  return key = _toPropertyKey23(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
+  return key = _toPropertyKey24(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
 }
-function _toPropertyKey23(arg) {
-  var key = _toPrimitive23(arg, "string");
+function _toPropertyKey24(arg) {
+  var key = _toPrimitive24(arg, "string");
   return typeof key == "symbol" ? key : String(key);
 }
-function _toPrimitive23(input, hint) {
+function _toPrimitive24(input, hint) {
   if (typeof input != "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
@@ -8564,9 +8709,9 @@ function _toPrimitive23(input, hint) {
 }
 var talkToRichard = !0, Scobo = /* @__PURE__ */ function() {
   function Scobo2(parts) {
-    _classCallCheck21(this, Scobo2), _defineProperty19(this, "parts", void 0), this.parts = parts;
+    _classCallCheck22(this, Scobo2), _defineProperty19(this, "parts", void 0), this.parts = parts;
   }
-  return _createClass21(Scobo2, [{
+  return _createClass22(Scobo2, [{
     key: "processScoboParts",
     value: function(parts, html) {
       var extractMatch = function(re) {
@@ -8616,11 +8761,11 @@ var talkToRichard = !0, Scobo = /* @__PURE__ */ function() {
 
 // src/quests/townsquare/tasks/snapper.ts
 var import_kolmafia42 = require("kolmafia");
-var _templateObject130, _templateObject248, _templateObject337;
+var _templateObject121, _templateObject248, _templateObject337;
 function _taggedTemplateLiteral30(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
-var snapper = $familiar(_templateObject130 || (_templateObject130 = _taggedTemplateLiteral30(["Red-Nosed Snapper"]))), Snapper = {
+var snapper = $familiar(_templateObject121 || (_templateObject121 = _taggedTemplateLiteral30(["Red-Nosed Snapper"]))), Snapper = {
   name: "Setup",
   completed: function() {
     return !have(snapper) || (0, import_kolmafia42.myFamiliar)() === $familiar(_templateObject248 || (_templateObject248 = _taggedTemplateLiteral30(["Red-Nosed Snapper"])));
@@ -8685,16 +8830,16 @@ var import_kolmafia45 = require("kolmafia");
 
 // src/quests/wander/shared/location.ts
 var import_kolmafia44 = require("kolmafia");
-var _templateObject131, _templateObject249, _templateObject338, _templateObject428;
+var _templateObject129, _templateObject249, _templateObject338, _templateObject428;
 function _taggedTemplateLiteral31(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 function getLocation2() {
-  return !have($item(_templateObject131 || (_templateObject131 = _taggedTemplateLiteral31(["Spookyraven billiards room key"])))) && (0, import_kolmafia44.canAdventure)($location(_templateObject249 || (_templateObject249 = _taggedTemplateLiteral31(["The Haunted Kitchen"])))) ? $location(_templateObject338 || (_templateObject338 = _taggedTemplateLiteral31(["The Haunted Kitchen"]))) : $location(_templateObject428 || (_templateObject428 = _taggedTemplateLiteral31(["Noob Cave"])));
+  return !have($item(_templateObject129 || (_templateObject129 = _taggedTemplateLiteral31(["Spookyraven billiards room key"])))) && (0, import_kolmafia44.canAdventure)($location(_templateObject249 || (_templateObject249 = _taggedTemplateLiteral31(["The Haunted Kitchen"])))) ? $location(_templateObject338 || (_templateObject338 = _taggedTemplateLiteral31(["The Haunted Kitchen"]))) : $location(_templateObject428 || (_templateObject428 = _taggedTemplateLiteral31(["Noob Cave"])));
 }
 
 // src/quests/wander/shared/effects.ts
-var _templateObject139;
+var _templateObject130;
 function _taggedTemplateLiteral32(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
@@ -8730,11 +8875,11 @@ function _arrayLikeToArray26(arr, len) {
   return arr2;
 }
 function getEffects() {
-  return [].concat(_toConsumableArray18(basicEffects()), _toConsumableArray18(getLocation2() === $location(_templateObject139 || (_templateObject139 = _taggedTemplateLiteral32(["The Haunted Kitchen"]))) ? resistanceEffects() : []));
+  return [].concat(_toConsumableArray18(basicEffects()), _toConsumableArray18(getLocation2() === $location(_templateObject130 || (_templateObject130 = _taggedTemplateLiteral32(["The Haunted Kitchen"]))) ? resistanceEffects() : []));
 }
 
 // src/quests/wander/tasks/digitized.ts
-var _templateObject140, _templateObject250, _templateObject339, _templateObject429, _templateObject521;
+var _templateObject131, _templateObject250, _templateObject339, _templateObject429, _templateObject521;
 function _toConsumableArray19(arr) {
   return _arrayWithoutHoles19(arr) || _iterableToArray19(arr) || _unsupportedIterableToArray27(arr) || _nonIterableSpread19();
 }
@@ -8775,7 +8920,7 @@ function shouldRedigitize() {
 }
 function meatBuffEffects() {
   var monster = SourceTerminal_exports.getDigitizeMonster(), result = getEffects();
-  return monster === $monster(_templateObject140 || (_templateObject140 = _taggedTemplateLiteral33(["Knob Goblin Embezzler"]))) && result.push.apply(result, _toConsumableArray19($effects(_templateObject250 || (_templateObject250 = _taggedTemplateLiteral33(["Polka of Plenty, Disco Leer"]))))), result;
+  return monster === $monster(_templateObject131 || (_templateObject131 = _taggedTemplateLiteral33(["Knob Goblin Embezzler"]))) && result.push.apply(result, _toConsumableArray19($effects(_templateObject250 || (_templateObject250 = _taggedTemplateLiteral33(["Polka of Plenty, Disco Leer"]))))), result;
 }
 function DigitizedTask() {
   return {
@@ -8805,7 +8950,7 @@ function DigitizedTask() {
 }
 
 // src/quests/wander/tasks/magnifyingglass.ts
-var _templateObject141, _templateObject251;
+var _templateObject138, _templateObject251;
 function ownKeys9(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
@@ -8828,13 +8973,13 @@ function _objectSpread9(target) {
   return target;
 }
 function _defineProperty20(obj, key, value2) {
-  return key = _toPropertyKey24(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
+  return key = _toPropertyKey25(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
 }
-function _toPropertyKey24(arg) {
-  var key = _toPrimitive24(arg, "string");
+function _toPropertyKey25(arg) {
+  var key = _toPrimitive25(arg, "string");
   return typeof key == "symbol" ? key : String(key);
 }
-function _toPrimitive24(input, hint) {
+function _toPrimitive25(input, hint) {
   if (typeof input != "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
@@ -8853,7 +8998,7 @@ function MagnifyingGlass() {
   return {
     name: "Magnifying Glass",
     ready: function() {
-      return have($item(_templateObject141 || (_templateObject141 = _taggedTemplateLiteral34(["cursed magnifying glass"])))) && get("cursedMagnifyingGlassCount") === 13;
+      return have($item(_templateObject138 || (_templateObject138 = _taggedTemplateLiteral34(["cursed magnifying glass"])))) && get("cursedMagnifyingGlassCount") === 13;
     },
     completed: function() {
       return get("_voidFreeFights") >= 5;
@@ -8874,7 +9019,7 @@ function MagnifyingGlass() {
 
 // src/quests/wander/tasks/sausage.ts
 var import_kolmafia46 = require("kolmafia");
-var _templateObject147, _templateObject256;
+var _templateObject139, _templateObject256;
 function ownKeys10(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
@@ -8897,13 +9042,13 @@ function _objectSpread10(target) {
   return target;
 }
 function _defineProperty21(obj, key, value2) {
-  return key = _toPropertyKey25(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
+  return key = _toPropertyKey26(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
 }
-function _toPropertyKey25(arg) {
-  var key = _toPrimitive25(arg, "string");
+function _toPropertyKey26(arg) {
+  var key = _toPrimitive26(arg, "string");
   return typeof key == "symbol" ? key : String(key);
 }
-function _toPrimitive25(input, hint) {
+function _toPrimitive26(input, hint) {
   if (typeof input != "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
@@ -8922,7 +9067,7 @@ function SausageTask() {
   return {
     name: "Sausage Goblin",
     ready: function() {
-      return have($item(_templateObject147 || (_templateObject147 = _taggedTemplateLiteral35(["Kramco Sausage-o-Matic\u2122"])))) && (0, import_kolmafia46.myInebriety)() <= (0, import_kolmafia46.inebrietyLimit)();
+      return have($item(_templateObject139 || (_templateObject139 = _taggedTemplateLiteral35(["Kramco Sausage-o-Matic\u2122"])))) && (0, import_kolmafia46.myInebriety)() <= (0, import_kolmafia46.inebrietyLimit)();
     },
     completed: function() {
       return getKramcoWandererChance() < 1;
@@ -8943,7 +9088,7 @@ function SausageTask() {
 
 // src/quests/wander/tasks/voter.ts
 var import_kolmafia47 = require("kolmafia");
-var _templateObject148, _templateObject257;
+var _templateObject140, _templateObject257;
 function ownKeys11(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
@@ -8966,13 +9111,13 @@ function _objectSpread11(target) {
   return target;
 }
 function _defineProperty22(obj, key, value2) {
-  return key = _toPropertyKey26(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
+  return key = _toPropertyKey27(key), key in obj ? Object.defineProperty(obj, key, { value: value2, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value2, obj;
 }
-function _toPropertyKey26(arg) {
-  var key = _toPrimitive26(arg, "string");
+function _toPropertyKey27(arg) {
+  var key = _toPrimitive27(arg, "string");
   return typeof key == "symbol" ? key : String(key);
 }
-function _toPrimitive26(input, hint) {
+function _toPrimitive27(input, hint) {
   if (typeof input != "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
@@ -8991,7 +9136,7 @@ function VoterTask() {
   return {
     name: "Voter",
     ready: function() {
-      return have($item(_templateObject148 || (_templateObject148 = _taggedTemplateLiteral36(['"I Voted!" sticker']))));
+      return have($item(_templateObject140 || (_templateObject140 = _taggedTemplateLiteral36(['"I Voted!" sticker']))));
     },
     completed: function() {
       return get("_voteFreeFights") >= 3 || (0, import_kolmafia47.totalTurnsPlayed)() % 11 !== 1 || get("lastVoteMonsterTurn") >= (0, import_kolmafia47.totalTurnsPlayed)();
