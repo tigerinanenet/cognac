@@ -61,7 +61,7 @@ export class Heap {
         },
         post: () => heapEpilogue(this.gossip),
         limit: {
-          guard: () => () => get(HEAP_ATTEMPTS, 0) < 75,
+          guard: () => () => get(HEAP_ATTEMPTS, 0) < 50,
         },
       },
     ];
