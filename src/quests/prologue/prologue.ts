@@ -1,10 +1,10 @@
 import { Quest, Task } from "grimoire-kolmafia";
 
-import { FuelAsdon, InstallAsdon } from "./tasks/asdon";
-import { DeployFalle } from "./tasks/autumnaton";
-import { RefillLatte, refreshLatte } from "./tasks/latte";
+import { fuelAsdon, installAsdon } from "./tasks/asdon";
+import { deployFalle } from "./tasks/autumnaton";
+import { refillLatte, refreshLatte } from "./tasks/latte";
 
 export const Prologue: Quest<Task> = {
   name: "Prologue",
-  tasks: [InstallAsdon, FuelAsdon, DeployFalle, refreshLatte, RefillLatte],
+  tasks: [installAsdon, fuelAsdon, deployFalle, refreshLatte, refillLatte],
 };

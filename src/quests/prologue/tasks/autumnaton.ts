@@ -1,7 +1,7 @@
 import { Task } from "grimoire-kolmafia";
 import { $location, AutumnAton } from "libram";
 
-export const DeployFalle: Task = {
+export const deployFalle: Task = {
   name: "Deploy fall-e",
   completed: () => !AutumnAton.available(),
   do: () => {

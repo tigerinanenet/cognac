@@ -4,7 +4,7 @@ import { $item, AsdonMartin, get, have } from "libram";
 
 import { ASDON } from "../../../prefs/properties";
 
-export const InstallAsdon: Task = {
+export const installAsdon: Task = {
   name: "Install Asdon",
   completed: () => get("_workshedItemUsed") || AsdonInstalled(),
   do: () => {
@@ -18,7 +18,7 @@ export const InstallAsdon: Task = {
   },
 };
 
-export const FuelAsdon: Task = {
+export const fuelAsdon: Task = {
   name: "Fuel Asdon",
   ready: () => getFuel() < 50,
   completed: () => {

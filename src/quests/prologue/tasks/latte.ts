@@ -12,7 +12,7 @@ export const refreshLatte: Task = {
   },
 };
 
-export const RefillLatte: Task = {
+export const refillLatte: Task = {
   name: "Refill Latte",
   ready: () => have($item`latte lovers member's mug`),
   completed: () => {
