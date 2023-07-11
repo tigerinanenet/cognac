@@ -69,6 +69,6 @@ export function LibraryTask(): Task {
         adv1($location`The Haunted Library`, -1, "");
       }
     },
-    limit: { soft: 8 },
+    limit: { soft: 15 },
   };
 }
