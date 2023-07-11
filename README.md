@@ -6,7 +6,7 @@ Farm cognac for fun and profit.
 
 Welcome to the `cognac` repo!
 
-Cognac is a script that will automatically try and [Dive for treasure](https://kol.coldfront.net/thekolwiki/index.php/I_Refuse!). The script should work regardless of your loadout. However, it _really_ likes non-combat skills and equipment. It is up to you to determine whether or not the script is right for you.
+Cognac is a script that will automatically try and [Dive for treasure](https://kol.coldfront.net/thekolwiki/index.php/I_Refuse!). The script should work regardless of your loadout. However, it _really_ likes non-combat skills and equipment. It is up to you to determine whether or not the script will turn a profit.
 
 To squeeze the most juice out of this script, run the script with as many clanmates as you can! By yourself, `cognac` averages one [I Refuse](https://kol.coldfront.net/thekolwiki/index.php/I_Refuse!) for every 30 adventures spent. With three clanmates, you will dive about once every _10_ adventures. That means _three times as much cognac_!
 
@@ -48,7 +48,7 @@ Cognac will perform the following tasks to the best of its ability:
 - Churn through your townsquare (Assumes you're already buffed up to overkill). Stops after Purple Light District is unlocked.
 - Dive in the heap until the heatdeath of the universe, or you run out of adventures.
 
-Cognac does its best not to hurt any hobos in PLD/The heap in its quest for hobos. That way, you will only ever need to open up one instance of hobopolis for all your cognac needs.
+Cognac does its best not to hurt any hobos in PLD/The heap in its quest for cognacs. That way, you will only ever need to open up one instance of hobopolis for all your cognac needs.
 
 Cognac will also
 
