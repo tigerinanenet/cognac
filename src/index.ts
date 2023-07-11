@@ -52,7 +52,7 @@ export function main(command?: string): void {
   const startingClan = getClanId();
   const meatToCloset = myMeat() > 1000000 ? myMeat() - 1000000 : 0;
   try {
-    const clan = get(Properties.CLAN).replace(/'/g, "&apos;");
+    const clan = get(Properties.CLAN);
     if (meatToCloset > 0) {
       cliExecute(`closet put ${meatToCloset} meat`);
     }

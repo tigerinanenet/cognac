@@ -1972,7 +1972,7 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-html-entities@^2.3.2:
+html-entities@^2.3.2, html-entities@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-2.4.0.tgz#edd0cee70402584c8c76cc2c0556db09d1f45061"
   integrity sha512-igBTJcNNNhvZFRtm8uA6xMY6xYleeDwn3PeBCkDz7tHttv4F2hsDI2aPgNERWzvRcNYHNT3ymRaQzllmXj4YsQ==
@@ -2091,10 +2091,10 @@ json5@^2.2.2:
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
-kolmafia@>=5.27455.0:
-  version "5.27455.0"
-  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-5.27455.0.tgz#5a3b69d7ba833f0055c8d00be9e34d9ccc654977"
-  integrity sha512-gaP3lUPnucjHBVr+B2c7CmNhj3CuH6UP0w8QJDHjPpM2dTdAjPHlADo2U7ZHdVoNqdNaoZ8llPQ3J609/AvzYg==
+kolmafia@>=5.27467.0:
+  version "5.27467.0"
+  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-5.27467.0.tgz#5289de1b0364b9112f98d5c73548429a0e100631"
+  integrity sha512-lQ12TAdxocXzVb7/W1ITMRZZVuNeugeHOl5/rAjFObfaE0+QbHaZHNkxnbdubltXYrPFLiMTSZng6GkH2ij8bA==
 
 levn@^0.4.1:
   version "0.4.1"
@@ -2104,10 +2104,12 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-libram@>=0.8.3:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/libram/-/libram-0.8.3.tgz#4cb960a2fc5ef2b4b48a05004b1d2f325f389520"
-  integrity sha512-TL7t/BdlaQdTtfkZCS4e1bOIgqq11O6I02xdzFhVQqNqjo3SvkbaH2vTusdSmyO7aUrCFgn4daL1RpIDjsJThQ==
+libram@>=0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/libram/-/libram-0.8.4.tgz#59e242a624d61866d7843891340c42f884fa807e"
+  integrity sha512-A/CDQ1oFtVxU6cSy1zPdB/yskghYsqfLaj6/ZjkhphFW81/6+AzCQCnuzyQx/L73JYft5vRnToEhG+XQVdQXsQ==
+  dependencies:
+    html-entities "^2.4.0"
 
 locate-path@^6.0.0:
   version "6.0.0"

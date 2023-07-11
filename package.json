@@ -32,8 +32,8 @@
   "dependencies": {
     "core-js": "^3.31.1",
     "grimoire-kolmafia": "^0.3.18",
-    "kolmafia": ">=5.27455.0",
-    "libram": ">=0.8.3"
+    "kolmafia": ">=5.27467.0",
+    "libram": ">=0.8.4"
   },
   "repository": {
     "type": "git",
