@@ -6,9 +6,9 @@ Farm cognac for fun and profit.
 
 Welcome to the `cognac` repo!
 
-Cognac is a script that will automatically try and `Dive for treasure`. The script should work regardless of your loadout. However, it _really_ likes non-combat skills and equipment. It is up to you to determine whether or not the script is right for you.
+Cognac is a script that will automatically try and [Dive for treasure](https://kol.coldfront.net/thekolwiki/index.php/I_Refuse!). The script should work regardless of your loadout. However, it _really_ likes non-combat skills and equipment. It is up to you to determine whether or not the script is right for you.
 
-To squeeze the most juice out of this script, run the script with as many clanmates as you can! By yourself, `cognac` averages one `I Refuse` for every 30 adventures spent. With three clanmates, you will dive about once every _10_ adventures. That means _three times as much cognac_!
+To squeeze the most juice out of this script, run the script with as many clanmates as you can! By yourself, `cognac` averages one [I Refuse](https://kol.coldfront.net/thekolwiki/index.php/I_Refuse!) for every 30 adventures spent. With three clanmates, you will dive about once every _10_ adventures. That means _three times as much cognac_!
 
 ## Install
 
@@ -30,7 +30,7 @@ You must be whitelisted to the clan, and must have permissions to access hobopol
 
 ### cognac_skipGarbo
 
-Optional - Set this flag if you want to be prompted when you try to run `cognac` without first running `garbo`.
+Optional - Set this flag if you want to be prompted when you try to run `cognac` without first running [garbo](https://github.com/Loathing-Associates-Scripting-Society/garbage-collector).
 
 <pre>set cognac_skipGarbo = true</pre>
 
