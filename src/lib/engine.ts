@@ -3,8 +3,8 @@ import { haveEffect } from "kolmafia";
 import { $effect, get, uneffect } from "libram";
 
 // 2.5 combat/NC, 6 NCs/heap. 5 sigma.
-const MAX_HEAP_ROUND_LENGTH = 75;
-const MAX_HEAP_LIVELOCKS = 3;
+// const MAX_HEAP_ROUND_LENGTH = 75;
+// const MAX_HEAP_LIVELOCKS = 3;
 
 export class Engine extends BaseEngine<never, Task> {
   constructor(tasks: Task[]) {
