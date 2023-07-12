@@ -1,5 +1,5 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
-import { myAdventures } from "kolmafia";
+import { inebrietyLimit, myAdventures, myInebriety } from "kolmafia";
 import { $familiar, $item, $location, $skill, get, have, set } from "libram";
 
 import { Macro, runawayIfDrunk } from "../../../lib/combat";
@@ -15,7 +15,7 @@ const runaway = Macro.trySkill($skill`Extract Jelly`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
   .runaway();
 
-const heapEpilogue = (gossip: Gossip) => {
+const epilogue = (gossip: Gossip) => {
   if (get("lastEncounter") === "I Refuse!") {
     gossip.resetStench();
 
@@ -27,8 +27,12 @@ const heapEpilogue = (gossip: Gossip) => {
   }
 };
 
-const heapFamiliar = () => {
-  if (have($familiar`Space Jellyfish`)) {
+const drunk = (): boolean => {
+  return myInebriety() > inebrietyLimit();
+};
+
+const familiar = () => {
+  if (!drunk() && have($familiar`Space Jellyfish`)) {
     return $familiar`Space Jellyfish`;
   }
   return noncombatFamiliar();
@@ -58,7 +62,7 @@ export class Heap {
             $item`mafia thumb ring`,
           ]),
           modifier: "-combat",
-          familiar: heapFamiliar(),
+          familiar: familiar(),
         }),
         choices: {
           203: 2,
@@ -67,7 +71,7 @@ export class Heap {
           218: 1,
           295: 2,
         },
-        post: () => heapEpilogue(this.gossip),
+        post: () => epilogue(this.gossip),
         limit: {
           guard: () => () => get(HEAP_ATTEMPTS, 0) < 50,
         },
