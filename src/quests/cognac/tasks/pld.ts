@@ -57,6 +57,7 @@ export class PLD {
         post: () => {
           if (get("lastEncounter") === "The Furtivity of My City") {
             this.gossip.incrementStench();
+            print(`Stench level increased to ${this.gossip.stench}.`);
           }
         },
       },
