@@ -1,6 +1,6 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { myAdventures } from "kolmafia";
-import { $item, $location, $skill, get, set } from "libram";
+import { $familiar, $item, $location, $skill, get, have, set } from "libram";
 
 import { Macro, runawayIfDrunk } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
@@ -10,7 +10,8 @@ import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
 import { DIVES, HEAP_ATTEMPTS, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
 
-const runaway = Macro.trySkill($skill`Bowl a Curveball`)
+const runaway = Macro.trySkill($skill`Extract Jelly`)
+  .trySkill($skill`Bowl a Curveball`)
   .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
   .runaway();
 
@@ -24,6 +25,13 @@ const heapEpilogue = (gossip: Gossip) => {
   } else if (get("lastEncounter") === "The Compostal Service" && gossip.willCompost()) {
     set(REFUSES_UNTIL_COMPOST, 5);
   }
+};
+
+const heapFamiliar = () => {
+  if (have($familiar`Space Jellyfish`)) {
+    return $familiar`Space Jellyfish`;
+  }
+  return noncombatFamiliar();
 };
 
 export class Heap {
@@ -50,7 +58,7 @@ export class Heap {
             $item`mafia thumb ring`,
           ]),
           modifier: "-combat",
-          familiar: noncombatFamiliar(),
+          familiar: heapFamiliar(),
         }),
         choices: {
           203: 2,
