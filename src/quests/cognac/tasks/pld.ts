@@ -1,17 +1,13 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
-import { $item, $location, $skill, get } from "libram";
+import { $item, $location, get } from "libram";
 
-import { Macro, runawayIfDrunk } from "../../../lib/combat";
+import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
-
-const runaway = Macro.trySkill($skill`Bowl a Curveball`)
-  .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
-  .runaway();
 
 export class PLD {
   gossip: Gossip;
@@ -34,7 +30,7 @@ export class PLD {
         completed: () => this.gossip.readyToDive(),
         do: () => $location`The Purple Light District`,
         effects: [...basicEffects(), ...noncombatEffects()],
-        combat: new CombatStrategy().autoattack(runawayIfDrunk(runaway)),
+        combat: new CombatStrategy().autoattack(Macro.tryFreeRun()),
         prepare: () => {
           capNonCombat();
         },

@@ -28,6 +28,21 @@ export class Macro extends LibramMacro {
     return new Macro().tryItemsTogether(itemOrItems);
   }
 
+  tryFreeRun(): Macro {
+    return Macro.externalIf(
+      !drunk(),
+      Macro.trySkill($skill`Bowl a Curveball`).trySkill(
+        $skill`Asdon Martin: Spring-Loaded Front Bumper`,
+      ),
+    )
+      .runaway()
+      .repeat();
+  }
+
+  static tryFreeRun(): Macro {
+    return new Macro().tryFreeRun();
+  }
+
   stasis(): Macro {
     return this.trySkill($skill`Curse of Weaksauce`)
       .trySkill($skill`Micrometeorite`)
@@ -55,8 +70,4 @@ export class Macro extends LibramMacro {
   static mortarShell(): Macro {
     return new Macro().mortarShell();
   }
-}
-
-export function runawayIfDrunk(macro: Macro): Macro {
-  return drunk() ? Macro.runaway() : macro;
 }

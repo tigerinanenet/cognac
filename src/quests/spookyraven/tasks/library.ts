@@ -27,7 +27,7 @@ export function LibraryTask(): Task {
       ),
     )
       .trySkill($skill`Throw Latte on Opponent`)
-      .runaway(),
+      .tryFreeRun(),
   );
 
   return {

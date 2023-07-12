@@ -2,18 +2,13 @@ import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { inebrietyLimit, myAdventures, myInebriety } from "kolmafia";
 import { $familiar, $item, $location, $skill, get, have, set } from "libram";
 
-import { Macro, runawayIfDrunk } from "../../../lib/combat";
+import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
 import { DIVES, HEAP_ATTEMPTS, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
-
-const runaway = Macro.trySkill($skill`Extract Jelly`)
-  .trySkill($skill`Bowl a Curveball`)
-  .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
-  .runaway();
 
 const epilogue = (gossip: Gossip) => {
   if (get("lastEncounter") === "I Refuse!") {
@@ -51,7 +46,7 @@ export class Heap {
         completed: () => myAdventures() < 1,
         do: () => $location`The Heap`,
         effects: [...basicEffects(), ...noncombatEffects()],
-        combat: new CombatStrategy().autoattack(runawayIfDrunk(runaway)),
+        combat: new CombatStrategy().autoattack(Macro.skill($skill`Extract Jelly`).tryFreeRun()),
         prepare: () => {
           capNonCombat();
         },
