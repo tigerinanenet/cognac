@@ -2810,8 +2810,8 @@ function applyModes(modes) {
     _iterator2.f();
   }
 }
-var cachedSlots = $slots(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral2(["hat, weapon, off-hand, back, shirt, pants, acc1, acc2, acc3, familiar"]))), CacheEntry = /* @__PURE__ */ _createClass6(function CacheEntry2(equipment, rider, familiar2, canEquipItemCount2, modes) {
-  _classCallCheck6(this, CacheEntry2), _defineProperty5(this, "equipment", void 0), _defineProperty5(this, "rider", void 0), _defineProperty5(this, "familiar", void 0), _defineProperty5(this, "canEquipItemCount", void 0), _defineProperty5(this, "modes", void 0), this.equipment = equipment, this.rider = rider, this.familiar = familiar2, this.canEquipItemCount = canEquipItemCount2, this.modes = modes;
+var cachedSlots = $slots(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral2(["hat, weapon, off-hand, back, shirt, pants, acc1, acc2, acc3, familiar"]))), CacheEntry = /* @__PURE__ */ _createClass6(function CacheEntry2(equipment, rider, familiar3, canEquipItemCount2, modes) {
+  _classCallCheck6(this, CacheEntry2), _defineProperty5(this, "equipment", void 0), _defineProperty5(this, "rider", void 0), _defineProperty5(this, "familiar", void 0), _defineProperty5(this, "canEquipItemCount", void 0), _defineProperty5(this, "modes", void 0), this.equipment = equipment, this.rider = rider, this.familiar = familiar3, this.canEquipItemCount = canEquipItemCount2, this.modes = modes;
 }), _outfitSlots = /* @__PURE__ */ new WeakMap(), _useHistory = /* @__PURE__ */ new WeakMap(), _maxSize = /* @__PURE__ */ new WeakMap(), OutfitLRUCache = /* @__PURE__ */ function() {
   function OutfitLRUCache2(maxSize) {
     _classCallCheck6(this, OutfitLRUCache2), _classPrivateFieldInitSpec(this, _outfitSlots, {
@@ -6102,8 +6102,8 @@ var weaponHands = function(i) {
     value: function(item3, slot) {
       if (![void 0, $slot(_templateObject2111 || (_templateObject2111 = _taggedTemplateLiteral9(["familiar"])))].includes(slot) || this.equips.has($slot(_templateObject226 || (_templateObject226 = _taggedTemplateLiteral9(["familiar"])))) || (0, import_kolmafia19.booleanModifier)(item3, "Single Equip"))
         return !1;
-      var familiar2 = this.getHoldingFamiliar(item3);
-      return familiar2 === void 0 || !this.equip(familiar2) ? !1 : (this.equips.set($slot(_templateObject236 || (_templateObject236 = _taggedTemplateLiteral9(["familiar"]))), item3), !0);
+      var familiar3 = this.getHoldingFamiliar(item3);
+      return familiar3 === void 0 || !this.equip(familiar3) ? !1 : (this.equips.set($slot(_templateObject236 || (_templateObject236 = _taggedTemplateLiteral9(["familiar"]))), item3), !0);
     }
   }, {
     key: "equipItem",
@@ -6112,13 +6112,13 @@ var weaponHands = function(i) {
     }
   }, {
     key: "equipFamiliar",
-    value: function(familiar2) {
-      if (familiar2 === this.familiar)
+    value: function(familiar3) {
+      if (familiar3 === this.familiar)
         return !0;
-      if (this.familiar !== void 0 || familiar2 !== $familiar.none && (!have(familiar2) || Array.from(this.riders.values()).includes(familiar2)))
+      if (this.familiar !== void 0 || familiar3 !== $familiar.none && (!have(familiar3) || Array.from(this.riders.values()).includes(familiar3)))
         return !1;
       var item3 = this.equips.get($slot(_templateObject246 || (_templateObject246 = _taggedTemplateLiteral9(["familiar"]))));
-      return item3 !== void 0 && item3 !== $item.none && !(0, import_kolmafia19.canEquip)(familiar2, item3) ? !1 : (this.familiar = familiar2, !0);
+      return item3 !== void 0 && item3 !== $item.none && !(0, import_kolmafia19.canEquip)(familiar3, item3) ? !1 : (this.familiar = familiar3, !0);
     }
   }, {
     key: "equipSpec",
@@ -6455,9 +6455,9 @@ var weaponHands = function(i) {
   }], [{
     key: "current",
     value: function() {
-      var _a, outfit3 = new Outfit2(), familiar2 = (0, import_kolmafia19.myFamiliar)();
-      if (outfit3.equip(familiar2))
-        throw "Failed to create outfit from current state (expected: familiar ".concat(familiar2, ")");
+      var _a, outfit3 = new Outfit2(), familiar3 = (0, import_kolmafia19.myFamiliar)();
+      if (outfit3.equip(familiar3))
+        throw "Failed to create outfit from current state (expected: familiar ".concat(familiar3, ")");
       for (var _i6 = 0, _outfitSlots3 = outfitSlots; _i6 < _outfitSlots3.length; _i6++) {
         var slotName = _outfitSlots3[_i6], slot = (_a = (/* @__PURE__ */ new Map([["famequip", $slot(_templateObject582 || (_templateObject582 = _taggedTemplateLiteral9(["familiar"])))], ["offhand", $slot(_templateObject592 || (_templateObject592 = _taggedTemplateLiteral9(["off-hand"])))]])).get(slotName)) !== null && _a !== void 0 ? _a : (0, import_kolmafia19.toSlot)(slotName), item3 = (0, import_kolmafia19.equippedItem)(slot);
         if (!outfit3.equip(item3, slot))
@@ -8061,10 +8061,12 @@ function _toPrimitive18(input, hint) {
 function _taggedTemplateLiteral19(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
-var runaway = Macro2.trySkill($skill(_templateObject91 || (_templateObject91 = _taggedTemplateLiteral19(["Extract Jelly"])))).trySkill($skill(_templateObject237 || (_templateObject237 = _taggedTemplateLiteral19(["Bowl a Curveball"])))).trySkill($skill(_templateObject327 || (_templateObject327 = _taggedTemplateLiteral19(["Asdon Martin: Spring-Loaded Front Bumper"])))).runaway(), heapEpilogue = function(gossip2) {
+var runaway = Macro2.trySkill($skill(_templateObject91 || (_templateObject91 = _taggedTemplateLiteral19(["Extract Jelly"])))).trySkill($skill(_templateObject237 || (_templateObject237 = _taggedTemplateLiteral19(["Bowl a Curveball"])))).trySkill($skill(_templateObject327 || (_templateObject327 = _taggedTemplateLiteral19(["Asdon Martin: Spring-Loaded Front Bumper"])))).runaway(), epilogue = function(gossip2) {
   get("lastEncounter") === "I Refuse!" ? (gossip2.resetStench(), _set(DIVES, get(DIVES, 0) + 1), _set(HEAP_ATTEMPTS, 0), _set(REFUSES_UNTIL_COMPOST, get(REFUSES_UNTIL_COMPOST, 0) - 1)) : get("lastEncounter") === "The Compostal Service" && gossip2.willCompost() && _set(REFUSES_UNTIL_COMPOST, 5);
-}, heapFamiliar = function() {
-  return have($familiar(_templateObject420 || (_templateObject420 = _taggedTemplateLiteral19(["Space Jellyfish"])))) ? $familiar(_templateObject515 || (_templateObject515 = _taggedTemplateLiteral19(["Space Jellyfish"]))) : noncombatFamiliar();
+}, drunk2 = function() {
+  return (0, import_kolmafia30.myInebriety)() > (0, import_kolmafia30.inebrietyLimit)();
+}, familiar2 = function() {
+  return !drunk2() && have($familiar(_templateObject420 || (_templateObject420 = _taggedTemplateLiteral19(["Space Jellyfish"])))) ? $familiar(_templateObject515 || (_templateObject515 = _taggedTemplateLiteral19(["Space Jellyfish"]))) : noncombatFamiliar();
 }, Heap = /* @__PURE__ */ function() {
   function Heap2(gossip2) {
     _classCallCheck17(this, Heap2), _defineProperty13(this, "gossip", void 0), this.gossip = gossip2;
@@ -8090,7 +8092,7 @@ var runaway = Macro2.trySkill($skill(_templateObject91 || (_templateObject91 = _
           return {
             equip: getEquipment([$item(_templateObject711 || (_templateObject711 = _taggedTemplateLiteral19(["June cleaver"]))), $item(_templateObject810 || (_templateObject810 = _taggedTemplateLiteral19(["Greatest American Pants"]))), $item(_templateObject910 || (_templateObject910 = _taggedTemplateLiteral19(["mafia thumb ring"])))]),
             modifier: "-combat",
-            familiar: heapFamiliar()
+            familiar: familiar2()
           };
         },
         choices: {
@@ -8103,7 +8105,7 @@ var runaway = Macro2.trySkill($skill(_templateObject91 || (_templateObject91 = _
           295: 2
         },
         post: function() {
-          return heapEpilogue(_this.gossip);
+          return epilogue(_this.gossip);
         },
         limit: {
           guard: function() {
