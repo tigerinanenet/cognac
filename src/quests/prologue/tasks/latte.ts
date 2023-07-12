@@ -2,6 +2,11 @@ import { Task } from "grimoire-kolmafia";
 import { visitUrl } from "kolmafia";
 import { $item, Latte, get, have } from "libram";
 
+function currentlyHasInk() {
+  const ingredients = get("latteIngredients").toLowerCase().split(",");
+  return ingredients.includes("ink") || ingredients.includes("inky");
+}
+
 let latteRefreshed = false;
 export const refreshLatte: Task = {
   name: "Refresh Latte",
@@ -17,7 +22,7 @@ export const refillLatte: Task = {
   ready: () => have($item`latte lovers member's mug`),
   completed: () => {
     // We're trying to get ink, so if we can't refill or have it, stop.
-    if (Latte.currentIngredients().includes("ink") || Latte.refillsRemaining() === 0) return true;
+    if (currentlyHasInk() || Latte.refillsRemaining() === 0) return true;
 
     if (Latte.ingredientsUnlocked().includes("ink")) {
       // If unlocked, refill regardless.
