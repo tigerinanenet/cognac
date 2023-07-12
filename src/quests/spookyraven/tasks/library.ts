@@ -44,7 +44,7 @@ export function LibraryTask(): Task {
         Object.values({
           ...defaultEquipment(),
           shirt: $item`Jurassic Parka`,
-          offhand: $item`latte lovers member's mug`,
+          "off-hand": $item`latte lovers member's mug`,
           pants: $item`Greatest American Pants`,
         }),
       ),
