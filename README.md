@@ -67,7 +67,7 @@ Cognac will work for any loadout. However, there are a few star items that reall
 - Greatest american pants
   - It's basically a free +20% adventures, since we are running all the time.
 - Mafia thumb ring
-  - It triggers on free run aways. It's free adventures.
+  - It triggers on turn taking runaways. It's free adventures.
 - June Cleaver
   - More free adventures
 - Bowling ball
