@@ -2,6 +2,7 @@ import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { adv1, cliExecute, visitUrl } from "kolmafia";
 import {
   $effect,
+  $familiar,
   $item,
   $location,
   $monster,
@@ -16,21 +17,6 @@ import { Macro } from "../../../lib/combat";
 import { basicEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
 import { defaultEquipment } from "../../wander/shared/combat";
-
-const outfit = () => {
-  {
-    let equip = Object.values({
-      ...defaultEquipment(),
-      shirt: $item`Jurassic Parka`,
-      offhand: $item`latte lovers member's mug`,
-      pants: $item`Greatest American Pants`,
-    });
-    equip = getEquipment(equip);
-    return {
-      equip,
-    };
-  }
-};
 
 export function LibraryTask(): Task {
   const combatStrat = new CombatStrategy().autoattack(
@@ -53,7 +39,17 @@ export function LibraryTask(): Task {
       get("writingDesksDefeated") < 5,
     completed: () => have($effect`Everything Looks Yellow`),
     effects: basicEffects,
-    outfit,
+    outfit: () => ({
+      equip: getEquipment(
+        Object.values({
+          ...defaultEquipment(),
+          shirt: $item`Jurassic Parka`,
+          offhand: $item`latte lovers member's mug`,
+          pants: $item`Greatest American Pants`,
+        }),
+      ),
+      familiar: $familiar`none`,
+    }),
     choices: {
       894: 1, // Lights Out
       888: 4, // Take a Look (Rise)
