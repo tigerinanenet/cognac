@@ -11,6 +11,8 @@ import { capNonCombat } from "../../../lib/preparenoncom";
 import { DIVES, HEAP_ATTEMPTS, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
 
 const epilogue = (gossip: Gossip) => {
+  set(HEAP_ATTEMPTS, get(HEAP_ATTEMPTS, 0) + 1);
+
   if (get("lastEncounter") === "I Refuse!") {
     gossip.resetStench();
 
