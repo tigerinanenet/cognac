@@ -1,9 +1,9 @@
-import { abort, print, userConfirm } from "kolmafia";
-import { get } from "libram";
+import { abort, print, todayToString, userConfirm } from "kolmafia";
+import { get, set } from "libram";
 
 import * as Properties from "./properties";
 
-function showPreferences(): void {
+export function showPreferences(): void {
   print("Preferences for cognac", "blue");
   print("");
   Object.values(Properties).map(prettyPrint);
@@ -18,7 +18,25 @@ function prettyPrint(prop: string): void {
   print(`${prop}: ${propVal}`, color);
 }
 
-function checkGarbo(): void {
+export function resetDailyPreference(trackingPreference: string): boolean {
+  const today = todayToString();
+  if (get(trackingPreference, "") !== today) {
+    get(trackingPreference, today);
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export function maybeResetDailyPreferences(): void {
+  if (resetDailyPreference(Properties.RESULTS_DAY)) {
+    set(Properties.TURNS_SPENT, 0);
+    set(Properties.COGNACS, 0);
+    set(Properties.DIVES, 0);
+  }
+}
+
+export function checkGarbo(): void {
   if (get(Properties.SKIP_GARBO)) {
     return;
   }
@@ -32,10 +50,8 @@ function checkGarbo(): void {
   abort("Go bonk those embezzlers real good.");
 }
 
-function checkClan(): void {
+export function checkClan(): void {
   if (!get(Properties.CLAN)) {
     throw `Please set cognac clan pref. See \`cognac config\``;
   }
 }
-
-export { checkClan, checkGarbo, showPreferences };

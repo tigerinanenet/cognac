@@ -5,7 +5,7 @@ import { Clan, get, set } from "libram";
 import * as CognacSession from "./lib/cognac";
 import { Engine } from "./lib/engine";
 import { Gossip } from "./lib/gossip";
-import { checkClan, checkGarbo, showPreferences } from "./prefs/prefs";
+import { checkClan, checkGarbo, maybeResetDailyPreferences, showPreferences } from "./prefs/prefs";
 import * as Properties from "./prefs/properties";
 import { Cognac } from "./quests/cognac/cognac";
 import { Prologue } from "./quests/prologue/prologue";
@@ -38,6 +38,7 @@ export function main(command?: string): void {
 
   checkGarbo();
   checkClan();
+  maybeResetDailyPreferences();
 
   const cognacTasks = getTasks([
     Prologue,
@@ -67,6 +68,6 @@ export function main(command?: string): void {
       cliExecute(`closet take ${meatToCloset} meat`);
     }
     CognacSession.save();
-    CognacSession.print();
+    CognacSession.printSession();
   }
 }

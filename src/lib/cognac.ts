@@ -1,35 +1,30 @@
-import { print as kolPrint } from "kolmafia";
+import { print, totalTurnsPlayed } from "kolmafia";
 import { $item, Session, get, set } from "libram";
 
-import { COGNACS, DIVES } from "../prefs/properties";
+import { COGNACS, DIVES, TURNS_SPENT } from "../prefs/properties";
 
-const session = Session.current();
-
-function printCognac(): void {
-  const cognacs = parseInt(get(COGNACS));
-  cognacs > 0
-    ? kolPrint(`You found ${cognacs} bottles of cognac today!`, `green`)
-    : kolPrint(`Didn't find any bottles of cognac this time. :(`, `red`);
-}
-
-function printDives(): void {
-  const divesStr = get(DIVES);
-  const dives = divesStr === "" ? 0 : parseInt(divesStr);
-  const s = dives === 1 ? "" : "s";
-  kolPrint(`You dove for treasure ${dives} time${s} today!`);
-}
+const initialSession = Session.current();
+const initialTurns = totalTurnsPlayed();
 
 export function save(): void {
-  const sessionDiff = Session.current().diff(session);
+  const sessionDiff = Session.current().diff(initialSession);
   const cognacs = sessionDiff.items.get($item`Ralph IX cognac`) ?? 0;
-  const cognacPref = get(COGNACS);
-  const cognacCount = cognacPref === "" ? 0 : parseInt(cognacPref);
-  set(COGNACS, cognacCount + cognacs);
+  set(COGNACS, get(COGNACS, 0) + cognacs);
+  set(TURNS_SPENT, totalTurnsPlayed() - initialTurns);
 }
 
-export function print(): void {
-  kolPrint("Cognac summary:");
-  kolPrint("");
-  printCognac();
-  printDives();
+export function printSession(): void {
+  print("Cognac summary:");
+  print("");
+
+  const cognacs = get(COGNACS, 0);
+  cognacs > 0
+    ? print(`You found ${cognacs} bottle${cognacs !== 1 ? "s" : ""} of cognac today!`, `green`)
+    : print(`Haven't found any bottles of cognac yet today. :(`, `red`);
+
+  const dives = get(DIVES, 0);
+  const s = dives === 1 ? "" : "s";
+  print(`You dove for treasure ${dives} time${s} today!`);
+
+  print(`You've spent ${get(TURNS_SPENT)} turns diving today!`);
 }
