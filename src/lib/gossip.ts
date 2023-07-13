@@ -152,7 +152,9 @@ export class Gossip {
   }
 
   readyToDive(): boolean {
-    return this.stench >= BASE_STENCH_REQUIRED + this.requestingCompost.length;
+    return (
+      this.stench >= BASE_STENCH_REQUIRED + this.players.length + this.requestingCompost.length
+    );
   }
 
   destroy(): void {
