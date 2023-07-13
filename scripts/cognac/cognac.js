@@ -12772,7 +12772,7 @@ var epilogue = function(gossip2) {
           return $location(_templateObject327 || (_templateObject327 = _taggedTemplateLiteral19(["The Heap"])));
         },
         effects: [].concat(_toConsumableArray10(basicEffects()), _toConsumableArray10(noncombatEffects())),
-        combat: new CombatStrategy().autoattack(Macro2.skill($skill(_templateObject420 || (_templateObject420 = _taggedTemplateLiteral19(["Extract Jelly"])))).tryFreeRun()),
+        combat: new CombatStrategy().autoattack(Macro2.trySkill($skill(_templateObject420 || (_templateObject420 = _taggedTemplateLiteral19(["Extract Jelly"])))).tryFreeRun()),
         prepare: function() {
           capNonCombat();
         },
