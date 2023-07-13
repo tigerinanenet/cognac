@@ -16,3 +16,4 @@ export const REFUSES_UNTIL_COMPOST = privatize("choice216");
 export const COGNACS = privatize("bottlesFound");
 export const DIVES = privatize("dives");
 export const HEAP_ATTEMPTS = privatize("heapAttempts");
+export const CURRENT_PLAYERS = privatize("currentPlayers");

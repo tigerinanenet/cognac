@@ -1,5 +1,7 @@
 import { gamedayToInt, gametimeToInt, myName } from "kolmafia";
+import { set } from "libram";
 
+import { CURRENT_PLAYERS } from "../prefs/properties";
 import * as Whiteboard from "./whiteboard";
 
 type GossipObject = {
@@ -12,7 +14,6 @@ type GossipObject = {
 };
 
 const BASE_STENCH_REQUIRED = 8;
-const MS_BETWEEN_ROUNDS = 60 * 1000;
 export class Gossip {
   players: string[] = [];
   requestingCompost: string[] = [];
@@ -82,6 +83,9 @@ export class Gossip {
     this.mutex = gossip.mutex || "";
     this.diveStart = gossip.diveStart || 0;
     this.gameday = gossip.gameday || 0;
+
+    // Need this one in a pref for the ASH choice script.
+    set(CURRENT_PLAYERS, this.players.length);
   }
 
   write(): void {
@@ -118,7 +122,7 @@ export class Gossip {
       return;
     }
     this.stench = 0;
-    this.diveStart = gametimeToInt() + MS_BETWEEN_ROUNDS;
+    this.diveStart = gametimeToInt() + 1000 * (60 + 5 * this.players.length);
     this.requestingCompost = [];
     this.players = [];
     this.write();
