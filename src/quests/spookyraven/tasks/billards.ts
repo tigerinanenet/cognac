@@ -6,7 +6,7 @@ import { noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
 
-export function BilliarTask(): Task {
+export function billiardsTask(): Task {
   return {
     name: "Haunted Billiards Room",
     ready: () => have($item`Spookyraven billiards room key`),

@@ -18,27 +18,7 @@ import { basicEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
 import { defaultEquipment } from "../../wander/shared/combat";
 
-export function LibraryTask(): Task {
-  const combatStrat = new CombatStrategy().autoattack(
-    Macro.if_(
-      "monstername writing desk",
-      Macro.externalIf(
-        have($skill`Transcendent Olfaction`) &&
-          get("olfactedMonster") !== $monster`writing desk` &&
-          get("_olfactionsUsed") < 3,
-        Macro.skill($skill`Transcendent Olfaction`),
-      )
-        .externalIf(
-          have($skill`Gallapagosian Mating Call`) &&
-            get("_gallapagosMonster") !== $monster`writing desk`,
-          Macro.skill($skill`Gallapagosian Mating Call`),
-        )
-        .skill($skill`Spit jurassic acid`),
-    )
-      .trySkill($skill`Throw Latte on Opponent`)
-      .tryFreeRun(),
-  );
-
+export function libraryTask(): Task {
   return {
     name: "Spit Acid in Library",
     ready: () =>
@@ -66,7 +46,25 @@ export function LibraryTask(): Task {
       163: 4, // Melvil Dewey
     },
     prepare: () => cliExecute("parka acid"),
-    combat: combatStrat,
+    combat: new CombatStrategy().autoattack(() =>
+      Macro.if_(
+        "monstername writing desk",
+        Macro.externalIf(
+          have($skill`Transcendent Olfaction`) &&
+            get("olfactedMonster") !== $monster`writing desk` &&
+            get("_olfactionsUsed") < 3,
+          Macro.skill($skill`Transcendent Olfaction`),
+        )
+          .externalIf(
+            have($skill`Gallapagosian Mating Call`) &&
+              get("_gallapagosMonster") !== $monster`writing desk`,
+            Macro.skill($skill`Gallapagosian Mating Call`),
+          )
+          .skill($skill`Spit jurassic acid`),
+      )
+        .trySkill($skill`Throw Latte on Opponent`)
+        .tryFreeRun(),
+    ),
     do: () => {
       if (Cartography.have() && get("_monstersMapped") < 3) {
         Cartography.mapMonster($location`The Haunted Library`, $monster`writing desk`);

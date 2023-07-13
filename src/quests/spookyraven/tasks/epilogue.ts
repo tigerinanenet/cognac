@@ -4,7 +4,7 @@ import { $item, get, have } from "libram";
 
 import { basicEffects } from "../../../lib/effects";
 
-export function EpilogueTask(): Task {
+export function epilogueTask(): Task {
   return {
     name: "Give Lady Spookyraven Her Necklace",
     ready: () => have($item`Lady Spookyraven's necklace`),

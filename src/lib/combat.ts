@@ -29,7 +29,7 @@ export class Macro extends LibramMacro {
   }
 
   tryFreeRun(): Macro {
-    return Macro.externalIf(
+    return this.externalIf(
       !drunk(),
       Macro.trySkill($skill`Bowl a Curveball`).trySkill(
         $skill`Asdon Martin: Spring-Loaded Front Bumper`,
