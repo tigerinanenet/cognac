@@ -1,6 +1,6 @@
 import { Args, getTasks } from "grimoire-kolmafia";
 import { cliExecute, getClanId, myMeat } from "kolmafia";
-import { Clan, get } from "libram";
+import { Clan, get, set } from "libram";
 
 import * as CognacSession from "./lib/cognac";
 import { Engine } from "./lib/engine";
@@ -60,6 +60,7 @@ export function main(command?: string): void {
     engine.run();
   } finally {
     engine.destruct();
+    set(Properties.HEAP_ATTEMPTS, 0);
     new Gossip().destroy();
     Clan.join(startingClan);
     if (meatToCloset > 0) {

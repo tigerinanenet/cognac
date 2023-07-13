@@ -1,9 +1,9 @@
 import { Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
-import { get } from "libram";
+import { get, set } from "libram";
 
 import { Gossip } from "../../../lib/gossip";
-import { REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
+import { HEAP_ATTEMPTS, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
 
 export class Round {
   gossip: Gossip;
@@ -32,6 +32,8 @@ export class Round {
         name: "Wait",
         completed: () => this.gossip.getWaitTime() === 0,
         do: () => {
+          // New round, who dis?
+          set(HEAP_ATTEMPTS, 0);
           print("Waiting for next cognac round to begin");
           wait(this.gossip.getWaitTime());
         },
