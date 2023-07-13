@@ -8120,7 +8120,7 @@ var epilogue = function(gossip2) {
         limit: {
           guard: function() {
             return function() {
-              return get(HEAP_ATTEMPTS, 0) < 50;
+              return get(HEAP_ATTEMPTS, 0) < 60;
             };
           }
         }
@@ -8305,7 +8305,7 @@ var Round = /* @__PURE__ */ function() {
           return _this.gossip.getWaitTime() === 0;
         },
         do: function() {
-          (0, import_kolmafia32.print)("Waiting for next cognac round to begin"), (0, import_kolmafia32.wait)(_this.gossip.getWaitTime());
+          _set(HEAP_ATTEMPTS, 0), (0, import_kolmafia32.print)("Waiting for next cognac round to begin"), (0, import_kolmafia32.wait)(_this.gossip.getWaitTime());
         }
       }];
     }
@@ -9621,7 +9621,7 @@ function main(command) {
     var clan = get(CLAN);
     meatToCloset > 0 && (0, import_kolmafia50.cliExecute)("closet put ".concat(meatToCloset, " meat")), Clan.join(clan), engine.run();
   } finally {
-    engine.destruct(), new Gossip().destroy(), Clan.join(startingClan), meatToCloset > 0 && (0, import_kolmafia50.cliExecute)("closet take ".concat(meatToCloset, " meat")), save(), print4();
+    engine.destruct(), _set(HEAP_ATTEMPTS, 0), new Gossip().destroy(), Clan.join(startingClan), meatToCloset > 0 && (0, import_kolmafia50.cliExecute)("closet take ".concat(meatToCloset, " meat")), save(), print4();
   }
 }
 // Annotate the CommonJS export names for ESM import in node:
