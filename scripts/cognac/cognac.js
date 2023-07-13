@@ -12483,7 +12483,7 @@ var drunk = function() {
   }, {
     key: "tryFreeRun",
     value: function() {
-      return Macro3.externalIf(!drunk(), Macro3.trySkill($skill(_templateObject228 || (_templateObject228 = _taggedTemplateLiteral14(["Bowl a Curveball"])))).trySkill($skill(_templateObject320 || (_templateObject320 = _taggedTemplateLiteral14(["Asdon Martin: Spring-Loaded Front Bumper"]))))).runaway().repeat();
+      return this.externalIf(!drunk(), Macro3.trySkill($skill(_templateObject228 || (_templateObject228 = _taggedTemplateLiteral14(["Bowl a Curveball"])))).trySkill($skill(_templateObject320 || (_templateObject320 = _taggedTemplateLiteral14(["Asdon Martin: Spring-Loaded Front Bumper"]))))).runaway().repeat();
     }
   }, {
     key: "stasis",
@@ -13405,7 +13405,7 @@ function _arrayLikeToArray22(arr, len) {
 function _taggedTemplateLiteral26(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
-function BilliarTask() {
+function billiardsTask() {
   return {
     name: "Haunted Billiards Room",
     ready: function() {
@@ -13444,7 +13444,7 @@ var _templateObject121;
 function _taggedTemplateLiteral27(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
-function EpilogueTask() {
+function epilogueTask() {
   return {
     name: "Give Lady Spookyraven Her Necklace",
     ready: function() {
@@ -13567,25 +13567,24 @@ function _toPrimitive22(input, hint) {
 function _taggedTemplateLiteral29(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
-function LibraryTask() {
-  var combatStrat = new CombatStrategy().autoattack(Macro2.if_("monstername writing desk", Macro2.externalIf(have($skill(_templateObject130 || (_templateObject130 = _taggedTemplateLiteral29(["Transcendent Olfaction"])))) && get("olfactedMonster") !== $monster(_templateObject250 || (_templateObject250 = _taggedTemplateLiteral29(["writing desk"]))) && get("_olfactionsUsed") < 3, Macro2.skill($skill(_templateObject338 || (_templateObject338 = _taggedTemplateLiteral29(["Transcendent Olfaction"]))))).externalIf(have($skill(_templateObject429 || (_templateObject429 = _taggedTemplateLiteral29(["Gallapagosian Mating Call"])))) && get("_gallapagosMonster") !== $monster(_templateObject520 || (_templateObject520 = _taggedTemplateLiteral29(["writing desk"]))), Macro2.skill($skill(_templateObject617 || (_templateObject617 = _taggedTemplateLiteral29(["Gallapagosian Mating Call"]))))).skill($skill(_templateObject716 || (_templateObject716 = _taggedTemplateLiteral29(["Spit jurassic acid"]))))).trySkill($skill(_templateObject813 || (_templateObject813 = _taggedTemplateLiteral29(["Throw Latte on Opponent"])))).tryFreeRun());
+function libraryTask() {
   return {
     name: "Spit Acid in Library",
     ready: function() {
-      return have($item(_templateObject913 || (_templateObject913 = _taggedTemplateLiteral29(["Jurassic Parka"])))) && have($item(_templateObject1012 || (_templateObject1012 = _taggedTemplateLiteral29(["[7302]Spookyraven library key"])))) && questStep("questM20Necklace") < 4 && get("writingDesksDefeated") < 5;
+      return have($item(_templateObject130 || (_templateObject130 = _taggedTemplateLiteral29(["Jurassic Parka"])))) && have($item(_templateObject250 || (_templateObject250 = _taggedTemplateLiteral29(["[7302]Spookyraven library key"])))) && questStep("questM20Necklace") < 4 && get("writingDesksDefeated") < 5;
     },
     completed: function() {
-      return have($effect(_templateObject1111 || (_templateObject1111 = _taggedTemplateLiteral29(["Everything Looks Yellow"]))));
+      return have($effect(_templateObject338 || (_templateObject338 = _taggedTemplateLiteral29(["Everything Looks Yellow"]))));
     },
     effects: basicEffects,
     outfit: function() {
       return {
         equip: getEquipment(Object.values(_objectSpread7(_objectSpread7({}, defaultEquipment()), {}, {
-          shirt: $item(_templateObject1210 || (_templateObject1210 = _taggedTemplateLiteral29(["Jurassic Parka"]))),
-          "off-hand": $item(_templateObject138 || (_templateObject138 = _taggedTemplateLiteral29(["latte lovers member's mug"]))),
-          pants: $item(_templateObject147 || (_templateObject147 = _taggedTemplateLiteral29(["Greatest American Pants"])))
+          shirt: $item(_templateObject429 || (_templateObject429 = _taggedTemplateLiteral29(["Jurassic Parka"]))),
+          "off-hand": $item(_templateObject520 || (_templateObject520 = _taggedTemplateLiteral29(["latte lovers member's mug"]))),
+          pants: $item(_templateObject617 || (_templateObject617 = _taggedTemplateLiteral29(["Greatest American Pants"])))
         }))),
-        familiar: $familiar(_templateObject157 || (_templateObject157 = _taggedTemplateLiteral29(["none"])))
+        familiar: $familiar(_templateObject716 || (_templateObject716 = _taggedTemplateLiteral29(["none"])))
       };
     },
     choices: {
@@ -13601,7 +13600,9 @@ function LibraryTask() {
     prepare: function() {
       return (0, import_kolmafia40.cliExecute)("parka acid");
     },
-    combat: combatStrat,
+    combat: new CombatStrategy().autoattack(function() {
+      return Macro2.if_("monstername writing desk", Macro2.externalIf(have($skill(_templateObject813 || (_templateObject813 = _taggedTemplateLiteral29(["Transcendent Olfaction"])))) && get("olfactedMonster") !== $monster(_templateObject913 || (_templateObject913 = _taggedTemplateLiteral29(["writing desk"]))) && get("_olfactionsUsed") < 3, Macro2.skill($skill(_templateObject1012 || (_templateObject1012 = _taggedTemplateLiteral29(["Transcendent Olfaction"]))))).externalIf(have($skill(_templateObject1111 || (_templateObject1111 = _taggedTemplateLiteral29(["Gallapagosian Mating Call"])))) && get("_gallapagosMonster") !== $monster(_templateObject1210 || (_templateObject1210 = _taggedTemplateLiteral29(["writing desk"]))), Macro2.skill($skill(_templateObject138 || (_templateObject138 = _taggedTemplateLiteral29(["Gallapagosian Mating Call"]))))).skill($skill(_templateObject147 || (_templateObject147 = _taggedTemplateLiteral29(["Spit jurassic acid"]))))).trySkill($skill(_templateObject157 || (_templateObject157 = _taggedTemplateLiteral29(["Throw Latte on Opponent"])))).tryFreeRun();
+    }),
     do: function() {
       Cartography_exports.have() && get("_monstersMapped") < 3 ? Cartography_exports.mapMonster($location(_templateObject167 || (_templateObject167 = _taggedTemplateLiteral29(["The Haunted Library"]))), $monster(_templateObject177 || (_templateObject177 = _taggedTemplateLiteral29(["writing desk"])))) : (0, import_kolmafia40.adv1)($location(_templateObject187 || (_templateObject187 = _taggedTemplateLiteral29(["The Haunted Library"]))), -1, ""), (0, import_kolmafia40.visitUrl)("main.php?latte=1");
     },
@@ -13617,7 +13618,7 @@ var Spookyraven = {
   completed: function() {
     return (0, import_kolmafia41.myInebriety)() > (0, import_kolmafia41.inebrietyLimit)();
   },
-  tasks: [BilliarTask(), LibraryTask(), EpilogueTask()]
+  tasks: [billiardsTask(), libraryTask(), epilogueTask()]
 };
 
 // src/quests/townsquare/townsquare.ts
