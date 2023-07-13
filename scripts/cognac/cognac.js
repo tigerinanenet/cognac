@@ -12310,7 +12310,7 @@ var BASE_STENCH_REQUIRED = 8, Gossip = /* @__PURE__ */ function() {
   }, {
     key: "readyToDive",
     value: function() {
-      return this.stench >= BASE_STENCH_REQUIRED + this.requestingCompost.length;
+      return this.stench >= BASE_STENCH_REQUIRED + this.players.length + this.requestingCompost.length;
     }
   }, {
     key: "destroy",
