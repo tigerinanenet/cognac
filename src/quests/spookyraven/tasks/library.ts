@@ -22,9 +22,18 @@ export function LibraryTask(): Task {
   const combatStrat = new CombatStrategy().autoattack(
     Macro.if_(
       "monstername writing desk",
-      Macro.trySkill($skill`Transcendent Olfaction`, $skill`Gallapagosian Mating Call`).skill(
-        $skill`Spit jurassic acid`,
-      ),
+      Macro.externalIf(
+        have($skill`Transcendent Olfaction`) &&
+          get("olfactedMonster") !== $monster`writing desk` &&
+          get("_olfactionsUsed") < 3,
+        Macro.skill($skill`Transcendent Olfaction`),
+      )
+        .externalIf(
+          have($skill`Gallapagosian Mating Call`) &&
+            get("_gallapagosMonster") !== $monster`writing desk`,
+          Macro.skill($skill`Gallapagosian Mating Call`),
+        )
+        .skill($skill`Spit jurassic acid`),
     )
       .trySkill($skill`Throw Latte on Opponent`)
       .tryFreeRun(),
