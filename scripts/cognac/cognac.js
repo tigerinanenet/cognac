@@ -11977,37 +11977,39 @@ __export(properties_exports, {
   REFUSES_UNTIL_COMPOST: function() {
     return REFUSES_UNTIL_COMPOST;
   },
+  RESULTS_DAY: function() {
+    return RESULTS_DAY;
+  },
   SKIP_GARBO: function() {
     return SKIP_GARBO;
+  },
+  TURNS_SPENT: function() {
+    return TURNS_SPENT;
   }
 });
 init_kolmafia_polyfill();
 var SCRIPT_PREFIX = "cognac", prefix = function(prop) {
   return "".concat(SCRIPT_PREFIX, "_").concat(prop);
-}, privatize = function(prop) {
+}, daily = function(prop) {
   return "_".concat(prefix(prop));
-}, CLAN = prefix("clan"), ASDON = prefix("useAsdon"), SKIP_GARBO = prefix("skipGarbo"), REFUSES_UNTIL_COMPOST = privatize("choice216"), COGNACS = privatize("bottlesFound"), DIVES = privatize("dives"), HEAP_ATTEMPTS = privatize("heapAttempts"), CURRENT_PLAYERS = privatize("currentPlayers");
+}, CLAN = prefix("clan"), ASDON = prefix("useAsdon"), SKIP_GARBO = prefix("skipGarbo"), REFUSES_UNTIL_COMPOST = prefix("choice216"), RESULTS_DAY = prefix("resultsDay"), COGNACS = prefix("bottlesFoundToday"), DIVES = prefix("divesToday"), TURNS_SPENT = prefix("turnsSpentToday"), HEAP_ATTEMPTS = daily("heapAttempts"), CURRENT_PLAYERS = daily("currentPlayers");
 
 // src/lib/cognac.ts
 var _templateObject69;
 function _taggedTemplateLiteral11(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
-var session = Session.current();
-function printCognac() {
-  var cognacs = parseInt(get(COGNACS));
-  cognacs > 0 ? (0, import_kolmafia21.print)("You found ".concat(cognacs, " bottles of cognac today!"), "green") : (0, import_kolmafia21.print)("Didn't find any bottles of cognac this time. :(", "red");
-}
-function printDives() {
-  var divesStr = get(DIVES), dives = divesStr === "" ? 0 : parseInt(divesStr), s = dives === 1 ? "" : "s";
-  (0, import_kolmafia21.print)("You dove for treasure ".concat(dives, " time").concat(s, " today!"));
-}
+var initialSession = Session.current(), initialTurns = (0, import_kolmafia21.totalTurnsPlayed)();
 function save() {
-  var _sessionDiff$items$ge, sessionDiff = Session.current().diff(session), cognacs = (_sessionDiff$items$ge = sessionDiff.items.get($item(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral11(["Ralph IX cognac"]))))) !== null && _sessionDiff$items$ge !== void 0 ? _sessionDiff$items$ge : 0, cognacPref = get(COGNACS), cognacCount = cognacPref === "" ? 0 : parseInt(cognacPref);
-  _set(COGNACS, cognacCount + cognacs);
+  var _sessionDiff$items$ge, sessionDiff = Session.current().diff(initialSession), cognacs = (_sessionDiff$items$ge = sessionDiff.items.get($item(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral11(["Ralph IX cognac"]))))) !== null && _sessionDiff$items$ge !== void 0 ? _sessionDiff$items$ge : 0;
+  _set(COGNACS, get(COGNACS, 0) + cognacs), _set(TURNS_SPENT, (0, import_kolmafia21.totalTurnsPlayed)() - initialTurns);
 }
-function print4() {
-  (0, import_kolmafia21.print)("Cognac summary:"), (0, import_kolmafia21.print)(""), printCognac(), printDives();
+function printSession() {
+  (0, import_kolmafia21.print)("Cognac summary:"), (0, import_kolmafia21.print)("");
+  var cognacs = get(COGNACS, 0);
+  cognacs > 0 ? (0, import_kolmafia21.print)("You found ".concat(cognacs, " bottle").concat(cognacs !== 1 ? "s" : "", " of cognac today!"), "green") : (0, import_kolmafia21.print)("Haven't found any bottles of cognac yet today. :(", "red");
+  var dives = get(DIVES, 0), s = dives === 1 ? "" : "s";
+  (0, import_kolmafia21.print)("You dove for treasure ".concat(dives, " time").concat(s, " today!")), (0, import_kolmafia21.print)("You've spent ".concat(get(TURNS_SPENT), " turns diving today!"));
 }
 
 // src/lib/engine.ts
@@ -12333,6 +12335,13 @@ function showPreferences() {
 function prettyPrint(prop) {
   var propVal = get(prop), color = "black";
   propVal || (color = "gray"), (0, import_kolmafia25.print)("".concat(prop, ": ").concat(propVal), color);
+}
+function resetDailyPreference(trackingPreference) {
+  var today = (0, import_kolmafia25.todayToString)();
+  return get(trackingPreference, "") !== today ? (get(trackingPreference, today), !0) : !1;
+}
+function maybeResetDailyPreferences() {
+  resetDailyPreference(RESULTS_DAY) && (_set(TURNS_SPENT, 0), _set(COGNACS, 0), _set(DIVES, 0));
 }
 function checkGarbo() {
   get(SKIP_GARBO) || parseInt(get("garboEmbezzlerCount")) > 0 || (0, import_kolmafia25.userConfirm)("You have not yet run garbo. Are you sure you wish to proceed?") || (0, import_kolmafia25.abort)("Go bonk those embezzlers real good.");
@@ -14315,13 +14324,13 @@ function main(command) {
     showPreferences();
     return;
   }
-  checkGarbo(), checkClan();
+  checkGarbo(), checkClan(), maybeResetDailyPreferences();
   var cognacTasks = getTasks([Prologue, Wander, Spookyraven, Sewers(args.nocage), TownSquare, Cognac]), engine = new Engine2(cognacTasks), startingClan = (0, import_kolmafia50.getClanId)(), meatToCloset = (0, import_kolmafia50.myMeat)() > 1e6 ? (0, import_kolmafia50.myMeat)() - 1e6 : 0;
   try {
     var clan = get(CLAN);
     meatToCloset > 0 && (0, import_kolmafia50.cliExecute)("closet put ".concat(meatToCloset, " meat")), Clan.join(clan), engine.run();
   } finally {
-    engine.destruct(), _set(HEAP_ATTEMPTS, 0), new Gossip().destroy(), Clan.join(startingClan), meatToCloset > 0 && (0, import_kolmafia50.cliExecute)("closet take ".concat(meatToCloset, " meat")), save(), print4();
+    engine.destruct(), _set(HEAP_ATTEMPTS, 0), new Gossip().destroy(), Clan.join(startingClan), meatToCloset > 0 && (0, import_kolmafia50.cliExecute)("closet take ".concat(meatToCloset, " meat")), save(), printSession();
   }
 }
 // Annotate the CommonJS export names for ESM import in node:
