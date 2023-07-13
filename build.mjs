@@ -1,6 +1,7 @@
 /* eslint-env node */
 import { build, context } from "esbuild";
 import babel from "esbuild-plugin-babel";
+import copy from "esbuild-plugin-copy";
 import process from "process";
 
 const args = process.argv.slice(2);
@@ -28,8 +29,17 @@ const config = {
   platform: "node",
   target: "rhino1.7.14",
   external: ["kolmafia"],
-  plugins: [babel(), ...(doWatch ? [watchPlugin] : [])],
-  outdir: "KoLmafia/scripts/",
+  plugins: [
+    babel(),
+    ...(doWatch ? [watchPlugin] : []),
+    copy({
+      assets: {
+        from: "src/scripts/choice.ash",
+        to: ".",
+      },
+    }),
+  ],
+  outdir: "KoLmafia/scripts/cognac/",
   loader: { ".json": "text" },
   inject: ["./kolmafia-polyfill.js"],
   define: {
