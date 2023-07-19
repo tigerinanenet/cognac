@@ -12338,7 +12338,7 @@ function prettyPrint(prop) {
 }
 function resetDailyPreference(trackingPreference) {
   var today = (0, import_kolmafia25.todayToString)();
-  return get(trackingPreference, "") !== today ? (get(trackingPreference, today), !0) : !1;
+  return get(trackingPreference, "") !== today ? (_set(trackingPreference, today), !0) : !1;
 }
 function maybeResetDailyPreferences() {
   resetDailyPreference(RESULTS_DAY) && (_set(TURNS_SPENT, 0), _set(COGNACS, 0), _set(DIVES, 0));
