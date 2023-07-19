@@ -21,7 +21,7 @@ function prettyPrint(prop: string): void {
 export function resetDailyPreference(trackingPreference: string): boolean {
   const today = todayToString();
   if (get(trackingPreference, "") !== today) {
-    get(trackingPreference, today);
+    set(trackingPreference, today);
     return true;
   } else {
     return false;
