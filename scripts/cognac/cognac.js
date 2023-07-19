@@ -12002,7 +12002,7 @@ function _taggedTemplateLiteral11(strings, raw) {
 var initialSession = Session.current(), initialTurns = (0, import_kolmafia21.totalTurnsPlayed)();
 function save() {
   var _sessionDiff$items$ge, sessionDiff = Session.current().diff(initialSession), cognacs = (_sessionDiff$items$ge = sessionDiff.items.get($item(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral11(["Ralph IX cognac"]))))) !== null && _sessionDiff$items$ge !== void 0 ? _sessionDiff$items$ge : 0;
-  _set(COGNACS, get(COGNACS, 0) + cognacs), _set(TURNS_SPENT, (0, import_kolmafia21.totalTurnsPlayed)() - initialTurns);
+  _set(COGNACS, get(COGNACS, 0) + cognacs), _set(TURNS_SPENT, get(TURNS_SPENT, 0) + (0, import_kolmafia21.totalTurnsPlayed)() - initialTurns);
 }
 function printSession() {
   (0, import_kolmafia21.print)("Cognac summary:"), (0, import_kolmafia21.print)("");
