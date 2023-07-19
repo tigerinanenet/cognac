@@ -10,7 +10,7 @@ export function save(): void {
   const sessionDiff = Session.current().diff(initialSession);
   const cognacs = sessionDiff.items.get($item`Ralph IX cognac`) ?? 0;
   set(COGNACS, get(COGNACS, 0) + cognacs);
-  set(TURNS_SPENT, totalTurnsPlayed() - initialTurns);
+  set(TURNS_SPENT, get(TURNS_SPENT, 0) + totalTurnsPlayed() - initialTurns);
 }
 
 export function printSession(): void {
