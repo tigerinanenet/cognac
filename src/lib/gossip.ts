@@ -109,6 +109,13 @@ export class Gossip {
     this.updateGossip();
   }
 
+  setStench(stenchLevel: number): void {
+    this.claimMutex(0);
+    this.stench = stenchLevel;
+    this.write();
+    this.updateGossip();
+  }
+
   incrementStench(): void {
     this.claimMutex(0);
     this.stench++;

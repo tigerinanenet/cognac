@@ -3,7 +3,7 @@ import { print, wait } from "kolmafia";
 import { get, set } from "libram";
 
 import { Gossip } from "../../../lib/gossip";
-import { HEAP_ATTEMPTS, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
+import { HEAP_ATTEMPTS, LAST_STENCH_CHECK, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
 
 export class Round {
   gossip: Gossip;
@@ -34,6 +34,7 @@ export class Round {
         do: () => {
           // New round, who dis?
           set(HEAP_ATTEMPTS, 0);
+          set(LAST_STENCH_CHECK, 0);
           print("Waiting for next cognac round to begin");
           wait(this.gossip.getWaitTime());
         },
