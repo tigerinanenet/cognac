@@ -55,7 +55,7 @@ const familiar = () => {
 };
 
 const ambientStenchRe = () =>
-  /<p>The oppressive smell of the heaps of garbage around you makes you feel sort of sick.<center><table><tr><td><img[A-Za-z0-9=" ]+><\/td><td[A-Za-z0-9=" ]+>You lose ([0-9]+) hit points./g;
+  /<p>The oppressive smell of the heaps of garbage around you makes you feel sort of sick.<center><table><tr><td><img[A-Za-z0-9=":/. ]+><\/td><td[A-Za-z0-9=" ]+>You lose ([0-9]+) hit points./g;
 
 function mustCheckStench() {
   const nextStenchCheck = [30, 45, 59].find((attempts) => attempts > get(LAST_STENCH_CHECK, 0));
