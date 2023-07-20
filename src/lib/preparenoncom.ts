@@ -8,7 +8,7 @@ import {
   numericModifier,
   use,
 } from "kolmafia";
-import { $items, getModifier } from "libram";
+import { $items, getModifier, have } from "libram";
 
 type Info = { item: Item; modifier: number; duration: number; price: number };
 
@@ -19,6 +19,7 @@ const itemInfo: Info[] = [];
 for (const item of $items``) {
   const effect = effectModifier(item, "Effect");
   const modifier = -1 * getModifier("Combat Rate", effect);
+
   if (modifier <= 0) {
     continue;
   }
@@ -33,6 +34,7 @@ for (const item of $items``) {
   }
 
   const price = mallPrice(item);
+
   if (price / duration > EFFECTIVE_NC_VALUE) {
     continue;
   }
@@ -48,10 +50,10 @@ for (const item of $items``) {
 const byValue = (a: Info, b: Info): number => {
   const valA = value(a);
   const valB = value(b);
-  if (valA > valB) {
+  if (valA < valB) {
     return 1;
   }
-  if (valA < valB) {
+  if (valA > valB) {
     return -1;
   }
   return 0;
@@ -76,11 +78,16 @@ export function capNonCombat(): void {
     if (haveEffect(getModifier("Effect", item))) {
       continue;
     }
-    const bought = buy(
-      item,
-      1,
-      Math.min((EFFECTIVE_NC_VALUE * info.duration * info.modifier) / 5, 10000),
-    );
+
+    const maxPrice = Math.min((EFFECTIVE_NC_VALUE * info.duration * info.modifier) / 5, 10000);
+    if (info.price < maxPrice && have(item)) {
+      if (!use(item, 1)) {
+        throw `Failed to use item`;
+      }
+      continue;
+    }
+
+    const bought = buy(item, 1, maxPrice);
     if (bought > 1) {
       throw `Bought too many items.`;
     }

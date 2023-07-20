@@ -23,6 +23,7 @@ import {
   DIVES,
   HEAP_ATTEMPTS,
   LAST_STENCH_CHECK,
+  LIFETIME_DIVES,
   REFUSES_UNTIL_COMPOST,
 } from "../../../prefs/properties";
 
@@ -33,6 +34,7 @@ const epilogue = (gossip: Gossip) => {
     gossip.resetStench();
 
     set(DIVES, get(DIVES, 0) + 1);
+    set(LIFETIME_DIVES, get(LIFETIME_DIVES, 0) + 1);
     set(HEAP_ATTEMPTS, 0);
     set(LAST_STENCH_CHECK, 0);
     set(REFUSES_UNTIL_COMPOST, get(REFUSES_UNTIL_COMPOST, 0) - 1);
@@ -111,6 +113,7 @@ export class Heap {
         effects: [...basicEffects(), ...noncombatEffects()],
         combat: new CombatStrategy().autoattack(() =>
           Macro.trySkill($skill`Extract Jelly`)
+            .trySkill($skill`Extract`)
             .externalIf(
               mustCheckStench(),
               Macro.stasis()

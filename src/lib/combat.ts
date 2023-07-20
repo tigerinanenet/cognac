@@ -46,7 +46,8 @@ export class Macro extends LibramMacro {
   stasis(): Macro {
     return this.trySkill($skill`Curse of Weaksauce`)
       .trySkill($skill`Micrometeorite`)
-      .tryItemsTogether([$item`Time-Spinner`, $item`HOA citation pad`]);
+      .tryItemsTogether([$item`Time-Spinner`, $item`HOA citation pad`])
+      .trySkill($skill`Extract`);
   }
 
   static stasis(): Macro {

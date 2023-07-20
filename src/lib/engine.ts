@@ -24,5 +24,14 @@ export class Engine extends BaseEngine<never, Task> {
     choiceAdventureScript: "scripts/cognac/choice.ash",
     hpAutoRecovery: "0.5",
     hpAutoRecoveryTarget: "1.0",
+    choiceAdventure1467: "3",
+    choiceAdventure1468: "1",
+    choiceAdventure1469: "3",
+    choiceAdventure1470: "2",
+    choiceAdventure1471: "1",
+    choiceAdventure1472: "1",
+    choiceAdventure1473: "1",
+    choiceAdventure1474: "2",
+    choiceAdventure1475: "1",
   };
 }

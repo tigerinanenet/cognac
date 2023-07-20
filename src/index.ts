@@ -2,7 +2,7 @@ import { Args, getTasks } from "grimoire-kolmafia";
 import { cliExecute, getClanId, myMeat } from "kolmafia";
 import { Clan, get, set } from "libram";
 
-import * as CognacSession from "./lib/cognac";
+import * as CognacStats from "./lib/cognac";
 import { Engine } from "./lib/engine";
 import { Gossip } from "./lib/gossip";
 import { checkClan, checkGarbo, maybeResetDailyPreferences, showPreferences } from "./prefs/prefs";
@@ -19,6 +19,10 @@ const args = Args.create("Cognac", "Farming perscription strength alcohol since 
     help: "Show script configuration, and exit.",
     default: false,
   }),
+  stats: Args.flag({
+    help: "Show lifetime achievement awards in the field of cognac.",
+    default: false,
+  }),
   nocage: Args.flag({
     help: "Do not fetch cagebait.",
     default: false,
@@ -33,6 +37,10 @@ export function main(command?: string): void {
   }
   if (args.config) {
     showPreferences();
+    return;
+  }
+  if (args.stats) {
+    CognacStats.printLifetime();
     return;
   }
 
@@ -68,7 +76,7 @@ export function main(command?: string): void {
     if (meatToCloset > 0) {
       cliExecute(`closet take ${meatToCloset} meat`);
     }
-    CognacSession.save();
-    CognacSession.printSession();
+    CognacStats.save();
+    CognacStats.printSession();
   }
 }
