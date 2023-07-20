@@ -119,7 +119,7 @@ export class Heap {
               Macro.stasis()
                 .tryItem($item`Rain-Doh indigo cup`)
                 .tryItem($item`Rain-Doh blue balls`)
-                .while_("hpabove 400 && !pastround 20", Macro.item($item`seal tooth`)),
+                .while_("!hpbelow 400 && !pastround 20", Macro.item($item`seal tooth`)),
             )
             .tryFreeRun(),
         ),
