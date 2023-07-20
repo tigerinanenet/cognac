@@ -8,7 +8,12 @@ import { getEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
-import { DIVES, HEAP_ATTEMPTS, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
+import {
+  DIVES,
+  HEAP_ATTEMPTS,
+  LIFETIME_DIVES,
+  REFUSES_UNTIL_COMPOST,
+} from "../../../prefs/properties";
 
 const epilogue = (gossip: Gossip) => {
   set(HEAP_ATTEMPTS, get(HEAP_ATTEMPTS, 0) + 1);
@@ -17,6 +22,7 @@ const epilogue = (gossip: Gossip) => {
     gossip.resetStench();
 
     set(DIVES, get(DIVES, 0) + 1);
+    set(LIFETIME_DIVES, get(LIFETIME_DIVES, 0) + 1);
     set(HEAP_ATTEMPTS, 0);
     set(REFUSES_UNTIL_COMPOST, get(REFUSES_UNTIL_COMPOST, 0) - 1);
   } else if (get("lastEncounter") === "The Compostal Service" && gossip.willCompost()) {
@@ -48,7 +54,11 @@ export class Heap {
         completed: () => myAdventures() < 1,
         do: () => $location`The Heap`,
         effects: [...basicEffects(), ...noncombatEffects()],
-        combat: new CombatStrategy().autoattack(Macro.trySkill($skill`Extract Jelly`).tryFreeRun()),
+        combat: new CombatStrategy().autoattack(
+          Macro.trySkill($skill`Extract Jelly`)
+            .trySkill($skill`Extract`)
+            .tryFreeRun(),
+        ),
         prepare: () => {
           capNonCombat();
         },
