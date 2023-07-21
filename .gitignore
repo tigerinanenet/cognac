@@ -137,3 +137,4 @@ KoLmafia
 
 # more yarn
 .yarnrc.yml
+yarn.lock

@@ -3,13 +3,8 @@ import { $effects, $item, $location, have } from "libram";
 
 import { Macro } from "../../../lib/combat";
 import { noncombatEffects } from "../../../lib/effects";
-<<<<<<< HEAD
 import { getDefaultEquipment } from "../../../lib/equipment";
-import { noncombatFamiliar } from "../../../lib/familiar";
-=======
-import { getEquipment } from "../../../lib/equipment";
 import { runsOrNCFamiliar } from "../../../lib/familiar";
->>>>>>> banderboots
 
 export function billiardsTask(): Task {
   return {

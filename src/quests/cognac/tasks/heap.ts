@@ -1,23 +1,13 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
-<<<<<<< HEAD
-import { inebrietyLimit, myAdventures, myInebriety } from "kolmafia";
-import { $familiar, $location, $skill, get, have, set } from "libram";
-=======
 import { Familiar, inebrietyLimit, myAdventures, myInebriety } from "kolmafia";
-import { $familiar, $item, $location, $skill, get, have, set } from "libram";
->>>>>>> banderboots
+import { $familiar, $location, $skill, get, have, set } from "libram";
 
 
 
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
-<<<<<<< HEAD
 import { getDefaultEquipment } from "../../../lib/equipment";
-import { noncombatFamiliar } from "../../../lib/familiar";
-=======
-import { getEquipment } from "../../../lib/equipment";
 import {  runsOrNCFamiliar } from "../../../lib/familiar";
->>>>>>> banderboots
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
 import { DIVES, HEAP_ATTEMPTS, LIFETIME_DIVES, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
@@ -56,7 +46,7 @@ export function pickFamiliar(): Familiar {
     return $familiar`Space Jellyfish`;
   }
   return runsOrNCFamiliar();
-};
+}
 
 export class Heap {
   gossip: Gossip;
@@ -80,20 +70,10 @@ export class Heap {
           capNonCombat();
         },
         outfit: () => ({
-<<<<<<< HEAD
           equip: getDefaultEquipment(),
-          modifier: "-combat",
-          familiar: familiar(),
-=======
-          equip: getEquipment([
-            $item`June cleaver`,
-            $item`Greatest American Pants`,
-            $item`mafia thumb ring`,
-          ]),
           // Include familiar weight modifier if bander/boots is active, else just use -combat
           modifier: getModString(),
           familiar: pickFamiliar(),
->>>>>>> banderboots
         }),
         choices: {
           203: 2,
