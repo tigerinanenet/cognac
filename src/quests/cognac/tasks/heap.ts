@@ -29,7 +29,7 @@ import {
 
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
-import { getEquipment } from "../../../lib/equipment";
+import { getDefaultEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
@@ -150,11 +150,7 @@ export class Heap {
           capNonCombat();
         },
         outfit: () => ({
-          equip: getEquipment([
-            $item`June cleaver`,
-            $item`Greatest American Pants`,
-            $item`mafia thumb ring`,
-          ]),
+          equip: getDefaultEquipment(),
           modifier: mustCheckStench() ? "-combat, -2 stench resistance" : "-combat",
           familiar: familiar(),
         }),
