@@ -4,7 +4,7 @@ import { $effects, $item, $location, have } from "libram";
 import { Macro } from "../../../lib/combat";
 import { noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
-import { noncombatFamiliar } from "../../../lib/familiar";
+import { runsOrNCFamiliar } from "../../../lib/familiar";
 
 export function billiardsTask(): Task {
   return {
@@ -19,7 +19,7 @@ export function billiardsTask(): Task {
         $item`mafia thumb ring`,
       ]),
       modifier: "-combat",
-      familiar: noncombatFamiliar(),
+      familiar: runsOrNCFamiliar(),
     }),
     choices: {
       900: 2, // Lights Out

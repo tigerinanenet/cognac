@@ -1,19 +1,17 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
-import { inebrietyLimit, myAdventures, myInebriety } from "kolmafia";
+import { Familiar, inebrietyLimit, myAdventures, myInebriety } from "kolmafia";
 import { $familiar, $item, $location, $skill, get, have, set } from "libram";
+
+
 
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
-import { noncombatFamiliar } from "../../../lib/familiar";
+import {  runsOrNCFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
-import {
-  DIVES,
-  HEAP_ATTEMPTS,
-  LIFETIME_DIVES,
-  REFUSES_UNTIL_COMPOST,
-} from "../../../prefs/properties";
+import { DIVES, HEAP_ATTEMPTS, LIFETIME_DIVES, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
+
 
 const epilogue = (gossip: Gossip) => {
   set(HEAP_ATTEMPTS, get(HEAP_ATTEMPTS, 0) + 1);
@@ -34,11 +32,20 @@ const drunk = (): boolean => {
   return myInebriety() > inebrietyLimit();
 };
 
-const familiar = () => {
+
+export function getModString(): string {
+  if(runsOrNCFamiliar() === $familiar`Frumious Bandersnatch` || runsOrNCFamiliar() === $familiar`Pair of Stomping Boots` )
+  {
+    return "-combat, 0.25 familiar weight"; // This way 1 free run counts for slightly more than a softcapped combat-rate modifier
+  } else {
+    return "-combat";
+  }
+}
+export function pickFamiliar(): Familiar {
   if (!drunk() && have($familiar`Space Jellyfish`)) {
     return $familiar`Space Jellyfish`;
   }
-  return noncombatFamiliar();
+  return runsOrNCFamiliar();
 };
 
 export class Heap {
@@ -68,8 +75,9 @@ export class Heap {
             $item`Greatest American Pants`,
             $item`mafia thumb ring`,
           ]),
-          modifier: "-combat",
-          familiar: familiar(),
+          // Include familiar weight modifier if bander/boots is active, else just use -combat
+          modifier: getModString(),
+          familiar: pickFamiliar(),
         }),
         choices: {
           203: 2,

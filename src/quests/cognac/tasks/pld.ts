@@ -1,19 +1,31 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
-import { $item, $location, $skill, get } from "libram";
+import { $item, $location, $skill, get, $familiar } from "libram";
 
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
-import { noncombatFamiliar } from "../../../lib/familiar";
+import { runsOrNCFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
+
+
+export function getModString(): string {
+  if(runsOrNCFamiliar() === $familiar`Frumious Bandersnatch` || runsOrNCFamiliar() === $familiar`Pair of Stomping Boots` )
+  {
+    return "-combat, 0.25 familiar weight"; // This way 1 free run counts for slightly more than a softcapped combat-rate modifier
+  } else {
+    return "-combat";
+  }
+}
 
 export class PLD {
   gossip: Gossip;
   constructor(gossip: Gossip) {
     this.gossip = gossip;
   }
+
+
 
   getTasks(): Task[] {
     return [
@@ -40,8 +52,9 @@ export class PLD {
             $item`Greatest American Pants`,
             $item`mafia thumb ring`,
           ]),
-          modifier: "-combat",
-          familiar: noncombatFamiliar(),
+          // Include familiar weight modifier if bander/boots is active, else just use -combat
+          modifier: getModString(),
+          familiar: runsOrNCFamiliar(),
         }),
         choices: {
           205: 2,
