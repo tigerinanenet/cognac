@@ -1,13 +1,13 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
-import { $item, $location, $skill, get } from "libram";
-
+import { $location, $skill, get } from "libram";
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
-import { getEquipment } from "../../../lib/equipment";
+import { getDefaultEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
+
 
 export class PLD {
   gossip: Gossip;
@@ -35,11 +35,7 @@ export class PLD {
           capNonCombat();
         },
         outfit: () => ({
-          equip: getEquipment([
-            $item`June cleaver`,
-            $item`Greatest American Pants`,
-            $item`mafia thumb ring`,
-          ]),
+          equip: getDefaultEquipment(),
           modifier: "-combat",
           familiar: noncombatFamiliar(),
         }),

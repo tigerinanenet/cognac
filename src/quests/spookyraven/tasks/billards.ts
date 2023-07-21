@@ -1,10 +1,10 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { $effects, $item, $location, have } from "libram";
-
 import { Macro } from "../../../lib/combat";
 import { noncombatEffects } from "../../../lib/effects";
-import { getEquipment } from "../../../lib/equipment";
+import { getDefaultEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
+
 
 export function billiardsTask(): Task {
   return {
@@ -13,11 +13,7 @@ export function billiardsTask(): Task {
     completed: () => have($item`[7302]Spookyraven library key`),
     effects: () => [...noncombatEffects(), ...$effects`Chalky Hand, Influence of Sphere`],
     outfit: () => ({
-      equip: getEquipment([
-        $item`June cleaver`,
-        $item`Greatest American Pants`,
-        $item`mafia thumb ring`,
-      ]),
+      equip: getDefaultEquipment(),
       modifier: "-combat",
       familiar: noncombatFamiliar(),
     }),

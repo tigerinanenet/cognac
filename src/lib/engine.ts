@@ -33,5 +33,6 @@ export class Engine extends BaseEngine<never, Task> {
     choiceAdventure1473: "1",
     choiceAdventure1474: "2",
     choiceAdventure1475: "1",
+    afterAdventureScript: get("afterAdventureScript", "")
   };
 }

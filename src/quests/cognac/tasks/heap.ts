@@ -1,10 +1,9 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { inebrietyLimit, myAdventures, myInebriety } from "kolmafia";
-import { $familiar, $item, $location, $skill, get, have, set } from "libram";
-
+import { $familiar, $location, $skill, get, have, set } from "libram";
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
-import { getEquipment } from "../../../lib/equipment";
+import { getDefaultEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
@@ -12,8 +11,9 @@ import {
   DIVES,
   HEAP_ATTEMPTS,
   LIFETIME_DIVES,
-  REFUSES_UNTIL_COMPOST,
+  REFUSES_UNTIL_COMPOST
 } from "../../../prefs/properties";
+
 
 const epilogue = (gossip: Gossip) => {
   set(HEAP_ATTEMPTS, get(HEAP_ATTEMPTS, 0) + 1);
@@ -41,6 +41,7 @@ const familiar = () => {
   return noncombatFamiliar();
 };
 
+
 export class Heap {
   gossip: Gossip;
   constructor(gossip: Gossip) {
@@ -63,11 +64,7 @@ export class Heap {
           capNonCombat();
         },
         outfit: () => ({
-          equip: getEquipment([
-            $item`June cleaver`,
-            $item`Greatest American Pants`,
-            $item`mafia thumb ring`,
-          ]),
+          equip: getDefaultEquipment(),
           modifier: "-combat",
           familiar: familiar(),
         }),
