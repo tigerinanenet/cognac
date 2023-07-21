@@ -5,13 +5,27 @@ import {
   inebrietyLimit,
   myAdventures,
   myInebriety,
+  myMaxhp,
   print,
+  restoreHp,
   retrieveItem,
   runTurn,
   toUrl,
   visitUrl,
 } from "kolmafia";
-import { $element, $familiar, $item, $location, $skill, get, have, set } from "libram";
+import {
+  $effect,
+  $element,
+  $familiar,
+  $item,
+  $location,
+  $skill,
+  ensureEffect,
+  get,
+  have,
+  set,
+  uneffect,
+} from "libram";
 
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
@@ -82,7 +96,12 @@ export class Heap {
               )} attempts at diving without success - double-checking stench level.`,
               "blue",
             );
+
             retrieveItem($item`seal tooth`);
+            if (have($skill`Song of Starch`)) ensureEffect($effect`Song of Starch`);
+            if (have($skill`Get Big`)) ensureEffect($effect`Big`);
+            restoreHp(myMaxhp());
+
             const page = visitUrl(toUrl($location`The Heap`));
             if (page.includes("You're fighting")) {
               const re = ambientStenchRe();
@@ -106,6 +125,10 @@ export class Heap {
               }
             }
             runTurn();
+            // We try not to get beaten up, but it might happen.
+            if (have($effect`Beaten Up`)) {
+              uneffect($effect`Beaten Up`);
+            }
           } else {
             adv1($location`The Heap`, -1, "");
           }
