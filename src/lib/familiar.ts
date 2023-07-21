@@ -38,11 +38,14 @@ export function freeRunsFamiliar(): Familiar {
   }
 
   const chosen_fam: Familiar = pickFamiliar();
+  if(chosen_fam === $familiar`none`) {
+    return $familiar`none`;
+  }
 
   // Calculate total runs based on base weight + familiar weight modifiers
   const base_weight: number = familiarWeight(chosen_fam);
   const bonus_weight: number = numericModifier("Familiar Weight");
-  const familiar_total_runs: number = Math.round((base_weight + bonus_weight) / 5);
+  const familiar_total_runs: number = Math.floor((base_weight + bonus_weight) / 5);
   const available_runs = Math.max(familiar_total_runs - get(`_banderRunaways`, 0), 0);
   if(available_runs === 0) {
     return $familiar`none`;
