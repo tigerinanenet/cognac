@@ -1,7 +1,13 @@
 import { inebrietyLimit, Item, myInebriety } from "kolmafia";
-import { $item, have } from "libram";
+import { $item, get, have } from "libram";
 
-const defaultEquipment = [$item`June cleaver`, $item`mafia thumb ring`, $item`tiny stillsuit`];
+import { FREE_RUN } from "../prefs/properties";
+
+const defaultEquipment = [
+  $item`June cleaver`,
+  $item`tiny stillsuit`,
+  ...(get(FREE_RUN, false) ? [] : [$item`mafia thumb ring`]),
+];
 
 if (have($item`Greatest American Pants`)) {
   defaultEquipment.push($item`Greatest American Pants`);

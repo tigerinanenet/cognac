@@ -1,5 +1,7 @@
-import { Item, inebrietyLimit, myInebriety } from "kolmafia";
-import { $item, $skill, Macro as LibramMacro, have } from "libram";
+import { Item, inebrietyLimit, itemAmount, myInebriety } from "kolmafia";
+import { $item, $skill, Macro as LibramMacro, get, have } from "libram";
+
+import { FREE_RUN } from "../prefs/properties";
 
 const drunk = (): boolean => {
   return myInebriety() > inebrietyLimit();
@@ -28,6 +30,32 @@ export class Macro extends LibramMacro {
     return new Macro().tryItemsTogether(itemOrItems);
   }
 
+  itemWhileHave(item: Item) {
+    return this.externalIf(
+      itemAmount(item) % 2 === 1 && itemAmount(item) < 60,
+      Macro.item(item),
+    ).while_(`hascombatitem ${item}`, Macro.tryItemsTogether([item, item]));
+  }
+
+  static itemWhileHave(item: Item) {
+    return new Macro().itemWhileHave(item);
+  }
+
+  freeRunItems() {
+    return this.externalIf(
+      get(FREE_RUN, false),
+      Macro.tryItemsTogether([$item`Louder Than Bomb`, $item`tennis ball`])
+        .tryItem($item`divine champagne popper`)
+        .itemWhileHave($item`green smoke bomb`)
+        .itemWhileHave($item`tattered scrap of paper`)
+        .itemWhileHave($item`GOTO`),
+    );
+  }
+
+  static freeRunItems() {
+    return new Macro().freeRunItems();
+  }
+
   tryFreeRun(): Macro {
     return this.externalIf(
       !drunk(),
@@ -35,6 +63,7 @@ export class Macro extends LibramMacro {
         $skill`Asdon Martin: Spring-Loaded Front Bumper`,
       ),
     )
+      .freeRunItems()
       .runaway()
       .repeat();
   }
