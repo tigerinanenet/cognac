@@ -1,6 +1,7 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { inebrietyLimit, myAdventures, myInebriety } from "kolmafia";
 import { $familiar, $location, $skill, get, have, set } from "libram";
+
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getDefaultEquipment } from "../../../lib/equipment";
@@ -11,9 +12,8 @@ import {
   DIVES,
   HEAP_ATTEMPTS,
   LIFETIME_DIVES,
-  REFUSES_UNTIL_COMPOST
+  REFUSES_UNTIL_COMPOST,
 } from "../../../prefs/properties";
-
 
 const epilogue = (gossip: Gossip) => {
   set(HEAP_ATTEMPTS, get(HEAP_ATTEMPTS, 0) + 1);
@@ -40,7 +40,6 @@ const familiar = () => {
   }
   return noncombatFamiliar();
 };
-
 
 export class Heap {
   gossip: Gossip;

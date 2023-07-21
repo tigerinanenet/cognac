@@ -1,10 +1,10 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { $effects, $item, $location, have } from "libram";
+
 import { Macro } from "../../../lib/combat";
 import { noncombatEffects } from "../../../lib/effects";
 import { getDefaultEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
-
 
 export function billiardsTask(): Task {
   return {
