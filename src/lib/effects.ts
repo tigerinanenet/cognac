@@ -9,11 +9,11 @@ function filterHave(effects: Effect[]) {
 export function basicEffects(): Effect[] {
   if(noncombatFamiliar() === $familiar`Frumious Bandersnatch`) {
     return filterHave(
-      $effects`Leash of Linguini, Empathy, Blood Bond, Springy Fusilli, Cletus's Canticle of Celerity, Walberg's Dim Bulb, Ode to Booze`,
+      $effects`Leash of Linguini, Empathy, Blood Bond, Springy Fusilli, Cletus's Canticle of Celerity, Ode to Booze`,
       );
   } else {
     return filterHave(
-      $effects`Leash of Linguini, Empathy, Blood Bond, Springy Fusilli, Cletus's Canticle of Celerity, Walberg's Dim Bulb`,
+      $effects`Leash of Linguini, Empathy, Blood Bond, Springy Fusilli, Cletus's Canticle of Celerity, `
     );
   }
 }
