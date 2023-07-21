@@ -1,13 +1,32 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
+<<<<<<< HEAD
 import { $location, $skill, get } from "libram";
 
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getDefaultEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
+=======
+import { $item, $location, $skill, get, $familiar } from "libram";
+
+import { Macro } from "../../../lib/combat";
+import { basicEffects, noncombatEffects } from "../../../lib/effects";
+import { getEquipment } from "../../../lib/equipment";
+import { runsOrNCFamiliar } from "../../../lib/familiar";
+>>>>>>> banderboots
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
+
+
+export function getModString(): string {
+  if(runsOrNCFamiliar() === $familiar`Frumious Bandersnatch` || runsOrNCFamiliar() === $familiar`Pair of Stomping Boots` )
+  {
+    return "-combat, 0.25 familiar weight"; // This way 1 free run counts for slightly more than a softcapped combat-rate modifier
+  } else {
+    return "-combat";
+  }
+}
 
 export class PLD {
   gossip: Gossip;
@@ -35,9 +54,20 @@ export class PLD {
           capNonCombat();
         },
         outfit: () => ({
+<<<<<<< HEAD
           equip: getDefaultEquipment(),
           modifier: "-combat",
           familiar: noncombatFamiliar(),
+=======
+          equip: getEquipment([
+            $item`June cleaver`,
+            $item`Greatest American Pants`,
+            $item`mafia thumb ring`,
+          ]),
+          // Include familiar weight modifier if bander/boots is active, else just use -combat
+          modifier: getModString(),
+          familiar: runsOrNCFamiliar(),
+>>>>>>> banderboots
         }),
         choices: {
           205: 2,
