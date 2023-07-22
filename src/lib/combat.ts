@@ -31,9 +31,9 @@ export class Macro extends LibramMacro {
   tryFreeRun(): Macro {
     return this.externalIf(
       !drunk(),
-      Macro.trySkill($skill`Bowl a Curveball`).trySkill(
-        $skill`Asdon Martin: Spring-Loaded Front Bumper`,
-      ),
+      Macro.trySkill($skill`Extract`)
+        .trySkill($skill`Bowl a Curveball`)
+        .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`),
     )
       .runaway()
       .repeat();

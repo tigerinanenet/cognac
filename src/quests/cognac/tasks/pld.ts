@@ -1,6 +1,6 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { print, wait } from "kolmafia";
-import { $location, $skill, get, $familiar } from "libram";
+import { $location, get, $familiar } from "libram";
 
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
@@ -42,7 +42,7 @@ export class PLD {
         completed: () => this.gossip.readyToDive(),
         do: () => $location`The Purple Light District`,
         effects: [...basicEffects(), ...noncombatEffects()],
-        combat: new CombatStrategy().autoattack(Macro.trySkill($skill`Extract`).tryFreeRun()),
+        combat: new CombatStrategy().autoattack(Macro.tryFreeRun()),
         prepare: () => {
           capNonCombat();
         },
