@@ -1,19 +1,7 @@
 import { inebrietyLimit, Item, myInebriety } from "kolmafia";
-import { $item, get, have } from "libram";
+import { $item, have } from "libram";
 
-import { FREE_RUN } from "../prefs/properties";
-
-const defaultEquipment = [
-  $item`June cleaver`,
-  $item`tiny stillsuit`,
-  ...(get(FREE_RUN, false) ? [] : [$item`mafia thumb ring`]),
-];
-
-if (have($item`Greatest American Pants`)) {
-  defaultEquipment.push($item`Greatest American Pants`);
-} else if (have($item`navel ring of navel gazing`)) {
-  defaultEquipment.push($item`navel ring of navel gazing`);
-}
+import { freeRunItemAvailable, shouldUseFreeRunItem } from "./freeRun";
 
 function appendWineglass(equips: Item[]): void {
   if (!have($item`Drunkula's wineglass`)) {
@@ -31,5 +19,17 @@ export function getEquipment(equips: Item[]): Item[] {
 }
 
 export function getDefaultEquipment() {
+  const defaultEquipment = [
+    $item`June cleaver`,
+    $item`tiny stillsuit`,
+    ...(freeRunItemAvailable() && shouldUseFreeRunItem() ? [] : [$item`mafia thumb ring`]),
+  ];
+
+  if (have($item`Greatest American Pants`) && !(freeRunItemAvailable() && shouldUseFreeRunItem())) {
+    defaultEquipment.push($item`Greatest American Pants`);
+  } else if (have($item`navel ring of navel gazing`)) {
+    defaultEquipment.push($item`navel ring of navel gazing`);
+  }
+
   return getEquipment(defaultEquipment);
 }

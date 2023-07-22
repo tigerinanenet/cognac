@@ -1,7 +1,7 @@
 import { Item, inebrietyLimit, itemAmount, myInebriety } from "kolmafia";
-import { $item, $skill, Macro as LibramMacro, get, have } from "libram";
+import { $item, $skill, Macro as LibramMacro, have } from "libram";
 
-import { FREE_RUN } from "../prefs/properties";
+import { shouldUseFreeRunItem } from "./freeRun";
 
 const drunk = (): boolean => {
   return myInebriety() > inebrietyLimit();
@@ -41,9 +41,9 @@ export class Macro extends LibramMacro {
     return new Macro().itemWhileHave(item);
   }
 
-  freeRunItems() {
+  maybeFreeRunItems() {
     return this.externalIf(
-      get(FREE_RUN, false),
+      shouldUseFreeRunItem(),
       Macro.tryItemsTogether([$item`Louder Than Bomb`, $item`tennis ball`])
         .tryItem($item`divine champagne popper`)
         .itemWhileHave($item`green smoke bomb`)
@@ -53,7 +53,7 @@ export class Macro extends LibramMacro {
   }
 
   static freeRunItems() {
-    return new Macro().freeRunItems();
+    return new Macro().maybeFreeRunItems();
   }
 
   tryFreeRun(): Macro {
@@ -62,7 +62,7 @@ export class Macro extends LibramMacro {
       Macro.trySkill($skill`Extract`)
         .trySkill($skill`Bowl a Curveball`)
         .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
-        .freeRunItems(),
+        .maybeFreeRunItems(),
     )
       .runaway()
       .repeat();

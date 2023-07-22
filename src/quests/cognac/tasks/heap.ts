@@ -2,9 +2,7 @@ import { CombatStrategy, Task } from "grimoire-kolmafia";
 import {
   adv1,
   elementalResistance,
-  inebrietyLimit,
   myAdventures,
-  myInebriety,
   myMaxhp,
   print,
   restoreHp,
@@ -28,6 +26,7 @@ import {
 } from "libram";
 
 import { Macro } from "../../../lib/combat";
+import { drunk } from "../../../lib/drunk";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getDefaultEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
@@ -55,10 +54,6 @@ const epilogue = (gossip: Gossip) => {
   } else if (get("lastEncounter") === "The Compostal Service" && gossip.willCompost()) {
     set(REFUSES_UNTIL_COMPOST, 5);
   }
-};
-
-const drunk = (): boolean => {
-  return myInebriety() > inebrietyLimit();
 };
 
 const familiar = () => {
