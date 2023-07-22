@@ -19,16 +19,15 @@ export function getEquipment(equips: Item[]): Item[] {
 }
 
 export function getDefaultEquipment() {
-  const defaultEquipment = [
-    $item`June cleaver`,
-    $item`tiny stillsuit`,
-    ...(freeRunItemAvailable() && shouldUseFreeRunItem() ? [] : [$item`mafia thumb ring`]),
-  ];
+  const defaultEquipment = [$item`June cleaver`, $item`tiny stillsuit`];
 
-  if (have($item`Greatest American Pants`) && !(freeRunItemAvailable() && shouldUseFreeRunItem())) {
-    defaultEquipment.push($item`Greatest American Pants`);
-  } else if (have($item`navel ring of navel gazing`)) {
-    defaultEquipment.push($item`navel ring of navel gazing`);
+  if (!(freeRunItemAvailable() && shouldUseFreeRunItem())) {
+    defaultEquipment.push($item`mafia thumb ring`);
+    if (have($item`Greatest American Pants`)) {
+      defaultEquipment.push($item`Greatest American Pants`);
+    } else if (have($item`navel ring of navel gazing`)) {
+      defaultEquipment.push($item`navel ring of navel gazing`);
+    }
   }
 
   return getEquipment(defaultEquipment);
