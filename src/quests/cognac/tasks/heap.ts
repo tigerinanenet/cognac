@@ -73,7 +73,7 @@ const ambientStenchRe = () =>
 
 function mustCheckStench() {
   const nextStenchCheck = [30, 45, 59].find((attempts) => attempts > get(LAST_STENCH_CHECK, 0));
-  return nextStenchCheck !== undefined && get(HEAP_ATTEMPTS, 0) >= nextStenchCheck;
+  return !drunk() && nextStenchCheck !== undefined && get(HEAP_ATTEMPTS, 0) >= nextStenchCheck;
 }
 
 export class Heap {
