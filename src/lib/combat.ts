@@ -51,7 +51,7 @@ export class Macro extends LibramMacro {
       !drunk(),
       // Only delevel if we have a chance of dying, to speed up combat
       Macro.externalIf(
-        myBuffedstat($stat`Moxie`) + 10 < monsterAttack($monster`Stench Hobo`),
+        myBuffedstat($stat`Moxie`) + 10 < monsterAttack($monster`Stench hobo`),
         Macro.tryDelevelStun(),
       )
         .trySkill($skill`Extract`)
