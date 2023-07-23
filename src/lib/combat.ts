@@ -1,19 +1,5 @@
-import {
-  Item,
-  inebrietyLimit,
-  myBuffedStat,
-  monsterAttack,
-  myInebriety,
-} from "kolmafia";
-import {
-  $item,
-  #monster,
-  $skill,
-  $stat,
-  Macro as LibramMacro,
-  have,
-  SongBoom,
-} from "libram";
+import { Item, inebrietyLimit, monsterAttack, myBuffedstat, myInebriety } from "kolmafia";
+import { $item, $monster, $skill, $stat, Macro as LibramMacro, SongBoom, have } from "libram";
 
 const drunk = (): boolean => {
   return myInebriety() > inebrietyLimit();
@@ -43,18 +29,17 @@ export class Macro extends LibramMacro {
   }
 
   tryDelevelStun(): Macro {
-    this.trySkill($skill`Curse of Weaksauce`)
-      .trySkill($skill`Micrometeorite`)
-      .tryItemsTogether([$item`Time-Spinner`, $item`HOA citation pad`])
-      .tryItemsTogether([
-        $item`Rain-Doh blue balls`,
-        $item`Rain-Doh indigo cup`,
-      ])
-      .tryItemsTogether([$item`train whistle`, $item`little red book`])
-      // requires arms or will abort
-      .if_($monster`Normal hobo`, Macro.tryItem($skill`El Vibrato restraints`))
-      .if_($monster`Stench hobo`, Macro.tryItem($skill`El Vibrato restraints`))
-      .if_($monster`Sleaze hobo`, Macro.tryItem($skill`El Vibrato restraints`));
+    return (
+      this.trySkill($skill`Curse of Weaksauce`)
+        .trySkill($skill`Micrometeorite`)
+        .tryItemsTogether([$item`Time-Spinner`, $item`HOA citation pad`])
+        .tryItemsTogether([$item`Rain-Doh blue balls`, $item`Rain-Doh indigo cup`])
+        .tryItemsTogether([$item`train whistle`, $item`little red book`])
+        // requires arms or will abort
+        .if_($monster`Normal hobo`, Macro.tryItem($item`El Vibrato restraints`))
+        .if_($monster`Stench hobo`, Macro.tryItem($item`El Vibrato restraints`))
+        .if_($monster`Sleaze hobo`, Macro.tryItem($item`El Vibrato restraints`))
+    );
   }
 
   static tryDelevelStun(): Macro {
@@ -66,13 +51,13 @@ export class Macro extends LibramMacro {
       !drunk(),
       // Only delevel if we have a chance of dying, to speed up combat
       Macro.externalIf(
-        myBuffedStat($stat`Moxie`) + 10 < monsterAttack($monster`Stench Hobo`),
-        Macro.tryDelevelStun()
+        myBuffedstat($stat`Moxie`) + 10 < monsterAttack($monster`Stench Hobo`),
+        Macro.tryDelevelStun(),
       )
         .trySkill($skill`Extract`)
         .tryItem($item`porquoise-handled sixgun`)
         .trySkill($skill`Bowl a Curveball`)
-        .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
+        .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`),
     )
       .runaway()
       .repeat();
@@ -83,9 +68,8 @@ export class Macro extends LibramMacro {
   }
 
   trySingAlong(): Macro {
-    if (!SongBoom.have() || SongBoom.song() !== "Total Eclipse of Your Meat")
-      return this;
-    return this.tryHaveSkill($skill`Sing Along`);
+    if (!SongBoom.have() || SongBoom.song() !== "Total Eclipse of Your Meat") return this;
+    return this.trySkill($skill`Sing Along`);
   }
 
   static trySingAlong(): Macro {
