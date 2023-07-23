@@ -79,8 +79,7 @@ export class Macro extends LibramMacro {
   stasis(): Macro {
     return this.tryDelevelStun()
       .tryItem($item`porquoise-handled sixgun`)
-      .trySkill($skill`Extract`)
-      .trySingAlong();
+      .trySkill($skill`Extract`);
   }
 
   static stasis(): Macro {
@@ -88,12 +87,7 @@ export class Macro extends LibramMacro {
   }
 
   attackKill(): Macro {
-    return this.stasis()
-      .tryItem($item`porquoise-handled sixgun`)
-      .trySkill($skill`Extract`)
-      .trySingAlong()
-      .attack()
-      .repeat();
+    return this.stasis().trySingAlong().attack().repeat();
   }
 
   static attackKill(): Macro {
@@ -102,6 +96,7 @@ export class Macro extends LibramMacro {
 
   mortarShell(): Macro {
     return this.stasis()
+      .trySingAlong()
       .trySkill($skill`Stuffed Mortar Shell`)
       .tryItem($item`seal tooth`)
       .attack() // Mortar shell should finish the fight but just in-case
