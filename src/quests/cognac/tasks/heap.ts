@@ -130,8 +130,10 @@ export class Heap {
         },
         effects: [...basicEffects(), ...noncombatEffects()],
         combat: new CombatStrategy().autoattack(() =>
-          Macro.trySkill($skill`Extract Jelly`)
-            .trySkill($skill`Extract`)
+          Macro.externalIf(
+            !drunk(),
+            Macro.trySkill($skill`Extract Jelly`).trySkill($skill`Extract`),
+          )
             .externalIf(
               mustCheckStench(),
               Macro.stasis()
