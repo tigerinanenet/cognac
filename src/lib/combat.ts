@@ -1,5 +1,5 @@
-import { Item, inebrietyLimit, monsterAttack, myBuffedstat, myInebriety } from "kolmafia";
-import { $item, $monster, $skill, $stat, Macro as LibramMacro, SongBoom, have } from "libram";
+import { Item, inebrietyLimit, myInebriety } from "kolmafia";
+import { $item, $monster, $skill, Macro as LibramMacro, SongBoom, have } from "libram";
 
 const drunk = (): boolean => {
   return myInebriety() > inebrietyLimit();
@@ -50,10 +50,7 @@ export class Macro extends LibramMacro {
     return this.externalIf(
       !drunk(),
       // Only delevel if we have a chance of dying, to speed up combat
-      Macro.externalIf(
-        myBuffedstat($stat`Moxie`) + 10 < monsterAttack($monster`Stench hobo`),
-        Macro.tryDelevelStun(),
-      )
+      Macro.tryItemsTogether([$item`Rain-Doh blue balls`, $item`Rain-Doh indigo cup`])
         .trySkill($skill`Extract`)
         .tryItem($item`porquoise-handled sixgun`)
         .trySkill($skill`Bowl a Curveball`)
