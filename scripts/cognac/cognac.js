@@ -12575,7 +12575,7 @@ var drunk = function() {
       return this.externalIf(
         !drunk(),
         // Only delevel if we have a chance of dying, to speed up combat
-        Macro3.externalIf((0, import_kolmafia27.myBuffedstat)($stat(_templateObject167 || (_templateObject167 = _taggedTemplateLiteral15(["Moxie"])))) + 10 < (0, import_kolmafia27.monsterAttack)($monster(_templateObject177 || (_templateObject177 = _taggedTemplateLiteral15(["Stench hobo"])))), Macro3.tryDelevelStun()).trySkill($skill(_templateObject187 || (_templateObject187 = _taggedTemplateLiteral15(["Extract"])))).tryItem($item(_templateObject197 || (_templateObject197 = _taggedTemplateLiteral15(["porquoise-handled sixgun"])))).trySkill($skill(_templateObject207 || (_templateObject207 = _taggedTemplateLiteral15(["Bowl a Curveball"])))).trySkill($skill(_templateObject2112 || (_templateObject2112 = _taggedTemplateLiteral15(["Asdon Martin: Spring-Loaded Front Bumper"]))))
+        Macro3.tryItemsTogether([$item(_templateObject167 || (_templateObject167 = _taggedTemplateLiteral15(["Rain-Doh blue balls"]))), $item(_templateObject177 || (_templateObject177 = _taggedTemplateLiteral15(["Rain-Doh indigo cup"])))]).trySkill($skill(_templateObject187 || (_templateObject187 = _taggedTemplateLiteral15(["Extract"])))).tryItem($item(_templateObject197 || (_templateObject197 = _taggedTemplateLiteral15(["porquoise-handled sixgun"])))).trySkill($skill(_templateObject207 || (_templateObject207 = _taggedTemplateLiteral15(["Bowl a Curveball"])))).trySkill($skill(_templateObject2112 || (_templateObject2112 = _taggedTemplateLiteral15(["Asdon Martin: Spring-Loaded Front Bumper"]))))
       ).runaway().repeat();
     }
   }, {
