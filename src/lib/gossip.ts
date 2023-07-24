@@ -116,13 +116,6 @@ export class Gossip {
     this.updateGossip();
   }
 
-  incrementStench(): void {
-    this.claimMutex(0);
-    this.stench++;
-    this.write();
-    this.updateGossip();
-  }
-
   resetStench(): void {
     const applyUpdate = this.claimMutex(0, () => gametimeToInt() < this.diveStart);
     if (!applyUpdate) {

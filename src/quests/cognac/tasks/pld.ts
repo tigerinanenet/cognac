@@ -8,6 +8,7 @@ import { getDefaultEquipment } from "../../../lib/equipment";
 import { noncombatFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
 import { capNonCombat } from "../../../lib/preparenoncom";
+import { CURRENT_STENCH } from "../../../prefs/properties";
 
 export class PLD {
   gossip: Gossip;
@@ -48,8 +49,7 @@ export class PLD {
         },
         post: () => {
           if (get("lastEncounter") === "The Furtivity of My City") {
-            this.gossip.incrementStench();
-            print(`Stench level increased to ${this.gossip.stench}.`);
+            print(`Stench level increased to ${get(CURRENT_STENCH)}.`);
           }
         },
       },
