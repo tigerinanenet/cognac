@@ -47,7 +47,7 @@ export class Gossip {
       return false;
     }
 
-    if (retries > 50) {
+    if (retries > 100) {
       throw `Could not claim whiteboard mutex`;
     }
     if (this.mutex === myName()) {
