@@ -35,7 +35,7 @@ export function libraryTask(): Task {
           shirt: $item`Jurassic Parka`,
           "off-hand": $item`latte lovers member's mug`,
           pants: $item`Greatest American Pants`,
-        }),
+        })
       ),
       familiar: $familiar`none`,
     }),
@@ -53,17 +53,18 @@ export function libraryTask(): Task {
           have($skill`Transcendent Olfaction`) &&
             get("olfactedMonster") !== $monster`writing desk` &&
             get("_olfactionsUsed") < 3,
-          Macro.skill($skill`Transcendent Olfaction`),
+          Macro.skill($skill`Transcendent Olfaction`)
         )
           .externalIf(
             have($skill`Gallapagosian Mating Call`) &&
               get("_gallapagosMonster") !== $monster`writing desk`,
-            Macro.skill($skill`Gallapagosian Mating Call`),
+            Macro.skill($skill`Gallapagosian Mating Call`)
           )
-          .skill($skill`Spit jurassic acid`),
+          .skill($skill`Spit jurassic acid`)
       )
         .trySkill($skill`Throw Latte on Opponent`)
-        .tryFreeRun(),
+        .runaway()
+        .repeat()
     ),
     do: () => {
       if (Cartography.have() && get("_monstersMapped") < 3) {
