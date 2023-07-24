@@ -46,7 +46,7 @@ jobs:
   push:
     runs-on: ubuntu-latest
     needs: [test, lint]
-    if: github.ref == 'refs/heads/tatter'
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3
 
