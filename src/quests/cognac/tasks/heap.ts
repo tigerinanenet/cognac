@@ -2,17 +2,19 @@ import { CombatStrategy, Task } from "grimoire-kolmafia";
 import { Familiar, inebrietyLimit, myAdventures, myInebriety } from "kolmafia";
 import { $familiar, $location, $skill, get, have, set } from "libram";
 
-
-
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getDefaultEquipment } from "../../../lib/equipment";
-import {  runsOrNCFamiliar } from "../../../lib/familiar";
-import { getModString } from "../../../lib/modifiers";
+import { runsOrNCFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
+import { getModString } from "../../../lib/modifiers";
 import { capNonCombat } from "../../../lib/preparenoncom";
-import { DIVES, HEAP_ATTEMPTS, LIFETIME_DIVES, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
-
+import {
+  DIVES,
+  HEAP_ATTEMPTS,
+  LIFETIME_DIVES,
+  REFUSES_UNTIL_COMPOST,
+} from "../../../prefs/properties";
 
 const epilogue = (gossip: Gossip) => {
   set(HEAP_ATTEMPTS, get(HEAP_ATTEMPTS, 0) + 1);
@@ -32,7 +34,6 @@ const epilogue = (gossip: Gossip) => {
 const drunk = (): boolean => {
   return myInebriety() > inebrietyLimit();
 };
-
 
 export function pickFamiliar(): Familiar {
   if (!drunk() && have($familiar`Space Jellyfish`)) {
