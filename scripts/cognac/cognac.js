@@ -13569,7 +13569,7 @@ function billiardsTask() {
       1436: 2
       // Maps: go straight to hustle
     },
-    combat: new CombatStrategy().autoattack(Macro2.tryFreeRun()),
+    combat: new CombatStrategy().autoattack(Macro2.runaway().repeat()),
     do: $location(_templateObject427 || (_templateObject427 = _taggedTemplateLiteral28(["The Haunted Billiards Room"])))
   };
 }
@@ -13738,7 +13738,7 @@ function libraryTask() {
       return (0, import_kolmafia41.cliExecute)("parka acid");
     },
     combat: new CombatStrategy().autoattack(function() {
-      return Macro2.if_("monstername writing desk", Macro2.externalIf(have($skill(_templateObject813 || (_templateObject813 = _taggedTemplateLiteral31(["Transcendent Olfaction"])))) && get("olfactedMonster") !== $monster(_templateObject914 || (_templateObject914 = _taggedTemplateLiteral31(["writing desk"]))) && get("_olfactionsUsed") < 3, Macro2.skill($skill(_templateObject1012 || (_templateObject1012 = _taggedTemplateLiteral31(["Transcendent Olfaction"]))))).externalIf(have($skill(_templateObject1112 || (_templateObject1112 = _taggedTemplateLiteral31(["Gallapagosian Mating Call"])))) && get("_gallapagosMonster") !== $monster(_templateObject1210 || (_templateObject1210 = _taggedTemplateLiteral31(["writing desk"]))), Macro2.skill($skill(_templateObject1310 || (_templateObject1310 = _taggedTemplateLiteral31(["Gallapagosian Mating Call"]))))).skill($skill(_templateObject148 || (_templateObject148 = _taggedTemplateLiteral31(["Spit jurassic acid"]))))).trySkill($skill(_templateObject158 || (_templateObject158 = _taggedTemplateLiteral31(["Throw Latte on Opponent"])))).tryFreeRun();
+      return Macro2.if_("monstername writing desk", Macro2.externalIf(have($skill(_templateObject813 || (_templateObject813 = _taggedTemplateLiteral31(["Transcendent Olfaction"])))) && get("olfactedMonster") !== $monster(_templateObject914 || (_templateObject914 = _taggedTemplateLiteral31(["writing desk"]))) && get("_olfactionsUsed") < 3, Macro2.skill($skill(_templateObject1012 || (_templateObject1012 = _taggedTemplateLiteral31(["Transcendent Olfaction"]))))).externalIf(have($skill(_templateObject1112 || (_templateObject1112 = _taggedTemplateLiteral31(["Gallapagosian Mating Call"])))) && get("_gallapagosMonster") !== $monster(_templateObject1210 || (_templateObject1210 = _taggedTemplateLiteral31(["writing desk"]))), Macro2.skill($skill(_templateObject1310 || (_templateObject1310 = _taggedTemplateLiteral31(["Gallapagosian Mating Call"]))))).skill($skill(_templateObject148 || (_templateObject148 = _taggedTemplateLiteral31(["Spit jurassic acid"]))))).trySkill($skill(_templateObject158 || (_templateObject158 = _taggedTemplateLiteral31(["Throw Latte on Opponent"])))).runaway().repeat();
     }),
     do: function() {
       Cartography_exports.have() && get("_monstersMapped") < 3 ? Cartography_exports.mapMonster($location(_templateObject168 || (_templateObject168 = _taggedTemplateLiteral31(["The Haunted Library"]))), $monster(_templateObject178 || (_templateObject178 = _taggedTemplateLiteral31(["writing desk"])))) : (0, import_kolmafia41.adv1)($location(_templateObject188 || (_templateObject188 = _taggedTemplateLiteral31(["The Haunted Library"]))), -1, ""), (0, import_kolmafia41.visitUrl)("main.php?latte=1");
