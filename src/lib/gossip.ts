@@ -80,6 +80,10 @@ export class Gossip {
     this.players = gossip.players || [];
     this.requestingCompost = gossip.requestingCompost || [];
     this.stench = gossip.stench || 0;
+    // if at start of run, set initial stench level to what is on whiteboard
+    if (get(CURRENT_STENCH) === "") {
+      set(CURRENT_STENCH, this.stench);
+    }
     const heapStench = parseInt(get(CURRENT_STENCH)) || 0;
     if (heapStench !== this.stench) {
       print(

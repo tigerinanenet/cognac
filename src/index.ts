@@ -5,7 +5,13 @@ import { Clan, get, set } from "libram";
 import * as CognacStats from "./lib/cognac";
 import { Engine } from "./lib/engine";
 import { Gossip } from "./lib/gossip";
-import { checkClan, checkGarbo, maybeResetDailyPreferences, showPreferences } from "./prefs/prefs";
+import {
+  checkClan,
+  checkGarbo,
+  maybeResetDailyPreferences,
+  resetSessionPreferences,
+  showPreferences,
+} from "./prefs/prefs";
 import * as Properties from "./prefs/properties";
 import { Cognac } from "./quests/cognac/cognac";
 import { Prologue } from "./quests/prologue/prologue";
@@ -47,6 +53,7 @@ export function main(command?: string): void {
   checkGarbo();
   checkClan();
   maybeResetDailyPreferences();
+  resetSessionPreferences();
 
   const cognacTasks = getTasks([
     Prologue,
