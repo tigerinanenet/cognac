@@ -38,6 +38,12 @@ const config = {
         to: ".",
       },
     }),
+    copy({
+      assets: {
+        from: "src/scripts/stenchtracker.js",
+        to: ".",
+      },
+    }),
   ],
   outdir: "KoLmafia/scripts/cognac/",
   loader: { ".json": "text" },
