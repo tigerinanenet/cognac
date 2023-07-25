@@ -40,7 +40,7 @@ const config = {
     }),
     copy({
       assets: {
-        from: "src/scripts/stenchtracker.js",
+        from: "src/scripts/cognac_chatbot.js",
         to: ".",
       },
     }),
