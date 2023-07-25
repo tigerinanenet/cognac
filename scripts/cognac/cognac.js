@@ -12005,7 +12005,7 @@ var Guards = /* @__PURE__ */ function() {
 }();
 
 // src/index.ts
-var import_kolmafia51 = require("kolmafia");
+var import_kolmafia52 = require("kolmafia");
 
 // src/lib/cognac.ts
 init_kolmafia_polyfill();
@@ -13760,11 +13760,12 @@ var Spookyraven = {
 
 // src/quests/townsquare/townsquare.ts
 init_kolmafia_polyfill();
-var import_kolmafia45 = require("kolmafia");
+var import_kolmafia46 = require("kolmafia");
 
 // src/quests/townsquare/tasks/explore.ts
 init_kolmafia_polyfill();
-var _templateObject149, _templateObject260, _templateObject339, _templateObject430, _templateObject521, _templateObject617, _templateObject716, _templateObject814, _templateObject915, _templateObject1013;
+var import_kolmafia43 = require("kolmafia");
+var _templateObject149, _templateObject260, _templateObject339, _templateObject430, _templateObject521, _templateObject617, _templateObject716, _templateObject814, _templateObject915, _templateObject1013, _templateObject1113, _templateObject1211;
 function ownKeys8(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
@@ -13858,7 +13859,9 @@ var elementMap = {
         do: function() {
           _this.targetElement = Object.keys(_this.parts).find(function(elem) {
             return _this.parts[elem] < 1;
-          }), _this.nextFightPrepped = !0;
+          });
+          var targetMp = (0, import_kolmafia43.mpCost)($skill(_templateObject716 || (_templateObject716 = _taggedTemplateLiteral32(["Curse of Weaksauce"])))) + (0, import_kolmafia43.mpCost)($skill(_templateObject814 || (_templateObject814 = _taggedTemplateLiteral32(["Stuffed Mortar Shell"]))));
+          (0, import_kolmafia43.myMp)() < targetMp && (0, import_kolmafia43.restoreMp)(targetMp), _this.nextFightPrepped = !0;
         }
       }, _objectSpread8(_objectSpread8({}, this.baseTask), {}, {
         name: "Hobo combat physical",
@@ -13866,9 +13869,9 @@ var elementMap = {
           return _this.targetElement !== "normal";
         },
         combat: new CombatStrategy().autoattack(Macro2.attackKill()),
-        effects: [$effect(_templateObject716 || (_templateObject716 = _taggedTemplateLiteral32(["Carol of the Bulls"])))],
+        effects: [$effect(_templateObject915 || (_templateObject915 = _taggedTemplateLiteral32(["Carol of the Bulls"])))],
         outfit: {
-          equip: [$item(_templateObject814 || (_templateObject814 = _taggedTemplateLiteral32(["Fourth of May Cosplay Saber"]))), $item(_templateObject915 || (_templateObject915 = _taggedTemplateLiteral32(["mafia thumb ring"])))]
+          equip: [$item(_templateObject1013 || (_templateObject1013 = _taggedTemplateLiteral32(["Fourth of May Cosplay Saber"]))), $item(_templateObject1113 || (_templateObject1113 = _taggedTemplateLiteral32(["mafia thumb ring"])))]
         }
       }), _objectSpread8(_objectSpread8({}, this.baseTask), {}, {
         name: "Hobo combat elemental",
@@ -13880,7 +13883,7 @@ var elementMap = {
         },
         combat: new CombatStrategy().autoattack(Macro2.mortarShell()),
         outfit: {
-          equip: [$item(_templateObject1013 || (_templateObject1013 = _taggedTemplateLiteral32(["mafia thumb ring"])))]
+          equip: [$item(_templateObject1211 || (_templateObject1211 = _taggedTemplateLiteral32(["mafia thumb ring"])))]
         }
       })];
     }
@@ -13889,7 +13892,7 @@ var elementMap = {
 
 // src/quests/townsquare/tasks/scobo.ts
 init_kolmafia_polyfill();
-var import_kolmafia43 = require("kolmafia");
+var import_kolmafia44 = require("kolmafia");
 function _slicedToArray11(arr, i) {
   return _arrayWithHoles11(arr) || _iterableToArrayLimit11(arr, i) || _unsupportedIterableToArray24(arr, i) || _nonIterableRest11();
 }
@@ -14010,7 +14013,7 @@ var talkToRichard = !0, Scobo = /* @__PURE__ */ function() {
           });
         },
         do: function() {
-          var html = (0, import_kolmafia43.visitUrl)("clan_hobopolis.php?preaction=simulacrum&place=3&qty=1");
+          var html = (0, import_kolmafia44.visitUrl)("clan_hobopolis.php?preaction=simulacrum&place=3&qty=1");
           _this.processScoboParts(_this.parts, html);
         }
       }, {
@@ -14019,7 +14022,7 @@ var talkToRichard = !0, Scobo = /* @__PURE__ */ function() {
           return !talkToRichard;
         },
         do: function() {
-          var html = (0, import_kolmafia43.visitUrl)("clan_hobopolis.php?place=3&action=talkrichard&whichtalk=3&pwd", !1);
+          var html = (0, import_kolmafia44.visitUrl)("clan_hobopolis.php?place=3&action=talkrichard&whichtalk=3&pwd", !1);
           _this.processScoboParts(_this.parts, html), talkToRichard = !1;
         }
       }];
@@ -14029,7 +14032,7 @@ var talkToRichard = !0, Scobo = /* @__PURE__ */ function() {
 
 // src/quests/townsquare/tasks/snapper.ts
 init_kolmafia_polyfill();
-var import_kolmafia44 = require("kolmafia");
+var import_kolmafia45 = require("kolmafia");
 var _templateObject150, _templateObject261, _templateObject340;
 function _taggedTemplateLiteral33(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
@@ -14037,10 +14040,10 @@ function _taggedTemplateLiteral33(strings, raw) {
 var snapper = $familiar(_templateObject150 || (_templateObject150 = _taggedTemplateLiteral33(["Red-Nosed Snapper"]))), Snapper = {
   name: "Setup",
   completed: function() {
-    return !have(snapper) || (0, import_kolmafia44.myFamiliar)() === $familiar(_templateObject261 || (_templateObject261 = _taggedTemplateLiteral33(["Red-Nosed Snapper"])));
+    return !have(snapper) || (0, import_kolmafia45.myFamiliar)() === $familiar(_templateObject261 || (_templateObject261 = _taggedTemplateLiteral33(["Red-Nosed Snapper"])));
   },
   do: function() {
-    Snapper_exports.trackPhylum($phylum(_templateObject340 || (_templateObject340 = _taggedTemplateLiteral33(["Hobo"])))), (0, import_kolmafia44.useFamiliar)(snapper);
+    Snapper_exports.trackPhylum($phylum(_templateObject340 || (_templateObject340 = _taggedTemplateLiteral33(["Hobo"])))), (0, import_kolmafia45.useFamiliar)(snapper);
   }
 };
 
@@ -14086,31 +14089,31 @@ var scoboParts = {
 }, scobo = new Scobo(scoboParts), explore = new Explore(scoboParts), skipTownSquare = !1, TownSquare = {
   name: "Town Square",
   completed: function() {
-    return skipTownSquare || (skipTownSquare = !!(0, import_kolmafia45.visitUrl)("clan_hobopolis.php?place=8&pwd", !1).match(/The Purple Light District/)), skipTownSquare;
+    return skipTownSquare || (skipTownSquare = !!(0, import_kolmafia46.visitUrl)("clan_hobopolis.php?place=8&pwd", !1).match(/The Purple Light District/)), skipTownSquare;
   },
   tasks: [DriveStealthily, Snapper].concat(_toConsumableArray17(scobo.getTasks()), _toConsumableArray17(explore.getTasks()))
 };
 
 // src/quests/wander/wander.ts
 init_kolmafia_polyfill();
-var import_kolmafia50 = require("kolmafia");
+var import_kolmafia51 = require("kolmafia");
 
 // src/quests/wander/tasks/digitized.ts
 init_kolmafia_polyfill();
-var import_kolmafia47 = require("kolmafia");
+var import_kolmafia48 = require("kolmafia");
 
 // src/quests/wander/shared/effects.ts
 init_kolmafia_polyfill();
 
 // src/quests/wander/shared/location.ts
 init_kolmafia_polyfill();
-var import_kolmafia46 = require("kolmafia");
+var import_kolmafia47 = require("kolmafia");
 var _templateObject151, _templateObject268, _templateObject341, _templateObject431;
 function _taggedTemplateLiteral34(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 function getLocation2() {
-  return !have($item(_templateObject151 || (_templateObject151 = _taggedTemplateLiteral34(["Spookyraven billiards room key"])))) && (0, import_kolmafia46.canAdventure)($location(_templateObject268 || (_templateObject268 = _taggedTemplateLiteral34(["The Haunted Kitchen"])))) ? $location(_templateObject341 || (_templateObject341 = _taggedTemplateLiteral34(["The Haunted Kitchen"]))) : $location(_templateObject431 || (_templateObject431 = _taggedTemplateLiteral34(["Noob Cave"])));
+  return !have($item(_templateObject151 || (_templateObject151 = _taggedTemplateLiteral34(["Spookyraven billiards room key"])))) && (0, import_kolmafia47.canAdventure)($location(_templateObject268 || (_templateObject268 = _taggedTemplateLiteral34(["The Haunted Kitchen"])))) ? $location(_templateObject341 || (_templateObject341 = _taggedTemplateLiteral34(["The Haunted Kitchen"]))) : $location(_templateObject431 || (_templateObject431 = _taggedTemplateLiteral34(["Noob Cave"])));
 }
 
 // src/quests/wander/shared/effects.ts
@@ -14191,7 +14194,7 @@ function _taggedTemplateLiteral36(strings, raw) {
 }
 function shouldRedigitize() {
   var digitizesLeft = SourceTerminal_exports.getDigitizeUsesRemaining(), monsterCount = SourceTerminal_exports.getDigitizeMonsterCount() + 1, digitizeAdventuresUsed = monsterCount * (monsterCount + 1) * 5 - 3;
-  return SourceTerminal_exports.have() && SourceTerminal_exports.canDigitize() && (0, import_kolmafia47.myAdventures)() / 0.96 < digitizesLeft * digitizeAdventuresUsed;
+  return SourceTerminal_exports.have() && SourceTerminal_exports.canDigitize() && (0, import_kolmafia48.myAdventures)() / 0.96 < digitizesLeft * digitizeAdventuresUsed;
 }
 function meatBuffEffects() {
   var monster = SourceTerminal_exports.getDigitizeMonster(), result = getEffects();
@@ -14295,7 +14298,7 @@ function MagnifyingGlass() {
 
 // src/quests/wander/tasks/sausage.ts
 init_kolmafia_polyfill();
-var import_kolmafia48 = require("kolmafia");
+var import_kolmafia49 = require("kolmafia");
 var _templateObject169, _templateObject271;
 function ownKeys10(object, enumerableOnly) {
   var keys = Object.keys(object);
@@ -14344,7 +14347,7 @@ function SausageTask() {
   return {
     name: "Sausage Goblin",
     ready: function() {
-      return have($item(_templateObject169 || (_templateObject169 = _taggedTemplateLiteral38(["Kramco Sausage-o-Matic\u2122"])))) && (0, import_kolmafia48.myInebriety)() <= (0, import_kolmafia48.inebrietyLimit)();
+      return have($item(_templateObject169 || (_templateObject169 = _taggedTemplateLiteral38(["Kramco Sausage-o-Matic\u2122"])))) && (0, import_kolmafia49.myInebriety)() <= (0, import_kolmafia49.inebrietyLimit)();
     },
     completed: function() {
       return getKramcoWandererChance() < 1;
@@ -14365,7 +14368,7 @@ function SausageTask() {
 
 // src/quests/wander/tasks/voter.ts
 init_kolmafia_polyfill();
-var import_kolmafia49 = require("kolmafia");
+var import_kolmafia50 = require("kolmafia");
 var _templateObject170, _templateObject277;
 function ownKeys11(object, enumerableOnly) {
   var keys = Object.keys(object);
@@ -14417,7 +14420,7 @@ function VoterTask() {
       return have($item(_templateObject170 || (_templateObject170 = _taggedTemplateLiteral39(['"I Voted!" sticker']))));
     },
     completed: function() {
-      return get("_voteFreeFights") >= 3 || (0, import_kolmafia49.totalTurnsPlayed)() % 11 !== 1 || get("lastVoteMonsterTurn") >= (0, import_kolmafia49.totalTurnsPlayed)();
+      return get("_voteFreeFights") >= 3 || (0, import_kolmafia50.totalTurnsPlayed)() % 11 !== 1 || get("lastVoteMonsterTurn") >= (0, import_kolmafia50.totalTurnsPlayed)();
     },
     effects: getEffects(),
     outfit: function() {
@@ -14437,7 +14440,7 @@ function VoterTask() {
 var Wander = {
   name: "Wander",
   completed: function() {
-    return (0, import_kolmafia50.myInebriety)() > (0, import_kolmafia50.inebrietyLimit)();
+    return (0, import_kolmafia51.myInebriety)() > (0, import_kolmafia51.inebrietyLimit)();
   },
   tasks: [VoterTask(), DigitizedTask(), SausageTask(), MagnifyingGlass()]
 };
@@ -14471,12 +14474,12 @@ function main(command) {
     return;
   }
   checkGarbo(), checkClan(), maybeResetDailyPreferences();
-  var cognacTasks = getTasks([Prologue, Wander, Spookyraven, Sewers(args.nocage), TownSquare, Cognac]), engine = new Engine2(cognacTasks), startingClan = (0, import_kolmafia51.getClanId)(), meatToCloset = (0, import_kolmafia51.myMeat)() > 1e6 ? (0, import_kolmafia51.myMeat)() - 1e6 : 0;
+  var cognacTasks = getTasks([Prologue, Wander, Spookyraven, Sewers(args.nocage), TownSquare, Cognac]), engine = new Engine2(cognacTasks), startingClan = (0, import_kolmafia52.getClanId)(), meatToCloset = (0, import_kolmafia52.myMeat)() > 1e6 ? (0, import_kolmafia52.myMeat)() - 1e6 : 0;
   try {
     var clan = get(CLAN);
-    meatToCloset > 0 && (0, import_kolmafia51.cliExecute)("closet put ".concat(meatToCloset, " meat")), Clan.join(clan), engine.run();
+    meatToCloset > 0 && (0, import_kolmafia52.cliExecute)("closet put ".concat(meatToCloset, " meat")), Clan.join(clan), engine.run();
   } finally {
-    engine.destruct(), _set(HEAP_ATTEMPTS, 0), new Gossip().destroy(), Clan.join(startingClan), meatToCloset > 0 && (0, import_kolmafia51.cliExecute)("closet take ".concat(meatToCloset, " meat")), save(), printSession();
+    engine.destruct(), _set(HEAP_ATTEMPTS, 0), new Gossip().destroy(), Clan.join(startingClan), meatToCloset > 0 && (0, import_kolmafia52.cliExecute)("closet take ".concat(meatToCloset, " meat")), save(), printSession();
   }
 }
 // Annotate the CommonJS export names for ESM import in node:
