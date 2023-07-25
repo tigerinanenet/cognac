@@ -1,5 +1,5 @@
 import { Effect, toSkill } from "kolmafia";
-import {$effects, have, $familiar} from "libram";
+import {$effects, have, $familiar, $effect} from "libram";
 import {runsOrNCFamiliar} from "./familiar";
 
 function filterHave(effects: Effect[]) {
@@ -7,15 +7,11 @@ function filterHave(effects: Effect[]) {
 }
 
 export function basicEffects(): Effect[] {
+  const buffs: Effect[] = [$effect`Leash of Linguini`, $effect`Empathy`, $effect`Blood Bond`, $effect`Springy Fusilli`, $effect`Cletus's Canticle of Celerity`];
   if(runsOrNCFamiliar() === $familiar`Frumious Bandersnatch`) {
-    return filterHave(
-      $effects`Leash of Linguini, Empathy, Blood Bond, Springy Fusilli, Cletus's Canticle of Celerity, Ode to Booze`,
-      );
-  } else {
-    return filterHave(
-      $effects`Leash of Linguini, Empathy, Blood Bond, Springy Fusilli, Cletus's Canticle of Celerity, `
-    );
+    buffs.push($effect`Ode to Booze`);
   }
+  return filterHave(buffs);
 }
 
 export function noncombatEffects(): Effect[] {
