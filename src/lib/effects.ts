@@ -1,13 +1,13 @@
 import { Effect, toSkill } from "kolmafia";
 import {$effects, have, $familiar} from "libram";
-import {noncombatFamiliar} from "./familiar";
+import {runsOrNCFamiliar} from "./familiar";
 
 function filterHave(effects: Effect[]) {
   return effects.filter((effect) => have(toSkill(effect)));
 }
 
 export function basicEffects(): Effect[] {
-  if(noncombatFamiliar() === $familiar`Frumious Bandersnatch`) {
+  if(runsOrNCFamiliar() === $familiar`Frumious Bandersnatch`) {
     return filterHave(
       $effects`Leash of Linguini, Empathy, Blood Bond, Springy Fusilli, Cletus's Canticle of Celerity, Ode to Booze`,
       );

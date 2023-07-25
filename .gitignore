@@ -134,7 +134,3 @@ KoLmafia
 
 # IDE stuff
 .fleet
-
-# more yarn
-.yarnrc.yml
-yarn.lock
