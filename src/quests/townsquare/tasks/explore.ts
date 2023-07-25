@@ -1,5 +1,6 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
-import { $effect, $effects, $item, $location } from "libram";
+import { mpCost, myMp, restoreMp } from "kolmafia";
+import { $effect, $effects, $item, $location, $skill } from "libram";
 
 import { Macro } from "../../../lib/combat";
 import { ScoboPartType, ScoboParts } from "./parts";
@@ -44,6 +45,11 @@ export class Explore {
           this.targetElement = Object.keys(this.parts).find(
             (elem) => this.parts[elem as ScoboPartType] < 1,
           ) as ScoboPartType;
+          const targetMp =
+            mpCost($skill`Curse of Weaksauce`) + mpCost($skill`Stuffed Mortar Shell`);
+          if (myMp() < targetMp) {
+            restoreMp(targetMp);
+          }
           this.nextFightPrepped = true;
         },
       },
