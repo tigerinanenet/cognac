@@ -3,14 +3,10 @@ import { getFuel, use } from "kolmafia";
 import { $item, AsdonMartin, get, have } from "libram";
 
 import { ASDON } from "../../../prefs/properties";
-import { CMCInstalled } from "./cmc";
 
 export const installAsdon: Task = {
   name: "Install Asdon",
-  completed: () =>
-    get("_workshedItemUsed") ||
-    AsdonInstalled() ||
-    (CMCInstalled() && get(`_coldMedicineConsults`) < 5),
+  completed: () => get("_workshedItemUsed") || AsdonInstalled(),
   do: () => {
     if (AsdonMartin.installed() || !have($item`Asdon Martin keyfob`)) {
       return;

@@ -56,16 +56,6 @@ export class Macro extends LibramMacro {
         .trySkill($skill`Bowl a Curveball`)
         .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`),
     )
-      .if_(
-        `hasskill CLEESH`,
-        Macro.if_(
-          `!mpbelow 10`,
-          Macro.trySkill($skill`CLEESH`)
-            .if_($monster`newt`, Macro.attack())
-            .if_($monster`salamander`, Macro.attack())
-            .if_($monster`frog`, Macro.attack()),
-        ),
-      )
       .runaway()
       .repeat();
   }
