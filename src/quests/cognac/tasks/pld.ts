@@ -49,7 +49,7 @@ export class PLD {
         },
         post: () => {
           if (get("lastEncounter") === "The Furtivity of My City") {
-            print(`Stench level increased to ${get(CURRENT_STENCH)}.`);
+            print(`Stench level increased to approx ${get(CURRENT_STENCH)}.`);
           }
         },
       },
