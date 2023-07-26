@@ -48,7 +48,7 @@ export class Macro extends LibramMacro {
 
   tryCLEESH(): Macro {
     return this.externalIf(
-      !have($item`Greatest American Pants`) || !have($item`navel ring of navel gazing`),
+      !have($item`Greatest American Pants`) && !have($item`navel ring of navel gazing`),
       Macro.if_(
         `hasskill CLEESH`,
         Macro.if_(
