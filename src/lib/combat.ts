@@ -46,17 +46,10 @@ export class Macro extends LibramMacro {
     return new Macro().tryDelevelStun();
   }
 
-  tryFreeRun(): Macro {
+  tryCLEESH(): Macro {
     return this.externalIf(
-      !drunk(),
-      // Only delevel if we have a chance of dying, to speed up combat
-      Macro.tryItemsTogether([$item`Rain-Doh blue balls`, $item`Rain-Doh indigo cup`])
-        .trySkill($skill`Extract`)
-        .tryItem($item`porquoise-handled sixgun`)
-        .trySkill($skill`Bowl a Curveball`)
-        .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`),
-    )
-      .if_(
+      !have($item`Greatest American Pants`) || !have($item`navel ring of navel gazing`),
+      Macro.if_(
         `hasskill CLEESH`,
         Macro.if_(
           `!mpbelow 10`,
@@ -65,7 +58,25 @@ export class Macro extends LibramMacro {
             .if_($monster`salamander`, Macro.attack())
             .if_($monster`frog`, Macro.attack()),
         ),
-      )
+      ),
+    );
+  }
+
+  static tryCLEESH(): Macro {
+    return new Macro().tryCLEESH();
+  }
+
+  tryFreeRun(): Macro {
+    return this.externalIf(
+      !drunk(),
+      // Only delevel if we have a chance of dying, to speed up combat
+      Macro.tryItemsTogether([$item`Rain-Doh blue balls`, $item`Rain-Doh indigo cup`])
+        .trySkill($skill`Extract`)
+        .tryItem($item`porquoise-handled sixgun`)
+        .trySkill($skill`Bowl a Curveball`)
+        .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
+        .tryCLEESH(),
+    )
       .runaway()
       .repeat();
   }
