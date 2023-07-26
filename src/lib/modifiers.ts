@@ -10,8 +10,7 @@ export function getModString(): string {
   let fwWeight = "0.02";
   if (banderBoots) {
     fwWeight = "0.25";
-  } else {
-    if(fam === $familiar`Left-Hand Man` || fam === $familiar`Disembodied Hand`)
+  } else if(fam === $familiar`Left-Hand Man` || fam === $familiar`Disembodied Hand`) {
       fwWeight = "0.00";
   }
   return `-combat, ${fwWeight} familiar weight`;
