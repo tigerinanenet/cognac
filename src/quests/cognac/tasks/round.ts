@@ -20,7 +20,7 @@ export class Round {
     return [
       {
         name: "Initial wait",
-        completed: () => get(CURRENT_STENCH) !== "" || get(CURRENT_PLAYERS).length === 1,
+        completed: () => get(CURRENT_STENCH) !== "" || get(CURRENT_PLAYERS) === "1",
         do: () => {
           print("Waiting for our first cognac round to begin");
           wait(5);
