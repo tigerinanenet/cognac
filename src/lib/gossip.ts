@@ -1,4 +1,4 @@
-import { gamedayToInt, gametimeToInt, myName, print } from "kolmafia";
+import { gamedayToInt, gametimeToInt, myName } from "kolmafia";
 import { get, set } from "libram";
 
 import { CURRENT_PLAYERS, CURRENT_STENCH } from "../prefs/properties";
@@ -79,14 +79,8 @@ export class Gossip {
     const gossip = Whiteboard.read() as GossipObject;
     this.players = gossip.players || [];
     this.requestingCompost = gossip.requestingCompost || [];
-    this.stench = gossip.stench || 0;
-    const heapStench = parseInt(get(CURRENT_STENCH)) || 0;
-    if (heapStench !== this.stench) {
-      print(
-        `Whiteboard and /hobo chat differ in stench level. Trusting /hobo. Whiteboard: ${this.stench} Chat: ${heapStench}`,
-      );
-      this.stench = heapStench;
-    }
+    // Rely on stench tracking via /hobopolis clan chat
+    this.stench = parseInt(get(CURRENT_STENCH)) || 0;
     this.mutex = gossip.mutex || "";
     this.diveStart = gossip.diveStart || 0;
     this.gameday = gossip.gameday || 0;
