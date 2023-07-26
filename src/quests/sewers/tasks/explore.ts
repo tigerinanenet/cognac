@@ -20,7 +20,7 @@ export const ExploreTasks: Task[] = [
       capNonCombat();
     },
     do: () => $location`A Maze of Sewer Tunnels`,
-    effects: [...basicEffects(), ...noncombatEffects()],
+    effects: () => [...basicEffects(), ...noncombatEffects()],
     combat: new CombatStrategy().autoattack(tryFreeRunThenAttack),
     outfit: () => ({
       equip: getEquipment([

@@ -30,7 +30,7 @@ export class PLD {
         name: "Increase stench",
         completed: () => this.gossip.readyToDive(),
         do: () => $location`The Purple Light District`,
-        effects: [...basicEffects(), ...noncombatEffects()],
+        effects: () => [...basicEffects(), ...noncombatEffects()],
         combat: new CombatStrategy().autoattack(Macro.tryFreeRun()),
         prepare: () => {
           capNonCombat();

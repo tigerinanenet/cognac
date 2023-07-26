@@ -54,7 +54,7 @@ export class Heap {
         name: "Dive",
         completed: () => myAdventures() < 1,
         do: () => $location`The Heap`,
-        effects: [...basicEffects(), ...noncombatEffects()],
+        effects: () => [...basicEffects(), ...noncombatEffects()],
         combat: new CombatStrategy().autoattack(Macro.trySkill($skill`Extract Jelly`).tryFreeRun()),
         prepare: () => {
           capNonCombat();

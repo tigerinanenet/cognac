@@ -2,8 +2,9 @@ import { Familiar, familiarWeight, numericModifier } from "kolmafia";
 import { $familiar, $item, have, get } from "libram";
 
 export function runsOrNCFamiliar(): Familiar {
-  if (freeRunsFamiliar() !== $familiar`none`) {
-    return freeRunsFamiliar();
+  const availableBanderboots: Familiar = freeRunsFamiliar();
+  if (availableBanderboots !== $familiar`none`) {
+    return availableBanderboots;
   }
   return noncombatFamiliar();
 }
@@ -42,9 +43,9 @@ export function freeRunsFamiliar(): Familiar {
   }
 
   // Calculate total runs based on base weight + familiar weight modifiers
-  const base_weight: number = familiarWeight(chosenFam);
+  const baseWeight: number = familiarWeight(chosenFam);
   const bonus_weight: number = numericModifier("Familiar Weight");
-  const familiar_total_runs: number = Math.floor((base_weight + bonus_weight) / 5);
+  const familiar_total_runs: number = Math.floor((baseWeight + bonus_weight) / 5);
   const available_runs = Math.max(familiar_total_runs - get(`_banderRunaways`, 0), 0);
   if (available_runs === 0) {
     return $familiar`none`;
