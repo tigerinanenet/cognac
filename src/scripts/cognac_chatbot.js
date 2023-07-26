@@ -6,11 +6,16 @@ module.exports.main = function main(sender, message, channel) {
     if (message.endsWith("moved some trash out of the Purple Light District.") && stench != "") {
       stench = parseInt(stench) + 1;
       kolmafia.setProperty("_cognac_heapStench", stench);
-      kolmafia.chatClan(`Stench level changed to ${stench}`, "hobopolis");
+      const targetStench = 8 + kolmafia.getProperty("_cognac_currentPlayers");
+      if (stench % (targetStench / 4) == 0 || stench >= targetStench) {
+        kolmafia.chatClan(`Stench level changed to ${stench}`, "hobopolis");
+      }
     } else if (message.endsWith("moved some compost out of the Heap.") && stench != "") {
       stench = Math.max(0, parseInt(stench) - 1);
       kolmafia.setProperty("_cognac_heapStench", stench);
-      kolmafia.chatClan(`Stench level changed to ${stench}`, "hobopolis");
+      if (stench % (targetStench / 4) == 0 || stench >= targetStench) {
+        kolmafia.chatClan(`Stench level changed to ${stench}`, "hobopolis");
+      }
     } else if (message.endsWith("went treasure-hunting in The Heap.")) {
       kolmafia.setProperty("_cognac_heapStench", 0);
       kolmafia.chatClan(`Stench level changed to 0`, "hobopolis");
