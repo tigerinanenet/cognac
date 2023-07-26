@@ -46,6 +46,26 @@ export class Macro extends LibramMacro {
     return new Macro().tryDelevelStun();
   }
 
+  tryCLEESH(): Macro {
+    return this.externalIf(
+      !have($item`Greatest American Pants`) && !have($item`navel ring of navel gazing`),
+      Macro.if_(
+        `hasskill CLEESH`,
+        Macro.if_(
+          `!mpbelow 10`,
+          Macro.trySkill($skill`CLEESH`)
+            .if_($monster`newt`, Macro.attack())
+            .if_($monster`salamander`, Macro.attack())
+            .if_($monster`frog`, Macro.attack()),
+        ),
+      ),
+    );
+  }
+
+  static tryCLEESH(): Macro {
+    return new Macro().tryCLEESH();
+  }
+
   tryFreeRun(): Macro {
     return this.externalIf(
       !drunk(),
@@ -54,7 +74,8 @@ export class Macro extends LibramMacro {
         .trySkill($skill`Extract`)
         .tryItem($item`porquoise-handled sixgun`)
         .trySkill($skill`Bowl a Curveball`)
-        .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`),
+        .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
+        .tryCLEESH(),
     )
       .runaway()
       .repeat();
