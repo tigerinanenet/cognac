@@ -5,7 +5,7 @@ import { $location, get } from "libram";
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getDefaultEquipment } from "../../../lib/equipment";
-import { runsOrNCFamiliar } from "../../../lib/familiar";
+import { selectBestFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
 import { getModString } from "../../../lib/modifiers";
 import { capNonCombat } from "../../../lib/preparenoncom";
@@ -39,7 +39,7 @@ export class PLD {
           equip: getDefaultEquipment(),
           // Include familiar weight modifier if bander/boots is active, else just use -combat
           modifier: getModString(),
-          familiar: runsOrNCFamiliar(),
+          familiar: selectBestFamiliar(),
         }),
         choices: {
           205: 2,

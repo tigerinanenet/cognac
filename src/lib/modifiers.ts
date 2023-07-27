@@ -1,10 +1,10 @@
 import { Familiar } from "kolmafia";
 import { $familiar } from "libram";
 
-import { runsOrNCFamiliar } from "./familiar";
+import { selectBestFamiliar } from "./familiar";
 
 export function getModString(): string {
-  const fam: Familiar = runsOrNCFamiliar();
+  const fam: Familiar = selectBestFamiliar();
   const banderBoots: boolean =
     fam === $familiar`Frumious Bandersnatch` || fam === $familiar`Pair of Stomping Boots`;
   let fwWeight = "0.02";

@@ -1,7 +1,7 @@
 import { Effect, toSkill } from "kolmafia";
 import { $effects, have, $familiar, $effect } from "libram";
 
-import { runsOrNCFamiliar } from "./familiar";
+import { selectBestFamiliar } from "./familiar";
 
 function filterHave(effects: Effect[]) {
   return effects.filter((effect) => have(toSkill(effect)));
@@ -15,7 +15,7 @@ export function basicEffects(): Effect[] {
     $effect`Springy Fusilli`,
     $effect`Cletus's Canticle of Celerity`,
   ];
-  if (runsOrNCFamiliar() === $familiar`Frumious Bandersnatch`) {
+  if (selectBestFamiliar() === $familiar`Frumious Bandersnatch`) {
     buffs.push($effect`Ode to Booze`);
   }
   return filterHave(buffs);

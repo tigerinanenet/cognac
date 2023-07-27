@@ -1,7 +1,10 @@
-import { Familiar, familiarWeight, numericModifier } from "kolmafia";
+import {Familiar, familiarWeight, inebrietyLimit, myFamiliar, myInebriety, numericModifier} from "kolmafia";
 import { $familiar, $item, have, get } from "libram";
 
-export function runsOrNCFamiliar(): Familiar {
+export function selectBestFamiliar(): Familiar {
+  if( myFamiliar() === $familiar`Stooper` && myInebriety() === inebrietyLimit() || myInebriety() === inebrietyLimit() + 1) {
+    return $familiar`Stooper`;
+  }
   const availableBanderboots: Familiar = freeRunsFamiliar();
   if (availableBanderboots !== $familiar`none`) {
     return availableBanderboots;
@@ -27,7 +30,7 @@ export function noncombatFamiliar(): Familiar {
 }
 
 export function freeRunsFamiliar(): Familiar {
-  const pickFamiliar = () => {
+  const pickRunsFamiliar = () => {
     if (have($familiar`Pair of Stomping Boots`)) {
       return $familiar`Pair of Stomping Boots`;
     } else if (have($familiar`Frumious Bandersnatch`)) {
@@ -37,7 +40,7 @@ export function freeRunsFamiliar(): Familiar {
     }
   };
 
-  const chosenFam: Familiar = pickFamiliar();
+  const chosenFam: Familiar = pickRunsFamiliar();
   if (chosenFam === $familiar`none`) {
     return $familiar`none`;
   }
