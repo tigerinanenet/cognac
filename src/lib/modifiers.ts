@@ -13,5 +13,5 @@ export function getModString(): string {
   } else if(fam === $familiar`Left-Hand Man` || fam === $familiar`Disembodied Hand`) {
       fwWeight = "0.00";
   }
-  return `-combat, ${fwWeight} familiar weight`;
+  return `-combat, ${fwWeight} familiar weight, 0.0001 init, 0.2 bonus "fuzzy slippers of hatred"`;
 }
