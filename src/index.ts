@@ -1,5 +1,5 @@
 import { Args, getTasks } from "grimoire-kolmafia";
-import { cliExecute, getClanId, myMeat } from "kolmafia";
+import { chatClan, cliExecute, getClanId, myMeat } from "kolmafia";
 import { Clan, get, set } from "libram";
 
 import * as CognacStats from "./lib/cognac";
@@ -73,6 +73,9 @@ export function main(command?: string): void {
       cliExecute(`closet put ${meatToCloset} meat`);
     }
     Clan.join(clan);
+    // enter chat
+    cliExecute("chat");
+    chatClan(`Starting cognac`, "hobopolis");
     engine.run();
   } finally {
     engine.destruct();
