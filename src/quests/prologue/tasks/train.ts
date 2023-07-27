@@ -22,7 +22,7 @@ const defaultPieces = [
   TrainSet.Station.TRACKSIDE_DINER,
   TrainSet.Station.GRAIN_SILO,
   TrainSet.Station.TOWER_FIZZY,
-  TrainSet.Station.PRAWN_SILO,
+  TrainSet.Station.GAIN_MEAT,
   TrainSet.Station.VIEWING_PLATFORM,
 ];
 
@@ -58,7 +58,7 @@ export const reconfigureTrain: Task = {
     [
       TrainSet.Station.GRAIN_SILO,
       TrainSet.Station.TOWER_FIZZY,
-      TrainSet.Station.PRAWN_SILO,
+      TrainSet.Station.GAIN_MEAT,
       TrainSet.Station.VIEWING_PLATFORM,
     ].includes(TrainSet.next()),
   completed: () =>
