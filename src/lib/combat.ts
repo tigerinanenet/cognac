@@ -1,5 +1,7 @@
-import { Item, inebrietyLimit, myInebriety } from "kolmafia";
-import { $item, $monster, $skill, Macro as LibramMacro, SongBoom, have } from "libram";
+import { Item, inebrietyLimit, itemAmount, myInebriety } from "kolmafia";
+import { $item, $skill, Macro as LibramMacro, SongBoom, have } from "libram";
+
+import { shouldUseFreeRunItem } from "./freeRun";
 
 const drunk = (): boolean => {
   return myInebriety() > inebrietyLimit();
@@ -28,6 +30,31 @@ export class Macro extends LibramMacro {
     return new Macro().tryItemsTogether(itemOrItems);
   }
 
+  itemWhileHave(item: Item) {
+    return this.externalIf(
+      itemAmount(item) % 2 === 1 && itemAmount(item) < 60,
+      Macro.item(item),
+    ).while_(`hascombatitem ${item}`, Macro.tryItemsTogether([item, item]));
+  }
+
+  static itemWhileHave(item: Item) {
+    return new Macro().itemWhileHave(item);
+  }
+
+  maybeFreeRunItems() {
+    return this.externalIf(
+      shouldUseFreeRunItem(),
+      Macro.tryItemsTogether([$item`Louder Than Bomb`, $item`tennis ball`])
+        .tryItem($item`divine champagne popper`)
+        .itemWhileHave($item`green smoke bomb`)
+        .itemWhileHave($item`tattered scrap of paper`)
+        .itemWhileHave($item`GOTO`),
+    );
+  }
+
+  static freeRunItems() {
+    return new Macro().maybeFreeRunItems();
+  }
   tryDelevelStun(): Macro {
     return (
       this.trySkill($skill`Curse of Weaksauce`)
@@ -54,7 +81,8 @@ export class Macro extends LibramMacro {
         .trySkill($skill`Extract`)
         .tryItem($item`porquoise-handled sixgun`)
         .trySkill($skill`Bowl a Curveball`)
-        .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`),
+        .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
+        .maybeFreeRunItems(),
     )
       .runaway()
       .repeat();
@@ -74,9 +102,14 @@ export class Macro extends LibramMacro {
   }
 
   stasis(): Macro {
-    return this.tryDelevelStun()
-      .tryItem($item`porquoise-handled sixgun`)
-      .trySkill($skill`Extract`);
+    return this.externalIf(
+      !drunk(),
+      Macro.trySkill($skill`Curse of Weaksauce`)
+         .tryItem($item`porquoise-handled sixgun`)
+        .trySkill($skill`Micrometeorite`)
+        .tryItemsTogether([$item`Time-Spinner`, $item`HOA citation pad`])
+        .trySkill($skill`Extract`),
+    );
   }
 
   static stasis(): Macro {

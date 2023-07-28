@@ -70,6 +70,7 @@ export function main(command?: string): void {
   } finally {
     engine.destruct();
     set(Properties.HEAP_ATTEMPTS, 0);
+    set(Properties.LAST_STENCH_CHECK, 0);
     new Gossip().destroy();
     Clan.join(startingClan);
     if (meatToCloset > 0) {
