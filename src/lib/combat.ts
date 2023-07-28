@@ -1,5 +1,5 @@
 import { Item, inebrietyLimit, itemAmount, myInebriety } from "kolmafia";
-import { $item, $skill, Macro as LibramMacro, have } from "libram";
+import { $item, $skill, Macro as LibramMacro, SongBoom, have } from "libram";
 
 import { shouldUseFreeRunItem } from "./freeRun";
 
@@ -55,11 +55,31 @@ export class Macro extends LibramMacro {
   static freeRunItems() {
     return new Macro().maybeFreeRunItems();
   }
+  tryDelevelStun(): Macro {
+    return (
+      this.trySkill($skill`Curse of Weaksauce`)
+        .trySkill($skill`Micrometeorite`)
+        .tryItemsTogether([$item`Time-Spinner`, $item`HOA citation pad`])
+        .tryItemsTogether([$item`Rain-Doh blue balls`, $item`Rain-Doh indigo cup`])
+        .tryItemsTogether([$item`train whistle`, $item`little red book`])
+        // requires arms or will abort
+        .if_($monster`Normal hobo`, Macro.tryItem($item`El Vibrato restraints`))
+        .if_($monster`Stench hobo`, Macro.tryItem($item`El Vibrato restraints`))
+        .if_($monster`Sleaze hobo`, Macro.tryItem($item`El Vibrato restraints`))
+    );
+  }
+
+  static tryDelevelStun(): Macro {
+    return new Macro().tryDelevelStun();
+  }
 
   tryFreeRun(): Macro {
     return this.externalIf(
       !drunk(),
-      Macro.trySkill($skill`Extract`)
+      // Only delevel if we have a chance of dying, to speed up combat
+      Macro.tryItemsTogether([$item`Rain-Doh blue balls`, $item`Rain-Doh indigo cup`])
+        .trySkill($skill`Extract`)
+        .tryItem($item`porquoise-handled sixgun`)
         .trySkill($skill`Bowl a Curveball`)
         .trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`)
         .maybeFreeRunItems(),
@@ -72,10 +92,20 @@ export class Macro extends LibramMacro {
     return new Macro().tryFreeRun();
   }
 
+  trySingAlong(): Macro {
+    if (!SongBoom.have() || SongBoom.song() !== "Total Eclipse of Your Meat") return this;
+    return this.trySkill($skill`Sing Along`);
+  }
+
+  static trySingAlong(): Macro {
+    return new Macro().trySingAlong();
+  }
+
   stasis(): Macro {
     return this.externalIf(
       !drunk(),
       Macro.trySkill($skill`Curse of Weaksauce`)
+         .tryItem($item`porquoise-handled sixgun`)
         .trySkill($skill`Micrometeorite`)
         .tryItemsTogether([$item`Time-Spinner`, $item`HOA citation pad`])
         .trySkill($skill`Extract`),
@@ -87,7 +117,7 @@ export class Macro extends LibramMacro {
   }
 
   attackKill(): Macro {
-    return this.stasis().attack().repeat();
+    return this.stasis().trySingAlong().attack().repeat();
   }
 
   static attackKill(): Macro {
@@ -96,8 +126,11 @@ export class Macro extends LibramMacro {
 
   mortarShell(): Macro {
     return this.stasis()
+      .trySingAlong()
       .trySkill($skill`Stuffed Mortar Shell`)
-      .tryItem($item`seal tooth`);
+      .tryItem($item`seal tooth`)
+      .attack() // Mortar shell should finish the fight but just in-case
+      .repeat();
   }
 
   static mortarShell(): Macro {

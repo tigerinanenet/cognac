@@ -63,7 +63,8 @@ export function libraryTask(): Task {
           .skill($skill`Spit jurassic acid`),
       )
         .trySkill($skill`Throw Latte on Opponent`)
-        .tryFreeRun(),
+        .runaway()
+        .repeat(),
     ),
     do: () => {
       if (Cartography.have() && get("_monstersMapped") < 3) {

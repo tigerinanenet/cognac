@@ -22,7 +22,7 @@ export function billiardsTask(): Task {
       875: 1, // Hustle the ghost
       1436: 2, // Maps: go straight to hustle
     },
-    combat: new CombatStrategy().autoattack(Macro.tryFreeRun()),
+    combat: new CombatStrategy().autoattack(Macro.runaway().repeat()),
     do: $location`The Haunted Billiards Room`,
   };
 }
