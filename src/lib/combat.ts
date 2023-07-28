@@ -105,7 +105,7 @@ export class Macro extends LibramMacro {
     return this.externalIf(
       !drunk(),
       Macro.trySkill($skill`Curse of Weaksauce`)
-         .tryItem($item`porquoise-handled sixgun`)
+        .tryItem($item`porquoise-handled sixgun`)
         .trySkill($skill`Micrometeorite`)
         .tryItemsTogether([$item`Time-Spinner`, $item`HOA citation pad`])
         .trySkill($skill`Extract`),
