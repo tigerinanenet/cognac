@@ -1,5 +1,5 @@
 import { Item, inebrietyLimit, itemAmount, myInebriety } from "kolmafia";
-import { $item, $skill, Macro as LibramMacro, SongBoom, have } from "libram";
+import { $item, $monster, $skill, Macro as LibramMacro, SongBoom, have } from "libram";
 
 import { shouldUseFreeRunItem } from "./freeRun";
 
