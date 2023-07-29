@@ -1,17 +1,28 @@
-import { Familiar } from "kolmafia";
+import {Familiar} from "kolmafia";
 import { $familiar } from "libram";
 
 import { selectBestFamiliar } from "./familiar";
 
 export function getModString(): string {
   const fam: Familiar = selectBestFamiliar();
-  const banderBoots: boolean =
-    fam === $familiar`Frumious Bandersnatch` || fam === $familiar`Pair of Stomping Boots`;
-  let fwWeight = "0.02";
-  if (banderBoots) {
-    fwWeight = "0.25";
-  } else if(fam === $familiar`Left-Hand Man` || fam === $familiar`Disembodied Hand`) {
-      fwWeight = "0.00";
+  function getModWeight(fam: Familiar) : string {
+      let w = "0.02"
+    switch(fam) {
+        case $familiar`Frumious Bandersnatch`:
+          w = "0.25";
+          break;
+        case $familiar`Pair of Stomping Boots`:
+          w = "0.25";
+          break;
+        case $familiar`Left-Hand Man`:
+          w = "0.00";
+          break;
+        case $familiar`Disembodied Hand`:
+          w = "0.00";
+          break;
+        }
+    return w;
   }
-  return `-combat, ${fwWeight} familiar weight, 0.0001 init, 0.2 bonus "fuzzy slippers of hatred"`;
+
+  return `-combat, ${getModWeight(fam)} familiar weight, 0.0001 init, 0.2 bonus "fuzzy slippers of hatred"`;
 }
