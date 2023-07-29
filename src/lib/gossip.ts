@@ -40,7 +40,7 @@ export class Gossip {
   // If callback evaluates to true, the reason we were fetching
   // the mutex has already been fulfilled.
   claimMutex(retries: number, callback?: () => boolean): boolean {
-    sleep(100);
+    sleep(waitTime(retries));
     this.updateGossip();
 
     if (callback && callback()) {
@@ -109,6 +109,13 @@ export class Gossip {
     this.updateGossip();
   }
 
+  setStench(stenchLevel: number): void {
+    this.claimMutex(0);
+    this.stench = stenchLevel;
+    this.write();
+    this.updateGossip();
+  }
+
   incrementStench(): void {
     this.claimMutex(0);
     this.stench++;
@@ -163,6 +170,10 @@ export class Gossip {
     this.players = this.players.filter((player: string) => player !== myName());
     Whiteboard.write(this.asRawJSON());
   }
+}
+
+function waitTime(retries: number): number {
+  return Math.min(Math.pow(2, retries) + Math.round(Math.random() * 10), 400);
 }
 
 // My poor javascript, look at what they've done to you.
