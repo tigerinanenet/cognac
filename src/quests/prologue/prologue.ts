@@ -4,6 +4,7 @@ import { fuelAsdon, installAsdon } from "./tasks/asdon";
 import { deployFalle } from "./tasks/autumnaton";
 import { grabCMCPill, installCMC } from "./tasks/cmc";
 import { refillLatte, refreshLatte } from "./tasks/latte";
+import { pantsgiving } from "./tasks/pantsgiving";
 import { setExtract } from "./tasks/sourceterminal";
 import { installTrain, reconfigureTrain } from "./tasks/train";
 
@@ -20,5 +21,6 @@ export const Prologue: Quest<Task> = {
     refreshLatte,
     refillLatte,
     setExtract,
+    pantsgiving,
   ],
 };

@@ -13,6 +13,8 @@ export const ASDON = prefix("useAsdon");
 export const CMC = prefix(`useCMC`);
 export const TRAIN = prefix(`useTrain`);
 export const SKIP_GARBO = prefix("skipGarbo");
+export const FREE_RUN = prefix("freeRun");
+
 export const REFUSES_UNTIL_COMPOST = prefix("choice216");
 export const RESULTS_DAY = prefix("resultsDay");
 export const COGNACS = prefix("bottlesFoundToday");
@@ -23,4 +25,5 @@ export const LIFETIME_DIVES = prefix("divesLifetime");
 export const LIFETIME_TURNS_SPENT = prefix("turnsLifetime");
 
 export const HEAP_ATTEMPTS = daily("heapAttempts");
+export const LAST_STENCH_CHECK = daily("heapAttemptsAtLastStenchCheck");
 export const CURRENT_PLAYERS = daily("currentPlayers");
