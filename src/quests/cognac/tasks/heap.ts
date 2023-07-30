@@ -1,8 +1,11 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import {
+  Familiar,
   adv1,
   elementalResistance,
+  inebrietyLimit,
   myAdventures,
+  myInebriety,
   myMaxhp,
   print,
   restoreHp,
@@ -29,8 +32,9 @@ import { Macro } from "../../../lib/combat";
 import { drunk } from "../../../lib/drunk";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getDefaultEquipment } from "../../../lib/equipment";
-import { noncombatFamiliar } from "../../../lib/familiar";
+import { selectBestFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
+import { getModString } from "../../../lib/modifiers";
 import { capNonCombat } from "../../../lib/preparenoncom";
 import {
   DIVES,
@@ -60,8 +64,8 @@ const familiar = () => {
   if (!drunk() && have($familiar`Space Jellyfish`)) {
     return $familiar`Space Jellyfish`;
   }
-  return noncombatFamiliar();
-};
+  return selectBestFamiliar();
+}
 
 const ambientStenchRe = () =>
   /<p>The oppressive smell of the heaps of garbage around you makes you feel sort of sick.<center><table><tr><td><img[A-Za-z0-9=":/. ]+><\/td><td[A-Za-z0-9=" ]+>You lose ([0-9]+) hit points./g;
@@ -148,7 +152,8 @@ export class Heap {
         },
         outfit: () => ({
           equip: getDefaultEquipment(),
-          modifier: mustCheckStench() ? "-combat, -2 stench resistance" : "-combat",
+          // Include familiar weight modifier if bander/boots is active, else just use -combat
+          modifier: `{getModString()} {mustCheckStench() ? "-combat, -2 stench resistance" : ""}`,
           familiar: familiar(),
         }),
         choices: {

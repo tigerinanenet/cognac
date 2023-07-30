@@ -5,8 +5,9 @@ import { $location, get } from "libram";
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getDefaultEquipment } from "../../../lib/equipment";
-import { noncombatFamiliar } from "../../../lib/familiar";
+import { selectBestFamiliar } from "../../../lib/familiar";
 import { Gossip } from "../../../lib/gossip";
+import { getModString } from "../../../lib/modifiers";
 import { capNonCombat } from "../../../lib/preparenoncom";
 
 export class PLD {
@@ -29,15 +30,16 @@ export class PLD {
         name: "Increase stench",
         completed: () => this.gossip.readyToDive(),
         do: () => $location`The Purple Light District`,
-        effects: [...basicEffects(), ...noncombatEffects()],
+        effects: () => [...basicEffects(), ...noncombatEffects()],
         combat: new CombatStrategy().autoattack(Macro.tryFreeRun()),
         prepare: () => {
           capNonCombat();
         },
         outfit: () => ({
           equip: getDefaultEquipment(),
-          modifier: "-combat",
-          familiar: noncombatFamiliar(),
+          // Include familiar weight modifier if bander/boots is active, else just use -combat
+          modifier: getModString(),
+          familiar: selectBestFamiliar(),
         }),
         choices: {
           205: 2,

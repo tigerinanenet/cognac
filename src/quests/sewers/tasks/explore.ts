@@ -4,7 +4,7 @@ import { $item, $location, $skill, get } from "libram";
 import { Macro } from "../../../lib/combat";
 import { basicEffects, noncombatEffects } from "../../../lib/effects";
 import { getEquipment } from "../../../lib/equipment";
-import { noncombatFamiliar } from "../../../lib/familiar";
+import { selectBestFamiliar } from "../../../lib/familiar";
 import { capNonCombat } from "../../../lib/preparenoncom";
 import { FREE_RUN } from "../../../prefs/properties";
 
@@ -22,7 +22,7 @@ export const ExploreTasks: Task[] = [
       capNonCombat();
     },
     do: () => $location`A Maze of Sewer Tunnels`,
-    effects: [...basicEffects(), ...noncombatEffects()],
+    effects: () => [...basicEffects(), ...noncombatEffects()],
     combat: new CombatStrategy().autoattack(tryFreeRunThenAttack),
     outfit: () => ({
       equip: getEquipment([
@@ -32,7 +32,7 @@ export const ExploreTasks: Task[] = [
       ]),
       modifier: "-combat",
       bonuses: new Map([[$item`mafia thumb ring`, 200]]),
-      familiar: noncombatFamiliar(),
+      familiar: selectBestFamiliar(),
     }),
     choices: {
       197: 1,

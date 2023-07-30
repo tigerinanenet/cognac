@@ -1,14 +1,24 @@
 import { Effect, toSkill } from "kolmafia";
-import { $effects, have } from "libram";
+import { $effects, have, $familiar, $effect } from "libram";
+
+import { selectBestFamiliar } from "./familiar";
 
 function filterHave(effects: Effect[]) {
   return effects.filter((effect) => have(toSkill(effect)));
 }
 
 export function basicEffects(): Effect[] {
-  return filterHave(
-    $effects`Leash of Linguini, Empathy, Blood Bond, Springy Fusilli, Cletus's Canticle of Celerity`,
-  );
+  const buffs: Effect[] = [
+    $effect`Leash of Linguini`,
+    $effect`Empathy`,
+    $effect`Blood Bond`,
+    $effect`Springy Fusilli`,
+    $effect`Cletus's Canticle of Celerity`,
+  ];
+  if (selectBestFamiliar() === $familiar`Frumious Bandersnatch`) {
+    buffs.push($effect`Ode to Booze`);
+  }
+  return filterHave(buffs);
 }
 
 export function noncombatEffects(): Effect[] {

@@ -4,7 +4,7 @@ import { $effects, $item, $location, have } from "libram";
 import { Macro } from "../../../lib/combat";
 import { noncombatEffects } from "../../../lib/effects";
 import { getDefaultEquipment } from "../../../lib/equipment";
-import { noncombatFamiliar } from "../../../lib/familiar";
+import { selectBestFamiliar } from "../../../lib/familiar";
 
 export function billiardsTask(): Task {
   return {
@@ -15,7 +15,7 @@ export function billiardsTask(): Task {
     outfit: () => ({
       equip: getDefaultEquipment(),
       modifier: "-combat",
-      familiar: noncombatFamiliar(),
+      familiar: selectBestFamiliar(),
     }),
     choices: {
       900: 2, // Lights Out

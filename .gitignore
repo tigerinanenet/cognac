@@ -131,3 +131,6 @@ dist
 
 # build output
 KoLmafia
+
+# IDE stuff
+.fleet
