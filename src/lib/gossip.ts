@@ -161,8 +161,7 @@ export class Gossip {
 
   readyToDive(): boolean {
     return (
-      parseInt(get(CURRENT_STENCH)) >=
-      BASE_STENCH_REQUIRED + Math.ceil(this.players.length * 1.1) + this.requestingCompost.length
+      parseInt(get(CURRENT_STENCH)) >= BASE_STENCH_REQUIRED + Math.ceil(this.players.length * 1.1)
     );
   }
 
