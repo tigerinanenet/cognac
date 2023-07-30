@@ -13354,7 +13354,7 @@ function _toPrimitive20(input, hint) {
 }
 var Round = /* @__PURE__ */ function() {
   function Round2(gossip2) {
-    _classCallCheck19(this, Round2), _defineProperty16(this, "gossip", void 0), this.gossip = gossip2;
+    _classCallCheck19(this, Round2), _defineProperty16(this, "gossip", void 0), _defineProperty16(this, "initRetries", 0), this.gossip = gossip2;
   }
   return _createClass19(Round2, [{
     key: "getTasks",
@@ -13362,11 +13362,14 @@ var Round = /* @__PURE__ */ function() {
       var _this = this;
       return [{
         name: "Initial wait",
+        ready: function() {
+          return _this.initRetries < 24;
+        },
         completed: function() {
           return get(CURRENT_STENCH) !== "" || get(CURRENT_PLAYERS) === "1";
         },
         do: function() {
-          (0, import_kolmafia36.print)("Waiting for our first cognac round to begin"), (0, import_kolmafia36.wait)(5);
+          (0, import_kolmafia36.print)("Waiting for our first cognac round to begin. Retry number ".concat(_this.initRetries)), (0, import_kolmafia36.wait)(5), _this.initRetries++;
         }
       }, {
         name: "Request compost",
