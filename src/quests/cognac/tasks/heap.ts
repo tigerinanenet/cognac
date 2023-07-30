@@ -1,11 +1,8 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import {
-  Familiar,
   adv1,
   elementalResistance,
-  inebrietyLimit,
   myAdventures,
-  myInebriety,
   myMaxhp,
   print,
   restoreHp,
@@ -65,7 +62,7 @@ const familiar = () => {
     return $familiar`Space Jellyfish`;
   }
   return selectBestFamiliar();
-}
+};
 
 const ambientStenchRe = () =>
   /<p>The oppressive smell of the heaps of garbage around you makes you feel sort of sick.<center><table><tr><td><img[A-Za-z0-9=":/. ]+><\/td><td[A-Za-z0-9=" ]+>You lose ([0-9]+) hit points./g;
@@ -153,7 +150,7 @@ export class Heap {
         outfit: () => ({
           equip: getDefaultEquipment(),
           // Include familiar weight modifier if bander/boots is active, else just use -combat
-          modifier: `{getModString()} {mustCheckStench() ? "-combat, -2 stench resistance" : ""}`,
+          modifier: `${getModString()} {mustCheckStench() ? "-combat, -2 stench resistance" : ""}`,
           familiar: familiar(),
         }),
         choices: {
