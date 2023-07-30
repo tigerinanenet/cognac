@@ -38,6 +38,12 @@ const config = {
         to: ".",
       },
     }),
+    copy({
+      assets: {
+        from: "src/scripts/cognac_chatbot.js",
+        to: ".",
+      },
+    }),
   ],
   outdir: "KoLmafia/scripts/cognac/",
   loader: { ".json": "text" },

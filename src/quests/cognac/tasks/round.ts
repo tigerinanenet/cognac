@@ -3,7 +3,13 @@ import { print, wait } from "kolmafia";
 import { get, set } from "libram";
 
 import { Gossip } from "../../../lib/gossip";
-import { HEAP_ATTEMPTS, LAST_STENCH_CHECK, REFUSES_UNTIL_COMPOST } from "../../../prefs/properties";
+import {
+  CURRENT_PLAYERS,
+  CURRENT_STENCH,
+  HEAP_ATTEMPTS,
+  LAST_STENCH_CHECK,
+  REFUSES_UNTIL_COMPOST,
+} from "../../../prefs/properties";
 
 export class Round {
   gossip: Gossip;
@@ -13,6 +19,14 @@ export class Round {
 
   getTasks(): Task[] {
     return [
+      {
+        name: "Initial wait",
+        completed: () => get(CURRENT_STENCH) !== "" || get(CURRENT_PLAYERS) === "1",
+        do: () => {
+          print("Waiting for our first cognac round to begin");
+          wait(5);
+        },
+      },
       {
         name: "Request compost",
         completed: (): boolean => {

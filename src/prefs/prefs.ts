@@ -36,6 +36,10 @@ export function maybeResetDailyPreferences(): void {
   }
 }
 
+export function resetSessionPreferences(): void {
+  set(Properties.CURRENT_STENCH, "");
+}
+
 export function checkGarbo(): void {
   if (get(Properties.SKIP_GARBO)) {
     return;
