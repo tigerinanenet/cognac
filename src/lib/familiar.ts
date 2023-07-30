@@ -1,8 +1,18 @@
-import {Familiar, familiarWeight, inebrietyLimit, myFamiliar, myInebriety, numericModifier} from "kolmafia";
+import {
+  Familiar,
+  familiarWeight,
+  inebrietyLimit,
+  myFamiliar,
+  myInebriety,
+  numericModifier,
+} from "kolmafia";
 import { $familiar, $item, have, get } from "libram";
 
 export function selectBestFamiliar(): Familiar {
-  if( myFamiliar() === $familiar`Stooper` && myInebriety() === inebrietyLimit() || myInebriety() === inebrietyLimit() + 1) {
+  if (
+    (myFamiliar() === $familiar`Stooper` && myInebriety() === inebrietyLimit()) ||
+    myInebriety() === inebrietyLimit() + 1
+  ) {
     return $familiar`Stooper`;
   }
   const availableBanderboots: Familiar = freeRunsFamiliar();
