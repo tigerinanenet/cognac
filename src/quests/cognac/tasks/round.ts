@@ -17,14 +17,18 @@ export class Round {
     this.gossip = gossip;
   }
 
+  initRetries = 0;
+
   getTasks(): Task[] {
     return [
       {
         name: "Initial wait",
+        ready: () => this.initRetries < 24 /* I refuse to wait longer than 2 minutes */,
         completed: () => get(CURRENT_STENCH) !== "" || get(CURRENT_PLAYERS) === "1",
         do: () => {
-          print("Waiting for our first cognac round to begin");
+          print(`Waiting for our first cognac round to begin. Retry number ${this.initRetries}`);
           wait(5);
+          this.initRetries++;
         },
       },
       {
