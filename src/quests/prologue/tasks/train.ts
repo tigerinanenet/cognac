@@ -3,7 +3,7 @@ import { use } from "kolmafia";
 import { $item, TrainSet, get, have } from "libram";
 
 import { WORKSHED } from "../../../prefs/properties";
-import { CMCInProgress } from "./cmc";
+import { cmcInProgress } from "./cmc";
 
 /*
 If we're running from combats, Candy has >100 meat value since some
@@ -27,19 +27,10 @@ function shouldInstallTrain(): boolean {
   if (get("_workshedItemUsed")) return false;
 
   const desiredWorksheds = get(WORKSHED).split(`,`);
-  //Check if user wants to install trainset at all
-  if (desiredWorksheds.includes(`train`)) {
-    //Need the workshed to install the workshed
-    if (have($item`model train set`)) {
-      if (desiredWorksheds.includes(`cmc`)) {
-        //If the user wants to use CMC, don't replace CMC until grabbing 5 pills
-        if (CMCInProgress()) {
-          return false;
-        } else return true;
-      }
-    }
-  }
-  return false;
+
+  if (!desiredWorksheds.includes(`train`)) return false;
+  if (!have($item`model train set`)) return false;
+  return !cmcInProgress();
 }
 
 function rotateToIdealStation(): TrainSet.Cycle {

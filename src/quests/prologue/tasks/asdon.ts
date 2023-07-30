@@ -3,25 +3,16 @@ import { getFuel, use } from "kolmafia";
 import { $item, AsdonMartin, get, have } from "libram";
 
 import { WORKSHED } from "../../../prefs/properties";
-import { CMCInProgress } from "./cmc";
+import { cmcInProgress } from "./cmc";
 
 function shouldInstallAsdon(): boolean {
   if (get("_workshedItemUsed")) return false;
 
   const desiredWorksheds = get(WORKSHED).split(`,`);
-  //Check if user wants to install asdon at all
-  if (desiredWorksheds.includes(`asdon`)) {
-    //Need the workshed to install the workshed
-    if (have($item`Asdon Martin keyfob`)) {
-      if (desiredWorksheds.includes(`cmc`)) {
-        //If the user wants to use CMC, don't replace CMC until grabbing 5 pills
-        if (CMCInProgress()) {
-          return false;
-        } else return true;
-      }
-    }
-  }
-  return false;
+
+  if (!desiredWorksheds.includes(`asdon`)) return false;
+  if (!have($item`Asdon Martin keyfob`)) return false;
+  return !cmcInProgress();
 }
 
 export const installAsdon: Task = {

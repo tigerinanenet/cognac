@@ -6,26 +6,20 @@ import { WORKSHED } from "../../../prefs/properties";
 
 function shouldInstallCMC(): boolean {
   if (get("_workshedItemUsed")) return false;
-
-  //Check if user wants to use CMC
-  if (get(WORKSHED).split(`,`).includes(`cmc`)) {
-    //We need to have it to be able to install it
-    if (have($item`cold medicine cabinet`)) {
-      //Install during the last 80 advs to grab all 5 pills
-      if (myAdventures() <= 80) return true;
-    }
-  }
-  return false;
+  if (!get(WORKSHED).split(`,`).includes(`cmc`)) return false;
+  if (!have($item`cold medicine cabinet`)) return false;
+  return myAdventures() <= 80;
 }
-function CMCInstalled(): boolean {
+
+function cmcInstalled(): boolean {
   return getWorkshed() === $item`cold medicine cabinet`;
 }
 
-export function CMCInProgress(): boolean {
-  return CMCInstalled() && get(`_coldMedicineConsults`) < 5;
+export function cmcInProgress(): boolean {
+  return cmcInstalled() && get(`_coldMedicineConsults`) < 5;
 }
 
-function CMCPillReady(): boolean {
+function cmcPillReady(): boolean {
   const workshedStatus = visitUrl(`campground.php?action=workshed`);
   return [`Breathitin`, `Extrovermectin`].some((pill) => workshedStatus.includes(pill));
 }
@@ -33,13 +27,13 @@ function CMCPillReady(): boolean {
 export const installCMC: Task = {
   name: `Install CMC`,
   ready: () => shouldInstallCMC(),
-  completed: () => CMCInstalled(),
+  completed: () => cmcInstalled(),
   do: () => use(1, $item`cold medicine cabinet`),
 };
 
 export const grabCMCPill: Task = {
   name: `Grab CMC Pill`,
-  ready: () => CMCPillReady() && CMCInstalled(),
+  ready: () => cmcPillReady() && cmcInstalled(),
   completed: () =>
     get(`_coldMedicineConsults`) >= 5 || totalTurnsPlayed() < get(`_nextColdMedicineConsult`),
   do: (): void => {
