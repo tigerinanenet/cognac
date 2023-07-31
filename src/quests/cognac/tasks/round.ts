@@ -22,13 +22,26 @@ export class Round {
   getTasks(): Task[] {
     return [
       {
-        name: "Initial wait",
-        ready: () => this.initRetries < 24 /* I refuse to wait longer than 2 minutes */,
-        completed: () => get(CURRENT_STENCH) !== "" || get(CURRENT_PLAYERS) === "1",
+        name: "Set initial stench if alone",
+        ready: () => get(CURRENT_PLAYERS) === "1",
+        completed: () => get(CURRENT_STENCH) !== "",
         do: () => {
-          print(`Waiting for our first cognac round to begin. Retry number ${this.initRetries}`);
+          set(CURRENT_STENCH, 0);
+        },
+      },
+      {
+        name: "Initial wait",
+        completed: () => get(CURRENT_STENCH) !== "",
+        do: () => {
+          print(
+            `Waiting for start of next round (someone diving). Retry number ${this.initRetries}`,
+          );
           wait(5);
           this.initRetries++;
+          if (this.initRetries === 24) {
+            /* I refuse to wait longer than 2 minutes */
+            set(CURRENT_STENCH, 0);
+          }
         },
       },
       {
