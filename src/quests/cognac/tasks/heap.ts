@@ -150,7 +150,7 @@ export class Heap {
         outfit: () => ({
           equip: getDefaultEquipment(),
           // Include familiar weight modifier if bander/boots is active, else just use -combat
-          modifier: `${getModString()} {mustCheckStench() ? "-combat, -2 stench resistance" : ""}`,
+          modifier: `${getModString()} ${mustCheckStench() ? "-combat, -2 stench resistance" : ""}`,
           familiar: familiar(),
         }),
         choices: {
