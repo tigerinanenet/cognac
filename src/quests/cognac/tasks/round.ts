@@ -38,8 +38,8 @@ export class Round {
           );
           wait(5);
           this.initRetries++;
-          if (this.initRetries === 24) {
-            /* I refuse to wait longer than 2 minutes */
+          if (this.initRetries === 120) {
+            /* I refuse to wait longer than 10 minutes */
             set(CURRENT_STENCH, 0);
           }
         },
