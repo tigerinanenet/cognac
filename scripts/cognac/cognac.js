@@ -13165,7 +13165,7 @@ var Heap = /* @__PURE__ */ function() {
           return {
             equip: getDefaultEquipment(),
             // Include familiar weight modifier if bander/boots is active, else just use -combat
-            modifier: "".concat(getModString(), ' {mustCheckStench() ? "-combat, -2 stench resistance" : ""}'),
+            modifier: "".concat(getModString(), " ").concat(mustCheckStench() ? "-combat, -2 stench resistance" : ""),
             familiar: familiar2()
           };
         },
@@ -13361,15 +13361,23 @@ var Round = /* @__PURE__ */ function() {
     value: function() {
       var _this = this;
       return [{
-        name: "Initial wait",
+        name: "Set initial stench if alone",
         ready: function() {
-          return _this.initRetries < 24;
+          return get(CURRENT_PLAYERS) === "1";
         },
         completed: function() {
-          return get(CURRENT_STENCH) !== "" || get(CURRENT_PLAYERS) === "1";
+          return get(CURRENT_STENCH) !== "";
         },
         do: function() {
-          (0, import_kolmafia36.print)("Waiting for our first cognac round to begin. Retry number ".concat(_this.initRetries)), (0, import_kolmafia36.wait)(5), _this.initRetries++;
+          _set(CURRENT_STENCH, 0);
+        }
+      }, {
+        name: "Initial wait",
+        completed: function() {
+          return get(CURRENT_STENCH) !== "";
+        },
+        do: function() {
+          (0, import_kolmafia36.print)("Waiting for start of next round (someone diving). Retry number ".concat(_this.initRetries)), (0, import_kolmafia36.wait)(5), _this.initRetries++, _this.initRetries === 24 && _set(CURRENT_STENCH, 0);
         }
       }, {
         name: "Request compost",
