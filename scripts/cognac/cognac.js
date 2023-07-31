@@ -13377,7 +13377,7 @@ var Round = /* @__PURE__ */ function() {
           return get(CURRENT_STENCH) !== "";
         },
         do: function() {
-          (0, import_kolmafia36.print)("Waiting for start of next round (someone diving). Retry number ".concat(_this.initRetries)), (0, import_kolmafia36.wait)(5), _this.initRetries++, _this.initRetries === 24 && _set(CURRENT_STENCH, 0);
+          (0, import_kolmafia36.print)("Waiting for start of next round (someone diving). Retry number ".concat(_this.initRetries)), (0, import_kolmafia36.wait)(5), _this.initRetries++, _this.initRetries === 120 && _set(CURRENT_STENCH, 0);
         }
       }, {
         name: "Request compost",
