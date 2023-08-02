@@ -52,6 +52,10 @@ export class PLD {
         post: () => {
           if (get("lastEncounter") === "The Furtivity of My City") {
             print(`Stench level increased to approx ${get(CURRENT_STENCH)}.`);
+            // update whiteboard when close to goal for backwards compatibility
+            if (this.gossip.almostReadyToDive()) {
+              this.gossip.setStench(parseInt(get(CURRENT_STENCH)));
+            }
           }
         },
       },

@@ -13,7 +13,7 @@ type GossipObject = {
   gameday: number;
 };
 
-const BASE_STENCH_REQUIRED = 8;
+export const BASE_STENCH_REQUIRED = 8;
 export class Gossip {
   players: string[] = [];
   requestingCompost: string[] = [];
@@ -162,6 +162,13 @@ export class Gossip {
   readyToDive(): boolean {
     return (
       parseInt(get(CURRENT_STENCH)) >= BASE_STENCH_REQUIRED + Math.ceil(this.players.length * 1.1)
+    );
+  }
+
+  almostReadyToDive(): boolean {
+    return (
+      parseInt(get(CURRENT_STENCH)) >=
+      BASE_STENCH_REQUIRED + Math.ceil(this.players.length * 1.1) - 2
     );
   }
 
