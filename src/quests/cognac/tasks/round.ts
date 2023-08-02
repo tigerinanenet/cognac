@@ -34,7 +34,7 @@ export class Round {
         completed: () => get(CURRENT_STENCH) !== "",
         do: () => {
           print(
-            `Waiting for start of next round (someone diving). Retry number ${this.initRetries}`,
+            `Waiting for start of next round (someone diving). Retry number ${this.initRetries} of 120`,
           );
           wait(5);
           this.initRetries++;
