@@ -75,6 +75,7 @@ export function main(command?: string): void {
     Clan.join(clan);
     // enter chat
     cliExecute("chat");
+    chatClan("/listen hobopolis", "hobopolis");
     chatClan(`Starting cognac`, "hobopolis");
     engine.run();
   } finally {
