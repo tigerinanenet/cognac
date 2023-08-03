@@ -105,7 +105,6 @@ export class Macro extends LibramMacro {
     return this.externalIf(
       !drunk(),
       Macro.trySkill($skill`Curse of Weaksauce`)
-        .tryItem($item`porquoise-handled sixgun`)
         .trySkill($skill`Micrometeorite`)
         .tryItemsTogether([$item`Time-Spinner`, $item`HOA citation pad`])
         .trySkill($skill`Extract`),
@@ -117,7 +116,11 @@ export class Macro extends LibramMacro {
   }
 
   attackKill(): Macro {
-    return this.stasis().trySingAlong().attack().repeat();
+    return this.stasis()
+      .tryItem($item`porquoise-handled sixgun`)
+      .trySingAlong()
+      .attack()
+      .repeat();
   }
 
   static attackKill(): Macro {
@@ -126,6 +129,7 @@ export class Macro extends LibramMacro {
 
   mortarShell(): Macro {
     return this.stasis()
+      .tryItem($item`porquoise-handled sixgun`)
       .trySingAlong()
       .trySkill($skill`Stuffed Mortar Shell`)
       .tryItem($item`seal tooth`)
