@@ -12539,6 +12539,11 @@ var BASE_STENCH_REQUIRED = 8, Gossip = /* @__PURE__ */ function() {
       return parseInt(get(CURRENT_STENCH)) >= BASE_STENCH_REQUIRED + Math.ceil(this.players.length * 1.1);
     }
   }, {
+    key: "almostReadyToDive",
+    value: function() {
+      return parseInt(get(CURRENT_STENCH)) >= BASE_STENCH_REQUIRED + Math.ceil(this.players.length * 1.1) - 2;
+    }
+  }, {
     key: "destroy",
     value: function() {
       this.claimMutex(0), this.mutex = "", this.players = this.players.filter(function(player) {
@@ -12635,7 +12640,7 @@ function shouldUseFreeRunItem() {
 }
 
 // src/lib/combat.ts
-var _templateObject79, _templateObject229, _templateObject321, _templateObject419, _templateObject515, _templateObject611, _templateObject710, _templateObject88, _templateObject99, _templateObject108, _templateObject118, _templateObject128, _templateObject138, _templateObject147, _templateObject157, _templateObject167, _templateObject177, _templateObject187, _templateObject197, _templateObject207, _templateObject2112, _templateObject2210, _templateObject237, _templateObject247, _templateObject257, _templateObject267, _templateObject277, _templateObject286, _templateObject296, _templateObject306, _templateObject3110, _templateObject326, _templateObject336, _templateObject345, _templateObject354, _templateObject364;
+var _templateObject79, _templateObject229, _templateObject321, _templateObject419, _templateObject515, _templateObject611, _templateObject710, _templateObject88, _templateObject99, _templateObject108, _templateObject118, _templateObject128, _templateObject138, _templateObject147, _templateObject157, _templateObject167, _templateObject177, _templateObject187, _templateObject197, _templateObject207, _templateObject2112, _templateObject2210, _templateObject237, _templateObject247, _templateObject257, _templateObject267, _templateObject277, _templateObject286, _templateObject296, _templateObject306, _templateObject3110, _templateObject326, _templateObject336, _templateObject345, _templateObject354, _templateObject364, _templateObject374;
 function _taggedTemplateLiteral16(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
@@ -12769,17 +12774,17 @@ var drunk2 = function() {
   }, {
     key: "stasis",
     value: function() {
-      return this.externalIf(!drunk2(), Macro3.trySkill($skill(_templateObject296 || (_templateObject296 = _taggedTemplateLiteral16(["Curse of Weaksauce"])))).tryItem($item(_templateObject306 || (_templateObject306 = _taggedTemplateLiteral16(["porquoise-handled sixgun"])))).trySkill($skill(_templateObject3110 || (_templateObject3110 = _taggedTemplateLiteral16(["Micrometeorite"])))).tryItemsTogether([$item(_templateObject326 || (_templateObject326 = _taggedTemplateLiteral16(["Time-Spinner"]))), $item(_templateObject336 || (_templateObject336 = _taggedTemplateLiteral16(["HOA citation pad"])))]).trySkill($skill(_templateObject345 || (_templateObject345 = _taggedTemplateLiteral16(["Extract"])))));
+      return this.externalIf(!drunk2(), Macro3.trySkill($skill(_templateObject296 || (_templateObject296 = _taggedTemplateLiteral16(["Curse of Weaksauce"])))).trySkill($skill(_templateObject306 || (_templateObject306 = _taggedTemplateLiteral16(["Micrometeorite"])))).tryItemsTogether([$item(_templateObject3110 || (_templateObject3110 = _taggedTemplateLiteral16(["Time-Spinner"]))), $item(_templateObject326 || (_templateObject326 = _taggedTemplateLiteral16(["HOA citation pad"])))]).trySkill($skill(_templateObject336 || (_templateObject336 = _taggedTemplateLiteral16(["Extract"])))));
     }
   }, {
     key: "attackKill",
     value: function() {
-      return this.stasis().trySingAlong().attack().repeat();
+      return this.stasis().tryItem($item(_templateObject345 || (_templateObject345 = _taggedTemplateLiteral16(["porquoise-handled sixgun"])))).trySingAlong().attack().repeat();
     }
   }, {
     key: "mortarShell",
     value: function() {
-      return this.stasis().trySingAlong().trySkill($skill(_templateObject354 || (_templateObject354 = _taggedTemplateLiteral16(["Stuffed Mortar Shell"])))).tryItem($item(_templateObject364 || (_templateObject364 = _taggedTemplateLiteral16(["seal tooth"])))).attack().repeat();
+      return this.stasis().tryItem($item(_templateObject354 || (_templateObject354 = _taggedTemplateLiteral16(["porquoise-handled sixgun"])))).trySingAlong().trySkill($skill(_templateObject364 || (_templateObject364 = _taggedTemplateLiteral16(["Stuffed Mortar Shell"])))).tryItem($item(_templateObject374 || (_templateObject374 = _taggedTemplateLiteral16(["seal tooth"])))).attack().repeat();
     }
   }], [{
     key: "pickpocket",
@@ -13310,7 +13315,7 @@ var PLD = /* @__PURE__ */ function() {
           294: 2
         },
         post: function() {
-          get("lastEncounter") === "The Furtivity of My City" && (0, import_kolmafia35.print)("Stench level increased to approx ".concat(get(CURRENT_STENCH), "."));
+          get("lastEncounter") === "The Furtivity of My City" && ((0, import_kolmafia35.print)("Stench level increased to approx ".concat(get(CURRENT_STENCH), ".")), _this.gossip.almostReadyToDive() && _this.gossip.setStench(parseInt(get(CURRENT_STENCH))));
         }
       }];
     }
@@ -13377,7 +13382,7 @@ var Round = /* @__PURE__ */ function() {
           return get(CURRENT_STENCH) !== "";
         },
         do: function() {
-          (0, import_kolmafia36.print)("Waiting for start of next round (someone diving). Retry number ".concat(_this.initRetries)), (0, import_kolmafia36.wait)(5), _this.initRetries++, _this.initRetries === 120 && _set(CURRENT_STENCH, 0);
+          (0, import_kolmafia36.print)("Waiting for start of next round (someone diving). Retry number ".concat(_this.initRetries, " of 120")), (0, import_kolmafia36.wait)(5), _this.initRetries++, _this.initRetries === 120 && _set(CURRENT_STENCH, 0);
         }
       }, {
         name: "Request compost",
@@ -14785,7 +14790,7 @@ function main(command) {
   var cognacTasks = getTasks([Prologue, Wander, Spookyraven, Sewers(args.nocage), TownSquare, Cognac]), engine = new Engine2(cognacTasks), startingClan = (0, import_kolmafia56.getClanId)(), meatToCloset = (0, import_kolmafia56.myMeat)() > 1e6 ? (0, import_kolmafia56.myMeat)() - 1e6 : 0;
   try {
     var clan = get(CLAN);
-    meatToCloset > 0 && (0, import_kolmafia56.cliExecute)("closet put ".concat(meatToCloset, " meat")), Clan.join(clan), (0, import_kolmafia56.cliExecute)("chat"), (0, import_kolmafia56.chatClan)("Starting cognac", "hobopolis"), engine.run();
+    meatToCloset > 0 && (0, import_kolmafia56.cliExecute)("closet put ".concat(meatToCloset, " meat")), Clan.join(clan), (0, import_kolmafia56.cliExecute)("chat"), (0, import_kolmafia56.chatClan)("/listen hobopolis", "hobopolis"), (0, import_kolmafia56.chatClan)("Starting cognac", "hobopolis"), engine.run();
   } finally {
     engine.destruct(), _set(HEAP_ATTEMPTS, 0), _set(LAST_STENCH_CHECK, 0), new Gossip().destroy(), Clan.join(startingClan), meatToCloset > 0 && (0, import_kolmafia56.cliExecute)("closet take ".concat(meatToCloset, " meat")), save(), printSession();
   }
