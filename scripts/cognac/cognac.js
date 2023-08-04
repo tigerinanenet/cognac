@@ -12186,6 +12186,9 @@ __export(properties_exports, {
   SKIP_GARBO: function() {
     return SKIP_GARBO;
   },
+  STENCH_TIMER: function() {
+    return STENCH_TIMER;
+  },
   TURNS_SPENT: function() {
     return TURNS_SPENT;
   }
@@ -12195,7 +12198,7 @@ var SCRIPT_PREFIX = "cognac", prefix = function(prop) {
   return "".concat(SCRIPT_PREFIX, "_").concat(prop);
 }, daily = function(prop) {
   return "_".concat(prefix(prop));
-}, CLAN = prefix("clan"), ASDON = prefix("useAsdon"), SKIP_GARBO = prefix("skipGarbo"), FREE_RUN = prefix("freeRun"), REFUSES_UNTIL_COMPOST = prefix("choice216"), RESULTS_DAY = prefix("resultsDay"), COGNACS = prefix("bottlesFoundToday"), DIVES = prefix("divesToday"), TURNS_SPENT = prefix("turnsSpentToday"), LIFETIME_COGNACS = prefix("bottlesLifetime"), LIFETIME_DIVES = prefix("divesLifetime"), LIFETIME_TURNS_SPENT = prefix("turnsLifetime"), HEAP_ATTEMPTS = daily("heapAttempts"), LAST_STENCH_CHECK = daily("heapAttemptsAtLastStenchCheck"), CURRENT_PLAYERS = daily("currentPlayers"), CURRENT_STENCH = daily("heapStench");
+}, CLAN = prefix("clan"), ASDON = prefix("useAsdon"), SKIP_GARBO = prefix("skipGarbo"), FREE_RUN = prefix("freeRun"), REFUSES_UNTIL_COMPOST = prefix("choice216"), RESULTS_DAY = prefix("resultsDay"), COGNACS = prefix("bottlesFoundToday"), DIVES = prefix("divesToday"), TURNS_SPENT = prefix("turnsSpentToday"), LIFETIME_COGNACS = prefix("bottlesLifetime"), LIFETIME_DIVES = prefix("divesLifetime"), LIFETIME_TURNS_SPENT = prefix("turnsLifetime"), HEAP_ATTEMPTS = daily("heapAttempts"), LAST_STENCH_CHECK = daily("heapAttemptsAtLastStenchCheck"), CURRENT_PLAYERS = daily("currentPlayers"), CURRENT_STENCH = daily("heapStench"), STENCH_TIMER = daily("stenchTimer");
 
 // src/lib/cognac.ts
 var _templateObject69;
@@ -12578,7 +12581,7 @@ function maybeResetDailyPreferences() {
   resetDailyPreference(RESULTS_DAY) && (_set(TURNS_SPENT, 0), _set(COGNACS, 0), _set(DIVES, 0));
 }
 function resetSessionPreferences() {
-  _set(CURRENT_STENCH, "");
+  _set(CURRENT_STENCH, ""), _set(STENCH_TIMER, -1);
 }
 function checkGarbo() {
   get(SKIP_GARBO) || parseInt(get("garboEmbezzlerCount")) > 0 || (0, import_kolmafia26.userConfirm)("You have not yet run garbo. Are you sure you wish to proceed?") || (0, import_kolmafia26.abort)("Go bonk those embezzlers real good.");
@@ -13118,7 +13121,7 @@ function _taggedTemplateLiteral22(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 var epilogue = function(gossip2) {
-  _set(HEAP_ATTEMPTS, get(HEAP_ATTEMPTS, 0) + 1), get("lastEncounter") === "I Refuse!" ? (gossip2.resetStench(), _set(DIVES, get(DIVES, 0) + 1), _set(LIFETIME_DIVES, get(LIFETIME_DIVES, 0) + 1), _set(HEAP_ATTEMPTS, 0), _set(LAST_STENCH_CHECK, 0), _set(REFUSES_UNTIL_COMPOST, get(REFUSES_UNTIL_COMPOST, 0) - 1)) : get("lastEncounter") === "The Compostal Service" && gossip2.willCompost() && _set(REFUSES_UNTIL_COMPOST, 5);
+  _set(HEAP_ATTEMPTS, get(HEAP_ATTEMPTS, 0) + 1), get("lastEncounter") === "I Refuse!" ? (gossip2.resetStench(), _set(DIVES, get(DIVES, 0) + 1), _set(LIFETIME_DIVES, get(LIFETIME_DIVES, 0) + 1), _set(HEAP_ATTEMPTS, 0), _set(LAST_STENCH_CHECK, 0), _set(REFUSES_UNTIL_COMPOST, get(REFUSES_UNTIL_COMPOST, 0) - 1)) : get("lastEncounter") === "The Compostal Service" && gossip2.willCompost() ? _set(REFUSES_UNTIL_COMPOST, 5) : get("lastEncounter") === "Deep Enough to Dive" && (0, import_kolmafia34.abort)("At Oscus! Time to reset dungeon and set it up again");
 }, familiar2 = function() {
   return !drunk() && have($familiar(_templateObject101 || (_templateObject101 = _taggedTemplateLiteral22(["Space Jellyfish"])))) ? $familiar(_templateObject240 || (_templateObject240 = _taggedTemplateLiteral22(["Space Jellyfish"]))) : selectBestFamiliar();
 }, ambientStenchRe = function() {
@@ -13315,7 +13318,13 @@ var PLD = /* @__PURE__ */ function() {
           294: 2
         },
         post: function() {
-          get("lastEncounter") === "The Furtivity of My City" && ((0, import_kolmafia35.print)("Stench level increased to approx ".concat(get(CURRENT_STENCH), ".")), _this.gossip.almostReadyToDive() && _this.gossip.setStench(parseInt(get(CURRENT_STENCH))));
+          if (get("lastEncounter") === "The Furtivity of My City") {
+            if ((0, import_kolmafia35.print)("Stench level increased to approx ".concat(get(CURRENT_STENCH), ".")), _this.gossip.almostReadyToDive() && _this.gossip.setStench(parseInt(get(CURRENT_STENCH))), parseInt(get(CURRENT_STENCH)) === 0) {
+              var stenchTimer = parseInt(get(STENCH_TIMER));
+              stenchTimer > 0 ? (stenchTimer = stenchTimer - 1, _set(STENCH_TIMER, stenchTimer)) : stenchTimer === 0 ? (0, import_kolmafia35.abort)("Failed to detect stench increase while adv in PLD. Likely something wrong with chatbot script.") : stenchTimer === -1 && _set(STENCH_TIMER, 2);
+            }
+            parseInt(get(CURRENT_STENCH)) > 0 && parseInt(get(STENCH_TIMER)) !== -1 && _set(STENCH_TIMER, -1);
+          }
         }
       }];
     }
@@ -14786,11 +14795,11 @@ function main(command) {
     printLifetime();
     return;
   }
-  checkGarbo(), checkClan(), maybeResetDailyPreferences(), resetSessionPreferences();
+  checkGarbo(), checkClan(), maybeResetDailyPreferences();
   var cognacTasks = getTasks([Prologue, Wander, Spookyraven, Sewers(args.nocage), TownSquare, Cognac]), engine = new Engine2(cognacTasks), startingClan = (0, import_kolmafia56.getClanId)(), meatToCloset = (0, import_kolmafia56.myMeat)() > 1e6 ? (0, import_kolmafia56.myMeat)() - 1e6 : 0;
   try {
     var clan = get(CLAN);
-    meatToCloset > 0 && (0, import_kolmafia56.cliExecute)("closet put ".concat(meatToCloset, " meat")), Clan.join(clan), (0, import_kolmafia56.cliExecute)("chat"), (0, import_kolmafia56.chatClan)("/listen hobopolis", "hobopolis"), (0, import_kolmafia56.chatClan)("Starting cognac", "hobopolis"), engine.run();
+    meatToCloset > 0 && (0, import_kolmafia56.cliExecute)("closet put ".concat(meatToCloset, " meat")), Clan.join(clan), (0, import_kolmafia56.cliExecute)("chat"), (0, import_kolmafia56.chatClan)("/listenon hobopolis", "hobopolis"), (0, import_kolmafia56.wait)(5), resetSessionPreferences(), (0, import_kolmafia56.chatClan)("Starting cognac", "hobopolis"), engine.run();
   } finally {
     engine.destruct(), _set(HEAP_ATTEMPTS, 0), _set(LAST_STENCH_CHECK, 0), new Gossip().destroy(), Clan.join(startingClan), meatToCloset > 0 && (0, import_kolmafia56.cliExecute)("closet take ".concat(meatToCloset, " meat")), save(), printSession();
   }
