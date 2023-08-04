@@ -1,5 +1,5 @@
 import { Args, getTasks } from "grimoire-kolmafia";
-import { chatClan, cliExecute, getClanId, myMeat } from "kolmafia";
+import { chatClan, cliExecute, getClanId, myMeat, wait } from "kolmafia";
 import { Clan, get, set } from "libram";
 
 import * as CognacStats from "./lib/cognac";
@@ -53,7 +53,6 @@ export function main(command?: string): void {
   checkGarbo();
   checkClan();
   maybeResetDailyPreferences();
-  resetSessionPreferences();
 
   const cognacTasks = getTasks([
     Prologue,
@@ -76,6 +75,10 @@ export function main(command?: string): void {
     // enter chat
     cliExecute("chat");
     chatClan("/listenon hobopolis", "hobopolis");
+    // after listening to a chat, can get dumped with a backlog of messages
+    // wait for them to come and reset important prefs
+    wait(5);
+    resetSessionPreferences();
     chatClan(`Starting cognac`, "hobopolis");
     engine.run();
   } finally {
