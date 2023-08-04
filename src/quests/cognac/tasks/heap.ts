@@ -1,5 +1,6 @@
 import { CombatStrategy, Task } from "grimoire-kolmafia";
 import {
+  abort,
   adv1,
   elementalResistance,
   myAdventures,
@@ -54,6 +55,8 @@ const epilogue = (gossip: Gossip) => {
     set(REFUSES_UNTIL_COMPOST, get(REFUSES_UNTIL_COMPOST, 0) - 1);
   } else if (get("lastEncounter") === "The Compostal Service" && gossip.willCompost()) {
     set(REFUSES_UNTIL_COMPOST, 5);
+  } else if (get("lastEncounter") === "Deep Enough to Dive") {
+    abort("At Oscus! Time to reset dungeon and set it up again");
   }
 };
 
