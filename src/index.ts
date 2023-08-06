@@ -1,17 +1,11 @@
 import { Args, getTasks } from "grimoire-kolmafia";
-import { chatClan, cliExecute, getClanId, myMeat, wait } from "kolmafia";
+import { cliExecute, getClanId, myMeat } from "kolmafia";
 import { Clan, get, set } from "libram";
 
 import * as CognacStats from "./lib/cognac";
 import { Engine } from "./lib/engine";
 import { Gossip } from "./lib/gossip";
-import {
-  checkClan,
-  checkGarbo,
-  maybeResetDailyPreferences,
-  resetSessionPreferences,
-  showPreferences,
-} from "./prefs/prefs";
+import { checkClan, checkGarbo, maybeResetDailyPreferences, showPreferences } from "./prefs/prefs";
 import * as Properties from "./prefs/properties";
 import { Cognac } from "./quests/cognac/cognac";
 import { Prologue } from "./quests/prologue/prologue";
@@ -72,14 +66,6 @@ export function main(command?: string): void {
       cliExecute(`closet put ${meatToCloset} meat`);
     }
     Clan.join(clan);
-    // enter chat
-    cliExecute("chat");
-    chatClan("/listenon hobopolis", "hobopolis");
-    // after listening to a chat, can get dumped with a backlog of messages
-    // wait for them to come and reset important prefs
-    wait(5);
-    resetSessionPreferences();
-    chatClan(`Starting cognac`, "hobopolis");
     engine.run();
   } finally {
     engine.destruct();

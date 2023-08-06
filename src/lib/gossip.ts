@@ -1,7 +1,7 @@
 import { gamedayToInt, gametimeToInt, myName } from "kolmafia";
-import { get, set } from "libram";
+import { set } from "libram";
 
-import { CURRENT_PLAYERS, CURRENT_STENCH } from "../prefs/properties";
+import { CURRENT_PLAYERS } from "../prefs/properties";
 import * as Whiteboard from "./whiteboard";
 
 type GossipObject = {
@@ -79,8 +79,7 @@ export class Gossip {
     const gossip = Whiteboard.read() as GossipObject;
     this.players = gossip.players || [];
     this.requestingCompost = gossip.requestingCompost || [];
-    // Rely on stench tracking via /hobopolis clan chat
-    this.stench = parseInt(get(CURRENT_STENCH)) || 0;
+    this.stench = gossip.stench || 0;
     this.mutex = gossip.mutex || "";
     this.diveStart = gossip.diveStart || 0;
     this.gameday = gossip.gameday || 0;
@@ -161,14 +160,7 @@ export class Gossip {
 
   readyToDive(): boolean {
     return (
-      parseInt(get(CURRENT_STENCH)) >= BASE_STENCH_REQUIRED + Math.ceil(this.players.length * 1.1)
-    );
-  }
-
-  almostReadyToDive(): boolean {
-    return (
-      parseInt(get(CURRENT_STENCH)) >=
-      BASE_STENCH_REQUIRED + Math.ceil(this.players.length * 1.1) - 2
+      this.stench >= BASE_STENCH_REQUIRED + this.players.length + this.requestingCompost.length
     );
   }
 
