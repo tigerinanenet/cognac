@@ -129,6 +129,7 @@ export class Gossip {
     if (!applyUpdate) {
       return;
     }
+    set(CURRENT_STENCH, 0);
     this.stench = 0;
     this.diveStart = gametimeToInt() + 1000 * (60 + 5 * this.players.length);
     this.requestingCompost = [];
