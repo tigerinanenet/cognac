@@ -25,5 +25,3 @@ export const LIFETIME_TURNS_SPENT = prefix("turnsLifetime");
 export const HEAP_ATTEMPTS = daily("heapAttempts");
 export const LAST_STENCH_CHECK = daily("heapAttemptsAtLastStenchCheck");
 export const CURRENT_PLAYERS = daily("currentPlayers");
-export const CURRENT_STENCH = daily("heapStench");
-export const STENCH_TIMER = daily("stenchTimer");

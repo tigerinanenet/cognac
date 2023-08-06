@@ -6,7 +6,7 @@ import {
   myInebriety,
   numericModifier,
 } from "kolmafia";
-import { $familiar, $item, have, get } from "libram";
+import { $familiar, $item, get, have } from "libram";
 
 export function selectBestFamiliar(): Familiar {
   if (
@@ -30,15 +30,14 @@ export function noncombatFamiliar(): Familiar {
   ) {
     return $familiar`Left-Hand Man`;
   } else if (
-      have($familiar`Disembodied Hand`) &&
-      (have($item`fish hatchet`) ||
-          have($item`bass clarinet`) ||
-          have($item`rusted-out shootin' iron`) ||
-          have($item`iFlail`)
-      )
+    have($familiar`Disembodied Hand`) &&
+    (have($item`fish hatchet`) ||
+      have($item`bass clarinet`) ||
+      have($item`rusted-out shootin' iron`) ||
+      have($item`iFlail`))
   ) {
     return $familiar`Disembodied Hand`;
-  } else if (have($familiar`Disgeist`)){
+  } else if (have($familiar`Disgeist`)) {
     return $familiar`Disgeist`;
   } else {
     return $familiar`none`;
