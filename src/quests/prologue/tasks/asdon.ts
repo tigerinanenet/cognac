@@ -2,20 +2,24 @@ import { Task } from "grimoire-kolmafia";
 import { getFuel, use } from "kolmafia";
 import { $item, AsdonMartin, get, have } from "libram";
 
-import { ASDON } from "../../../prefs/properties";
+import { WORKSHED } from "../../../prefs/properties";
+import { cmcInProgress } from "./cmc";
+
+function shouldInstallAsdon(): boolean {
+  if (get("_workshedItemUsed")) return false;
+
+  const desiredWorksheds = get(WORKSHED).split(`,`);
+
+  if (!desiredWorksheds.includes(`asdon`)) return false;
+  if (!have($item`Asdon Martin keyfob`)) return false;
+  return !cmcInProgress();
+}
 
 export const installAsdon: Task = {
   name: "Install Asdon",
-  completed: () => get("_workshedItemUsed") || AsdonInstalled(),
-  do: () => {
-    if (AsdonMartin.installed() || !have($item`Asdon Martin keyfob`)) {
-      return;
-    }
-    if (!get(ASDON)) {
-      return;
-    }
-    use($item`Asdon Martin keyfob`);
-  },
+  ready: () => shouldInstallAsdon(),
+  completed: () => AsdonMartin.installed(),
+  do: () => use($item`Asdon Martin keyfob`),
 };
 
 export const fuelAsdon: Task = {
@@ -28,13 +32,3 @@ export const fuelAsdon: Task = {
     AsdonMartin.fillTo(50);
   },
 };
-
-export function AsdonInstalled(): boolean {
-  if (!get(ASDON)) {
-    return true;
-  }
-  if (AsdonMartin.installed()) {
-    return true;
-  }
-  return !have($item`Asdon Martin keyfob`);
-}
